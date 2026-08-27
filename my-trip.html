@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly — My Expedition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/theme.js"></script>
+<link href="assets/roamly.css" rel="stylesheet">
+</head>
+<body class="antialiased bg-canvas text-ink">
+
+<a href="#main" class="skip-link">Skip to content</a>
+<nav data-nav="account" aria-label="Main"></nav>
+
+<!-- No booking yet -->
+<main id="empty" class="hidden max-w-2xl mx-auto px-6 pt-40 pb-32 text-center">
+  <div class="w-24 h-24 rounded-[2rem] bg-surface border border-border-subtle flex items-center justify-center text-3xl text-muted mx-auto mb-10">
+    <i class="fa-solid fa-compass" aria-hidden="true"></i>
+  </div>
+  <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase mb-6">
+    No runs <span class="text-brand italic">logged.</span>
+  </h1>
+  <p class="text-muted font-medium text-lg mb-10">
+    Once you secure a slot, your expedition log lives here — extraction point, gear list, guide contact and balance.
+  </p>
+  <a href="trips.html" class="inline-block bg-brand text-accent px-12 py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 transition-all shadow-brand">
+    Browse Expeditions
+  </a>
+</main>
+
+<!-- Booked -->
+<main id="main" class="hidden max-w-7xl mx-auto px-6 pt-32 pb-20">
+
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16">
+    <div class="max-w-2xl">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-brand">Confirmed</span>
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-muted" id="ref"></span>
+      </div>
+      <h1 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-4 uppercase" id="title"></h1>
+      <p class="text-lg text-muted font-medium" id="meta"></p>
+    </div>
+    <div id="balanceCta"></div>
+  </div>
+
+  <!-- Journey -->
+  <section class="bg-surface border border-border-subtle rounded-panel p-10 mb-16" aria-label="Trip progress">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 relative" id="track">
+      <div class="absolute top-6 left-[10%] right-[10%] h-0.5 bg-border-subtle hidden md:block" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+    <div class="lg:col-span-8 space-y-20">
+
+      <section>
+        <div class="flex items-center gap-4 mb-10">
+          <span class="w-10 h-10 rounded-xl bg-brand text-accent flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-map-pin"></i></span>
+          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">Extraction Point</h2>
+        </div>
+        <div class="bg-ink text-white rounded-panel p-10 flex flex-col md:flex-row justify-between items-center gap-10" id="extraction"></div>
+      </section>
+
+      <section>
+        <div class="flex items-center gap-4 mb-10">
+          <span class="w-10 h-10 rounded-xl bg-brand text-accent flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-user-group"></i></span>
+          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">The Roster</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="roster"></div>
+      </section>
+
+      <section>
+        <div class="flex items-center gap-4 mb-10">
+          <span class="w-10 h-10 rounded-xl bg-brand text-accent flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-file-shield"></i></span>
+          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">Expedition Intel</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent transition-all">
+            <span class="flex items-center gap-6">
+              <i class="fa-solid fa-file-pdf text-3xl" aria-hidden="true"></i>
+              <span class="text-left">
+                <span class="block font-bold uppercase tracking-tight">Gear Checklist</span>
+                <span class="block text-[10px] opacity-60 uppercase tracking-widest">Alpine Standard</span>
+              </span>
+            </span>
+            <i class="fa-solid fa-download" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent transition-all">
+            <span class="flex items-center gap-6">
+              <i class="fa-solid fa-file-pdf text-3xl" aria-hidden="true"></i>
+              <span class="text-left">
+                <span class="block font-bold uppercase tracking-tight">Full Itinerary</span>
+                <span class="block text-[10px] opacity-60 uppercase tracking-widest" id="itinLabel"></span>
+              </span>
+            </span>
+            <i class="fa-solid fa-download" aria-hidden="true"></i>
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="lg:col-span-4 space-y-10">
+      <div class="bg-surface border border-border-subtle rounded-panel p-10 text-center" id="guide"></div>
+      <div class="bg-brand text-accent rounded-panel p-10">
+        <h2 class="font-display text-2xl font-extrabold tracking-tight mb-4 uppercase">Basecamp Help</h2>
+        <p class="text-white/70 font-medium mb-10">Stuck at basecamp? Need to reschedule your run?</p>
+        <button type="button" id="chat" class="w-full bg-accent text-brand py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-lg shadow-black/10">
+          Chat with Command
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer data-footer="slim"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/roamly.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.Roamly;
+  var s = R.state.get();
+
+  /* nothing booked yet — show the empty state instead of a fake trip */
+  if (!s.deposited) {
+    document.getElementById('empty').classList.remove('hidden');
+    return;
+  }
+  document.getElementById('main').classList.remove('hidden');
+
+  var t = R.trip();
+  var p = R.pickup();
+  var ref = R.makeRef();
+  var bal = R.balance();
+
+  document.getElementById('ref').textContent = 'Ref: ' + ref;
+  document.getElementById('itinLabel').textContent = t.days + ' Days Log';
+
+  var head = t.short.split(' ');
+  var last = head.pop();
+  document.getElementById('title').innerHTML =
+    'Your ' + R.esc(head.join(' ')) + ' <span class="text-brand italic">' + R.esc(last) + '.</span>';
+  document.getElementById('meta').textContent =
+    (s.date || t.dates) + ' • ' + t.days + ' Days Run • ' + R.pad(s.pax) +
+    (s.pax === 1 ? ' Traveller' : ' Travellers');
+
+  /* balance CTA — settles when paid */
+  function paintBalance() {
+    var el = document.getElementById('balanceCta');
+    if (s.settled || bal <= 0) {
+      el.innerHTML = '<p class="bg-surface border border-border-subtle px-8 py-5 rounded-[2rem] ' +
+        'text-[11px] font-black uppercase tracking-widest text-brand flex items-center gap-3">' +
+        '<i class="fa-solid fa-circle-check"></i> Paid in full</p>';
+    } else {
+      el.innerHTML = '<button type="button" id="payBal" class="bg-brand text-accent px-10 py-5 ' +
+        'rounded-[2rem] font-black text-lg uppercase tracking-tighter hover:scale-105 transition-all ' +
+        'shadow-brand">Pay Balance (' + R.inr(bal) + ')</button>';
+      document.getElementById('payBal').addEventListener('click', function () {
+        R.state.set({ settled: true });
+        s.settled = true;
+        R.toast('Balance settled — you are all set');
+        paintBalance();
+        paintTrack();
+      });
+    }
+  }
+
+  /* journey tracker */
+  function paintTrack() {
+    var stages = [
+      { cap: 'Booking',        icon: 'fa-check',           state: 'done' },
+      { cap: 'Payment',        icon: 'fa-check',           state: s.settled ? 'done' : 'now' },
+      { cap: 'Pre-Expedition', icon: 'fa-mountain',        state: s.settled ? 'now' : 'todo' },
+      { cap: 'Departure',      icon: 'fa-flag-checkered',  state: 'todo' },
+      { cap: 'Peak Attained',  icon: 'fa-trophy',          state: 'todo' }
+    ];
+    var track = document.getElementById('track');
+    track.innerHTML = '<div class="absolute top-6 left-[10%] right-[10%] h-0.5 bg-border-subtle hidden md:block" aria-hidden="true"></div>' +
+      stages.map(function (st) {
+        return '<div class="relative z-10 text-center track-node" data-state="' + st.state + '">' +
+          '<span class="track-box"><i class="fa-solid ' + st.icon + '" aria-hidden="true"></i></span>' +
+          '<p class="text-[10px] font-black uppercase tracking-widest ' +
+            (st.state === 'todo' ? 'text-muted' : 'text-brand') + '">' + st.cap + '</p></div>';
+      }).join('');
+  }
+
+  paintBalance();
+  paintTrack();
+
+  document.getElementById('extraction').innerHTML =
+    '<div><p class="font-display text-3xl font-extrabold tracking-tight mb-2">' + R.esc(p.place) + '</p>' +
+      '<p class="text-white/70 font-medium mb-6">' + R.esc(p.note) + '</p>' +
+      '<button type="button" id="gps" class="bg-accent text-brand px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">Get GPS Pin</button></div>' +
+    '<div class="flex gap-10 text-center md:border-l border-white/15 md:pl-10">' +
+      '<div><span class="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 block mb-2">Report</span>' +
+        '<p class="font-display text-4xl font-black tracking-tighter text-accent">' + R.esc(p.time) + '</p></div>' +
+      '<div><span class="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 block mb-2">Grade</span>' +
+        '<p class="font-display text-2xl font-black tracking-tighter pt-2">' + R.esc(t.grade) + '</p></div>' +
+    '</div>';
+
+  var people = (s.travellers && s.travellers.length) ? s.travellers : [];
+  document.getElementById('roster').innerHTML = people.length
+    ? people.map(function (m, i) {
+        return '<div class="bg-surface border border-border-subtle p-6 rounded-[2rem] flex items-center gap-5">' +
+          '<span class="w-11 h-11 rounded-xl bg-brand text-accent flex items-center justify-center font-display font-black italic shrink-0">' + (i + 1) + '</span>' +
+          '<div class="min-w-0"><p class="font-bold uppercase tracking-tight truncate">' + R.esc(m.name || 'Traveller ' + (i + 1)) + '</p>' +
+          '<p class="text-[10px] font-black uppercase tracking-widest text-muted truncate">' +
+            (i === 0 ? 'Lead • ' : '') + R.esc(m.age ? m.age + ' yrs' : '—') + '</p></div></div>';
+      }).join('')
+    : '<p class="text-muted font-medium">Roster details were not captured for this booking.</p>';
+
+  document.getElementById('guide').innerHTML =
+    '<p class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-6">Lead Guide</p>' +
+    '<div class="w-24 h-24 rounded-[2rem] overflow-hidden mx-auto mb-6 border-4 border-white shadow-xl">' +
+      '<img class="w-full h-full object-cover" loading="lazy" src="' + t.guide.photo + '" alt="' + R.esc(t.guide.name) + '"></div>' +
+    '<h2 class="font-display text-2xl font-extrabold tracking-tight mb-2">' + R.esc(t.guide.name) + '</h2>' +
+    '<p class="text-xs text-muted font-bold uppercase tracking-widest mb-10">' + R.esc(t.guide.quote) + '</p>' +
+    '<div class="grid grid-cols-2 gap-4">' +
+      '<a href="tel:+910000000000" class="bg-white border border-border-subtle py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand hover:text-accent transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-phone"></i> Call</a>' +
+      '<a href="#" class="bg-white border border-border-subtle py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand hover:text-accent transition-all flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Chat</a>' +
+    '</div>';
+
+  document.getElementById('gps').addEventListener('click', function () { R.toast('GPS pin sent to your phone'); });
+  document.getElementById('chat').addEventListener('click', function () { R.toast('A coordinator will call within 10 minutes'); });
+  Array.prototype.forEach.call(document.querySelectorAll('.doc'), function (b) {
+    b.addEventListener('click', function () { R.toast('Document sent to your email'); });
+  });
+})();
+</script>
+</body>
+</html>

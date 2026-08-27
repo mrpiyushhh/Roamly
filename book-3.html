@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly — Extraction Point</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/theme.js"></script>
+<link href="assets/roamly.css" rel="stylesheet">
+</head>
+<body class="antialiased bg-canvas text-ink">
+
+<a href="#main" class="skip-link">Skip to content</a>
+<nav data-nav="checkout" data-step="3" aria-label="Checkout progress"></nav>
+
+<main id="main" class="max-w-7xl mx-auto px-6 pt-32 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+  <form class="lg:col-span-8" id="pickupForm">
+    <header class="mb-12">
+      <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 uppercase">
+        Extraction <span class="text-brand italic">point.</span>
+      </h1>
+      <p class="text-muted font-medium text-lg">
+        Where the coach picks you up. Reporting times are fixed — the coach does not wait.
+      </p>
+    </header>
+
+    <fieldset class="space-y-5" id="pickups">
+      <legend class="sr-only">Choose a pickup point</legend>
+    </fieldset>
+
+    <div class="mt-10 p-8 bg-surface border border-border-subtle rounded-[2.5rem] flex gap-5 items-start">
+      <i class="fa-solid fa-circle-info text-brand text-xl mt-1" aria-hidden="true"></i>
+      <p class="text-sm text-muted font-medium leading-relaxed">
+        Arrive at least 15 minutes before reporting time. Your coordinator calls the moment the
+        coach leaves the previous stop, so keep your phone on from an hour before.
+      </p>
+    </div>
+  </form>
+
+  <aside class="lg:col-span-4">
+    <div class="sticky top-32 bg-brand text-accent rounded-panel p-10 shadow-brand">
+      <h2 class="font-display font-black text-2xl tracking-tighter mb-8 uppercase">Expedition Log</h2>
+      <div id="summary"></div>
+      <div class="pb-8 mb-8 border-b border-white/15" id="pickupLine"></div>
+      <button type="submit" form="pickupForm"
+        class="w-full bg-accent text-brand py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 transition-all">
+        Proceed to Step 04
+      </button>
+      <a href="book-2.html" data-keep="book-2.html" class="block text-center mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-accent transition-colors">
+        Back to intel
+      </a>
+    </div>
+  </aside>
+
+</main>
+
+<script src="assets/data.js"></script>
+<script src="assets/roamly.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.Roamly;
+  var t = R.trip();
+  var s = R.state.get();
+  var chosen = s.pickup || R.pickup().id;
+
+  document.getElementById('summary').innerHTML = R.summaryBody({});
+
+  /* The selectable option card — the one pattern worth keeping from the
+     Heritage checkout, rebuilt in the Expedition palette. A real label
+     wrapping a real radio: arrow keys work, screen readers announce it. */
+  document.getElementById('pickups').insertAdjacentHTML('beforeend',
+    t.pickups.map(function (p) {
+      var tag = p.recommended
+        ? '<span class="option-tag">Recommended</span>' : '';
+      return '<label class="option-card">' + tag +
+        '<input type="radio" name="pickup" value="' + p.id + '"' +
+          (p.id === chosen ? ' checked' : '') + '>' +
+        '<span class="option-check"><i class="fa-solid fa-check text-[11px]"></i></span>' +
+        '<span class="option-body flex flex-wrap justify-between items-center gap-6 pr-12">' +
+          '<span>' +
+            '<span class="block font-display text-2xl font-extrabold tracking-tight mb-1">' + R.esc(p.place) + '</span>' +
+            '<span class="block text-sm text-muted font-medium">' + R.esc(p.note) + '</span>' +
+          '</span>' +
+          '<span class="text-right">' +
+            '<span class="block text-[10px] font-black uppercase tracking-widest text-muted mb-1">Reporting</span>' +
+            '<span class="block font-display text-2xl font-black tracking-tighter">' + R.esc(p.time) + '</span>' +
+          '</span>' +
+        '</span></label>';
+    }).join('')
+  );
+
+  var box = document.getElementById('pickups');
+
+  function syncCards() {
+    Array.prototype.forEach.call(box.querySelectorAll('.option-card'), function (l) {
+      var i = l.querySelector('input');
+      l.classList.toggle('is-selected', !!(i && i.checked));
+    });
+  }
+
+  function paintLine() {
+    var p = R.pickup();
+    document.getElementById('pickupLine').innerHTML =
+      '<p class="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 mb-1">Extraction</p>' +
+      '<p class="font-bold text-white uppercase text-sm">' + R.esc(p.place) + '</p>' +
+      '<p class="text-[10px] font-black uppercase tracking-widest text-accent mt-1">Report ' + R.esc(p.time) + '</p>';
+  }
+
+  box.addEventListener('change', function () {
+    var sel = box.querySelector('input:checked');
+    if (sel) R.state.set({ pickup: sel.value });
+    syncCards();
+    paintLine();
+  });
+
+  syncCards();
+  paintLine();
+
+  document.getElementById('pickupForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var sel = box.querySelector('input:checked');
+    if (!sel) { R.toast('Pick an extraction point'); return; }
+    R.state.set({ pickup: sel.value });
+    R.go('book-4.html');
+  });
+})();
+</script>
+</body>
+</html>

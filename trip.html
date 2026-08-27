@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly — Expedition Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/theme.js"></script>
+<link href="assets/roamly.css" rel="stylesheet">
+</head>
+<body class="antialiased bg-canvas text-ink">
+
+<a href="#main" class="skip-link">Skip to content</a>
+<nav data-nav="marketing" data-active="expeditions" aria-label="Main"></nav>
+
+<!-- Gallery -->
+<section class="pt-28 px-6" aria-label="Expedition gallery">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-[420px] md:h-[650px]" id="gallery"></div>
+  </div>
+</section>
+
+<main id="main" class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+  <!-- Detail -->
+  <div class="lg:col-span-8">
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted">
+        <li><a href="index.html" class="hover:text-brand">Base</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href="trips.html" class="hover:text-brand">Expeditions</a></li>
+        <li aria-hidden="true">/</li>
+        <li class="text-brand" id="crumb"></li>
+      </ol>
+    </nav>
+
+    <div class="flex flex-wrap items-center gap-3 mb-6" id="badges"></div>
+
+    <h1 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-8 uppercase" id="title"></h1>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 py-10 border-y border-border-subtle" id="stats"></div>
+
+    <section class="mt-16 mb-20">
+      <h2 class="font-display text-3xl font-extrabold tracking-tighter mb-6 uppercase">Expedition Brief</h2>
+      <div class="text-muted font-medium leading-relaxed space-y-6 text-lg max-w-3xl" id="blurb"></div>
+    </section>
+
+    <section class="mb-20">
+      <h2 class="font-display text-3xl font-extrabold tracking-tighter mb-10 uppercase">The Ridge Run</h2>
+      <div class="space-y-4" id="itinerary"></div>
+    </section>
+
+    <section class="mb-20 bg-ink rounded-panel p-10 flex flex-col md:flex-row items-center gap-10" id="guide"></section>
+  </div>
+
+  <!-- Booking widget -->
+  <aside class="lg:col-span-4" aria-label="Book this expedition">
+    <form class="sticky top-32 bg-white border border-border-subtle rounded-panel p-10 shadow-soft" id="bookForm">
+      <div class="flex justify-between items-start gap-4 mb-8">
+        <div>
+          <p class="text-[10px] text-muted uppercase tracking-[0.2em] font-black mb-1">Starting from</p>
+          <p class="text-5xl font-display font-black tracking-tighter" id="price"></p>
+          <p class="text-[10px] text-muted uppercase tracking-widest font-black mt-1">per person</p>
+        </div>
+        <span class="bg-accent text-brand px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest animate-pulse shrink-0" id="slots"></span>
+      </div>
+
+      <div class="space-y-4 mb-8">
+        <div class="p-6 bg-surface rounded-[2rem] border border-border-subtle">
+          <p class="text-[9px] font-black uppercase tracking-widest text-muted mb-2">Next Run</p>
+          <p class="font-bold text-sm uppercase" id="dates"></p>
+        </div>
+
+        <div class="p-6 bg-surface rounded-[2rem] border border-border-subtle">
+          <label class="block text-[9px] font-black uppercase tracking-widest text-muted mb-2" for="pickup">Basecamp Pickup</label>
+          <select id="pickup" class="w-full bg-transparent text-sm font-bold uppercase outline-none cursor-pointer"></select>
+        </div>
+
+        <div class="p-6 bg-surface rounded-[2rem] border border-border-subtle">
+          <p class="text-[9px] font-black uppercase tracking-widest text-muted mb-3">Roster Size</p>
+          <div class="flex items-center justify-between gap-4">
+            <button type="button" id="minus" aria-label="Remove a traveller"
+              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-inherit">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <span class="font-display text-3xl font-black tracking-tighter tabular-nums" id="paxOut" aria-live="polite">1</span>
+            <button type="button" id="plus" aria-label="Add a traveller"
+              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent transition-all disabled:opacity-30">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-end pb-6 mb-6 border-b border-border-subtle">
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-muted">Total</span>
+        <span class="text-3xl font-display font-black tracking-tighter" id="total"></span>
+      </div>
+
+      <div class="space-y-4">
+        <button type="submit" class="w-full bg-brand text-accent py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-[1.02] transition-all shadow-brand">
+          Secure My Slot
+        </button>
+        <button type="button" id="download" class="w-full border border-border-subtle py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-surface transition-all">
+          <i class="fa-solid fa-file-pdf"></i> Download Itinerary
+        </button>
+      </div>
+
+      <p class="text-[9px] text-center text-muted mt-8 uppercase tracking-widest font-black">
+        Zero Hidden Fees • Secure Encryption
+      </p>
+    </form>
+  </aside>
+
+</main>
+
+<footer data-footer="slim"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/roamly.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.Roamly;
+  var t = R.trip();
+  var s = R.state.get();
+
+  document.title = 'Roamly — ' + t.name;
+  document.getElementById('crumb').textContent = t.short;
+
+  /* headline: last word takes the italic brand accent */
+  var head = t.name.split(' ');
+  var last = head.pop();
+  document.getElementById('title').innerHTML =
+    R.esc(head.join(' ')) + ' <span class="text-brand italic">' + R.esc(last) + '.</span>';
+
+  /* gallery mosaic — lead image spans 2x2, four secondaries fill the rest */
+  document.getElementById('gallery').innerHTML =
+    '<div class="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-panel">' +
+      '<img class="w-full h-full object-cover" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '"></div>' +
+    t.gallery.map(function (g, i) {
+      var btn = i === 3
+        ? '<button type="button" class="absolute bottom-6 right-6 glass px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2" id="showGallery">' +
+          '<i class="fa-solid fa-images"></i> Show gallery</button>' : '';
+      return '<div class="hidden md:block relative overflow-hidden rounded-[2.5rem]">' +
+        '<img class="w-full h-full object-cover" loading="lazy" src="' + g.src + '" alt="' + R.esc(g.alt) + '">' + btn + '</div>';
+    }).join('');
+
+  document.getElementById('badges').innerHTML =
+    t.badges.map(function (b, i) {
+      return i === 0
+        ? '<span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-brand">' + R.esc(b) + '</span>'
+        : '<span class="bg-surface border border-border-subtle px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">' + R.esc(b) + '</span>';
+    }).join('');
+
+  function stat(icon, big, small) {
+    return '<div class="flex items-center gap-4">' +
+      '<span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center shrink-0">' +
+      '<i class="fa-solid ' + icon + ' text-brand"></i></span><div>' +
+      '<p class="text-sm font-black uppercase tracking-tighter">' + big + '</p>' +
+      '<p class="text-[10px] font-bold text-muted uppercase tracking-widest">' + small + '</p></div></div>';
+  }
+  document.getElementById('stats').innerHTML =
+    stat('fa-star', t.rating.toFixed(1) + '/5 Rating', t.reviews + ' Reviews') +
+    stat('fa-clock', t.days + ' Days Run', 'Base to Base') +
+    stat('fa-mountain', t.grade, R.esc(t.region));
+
+  document.getElementById('blurb').innerHTML =
+    t.blurb.map(function (p) { return '<p>' + R.esc(p) + '</p>'; }).join('');
+
+  /* itinerary — a real accordion, one panel at a time */
+  document.getElementById('itinerary').innerHTML = t.itinerary.map(function (st, i) {
+    var id = 'stage-' + i;
+    return '<div>' +
+      '<button type="button" class="stage-row" aria-expanded="false" aria-controls="' + id + '">' +
+        '<span class="flex justify-between items-center gap-6">' +
+          '<span class="text-left">' +
+            '<span class="text-[10px] font-black uppercase tracking-[0.2em] opacity-60 mb-2 block">Stage ' + R.pad(i + 1) + '</span>' +
+            '<span class="font-display text-2xl font-extrabold tracking-tight block">' + R.esc(st.t) + '</span>' +
+          '</span>' +
+          '<i class="fa-solid fa-plus stage-plus shrink-0" aria-hidden="true"></i>' +
+        '</span>' +
+      '</button>' +
+      '<div class="stage-body" id="' + id + '"><div>' +
+        '<p class="px-10 py-6 text-muted font-medium leading-relaxed">' + R.esc(st.d) + '</p>' +
+      '</div></div></div>';
+  }).join('');
+
+  document.getElementById('itinerary').addEventListener('click', function (e) {
+    var btn = e.target.closest('.stage-row');
+    if (!btn) return;
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    Array.prototype.forEach.call(document.querySelectorAll('.stage-row'), function (b) {
+      b.setAttribute('aria-expanded', 'false');
+      document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');
+    });
+    if (!open) {
+      btn.setAttribute('aria-expanded', 'true');
+      document.getElementById(btn.getAttribute('aria-controls')).classList.add('open');
+    }
+  });
+
+  document.getElementById('guide').innerHTML =
+    '<div class="w-32 h-32 rounded-[2rem] overflow-hidden shrink-0 border-4 border-accent/20">' +
+      '<img class="w-full h-full object-cover" loading="lazy" src="' + t.guide.photo + '" alt="' + R.esc(t.guide.name) + '"></div>' +
+    '<div class="text-center md:text-left">' +
+      '<p class="text-[10px] font-black uppercase tracking-[0.2em] text-accent/70 mb-2">' + R.esc(t.guide.role) + '</p>' +
+      '<h2 class="font-display text-3xl font-extrabold text-white tracking-tight mb-2">' + R.esc(t.guide.name) + '</h2>' +
+      '<p class="text-white/70 font-medium mb-6">' + R.esc(t.guide.bio) + '</p>' +
+      '<a href="#" class="inline-flex bg-accent text-brand px-8 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest items-center gap-2 hover:scale-105 transition-all">' +
+        '<i class="fa-brands fa-whatsapp text-lg"></i> Contact Coordinator</a></div>';
+
+  /* ---- booking widget ---- */
+  var pax = s.pax || 1;
+  var priceEl = document.getElementById('price');
+  var totalEl = document.getElementById('total');
+  var paxOut  = document.getElementById('paxOut');
+  var minus   = document.getElementById('minus');
+  var plus    = document.getElementById('plus');
+
+  priceEl.textContent = R.inr(t.price);
+  document.getElementById('dates').textContent = t.dates;
+  document.getElementById('slots').textContent = t.slots + ' Slots Left';
+
+  document.getElementById('pickup').innerHTML = t.pickups.map(function (p) {
+    return '<option value="' + p.id + '"' + (p.id === s.pickup ? ' selected' : '') + '>' +
+      R.esc(p.place) + ' (' + p.time + ')</option>';
+  }).join('');
+
+  function paint() {
+    paxOut.textContent = pax;
+    totalEl.textContent = R.inr(t.price * pax);
+    minus.disabled = pax <= 1;
+    plus.disabled = pax >= t.slots;
+  }
+  minus.addEventListener('click', function () { if (pax > 1) { pax--; paint(); } });
+  plus.addEventListener('click', function () {
+    if (pax < t.slots) { pax++; paint(); }
+    else R.toast('Only ' + t.slots + ' slots left on this run');
+  });
+  paint();
+
+  document.getElementById('bookForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    R.state.set({
+      trip: t.id,
+      pax: pax,
+      date: t.dates,
+      pickup: document.getElementById('pickup').value,
+      travellers: []
+    });
+    R.go('book-1.html');
+  });
+
+  document.getElementById('download').addEventListener('click', function () {
+    R.toast('Itinerary sent to your email');
+  });
+  var sg = document.getElementById('showGallery');
+  if (sg) sg.addEventListener('click', function () { R.toast('Full gallery coming soon'); });
+})();
+</script>
+</body>
+</html>

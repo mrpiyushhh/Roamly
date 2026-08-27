@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly — Modern Trekking Adventures</title>
+<meta name="description" content="Premium weekend trekking experiences for those who seek the silence of the summits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/theme.js"></script>
+<link href="assets/roamly.css" rel="stylesheet">
+</head>
+<body class="antialiased bg-canvas text-ink">
+
+<a href="#main" class="skip-link">Skip to content</a>
+<nav data-nav="marketing" aria-label="Main"></nav>
+
+<main id="main">
+
+  <!-- Hero -->
+  <header class="relative pt-32 pb-16 px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6 relative z-10">
+        <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          2026 Winter Season Now Open
+        </p>
+        <h1 class="font-display text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-6 uppercase">
+          Hike beyond the <span class="text-brand">edge.</span>
+        </h1>
+        <p class="text-lg text-muted max-w-md mb-8 leading-relaxed font-medium">
+          Premium weekend trekking experiences for those who seek the silence of the summits.
+          No crowds, just the climb.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="trips.html" class="bg-brand text-accent px-10 py-5 rounded-2xl font-black text-lg hover:rotate-2 transition-all shadow-brand-lg uppercase tracking-tighter">Enroll Now</a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6 relative">
+        <div class="relative aspect-[4/5] rounded-panel overflow-hidden shadow-2xl animate-float max-h-[600px] mx-auto">
+          <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b480f492a1_5d5662a06cc88467.png" alt="A lone hiker with a full pack standing on a sharp rocky ridge">
+          <div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-3xl">
+            <div class="flex justify-between items-center gap-4">
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-brand mb-1">Featured Peak</p>
+                <p class="font-display font-extrabold text-xl uppercase" id="heroTripName">Kudremukh Trail</p>
+              </div>
+              <div class="text-right">
+                <p class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Difficulty</p>
+                <p class="font-bold text-brand uppercase" id="heroTripGrade">Hard Core</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accent rounded-full blur-3xl opacity-30 -z-10" aria-hidden="true"></div>
+        <div class="absolute -top-10 -right-10 w-60 h-60 bg-brand rounded-full blur-3xl opacity-10 -z-10" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search -->
+  <section class="px-6 -mt-6 mb-16 relative z-20" aria-label="Find a trail">
+    <form id="searchForm" class="max-w-4xl mx-auto bg-white border border-border-subtle p-2 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row gap-2">
+      <div class="flex-1 flex items-center gap-4 px-6 py-4 bg-surface rounded-[2rem]">
+        <i class="fa-solid fa-map-pin text-brand" aria-hidden="true"></i>
+        <div class="flex-1">
+          <input id="basecamp" name="basecamp" type="text" placeholder="Where do you start?" aria-label="Where do you start?" autocomplete="off" class="bg-transparent w-full text-sm font-bold outline-none border-none focus:outline-none focus-visible:outline-none focus:ring-0 placeholder:text-muted/50 uppercase">
+        </div>
+      </div>
+      <button type="submit" class="bg-brand text-accent px-8 py-4 rounded-[2rem] font-black uppercase tracking-widest hover:scale-[1.02] transition-all">
+        Search Trails
+      </button>
+    </form>
+  </section>
+
+  <!-- Marquee -->
+  <section class="py-10 border-y border-border-subtle overflow-hidden" aria-hidden="true">
+    <div class="marquee flex whitespace-nowrap">
+      <div class="marquee-track flex items-center gap-4 text-4xl font-display font-black tracking-tighter italic uppercase pr-4">
+        <span class="text-brand">150+ Summits</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">8K Community</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">Expert Guides</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle">/</span>
+      </div>
+      <div class="marquee-track flex items-center gap-4 text-4xl font-display font-black tracking-tighter italic uppercase pr-4">
+        <span class="text-brand">150+ Summits</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">8K Community</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">Expert Guides</span><span class="text-border-subtle">/</span>
+        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle">/</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+        <div class="max-w-xl">
+          <h2 class="font-display text-5xl md:text-6xl font-extrabold tracking-tighter leading-none mb-4 uppercase">
+            Upcoming <br><span class="text-outline italic">Expeditions</span>
+          </h2>
+          <p class="text-muted font-medium">Curated weekend escapes for the modern hiker. From the Sahyadris to the Himalayas.</p>
+        </div>
+        <a href="trips.html" class="shrink-0 flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em] text-brand border-b-2 border-brand pb-1">
+          See all 9 trails <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8" id="featured"></div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="py-16 bg-surface px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-display text-4xl md:text-5xl font-extrabold tracking-tighter mb-12 text-center uppercase">
+        How do you <span class="italic text-brand">want to roam?</span>
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <a href="trips.html#weekend" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
+          <i class="fa-solid fa-cloud-sun text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
+          <span>
+            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Weekend <br>Peaks</span>
+            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">From ₹4,499</span>
+          </span>
+        </a>
+        <a href="trips.html#alpine" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
+          <i class="fa-solid fa-mountain-city text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
+          <span>
+            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Alpine <br>Tours</span>
+            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">From ₹24,999</span>
+          </span>
+        </a>
+        <a href="trips.html#expert" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
+          <i class="fa-solid fa-tent text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
+          <span>
+            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Expert <br>Ridges</span>
+            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">From ₹18,999</span>
+          </span>
+        </a>
+        <a href="trips.html" data-trip="workshop" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
+          <i class="fa-solid fa-compass text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
+          <span>
+            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Beginner <br>Workshop</span>
+            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">Free</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="py-24 px-6" id="story">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div class="relative">
+        <span class="absolute -top-8 -left-8 font-display text-[12rem] font-black text-surface leading-none -z-10 select-none" aria-hidden="true">26</span>
+        <h2 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight mb-8 uppercase">
+          Plan less. <br><span class="text-brand italic">Climb more.</span>
+        </h2>
+        <div class="space-y-6">
+          <div class="flex gap-6">
+            <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center shrink-0"><i class="fa-solid fa-leaf text-brand" aria-hidden="true"></i></span>
+            <div>
+              <h3 class="font-display font-black text-sm uppercase tracking-widest mb-1">Zero Waste Policy</h3>
+              <p class="text-sm text-muted font-medium">We carry everything back. Every trail we visit stays as we found it.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved text-brand" aria-hidden="true"></i></span>
+            <div>
+              <h3 class="font-display font-black text-sm uppercase tracking-widest mb-1">Elite Safety Gear</h3>
+              <p class="text-sm text-muted font-medium">Satellite phones and oxygen kits on all high-altitude expeditions.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center shrink-0"><i class="fa-solid fa-user-group text-brand" aria-hidden="true"></i></span>
+            <div>
+              <h3 class="font-display font-black text-sm uppercase tracking-widest mb-1">Expert Led Groups</h3>
+              <p class="text-sm text-muted font-medium">Max 8 hikers per guide for personal attention and safe navigation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="pt-10">
+          <div class="rounded-[2.5rem] overflow-hidden aspect-[3/4] mb-4">
+            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b06b700247_90aa9151b2f2970f.png" alt="Portrait of a Roamly mountain guide">
+          </div>
+          <div class="rounded-[2.5rem] overflow-hidden aspect-square">
+            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_4c16770163_91d331bdae7e14fc.png" alt="A cold mountain stream running over rock">
+          </div>
+        </div>
+        <div>
+          <div class="rounded-[2.5rem] overflow-hidden aspect-square mb-4">
+            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_69827c6679_027396a5bf777abd.png" alt="Hikers eating together at camp">
+          </div>
+          <div class="rounded-[2.5rem] overflow-hidden aspect-[3/4]">
+            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_3a04715526_d7ed130b66874447.png" alt="Pine canopy seen from below">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-6 py-16">
+    <div class="max-w-7xl mx-auto bg-brand rounded-block p-12 md:p-20 relative overflow-hidden text-center">
+      <i class="fa-solid fa-mountain text-[15rem] absolute top-0 right-0 p-12 opacity-10 text-accent" aria-hidden="true"></i>
+      <div class="relative z-10">
+        <h2 class="font-display text-5xl md:text-7xl font-black text-accent tracking-tighter mb-6 leading-none uppercase">
+          Stop scrolling. <br>Start <span class="italic">climbing.</span>
+        </h2>
+        <p class="text-white/70 text-lg max-w-xl mx-auto mb-10 font-medium">
+          Join our next weekend expedition. Limited slots available for the Winter ’26 Sahyadri Ridge run.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="trips.html" class="bg-accent text-brand px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-all uppercase tracking-tighter">Enroll Now</a>
+          <a href="my-trip.html" class="border border-white/25 text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all uppercase tracking-tighter">Contact Basecamp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer="full"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/roamly.js"></script>
+<script>
+(function () {
+  'use strict';
+  var D = window.RoamlyData, R = window.Roamly;
+
+  /* hero caption reflects the flagship trip */
+  var flagship = D.byId('sandakphu');
+  document.getElementById('heroTripName').textContent = flagship.name;
+  document.getElementById('heroTripGrade').textContent = flagship.grade;
+
+  /* featured bento — one large, one tall, three compact */
+  var big   = D.byId('sandakphu');
+  var tall  = D.byId('cloudforest');
+  var small = ['stargazer', 'workshop', 'coastal'].map(D.byId);
+
+  function bigCard(t) {
+    return '<article class="md:col-span-8 group trip-card">' +
+      '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
+      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle">' +
+        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' +
+        '<div class="absolute top-8 left-8"><span class="bg-accent text-brand px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>' +
+        '<div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-[2.5rem] flex flex-wrap justify-between items-end gap-4">' +
+          '<div><div class="flex gap-1 mb-2">' + R.stars(t.rating) + '</div>' +
+            '<h3 class="font-display font-extrabold text-2xl mb-1 uppercase">' + R.esc(t.name) + '</h3>' +
+            '<p class="text-sm font-black text-brand/70 uppercase tracking-widest">' + R.esc(t.region) + ' • ' + t.days + ' Days</p></div>' +
+          '<div class="text-right"><p class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Starting From</p>' +
+            '<p class="text-3xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</p></div>' +
+        '</div></div></a></article>';
+  }
+
+  function tallCard(t) {
+    return '<article class="md:col-span-4 group trip-card">' +
+      '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
+      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle">' +
+        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' +
+        '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>' +
+        '<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>' +
+        '<div class="absolute bottom-8 left-8 right-8 text-white">' +
+          '<h3 class="font-display font-extrabold text-2xl mb-1 uppercase">' + R.esc(t.name) + '</h3>' +
+          '<p class="text-xs font-black text-accent uppercase tracking-widest mb-4">' + R.esc(t.region) + ' • ' + t.days + ' Days</p>' +
+          '<div class="flex justify-between items-center">' +
+            '<span class="text-2xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</span>' +
+            '<span class="w-10 h-10 rounded-full bg-white text-brand flex items-center justify-center"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>' +
+          '</div></div></div></a></article>';
+  }
+
+  function smallCard(t) {
+    var badge = t.badges[0] ? '<div class="absolute top-4 left-4"><span class="bg-accent text-brand px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em]">' + R.esc(t.badges[0]) + '</span></div>' : '';
+    return '<article class="md:col-span-4 group trip-card">' +
+      '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
+      '<div class="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-4 border border-border-subtle">' +
+        '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
+      '</div><div class="px-1">' +
+        '<div class="flex justify-between items-start gap-3 mb-1">' +
+          '<h3 class="font-display font-extrabold text-xl uppercase">' + R.esc(t.name) + '</h3>' +
+          '<span class="text-sm font-black uppercase shrink-0">' + R.inr(t.price) + '</span></div>' +
+        '<p class="text-[10px] font-black text-muted uppercase tracking-widest">' + R.esc(t.region) + ' • ' + (t.days > 1 ? t.days + ' Days' : 'Day Trip') + '</p>' +
+      '</div></a></article>';
+  }
+
+  document.getElementById('featured').innerHTML =
+    bigCard(big) + tallCard(tall) + small.map(smallCard).join('');
+
+  /* search routes into the browse page */
+  document.getElementById('searchForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    window.location.href = 'trips.html';
+  });
+})();
+</script>
+</body>
+</html>

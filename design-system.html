@@ -1,0 +1,2036 @@
+<title>Roamly Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+/* ============================================================
+   TOKENS — page chrome. Light is the base; dark redefines only
+   these values, never component rules.
+   ============================================================ */
+:root{
+  --ground:#f4f7f4;
+  --panel:#ffffff;
+  --panel-2:#eef3ef;
+  --ink:#0e1410;
+  --ink-2:#3d4a42;
+  --muted:#5f6b63;
+  --line:#dbe4dd;
+  --line-strong:#c3d0c7;
+  --brand:#1a4332;
+  --brand-text:#1a4332;
+  --brand-soft:#e6eeea;
+  --accent:#d4f27a;
+  --accent-ink:#1a4332;
+  --crit:#a3341f;
+  --crit-bg:#fbeae6;
+  --warn:#8a5a10;
+  --warn-bg:#fbf1de;
+  --ok:#1f6b45;
+  --ok-bg:#e4f2ea;
+  --shadow:0 1px 2px rgba(14,20,16,.05), 0 8px 24px -12px rgba(14,20,16,.18);
+  --shadow-lg:0 2px 6px rgba(14,20,16,.06), 0 24px 48px -24px rgba(26,67,50,.28);
+  --radius:14px;
+  --topo:#1a4332;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0d110f;
+    --panel:#151b17;
+    --panel-2:#1b231e;
+    --ink:#eaf0ec;
+    --ink-2:#b6c3bb;
+    --muted:#8d9a92;
+    --line:#26302a;
+    --line-strong:#38443c;
+    --brand:#1f5a41;
+    --brand-text:#8fd6ae;
+    --brand-soft:#16241d;
+    --accent:#d4f27a;
+    --accent-ink:#12281d;
+    --crit:#f0a08c;
+    --crit-bg:#2c1a15;
+    --warn:#e6bd76;
+    --warn-bg:#2a2015;
+    --ok:#86cea6;
+    --ok-bg:#152a20;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.45), 0 24px 48px -24px rgba(0,0,0,.75);
+    --topo:#7fc9a3;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0d110f;
+  --panel:#151b17;
+  --panel-2:#1b231e;
+  --ink:#eaf0ec;
+  --ink-2:#b6c3bb;
+  --muted:#8d9a92;
+  --line:#26302a;
+  --line-strong:#38443c;
+  --brand:#1f5a41;
+  --brand-text:#8fd6ae;
+  --brand-soft:#16241d;
+  --accent:#d4f27a;
+  --accent-ink:#12281d;
+  --crit:#f0a08c;
+  --crit-bg:#2c1a15;
+  --warn:#e6bd76;
+  --warn-bg:#2a2015;
+  --ok:#86cea6;
+  --ok-bg:#152a20;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lg:0 2px 6px rgba(0,0,0,.45), 0 24px 48px -24px rgba(0,0,0,.75);
+  --topo:#7fc9a3;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk','Space Grotesk Fallback',sans-serif;text-wrap:balance;margin:0;}
+p{margin:0;}
+a{color:var(--brand-text);}
+code,.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;}
+:focus-visible{outline:2px solid var(--brand-text);outline-offset:3px;border-radius:4px;}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+
+/* ============================================================
+   SHELL
+   ============================================================ */
+.shell{max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,40px);}
+.masthead{position:relative;overflow:hidden;border-bottom:1px solid var(--line);}
+#topo{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none;}
+.masthead-inner{position:relative;padding:clamp(56px,9vw,104px) 0 clamp(40px,6vw,64px);max-width:840px;}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+}
+.masthead h1{
+  font-size:clamp(40px,7.5vw,76px);font-weight:700;letter-spacing:-.045em;
+  line-height:.96;margin:18px 0 22px;text-transform:uppercase;
+}
+.masthead h1 em{font-style:italic;color:var(--brand-text);}
+.lede{font-size:clamp(16px,1.9vw,19px);color:var(--ink-2);max-width:64ch;line-height:1.65;}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.fact{
+  display:flex;flex-direction:column;gap:2px;padding:12px 18px;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;min-width:104px;
+}
+.fact b{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1;}
+.fact span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);}
+
+.layout{display:grid;grid-template-columns:216px minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start;padding-bottom:96px;}
+@media (max-width:900px){ .layout{grid-template-columns:1fr;gap:0;} }
+
+/* rail */
+.rail{position:sticky;top:0;padding:32px 0;max-height:100vh;overflow-y:auto;}
+.rail-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:0 12px 10px;}
+.rail nav{display:flex;flex-direction:column;gap:1px;}
+.rail a{
+  display:flex;align-items:baseline;gap:9px;padding:7px 12px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500;
+  transition:background .15s, color .15s;
+}
+.rail a .num{font-family:'JetBrains Mono',monospace;font-size:10px;opacity:.6;}
+.rail a:hover{background:var(--panel-2);color:var(--ink);}
+.rail a.on{background:var(--brand-soft);color:var(--brand-text);font-weight:600;}
+@media (max-width:900px){
+  .rail{position:static;max-height:none;padding:14px 0;border-bottom:1px solid var(--line);}
+  .rail-title{display:none;}
+  .rail nav{flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:4px;}
+  .rail a{white-space:nowrap;border:1px solid var(--line);}
+}
+
+/* sections */
+section{padding:clamp(44px,6vw,76px) 0;border-bottom:1px solid var(--line);scroll-margin-top:16px;}
+section:last-of-type{border-bottom:0;}
+.sec-head{max-width:70ch;margin-bottom:32px;}
+.sec-head h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.035em;margin:10px 0 12px;text-transform:uppercase;}
+.sec-head p{color:var(--ink-2);font-size:15.5px;}
+h3.sub{
+  font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);margin:38px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);
+}
+h3.sub:first-of-type{margin-top:0;}
+.note{color:var(--muted);font-size:13.5px;line-height:1.6;max-width:72ch;}
+.note + .note{margin-top:8px;}
+
+/* file reference chip */
+.ref{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+  background:var(--panel-2);border:1px solid var(--line);border-radius:5px;
+  padding:1px 6px;white-space:nowrap;
+}
+a.ref{text-decoration:none;}
+
+/* ============================================================
+   ARTBOARD — components render in the palette they actually ship
+   in, independent of the page theme. Theme A and Theme B are two
+   scoped token sets on the same markup.
+   ============================================================ */
+.stage{
+  --rm-canvas:#ffffff; --rm-surface:#f8f9fa; --rm-brand:#1a4332;
+  --rm-accent:#d4f27a; --rm-ink:#0a0a0a; --rm-muted:#666666; --rm-line:#e5e7eb;
+  --rm-display:'Space Grotesk', sans-serif;
+  --rm-case:uppercase; --rm-track:-.05em;
+  background:var(--rm-canvas);color:var(--rm-ink);
+  font-family:'Inter',sans-serif;
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(18px,3vw,32px);
+  position:relative;
+}
+.stage[data-sys="b"]{
+  --rm-canvas:#faf9f6; --rm-surface:#f3f0e9; --rm-surface-1:#ebe7de;
+  --rm-line:#e0d9cc; --rm-ink:#1c1a17; --rm-muted:#5c564c; --rm-brand:#094c32;
+  --rm-accent:#094c32;
+  --rm-display:'Playfair Display', serif;
+  --rm-case:none; --rm-track:-.01em;
+}
+.stage-label{
+  position:absolute;top:0;right:0;font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);background:var(--panel);border-left:1px solid var(--line);
+  border-bottom:1px solid var(--line);border-radius:0 var(--radius) 0 10px;padding:5px 10px;
+}
+.stage-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.stage-grid{display:grid;gap:16px;}
+
+/* ---------- Roamly component recreations ---------- */
+.rm-btn{
+  font-family:'Inter',sans-serif;font-weight:700;text-transform:uppercase;
+  border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .15s ease, background .15s, color .15s, border-color .15s;
+}
+.rm-primary{
+  background:var(--rm-brand);color:var(--rm-accent);
+  padding:16px 34px;border-radius:16px;font-size:17px;letter-spacing:-.04em;
+  box-shadow:0 18px 34px -18px rgba(26,67,50,.55);
+}
+.rm-primary:hover{transform:scale(1.05);}
+.rm-primary.tilt:hover{transform:rotate(2deg);}
+.rm-inverse{
+  background:var(--rm-accent);color:var(--rm-brand);
+  padding:16px 34px;border-radius:16px;font-size:17px;letter-spacing:-.04em;
+}
+.rm-inverse:hover{transform:scale(1.05);}
+.rm-secondary{
+  background:transparent;color:inherit;border:1px solid var(--rm-line);
+  padding:15px 30px;border-radius:16px;font-size:12px;letter-spacing:.1em;
+}
+.rm-secondary:hover{background:var(--rm-surface);}
+.rm-onduskghost{
+  background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);
+  padding:15px 30px;border-radius:16px;font-size:12px;letter-spacing:.1em;
+}
+.rm-onduskghost:hover{background:rgba(255,255,255,.1);}
+.rm-neutral{
+  background:var(--rm-ink);color:#fff;padding:11px 28px;border-radius:16px;
+  font-size:11px;letter-spacing:.1em;
+}
+.rm-neutral:hover{background:var(--rm-brand);color:var(--rm-accent);}
+.rm-icon-round{
+  width:48px;height:48px;border-radius:999px;background:transparent;
+  border:1px solid var(--rm-line);color:inherit;padding:0;
+}
+.rm-icon-round:hover{background:var(--rm-brand);color:#fff;}
+.rm-icon-square{
+  width:48px;height:48px;border-radius:16px;background:var(--rm-surface);
+  border:1px solid var(--rm-line);color:inherit;padding:0;
+}
+.rm-icon-square:hover{background:var(--rm-brand);color:var(--rm-accent);}
+.rm-dashed{
+  width:100%;padding:34px;border:2px dashed var(--rm-line);border-radius:24px;
+  background:transparent;color:var(--rm-muted);
+  font-family:var(--rm-display);font-weight:700;letter-spacing:.16em;font-size:12px;
+  flex-direction:column;gap:10px;
+}
+.rm-dashed:hover{border-color:var(--rm-brand);color:var(--rm-brand);background:var(--rm-surface);}
+.rm-textlink{
+  background:none;border:0;border-bottom:2px solid var(--rm-brand);padding:0 0 4px;
+  color:var(--rm-brand);font-size:11px;font-weight:800;letter-spacing:.2em;border-radius:0;
+}
+.rm-outline-block{
+  background:transparent;border:2px solid var(--rm-ink);color:inherit;
+  padding:17px 44px;border-radius:16px;
+  font-family:var(--rm-display);font-size:17px;letter-spacing:-.04em;
+}
+.rm-outline-block:hover{background:var(--rm-ink);color:#fff;}
+
+.rm-badge{
+  display:inline-flex;align-items:center;gap:7px;padding:6px 16px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+}
+.rm-badge.brand{background:var(--rm-brand);color:var(--rm-accent);box-shadow:0 10px 20px -12px rgba(0,0,0,.5);}
+.rm-badge.accent{background:var(--rm-accent);color:var(--rm-brand);box-shadow:0 10px 20px -12px rgba(0,0,0,.35);}
+.rm-badge.frost{background:rgba(255,255,255,.9);backdrop-filter:blur(6px);color:var(--rm-ink);box-shadow:0 10px 20px -12px rgba(0,0,0,.4);border:1px solid var(--rm-line);}
+.rm-badge.outline{background:var(--rm-surface);border:1px solid var(--rm-line);color:inherit;}
+.rm-badge.urgent{background:var(--rm-accent);color:var(--rm-brand);padding:4px 12px;border-radius:8px;font-size:9px;}
+.rm-dot{width:6px;height:6px;border-radius:999px;background:var(--rm-accent);display:inline-block;animation:rm-pulse 2s ease-in-out infinite;}
+.stage[data-sys="b"] .rm-dot{background:var(--rm-brand);}
+@keyframes rm-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.rm-eyebrow{font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--rm-muted);}
+.rm-value{font-size:14px;font-weight:700;text-transform:var(--rm-case);letter-spacing:-.01em;}
+.rm-h{font-family:var(--rm-display);font-weight:700;letter-spacing:var(--rm-track);text-transform:var(--rm-case);}
+
+.rm-card{border:1px solid var(--rm-line);border-radius:48px;overflow:hidden;position:relative;}
+.rm-photo{display:block;width:100%;height:100%;}
+.rm-media{position:relative;height:290px;border-radius:48px;overflow:hidden;border:1px solid var(--rm-line);}
+.rm-media .rm-photo{position:absolute;inset:0;transition:transform .7s ease;}
+.rm-media:hover .rm-photo{transform:scale(1.05);}
+.rm-glass{
+  position:absolute;left:20px;right:20px;bottom:20px;
+  background:rgba(255,255,255,.7);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.3);border-radius:36px;padding:20px 24px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:16px;color:#0a0a0a;
+}
+.rm-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8),transparent 55%);}
+.rm-scrim-body{position:absolute;left:26px;right:26px;bottom:26px;color:#fff;}
+.rm-ribbon{
+  position:absolute;top:0;right:0;background:var(--rm-brand);color:var(--rm-accent);
+  padding:11px 30px;border-radius:0 0 0 32px;
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.rm-panel-dark{background:var(--rm-ink);color:#fff;border-radius:48px;padding:36px;}
+.rm-panel-brand{background:var(--rm-brand);color:var(--rm-accent);border-radius:48px;padding:36px;}
+.rm-panel-dark .dim{color:rgba(255,255,255,.6);}
+.rm-panel-dark .dimmer{color:rgba(255,255,255,.4);}
+.rm-panel-brand .dim{color:rgba(255,255,255,.6);}
+.rm-panel-brand .dimmer{color:rgba(255,255,255,.4);}
+.rm-widget{
+  background:#fff;border:1px solid var(--rm-line);border-radius:48px;padding:36px;
+  box-shadow:0 24px 48px -24px rgba(26,67,50,.18);max-width:380px;
+}
+.stage[data-sys="b"] .rm-widget{border-radius:24px;}
+.rm-field-block{background:var(--rm-surface);border:1px solid var(--rm-line);border-radius:32px;padding:20px 24px;}
+.rm-tile{
+  aspect-ratio:1/1;border:1px solid var(--rm-line);border-radius:40px;padding:24px;
+  display:flex;flex-direction:column;justify-content:space-between;text-align:left;
+  background:transparent;color:inherit;cursor:pointer;transition:background .2s,color .2s;
+}
+.rm-tile:hover{background:var(--rm-brand);color:var(--rm-accent);}
+.rm-tile:hover .rm-eyebrow{color:inherit;opacity:.6;}
+.rm-tile .glyph{font-size:28px;transition:transform .2s ease;line-height:1;}
+.rm-tile:hover .glyph{transform:rotate(-12deg);}
+.rm-accordion{
+  background:var(--rm-surface);border:1px solid var(--rm-line);border-radius:40px;padding:28px 32px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  cursor:pointer;transition:background .2s,color .2s;
+}
+.rm-accordion:hover{background:var(--rm-brand);color:var(--rm-accent);}
+.rm-accordion:hover .rm-eyebrow{color:inherit;opacity:.6;}
+.rm-accordion .plus{font-size:20px;transition:transform .2s ease;line-height:1;}
+.rm-accordion:hover .plus{transform:rotate(45deg);}
+
+.rm-label{
+  display:block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--rm-muted);margin:0 0 8px 8px;
+}
+.stage[data-sys="b"] .rm-label{font-size:12px;margin-left:4px;}
+.rm-input{
+  width:100%;background:#fff;border:1px solid var(--rm-line);border-radius:16px;
+  padding:15px 24px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;
+  color:var(--rm-ink);outline:none;transition:border-color .15s;
+}
+.stage[data-sys="b"] .rm-input{background:var(--rm-surface);border-radius:12px;padding:11px 16px;font-weight:500;font-size:14px;}
+.rm-input:focus{border-color:var(--rm-brand);}
+.rm-input::placeholder{color:var(--rm-muted);opacity:.55;}
+
+.rm-nav{
+  background:rgba(255,255,255,.7);backdrop-filter:blur(12px);
+  border:1px solid var(--rm-line);border-radius:999px;
+  padding:11px 22px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  box-shadow:0 1px 2px rgba(0,0,0,.05);
+}
+.rm-logo{display:flex;align-items:center;gap:9px;font-family:var(--rm-display);font-weight:700;font-size:21px;letter-spacing:-.05em;text-decoration:none;color:inherit;}
+.rm-logo .mark{
+  width:30px;height:30px;border-radius:8px;background:var(--rm-brand);color:var(--rm-accent);
+  display:grid;place-items:center;font-size:13px;font-style:italic;
+}
+.rm-navlinks{display:flex;gap:26px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;}
+.rm-navlinks span{color:var(--rm-muted);cursor:pointer;}
+.rm-navlinks span.on{color:var(--rm-brand);}
+
+.rm-step{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.rm-step-item{display:flex;align-items:center;gap:9px;transition:opacity .25s;}
+.rm-step-item[data-state="todo"]{opacity:.3;}
+.rm-chip{
+  width:26px;height:26px;border-radius:999px;display:grid;place-items:center;
+  font-size:10px;font-weight:700;background:var(--rm-surface);
+  border:1px solid var(--rm-line);color:var(--rm-ink);
+}
+.rm-step-item[data-state="done"] .rm-chip,
+.rm-step-item[data-state="now"] .rm-chip{background:var(--rm-brand);color:var(--rm-accent);border-color:var(--rm-brand);}
+.rm-step-item .cap{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;}
+.rm-step-item[data-state="done"] .cap,
+.rm-step-item[data-state="now"] .cap{color:var(--rm-brand);}
+.rm-connector{width:34px;height:1px;background:var(--rm-line);}
+.rm-connector[data-state="done"]{background:var(--rm-brand);}
+
+.rm-track{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative;}
+.rm-track .rail-line{position:absolute;top:24px;left:12%;right:12%;height:2px;background:var(--rm-line);}
+.rm-node{position:relative;z-index:1;text-align:center;}
+.rm-node .box{
+  width:48px;height:48px;border-radius:16px;display:grid;place-items:center;margin:0 auto 14px;
+  background:#fff;border:1px solid var(--rm-line);color:var(--rm-muted);font-size:17px;
+}
+.rm-node[data-state="done"] .box{background:var(--rm-brand);color:var(--rm-accent);border-color:var(--rm-brand);}
+.rm-node[data-state="now"] .box{background:var(--rm-accent);color:var(--rm-brand);border-color:var(--rm-accent);animation:rm-pulse 2s ease-in-out infinite;}
+.rm-node[data-state="todo"]{opacity:.3;filter:grayscale(1);}
+.rm-node .cap{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--rm-brand);}
+.rm-node[data-state="todo"] .cap{color:var(--rm-muted);}
+
+/* Theme B radio card — the one pattern Theme A never got */
+.rm-radio{
+  display:block;background:#fff;border:1px solid var(--rm-line);border-radius:24px;
+  padding:22px 26px;position:relative;cursor:pointer;transition:border-color .15s;
+}
+.rm-radio:hover{border-color:var(--rm-brand);}
+.rm-radio.on{border:2px solid var(--rm-brand);padding:21px 25px;}
+.rm-radio .tag{
+  position:absolute;top:-11px;left:24px;background:var(--rm-brand);color:#fff;
+  padding:3px 12px;border-radius:999px;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* ============================================================
+   DOC FURNITURE
+   ============================================================ */
+.grid-auto{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));}
+.grid-2{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+.grid-3{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+
+.swatch{
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel);
+  text-align:left;padding:0;cursor:pointer;font:inherit;color:inherit;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.swatch:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.swatch .chip{height:76px;border-bottom:1px solid var(--line);position:relative;}
+.swatch .meta{padding:11px 13px 13px;}
+.swatch .nm{font-size:13px;font-weight:600;}
+.swatch .hx{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:.02em;}
+.swatch .role{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.45;}
+.copied{color:var(--ok) !important;font-weight:700;}
+
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);}
+.tbl th{
+  text-align:left;font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;padding:12px 16px;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+.tbl td{padding:11px 16px;border-bottom:1px solid var(--line);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:0;}
+.tbl td.num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
+
+.pill{
+  display:inline-block;padding:2px 9px;border-radius:999px;font-size:10px;
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+}
+.pill.pass{background:var(--ok-bg);color:var(--ok);}
+.pill.fail{background:var(--crit-bg);color:var(--crit);}
+.pill.large{background:var(--warn-bg);color:var(--warn);}
+.pill.a{background:var(--brand-soft);color:var(--brand-text);}
+.pill.b{background:var(--warn-bg);color:var(--warn);}
+
+.code{
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.65;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:10px;
+  padding:11px 13px;color:var(--ink-2);overflow-x:auto;white-space:pre-wrap;word-break:break-word;
+  margin:0;
+}
+details.spec{margin-top:12px;}
+details.spec summary{
+  cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  list-style:none;display:flex;align-items:center;gap:7px;padding:5px 0;
+}
+details.spec summary::-webkit-details-marker{display:none;}
+details.spec summary::before{content:"+";font-size:13px;line-height:1;}
+details.spec[open] summary::before{content:"\2212";}
+details.spec summary:hover{color:var(--ink);}
+
+.comp{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:18px;}
+.comp-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.comp-head h4{font-size:15px;font-weight:700;letter-spacing:-.02em;}
+.comp-head .ref{flex-shrink:0;}
+.comp .stage{border-radius:10px;}
+
+.seg{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;}
+.seg button{
+  font:inherit;font-size:12px;font-weight:600;padding:6px 14px;border:0;border-radius:7px;
+  background:transparent;color:var(--muted);cursor:pointer;transition:background .15s,color .15s;
+}
+.seg button.on{background:var(--panel);color:var(--ink);box-shadow:var(--shadow);}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:22px;}
+
+/* flow graph */
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;}
+.flow-node{
+  flex:1 1 132px;min-width:132px;border:1px solid var(--line);border-radius:11px;
+  background:var(--panel);padding:12px 13px;display:flex;flex-direction:column;gap:5px;
+}
+.flow-node.sysb{background:#faf9f6;border-color:#e0d9cc;}
+:root[data-theme="dark"] .flow-node.sysb,
+:root:not([data-theme="light"]) .flow-node.sysb{background:#232019;border-color:#3c352a;}
+.flow-node .idx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+.flow-node .nm{font-size:13px;font-weight:600;line-height:1.25;letter-spacing:-.01em;}
+.flow-node.sysb .nm{font-family:'Playfair Display',serif;font-weight:700;}
+.flow-node .sys{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-top:auto;padding-top:6px;}
+.flow-node .sys.a{color:var(--brand-text);}
+.flow-node .sys.b{color:var(--warn);}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:7px;vertical-align:-1px;}
+
+/* type specimens */
+.spec-row{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+.spec-row:last-child{border-bottom:0;}
+.spec-meta{flex:0 0 200px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);line-height:1.5;}
+.spec-demo{flex:1 1 300px;min-width:0;color:var(--ink);}
+
+/* radius + shadow */
+.shape{text-align:center;}
+.shape .box{
+  height:88px;background:var(--brand-soft);border:1px solid var(--line-strong);margin-bottom:9px;
+}
+.shape .lbl{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);line-height:1.5;}
+.elev{background:var(--panel);border-radius:14px;padding:22px;text-align:center;border:1px solid var(--line);}
+
+/* issues */
+.issue{
+  border:1px solid var(--line);border-left:3px solid var(--line-strong);border-radius:11px;
+  background:var(--panel);padding:16px 18px;margin-bottom:10px;
+}
+.issue[data-sev="critical"]{border-left-color:var(--crit);}
+.issue[data-sev="major"]{border-left-color:var(--warn);}
+.issue[data-sev="minor"]{border-left-color:var(--line-strong);}
+.issue-head{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin-bottom:7px;}
+.issue-head h4{font-size:14.5px;font-weight:700;letter-spacing:-.01em;}
+.issue p{font-size:13.5px;color:var(--ink-2);max-width:78ch;}
+.issue .refs{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;}
+
+/* checklist */
+.check{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:var(--panel);margin-bottom:8px;cursor:pointer;}
+.check input{margin:3px 0 0;width:16px;height:16px;accent-color:var(--brand-text);flex-shrink:0;cursor:pointer;}
+.check span{font-size:14px;line-height:1.5;}
+.check.done span{color:var(--muted);text-decoration:line-through;}
+.progress{height:5px;background:var(--panel-2);border-radius:999px;overflow:hidden;margin:0 0 18px;border:1px solid var(--line);}
+.progress i{display:block;height:100%;background:var(--brand-text);transition:width .3s ease;}
+
+.footer{padding:36px 0 60px;color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+</style>
+
+<header class="masthead">
+  <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="shell">
+    <div class="masthead-inner">
+      <div class="eyebrow">Living style guide &middot; extracted from source</div>
+      <h1>Roamly <em>Design System.</em></h1>
+      <p class="lede">
+        Every token, component, and rule below was read out of the nine static HTML prototypes
+        in this folder and rebuilt here as live markup. Component previews render on fixed
+        artboards in the palette they actually ship in &mdash; including the second, divergent
+        system that owns two of the four checkout steps.
+      </p>
+      <div class="facts">
+        <div class="fact"><b>9</b><span>Screens</span></div>
+        <div class="fact"><b>2</b><span>Design systems</span></div>
+        <div class="fact"><b>7</b><span>Color tokens</span></div>
+        <div class="fact"><b>9</b><span>Radius steps</span></div>
+        <div class="fact"><b>13</b><span>Open issues</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+<div class="layout">
+
+  <aside class="rail">
+    <div class="rail-title">Contents</div>
+    <nav id="rail">
+      <a href="#screens"><span class="num">01</span> Screens &amp; flow</a>
+      <a href="#color"><span class="num">02</span> Color</a>
+      <a href="#type"><span class="num">03</span> Typography</a>
+      <a href="#shape"><span class="num">04</span> Shape &amp; elevation</a>
+      <a href="#layout"><span class="num">05</span> Layout</a>
+      <a href="#components"><span class="num">06</span> Components</a>
+      <a href="#motion"><span class="num">07</span> Motion</a>
+      <a href="#voice"><span class="num">08</span> Voice</a>
+      <a href="#systems"><span class="num">09</span> Two systems</a>
+      <a href="#issues"><span class="num">10</span> Issues</a>
+      <a href="#next"><span class="num">11</span> Next steps</a>
+    </nav>
+  </aside>
+
+  <main>
+
+  <!-- ============ 01 SCREENS ============ -->
+  <section id="screens">
+    <div class="sec-head">
+      <div class="eyebrow">01 &middot; Inventory</div>
+      <h2>Screens &amp; flow</h2>
+      <p>Nine prototypes covering marketing, browse, detail, a four-step checkout, and a
+         post-booking dashboard. Two of them are built in a different design language.</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-node"><span class="idx">01</span><span class="nm">Home</span><span class="sys a">Expedition</span></div>
+      <div class="flow-node"><span class="idx">03</span><span class="nm">Trips</span><span class="sys a">Expedition</span></div>
+      <div class="flow-node"><span class="idx">02</span><span class="nm">Trip Detail</span><span class="sys a">Expedition</span></div>
+      <div class="flow-node"><span class="idx">04</span><span class="nm">Step 1 &middot; Roster</span><span class="sys a">Expedition</span></div>
+      <div class="flow-node sysb"><span class="idx">05</span><span class="nm">Step 2 &middot; Details</span><span class="sys b">Heritage</span></div>
+      <div class="flow-node sysb"><span class="idx">06</span><span class="nm">Step 3 &middot; Pickup</span><span class="sys b">Heritage</span></div>
+      <div class="flow-node"><span class="idx">07</span><span class="nm">Step 4 &middot; Payment</span><span class="sys a">Expedition</span></div>
+      <div class="flow-node"><span class="idx">08</span><span class="nm">Confirmation</span><span class="sys a">Expedition</span></div>
+      <div class="flow-node"><span class="idx">09</span><span class="nm">My Trip</span><span class="sys a">Expedition</span></div>
+    </div>
+    <div class="legend">
+      <span><i style="background:#1a4332"></i>Theme A &mdash; Expedition (7 screens)</span>
+      <span><i style="background:#faf9f6;border:1px solid #e0d9cc"></i>Theme B &mdash; Heritage (2 screens)</span>
+    </div>
+    <p class="note" style="margin-top:16px">
+      A user moving through checkout crosses the brand boundary twice: step&nbsp;1 Expedition,
+      steps&nbsp;2&ndash;3 Heritage, step&nbsp;4 Expedition again.
+    </p>
+
+    <h3 class="sub">Transitions as written in the markup</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>From</th><th>To</th><th>Mechanism</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Home</td><td>Step 1</td><td class="num">onclick &rarr; location.href</td><td><span class="ref">01:96, 01:202</span></td></tr>
+          <tr><td>Trips</td><td>Trip Detail</td><td class="num">onclick on card div</td><td><span class="ref">03:120</span></td></tr>
+          <tr><td>Trip Detail</td><td>Step 1</td><td class="num">onclick &rarr; location.href</td><td><span class="ref">02:229</span></td></tr>
+          <tr><td>Step 1</td><td>Step 2</td><td class="num">onclick &rarr; location.href</td><td><span class="ref">04:153</span></td></tr>
+          <tr><td>Step 2</td><td>Step 3</td><td class="num">form action + submit</td><td><span class="ref">05:70</span></td></tr>
+          <tr><td>Step 3</td><td>Step 4</td><td class="num">onclick &rarr; location.href</td><td><span class="ref">06:125</span></td></tr>
+          <tr><td>Step 4</td><td>Confirmation</td><td class="num">onclick &rarr; location.href</td><td><span class="ref">07:138</span></td></tr>
+          <tr><td>Confirmation</td><td>My Trip</td><td class="num">anchor href</td><td><span class="ref">08:91</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:12px">
+      Every target above points at a <code>*__desktop.html</code> filename that does not exist on
+      disk. Nothing navigates as shipped &mdash; see issue&nbsp;05.
+    </p>
+  </section>
+
+  <!-- ============ 02 COLOR ============ -->
+  <section id="color">
+    <div class="sec-head">
+      <div class="eyebrow">02 &middot; Foundations</div>
+      <h2>Color</h2>
+      <p>Seven tokens, declared inline in every page&rsquo;s <code>tailwind.config</code>.
+         Click any swatch to copy its hex.</p>
+    </div>
+
+    <h3 class="sub">Theme A &mdash; Expedition <span class="ref" style="margin-left:8px">01:23&ndash;31</span></h3>
+    <div class="grid-auto" id="paletteA"></div>
+
+    <h3 class="sub">The pairing rule</h3>
+    <p class="note" style="margin-bottom:14px">
+      Lime never sits on white. It appears only as a foreground on <code>brand</code> or
+      <code>ink</code>. White copy on brand is always transparency-stepped rather than pure.
+    </p>
+    <div class="stage">
+      <span class="stage-label">Artboard &middot; Theme A</span>
+      <div class="grid-3">
+        <div style="background:#1a4332;color:#d4f27a;border-radius:20px;padding:22px;">
+          <div style="font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.03em;text-transform:uppercase">Correct</div>
+          <div style="font-size:12px;margin-top:6px;color:rgba(255,255,255,.6)">accent on brand</div>
+        </div>
+        <div style="background:#0a0a0a;color:#d4f27a;border-radius:20px;padding:22px;">
+          <div style="font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.03em;text-transform:uppercase">Correct</div>
+          <div style="font-size:12px;margin-top:6px;color:rgba(255,255,255,.6)">accent on ink</div>
+        </div>
+        <div style="background:#ffffff;color:#d4f27a;border-radius:20px;padding:22px;border:1px dashed #e5e7eb;">
+          <div style="font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.03em;text-transform:uppercase">Never</div>
+          <div style="font-size:12px;margin-top:6px;color:#666">accent on canvas &mdash; 1.3:1</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Transparency steps on dark grounds</h3>
+    <div class="stage" style="background:#1a4332">
+      <div style="display:flex;flex-wrap:wrap;gap:28px">
+        <div><div style="color:#fff;font-weight:700;font-size:14px">text-white</div><div class="mono" style="color:rgba(255,255,255,.5);font-size:11px">headings</div></div>
+        <div><div style="color:rgba(255,255,255,.6);font-weight:500;font-size:14px">text-white/60</div><div class="mono" style="color:rgba(255,255,255,.5);font-size:11px">body &middot; 02:194, 09:197</div></div>
+        <div><div style="color:rgba(255,255,255,.4);font-weight:500;font-size:14px">text-white/40</div><div class="mono" style="color:rgba(255,255,255,.5);font-size:11px">labels &middot; 04:127, 07:113</div></div>
+        <div><div style="color:rgba(255,255,255,.3);font-weight:500;font-size:14px">text-white/30</div><div class="mono" style="color:rgba(255,255,255,.5);font-size:11px">legal &middot; 07:143</div></div>
+      </div>
+    </div>
+
+    <h3 class="sub">Contrast audit</h3>
+    <p class="note" style="margin-bottom:14px">
+      Computed live from the literal hex values. WCAG AA needs 4.5:1 for body text,
+      3:1 for text at 24px or 19px&nbsp;bold and above.
+    </p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Foreground</th><th>Ground</th><th>Ratio</th><th>Body</th><th>Large</th><th>Where</th></tr></thead>
+        <tbody id="contrastRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 03 TYPE ============ -->
+  <section id="type">
+    <div class="sec-head">
+      <div class="eyebrow">03 &middot; Foundations</div>
+      <h2>Typography</h2>
+      <p>Space Grotesk for display, Inter for everything else &mdash; loaded from Google Fonts
+         at <span class="ref">01:14</span> and wired both as a Tailwind key and a hand-written
+         CSS class.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="comp">
+        <div class="comp-head"><h4>Space Grotesk</h4><span class="ref">font-display</span></div>
+        <div style="font-family:'Space Grotesk';font-weight:700;font-size:42px;letter-spacing:-.05em;line-height:1;text-transform:uppercase">Ridge Run</div>
+        <p class="note" style="margin-top:12px">Headings, prices, logo, stat numerals. Always
+          <code>tracking-tighter</code>, usually uppercase, frequently with one italic word.</p>
+      </div>
+      <div class="comp">
+        <div class="comp-head"><h4>Inter</h4><span class="ref">font-sans &middot; default</span></div>
+        <div style="font-family:'Inter';font-weight:500;font-size:22px;line-height:1.4">Premium weekend trekking experiences for those who seek the silence of the summits.</div>
+        <p class="note" style="margin-top:12px">Body copy, labels, badges, buttons, nav. Carries
+          every micro-label at 9&ndash;11px with wide tracking.</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Scale in use</h3>
+    <div id="typeScale"></div>
+
+    <h3 class="sub">Three rules carry the voice</h3>
+    <div class="grid-3">
+      <div class="comp">
+        <div class="comp-head"><h4>Uppercase above body</h4></div>
+        <p class="note">Headings, buttons, labels, badges, nav, footer. Sentence case survives
+          only in long prose &mdash; <span class="ref">01:92</span>, <span class="ref">02:143</span>.</p>
+      </div>
+      <div class="comp">
+        <div class="comp-head"><h4>Tracking inverts with size</h4></div>
+        <p class="note">Display type goes <code>tracking-tighter</code> (&minus;0.05em); anything
+          at or below 11px goes <code>tracking-widest</code> or <code>[0.2em]</code>.</p>
+      </div>
+      <div class="comp">
+        <div class="comp-head"><h4>Italic as the accent mark</h4></div>
+        <p class="note">The last word of a headline flips to <code>text-brand italic</code> &mdash;
+          <span class="ref">02:111</span>, <span class="ref">04:69</span>, <span class="ref">08:44</span>,
+          <span class="ref">09:74</span>.</p>
+      </div>
+    </div>
+
+    <div class="stage" style="margin-top:18px">
+      <span class="stage-label">Artboard &middot; Theme A</span>
+      <div style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,6vw,58px);letter-spacing:-.05em;line-height:.92;text-transform:uppercase;color:#0a0a0a">
+        Kashmir Group <span style="color:#1a4332;font-style:italic">Escape.</span>
+      </div>
+    </div>
+
+    <h3 class="sub">Weight ladder</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Class</th><th>Weight</th><th>Applied to</th><th>Actually renders at</th></tr></thead>
+        <tbody>
+          <tr><td class="num">font-medium</td><td class="num">500</td><td>Body paragraphs</td><td class="num">500</td></tr>
+          <tr><td class="num">font-semibold</td><td class="num">600</td><td>Nav links</td><td class="num">600</td></tr>
+          <tr><td class="num">font-bold</td><td class="num">700</td><td>Data values, prices</td><td class="num"><span class="pill fail">600 on Inter</span></td></tr>
+          <tr><td class="num">font-extrabold</td><td class="num">800</td><td>Headings</td><td class="num"><span class="pill large">700 on Grotesk</span></td></tr>
+          <tr><td class="num">font-black</td><td class="num">900</td><td>Micro-labels, buttons</td><td class="num"><span class="pill fail">600 on Inter</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:12px">
+      The font request at <span class="ref">01:14</span> loads Inter at
+      <code>wght@300;400;500;600</code> and Space Grotesk at <code>300&hellip;700</code>. Every
+      <code>font-bold</code> and <code>font-black</code> on Inter &mdash; which is most of the
+      interface &mdash; clamps to 600, and <code>font-extrabold</code>/<code>font-black</code>
+      headings clamp to 700. See issue&nbsp;13.
+    </p>
+  </section>
+
+  <!-- ============ 04 SHAPE ============ -->
+  <section id="shape">
+    <div class="sec-head">
+      <div class="eyebrow">04 &middot; Foundations</div>
+      <h2>Shape &amp; elevation</h2>
+      <p>Radius scales with the element: controls 1&ndash;2rem, cards 2.5&ndash;3rem, page blocks
+         4rem. Shadows are tinted with the brand, never neutral black.</p>
+    </div>
+
+    <h3 class="sub">Radius scale</h3>
+    <div class="grid-auto" id="radiusScale"></div>
+    <p class="note" style="margin-top:14px">
+      The <code>borderRadius</code> extension at <span class="ref">01:32&ndash;35</span> is dead
+      config: <code>3xl</code> already equals 1.5rem in Tailwind, and no markup ever uses
+      <code>rounded-4xl</code> &mdash; the CTA at <span class="ref">01:390</span> reaches for
+      arbitrary <code>rounded-[4rem]</code> instead.
+    </p>
+
+    <h3 class="sub">Elevation</h3>
+    <div class="grid-3">
+      <div class="elev" style="box-shadow:0 1px 2px rgba(0,0,0,.05)">
+        <div class="mono" style="font-size:11px;color:var(--muted)">shadow-sm</div>
+        <div style="font-size:12.5px;margin-top:5px">Nav bar, listing cards</div>
+      </div>
+      <div class="elev" style="box-shadow:0 10px 15px -3px rgba(26,67,50,.2)">
+        <div class="mono" style="font-size:11px;color:var(--muted)">shadow-lg&nbsp;shadow-brand/20</div>
+        <div style="font-size:12.5px;margin-top:5px">Primary buttons, badges</div>
+      </div>
+      <div class="elev" style="box-shadow:0 20px 25px -5px rgba(26,67,50,.3)">
+        <div class="mono" style="font-size:11px;color:var(--muted)">shadow-xl&nbsp;shadow-brand/30</div>
+        <div style="font-size:12.5px;margin-top:5px">Hero CTA, overlay badges</div>
+      </div>
+      <div class="elev" style="box-shadow:0 25px 50px -12px rgba(26,67,50,.28)">
+        <div class="mono" style="font-size:11px;color:var(--muted)">shadow-2xl&nbsp;shadow-brand/5</div>
+        <div style="font-size:12.5px;margin-top:5px">Hero image, booking widget</div>
+      </div>
+      <div class="elev" style="box-shadow:0 20px 25px -5px rgba(212,242,122,.35)">
+        <div class="mono" style="font-size:11px;color:var(--muted)">shadow-xl&nbsp;shadow-accent/20</div>
+        <div style="font-size:12.5px;margin-top:5px">Lime deposit panel &middot; 07:129</div>
+      </div>
+      <div class="elev" style="box-shadow:0 20px 25px -5px rgba(0,0,0,.2)">
+        <div class="mono" style="font-size:11px;color:var(--muted)">shadow-xl&nbsp;shadow-black/20</div>
+        <div style="font-size:12.5px;margin-top:5px">Only on dark grounds &middot; 07:138</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 LAYOUT ============ -->
+  <section id="layout">
+    <div class="sec-head">
+      <div class="eyebrow">05 &middot; Foundations</div>
+      <h2>Layout</h2>
+      <p>One container, one grid, one stacking order &mdash; repeated verbatim across all seven
+         Theme&nbsp;A pages.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="comp">
+        <div class="comp-head"><h4>Container</h4><span class="ref">01:62, 02:99, 09:64</span></div>
+        <pre class="code">max-w-7xl mx-auto px-6</pre>
+        <p class="note" style="margin-top:10px">Narrows to <code>max-w-4xl</code> for the search
+          bar <span class="ref">01:131</span> and <code>max-w-2xl</code> for the confirmation
+          <span class="ref">08:33</span>.</p>
+      </div>
+      <div class="comp">
+        <div class="comp-head"><h4>Section rhythm</h4></div>
+        <pre class="code">py-24  marketing   01:185, 01:334
+py-20  app screens 02:99, 09:64
+py-16  transitions 01:297
+pt-32  under fixed nav  04:64, 09:64</pre>
+      </div>
+    </div>
+
+    <h3 class="sub">The 12-column split</h3>
+    <div class="comp">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin-bottom:14px">
+        <div style="grid-column:span 8;background:var(--brand-soft);border:1px solid var(--line-strong);border-radius:7px;padding:16px 12px;font-size:12px;font-weight:600;color:var(--brand-text)">lg:col-span-8 &mdash; content</div>
+        <div style="grid-column:span 4;background:var(--panel-2);border:1px solid var(--line);border-radius:7px;padding:16px 12px;font-size:12px;font-weight:600;color:var(--muted)">span-4 &mdash; sticky rail</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:5px">
+        <div style="grid-column:span 7;background:var(--brand-soft);border:1px solid var(--line-strong);border-radius:7px;padding:16px 12px;font-size:12px;font-weight:600;color:var(--brand-text)">lg:col-span-7 &mdash; payment methods</div>
+        <div style="grid-column:span 5;background:var(--panel-2);border:1px solid var(--line);border-radius:7px;padding:16px 12px;font-size:12px;font-weight:600;color:var(--muted)">span-5 &mdash; order ledger</div>
+      </div>
+      <p class="note" style="margin-top:12px">
+        8/4 on trip detail <span class="ref">02:102</span> and roster
+        <span class="ref">04:67</span>; widened to 7/5 on payment
+        <span class="ref">07:67</span>. Gutter is always <code>gap-16</code>. Rails are
+        <code>sticky top-32</code>.
+      </p>
+    </div>
+
+    <h3 class="sub">Stacking order</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Layer</th><th>z-index</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Custom cursor</td><td class="num">z-[200]</td><td><span class="ref">01:457</span></td></tr>
+          <tr><td>Fixed navbar</td><td class="num">z-[100]</td><td><span class="ref">01:61</span></td></tr>
+          <tr><td>Filter bar (sticky top-24)</td><td class="num">z-40</td><td><span class="ref">03:90</span></td></tr>
+          <tr><td>Search overlay</td><td class="num">z-20</td><td><span class="ref">01:130</span></td></tr>
+          <tr><td>Content over decoration</td><td class="num">z-10</td><td><span class="ref">01:84</span></td></tr>
+          <tr><td>Blur orbs</td><td class="num">-z-10</td><td><span class="ref">01:123&ndash;124</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 06 COMPONENTS ============ -->
+  <section id="components">
+    <div class="sec-head">
+      <div class="eyebrow">06 &middot; Library</div>
+      <h2>Components</h2>
+      <p>Live recreations. Hover anything that has a hover state &mdash; the transitions are the
+         ones in the source. Expand <em>Source classes</em> under any component for the exact
+         Tailwind string it was lifted from.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="seg" id="sysToggle" role="group" aria-label="Design system">
+        <button data-sys="a" class="on">Theme A &middot; Expedition</button>
+        <button data-sys="b">Theme B &middot; Heritage</button>
+      </div>
+      <span class="note" id="sysNote">Artboards below render in Theme A.</span>
+    </div>
+
+    <h3 class="sub">Navigation</h3>
+    <div class="comp">
+      <div class="comp-head"><h4>Floating glass navbar</h4><span class="ref">01:61&ndash;79</span></div>
+      <div class="stage" data-flip>
+        <span class="stage-label">Artboard</span>
+        <div class="rm-nav">
+          <div style="display:flex;align-items:center;gap:34px">
+            <a class="rm-logo" href="#components"><span class="mark">R</span> ROAMLY</a>
+            <div class="rm-navlinks">
+              <span class="on">Expeditions</span><span>Weekend Peaks</span><span>Day Hikes</span><span>Community</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <button class="rm-btn" style="background:none;font-size:12px;letter-spacing:.1em;padding:8px 14px;border-radius:999px;color:inherit">Sign In</button>
+            <button class="rm-btn" style="background:var(--rm-brand);color:var(--rm-accent);padding:10px 22px;border-radius:999px;font-size:12px;letter-spacing:.1em">Book Now</button>
+          </div>
+        </div>
+      </div>
+      <details class="spec"><summary>Source classes</summary>
+<pre class="code">nav   fixed top-0 left-0 right-0 z-[100] px-6 py-4
+bar   max-w-7xl mx-auto glass rounded-full px-6 py-3 flex items-center
+      justify-between border border-border-subtle shadow-sm
+logo  font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2
+mark  bg-brand text-accent w-8 h-8 rounded-lg flex items-center justify-center text-sm italic
+link  text-[13px] font-semibold uppercase tracking-wider hover:text-brand transition-colors</pre>
+      </details>
+    </div>
+
+    <h3 class="sub">Buttons</h3>
+    <div class="comp">
+      <div class="comp-head"><h4>Ten variants</h4><span class="ref">01:96 &middot; 03:141 &middot; 04:113</span></div>
+      <div class="stage" data-flip>
+        <span class="stage-label">Artboard</span>
+        <div class="stage-row" style="margin-bottom:18px">
+          <button class="rm-btn rm-primary tilt">Enroll Now</button>
+          <button class="rm-btn rm-secondary">Download Itinerary</button>
+          <button class="rm-btn rm-neutral">View Trail</button>
+          <button class="rm-btn rm-outline-block">Load More</button>
+        </div>
+        <div class="stage-row" style="margin-bottom:18px">
+          <button class="rm-btn rm-icon-round" aria-label="Previous">&larr;</button>
+          <button class="rm-btn rm-icon-round" aria-label="Next">&rarr;</button>
+          <button class="rm-btn rm-icon-square" aria-label="Instagram">&#9673;</button>
+          <button class="rm-btn rm-textlink">View Full Expedition Log</button>
+        </div>
+        <div style="background:var(--rm-brand);border-radius:24px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px">
+          <button class="rm-btn rm-inverse">Secure My Slot</button>
+          <button class="rm-btn rm-onduskghost">Contact Basecamp</button>
+        </div>
+        <button class="rm-btn rm-dashed"><span style="font-size:26px;line-height:1">+</span> Add Member to Roster</button>
+      </div>
+      <details class="spec"><summary>Source classes</summary>
+<pre class="code">primary     bg-brand text-accent px-10 py-5 rounded-2xl font-black text-lg
+            hover:rotate-2 transition-all shadow-2xl shadow-brand/30 uppercase tracking-tighter
+inverse     bg-accent text-brand px-12 py-5 rounded-2xl font-black text-xl
+            hover:scale-105 transition-all uppercase tracking-tighter
+secondary   border border-border-subtle py-5 rounded-[2rem] font-black text-xs
+            uppercase tracking-widest hover:bg-surface transition-all
+ghost/dark  border border-white/20 text-white px-12 py-5 rounded-2xl font-black
+            text-xl hover:bg-white/10 transition-all uppercase tracking-tighter
+neutral     bg-ink text-white px-8 py-3 rounded-2xl text-[11px] font-bold uppercase
+            tracking-widest group-hover:bg-brand group-hover:text-accent transition-all
+icon round  w-12 h-12 rounded-full border border-border-subtle flex items-center
+            justify-center hover:bg-brand hover:text-white transition-all
+icon square w-12 h-12 rounded-2xl bg-surface border border-border-subtle
+            hover:bg-brand hover:text-accent transition-all
+dashed      w-full py-12 border-2 border-dashed border-border-subtle rounded-[3rem]
+            text-muted font-display font-black uppercase tracking-[0.2em]
+            hover:border-brand hover:text-brand hover:bg-surface transition-all
+text link   text-[11px] font-black uppercase tracking-[0.2em] text-brand
+            border-b-2 border-brand pb-1
+outline blk px-12 py-5 rounded-2xl border-2 border-ink font-display font-black
+            text-lg hover:bg-ink hover:text-white transition-all uppercase tracking-tighter</pre>
+      </details>
+    </div>
+
+    <h3 class="sub">Badges &amp; pills</h3>
+    <div class="comp">
+      <div class="comp-head"><h4>Six treatments plus the corner ribbon</h4><span class="ref">01:206 &middot; 02:107 &middot; 08:52</span></div>
+      <div class="stage" data-flip>
+        <span class="stage-label">Artboard</span>
+        <div class="stage-row" style="margin-bottom:18px">
+          <span class="rm-badge brand">Weekend Peak</span>
+          <span class="rm-badge accent">Best for Experts</span>
+          <span class="rm-badge frost">Himalayas</span>
+          <span class="rm-badge outline">Verified Trail</span>
+          <span class="rm-badge urgent">6 Slots Left</span>
+          <span class="rm-badge outline"><i class="rm-dot"></i> 2026 Winter Season Now Open</span>
+        </div>
+        <div style="position:relative;background:var(--rm-surface);border:1px solid var(--rm-line);border-radius:40px;height:110px">
+          <span class="rm-ribbon">Confirmed Extraction</span>
+        </div>
+      </div>
+      <details class="spec"><summary>Source classes</summary>
+<pre class="code">shared    px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest
+brand     bg-brand text-accent shadow-xl
+accent    bg-accent text-brand shadow-xl
+frosted   bg-white/90 backdrop-blur shadow-xl
+outline   bg-surface border border-border-subtle
+urgency   bg-accent text-brand px-3 py-1 rounded-lg text-[9px] animate-pulse
+eyebrow   inline-flex items-center gap-2 bg-surface border border-border-subtle
+          px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]
+  dot     w-1.5 h-1.5 rounded-full bg-accent animate-pulse
+ribbon    absolute top-0 right-0 px-8 py-3 bg-brand text-accent text-[10px]
+          font-black uppercase tracking-widest rounded-bl-[2rem]</pre>
+      </details>
+    </div>
+
+    <h3 class="sub">Cards</h3>
+    <div class="grid-2">
+      <div class="comp">
+        <div class="comp-head"><h4>Media card &middot; glass overlay</h4><span class="ref">01:202&ndash;226</span></div>
+        <div class="stage" data-flip style="padding:16px">
+          <div class="rm-media">
+            <svg class="rm-photo" viewBox="0 0 400 290" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated ridge line">
+              <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9d4c4"/><stop offset="1" stop-color="#e9f2ec"/></linearGradient></defs>
+              <rect width="400" height="290" fill="url(#sky1)"/>
+              <path d="M0 210 L90 118 L150 178 L215 96 L300 200 L400 140 L400 290 L0 290Z" fill="#2f6a4e"/>
+              <path d="M0 250 L110 178 L200 236 L290 176 L400 238 L400 290 L0 290Z" fill="#1a4332"/>
+            </svg>
+            <div class="rm-glass">
+              <div>
+                <div class="rm-eyebrow" style="color:#1a4332">Featured Peak</div>
+                <div class="rm-h" style="font-size:21px;margin-top:4px">Sandakphu Ridge</div>
+              </div>
+              <div style="text-align:right">
+                <div class="rm-eyebrow">Starting From</div>
+                <div class="rm-h" style="font-size:26px;margin-top:4px">&#8377;18,999</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <details class="spec"><summary>Source classes</summary>
+<pre class="code">frame  relative h-[500px] rounded-[3rem] overflow-hidden border border-border-subtle
+image  w-full h-full object-cover transition-transform duration-700 trip-image
+panel  absolute bottom-6 left-6 right-6 glass p-6 rounded-[2.5rem]
+       flex justify-between items-end
+glass  background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+       border: 1px solid rgba(255,255,255,0.3);</pre>
+        </details>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h4>Media card &middot; gradient scrim</h4><span class="ref">01:229&ndash;245</span></div>
+        <div class="stage" data-flip style="padding:16px">
+          <div class="rm-media">
+            <svg class="rm-photo" viewBox="0 0 400 290" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated forest ridge">
+              <rect width="400" height="290" fill="#8fae9c"/>
+              <path d="M0 160 L80 92 L170 168 L250 84 L340 170 L400 128 L400 290 L0 290Z" fill="#3d7357"/>
+              <path d="M0 226 L120 158 L230 220 L330 162 L400 214 L400 290 L0 290Z" fill="#17392a"/>
+            </svg>
+            <div class="rm-scrim"></div>
+            <div class="rm-scrim-body">
+              <div class="rm-h" style="font-size:21px">The Cloud Forest Trek</div>
+              <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#d4f27a;margin:5px 0 14px">Mullayanagiri &middot; 2 Days</div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="rm-h" style="font-size:24px">&#8377;4,499</span>
+                <span style="width:38px;height:38px;border-radius:999px;background:#fff;color:#1a4332;display:grid;place-items:center">&#8599;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <details class="spec"><summary>Source classes</summary>
+<pre class="code">scrim  absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent
+body   absolute bottom-8 left-8 right-8 text-white
+meta   text-xs font-black text-accent uppercase tracking-widest mb-4</pre>
+        </details>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div class="comp">
+        <div class="comp-head"><h4>Dark panel</h4><span class="ref">02:187 &middot; 07:107 &middot; 09:123</span></div>
+        <div class="stage" data-flip style="padding:16px">
+          <div class="rm-panel-dark">
+            <div class="rm-h" style="font-size:21px;color:#d4f27a;margin-bottom:20px">Order Ledger</div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+              <div><div class="rm-eyebrow dimmer">Expedition</div><div class="rm-value" style="margin-top:4px">Kashmir Group Escape</div></div>
+              <div style="text-align:right"><div class="rm-eyebrow dimmer">Team</div><div class="rm-value" style="margin-top:4px">02 Units</div></div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase" class="dim">Total Amount</span>
+              <span class="rm-h" style="font-size:22px">&#8377;49,998</span>
+            </div>
+          </div>
+        </div>
+        <details class="spec"><summary>Source classes</summary>
+<pre class="code">panel   sticky top-32 bg-ink text-white rounded-[3rem] p-10 shadow-2xl shadow-brand/10
+title   font-display font-black text-2xl tracking-tighter text-accent uppercase
+label   text-[9px] font-black uppercase tracking-[0.2em] text-white/40
+divider py-8 border-y border-white/10</pre>
+        </details>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h4>Brand panel</h4><span class="ref">04:122 &middot; 09:195</span></div>
+        <div class="stage" data-flip style="padding:16px">
+          <div class="rm-panel-brand">
+            <div class="rm-h" style="font-size:21px;margin-bottom:14px">Basecamp Help</div>
+            <p class="dim" style="font-size:14px;margin-bottom:24px">Stuck at basecamp? Need to reschedule your run?</p>
+            <button class="rm-btn rm-inverse" style="width:100%;font-size:12px;letter-spacing:.2em;padding:16px;border-radius:28px">Chat with Command</button>
+          </div>
+        </div>
+        <details class="spec"><summary>Source classes</summary>
+<pre class="code">panel  bg-brand text-accent rounded-[3rem] p-10
+body   text-white/60 font-medium mb-10
+cta    w-full bg-accent text-brand py-5 rounded-[2rem] font-black text-xs
+       uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-lg shadow-black/10</pre>
+        </details>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div class="comp">
+        <div class="comp-head"><h4>Category tile &middot; hover inverts</h4><span class="ref">01:301&ndash;307</span></div>
+        <div class="stage" data-flip style="padding:16px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <button class="rm-tile">
+              <span class="glyph">&#9748;</span>
+              <span>
+                <span class="rm-h" style="font-size:20px;display:block;line-height:1.05">Weekend<br>Peaks</span>
+                <span class="rm-eyebrow" style="display:block;margin-top:5px">From &#8377;2,499</span>
+              </span>
+            </button>
+            <button class="rm-tile">
+              <span class="glyph">&#9968;</span>
+              <span>
+                <span class="rm-h" style="font-size:20px;display:block;line-height:1.05">Alpine<br>Tours</span>
+                <span class="rm-eyebrow" style="display:block;margin-top:5px">From &#8377;12,999</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <details class="spec"><summary>Source classes</summary>
+<pre class="code">tile  aspect-square rounded-[2.5rem] border border-border-subtle p-6
+      flex flex-col justify-between hover:bg-brand hover:text-accent
+      transition-all group text-left
+icon  text-3xl mb-4 group-hover:-rotate-12 transition-transform
+meta  text-[10px] font-black uppercase tracking-widest opacity-60</pre>
+        </details>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h4>Itinerary row &middot; hover inverts</h4><span class="ref">02:153&ndash;161</span></div>
+        <div class="stage" data-flip style="padding:16px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="rm-accordion">
+              <div><div class="rm-eyebrow">Stage 01</div><div class="rm-h" style="font-size:19px;margin-top:5px">Arrival &amp; Houseboat Dock</div></div>
+              <span class="plus">+</span>
+            </div>
+            <div class="rm-accordion">
+              <div><div class="rm-eyebrow">Stage 02</div><div class="rm-h" style="font-size:19px;margin-top:5px">Gulmarg High-Altitude Run</div></div>
+              <span class="plus">+</span>
+            </div>
+          </div>
+        </div>
+        <details class="spec"><summary>Source classes</summary>
+<pre class="code">row    group bg-surface border border-border-subtle p-8 rounded-[2.5rem]
+       hover:bg-brand hover:text-accent transition-all
+stage  text-[10px] font-black uppercase tracking-[0.2em] opacity-60 mb-2 block
+title  font-display text-2xl font-extrabold tracking-tight
+icon   fa-solid fa-plus group-hover:rotate-45 transition-transform</pre>
+        </details>
+      </div>
+    </div>
+
+    <div class="comp" style="margin-top:16px">
+      <div class="comp-head"><h4>Sticky booking widget</h4><span class="ref">02:205&ndash;236</span></div>
+      <div class="stage" data-flip>
+        <span class="stage-label">Artboard</span>
+        <div class="rm-widget">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
+            <div>
+              <div class="rm-eyebrow">Starting from</div>
+              <div class="rm-h" style="font-size:40px;margin-top:5px">&#8377;24,999</div>
+            </div>
+            <span class="rm-badge urgent">6 Slots Left</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:26px">
+            <div class="rm-field-block">
+              <div class="rm-eyebrow">Next Run</div>
+              <div class="rm-value" style="margin-top:6px">15 Sep &ndash; 20 Sep &rsquo;26</div>
+            </div>
+            <div class="rm-field-block">
+              <div class="rm-eyebrow">Basecamp Pickup</div>
+              <div class="rm-value" style="margin-top:6px">Srinagar Terminal (09:00 AM)</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <button class="rm-btn rm-primary" style="width:100%;border-radius:32px;padding:17px">Secure My Slot</button>
+            <button class="rm-btn rm-secondary" style="width:100%;border-radius:32px;padding:17px">Download Itinerary</button>
+          </div>
+          <div class="rm-eyebrow" style="text-align:center;margin-top:24px">Zero Hidden Fees &middot; Secure Encryption</div>
+        </div>
+      </div>
+      <details class="spec"><summary>Source classes</summary>
+<pre class="code">shell  sticky top-32 bg-white border border-border-subtle rounded-[3rem] p-10
+       shadow-2xl shadow-brand/5
+price  text-5xl font-display font-black tracking-tighter
+field  p-6 bg-surface rounded-[2rem] border border-border-subtle
+cta    w-full bg-brand text-accent py-5 rounded-[2rem] font-black text-xl
+       uppercase tracking-tighter hover:scale-[1.02] transition-all shadow-xl shadow-brand/20
+trust  text-[9px] text-center text-muted mt-8 uppercase tracking-widest font-black</pre>
+      </details>
+    </div>
+
+    <h3 class="sub">Forms</h3>
+    <div class="comp">
+      <div class="comp-head"><h4>Field, select, read-only block</h4><span class="ref">04:85&ndash;108 &middot; 05:79&ndash;91</span></div>
+      <div class="stage" data-flip>
+        <span class="stage-label">Artboard</span>
+        <div class="stage-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <div>
+            <label class="rm-label" for="f1">Full Name</label>
+            <input class="rm-input" id="f1" type="text" placeholder="e.g. Rahul Mehta">
+          </div>
+          <div>
+            <label class="rm-label" for="f2">Secure Email</label>
+            <input class="rm-input" id="f2" type="email" placeholder="rahul@climb.com">
+          </div>
+          <div>
+            <label class="rm-label" for="f3">Elevation</label>
+            <select class="rm-input" id="f3">
+              <option>Weekend Peaks (1000m+)</option>
+              <option>Alpine Tours (3000m+)</option>
+              <option>Expert Ridges (5000m+)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <details class="spec"><summary>Source classes</summary>
+<pre class="code">Theme A
+  label  text-[10px] font-black uppercase tracking-widest text-muted ml-2
+  input  w-full bg-white border border-border-subtle rounded-2xl px-6 py-4
+         outline-none focus:border-brand transition-colors font-bold text-sm
+  select adds appearance-none cursor-pointer
+
+Theme B
+  label  text-xs font-bold uppercase tracking-widest text-ink-600 ml-1
+  input  w-full bg-surface-0 border border-line-1 rounded-xl px-4 py-3
+         outline-none focus:border-brand transition-colors
+
+Both use outline-none with no replacement focus ring &mdash; see issue 10.</pre>
+      </details>
+    </div>
+
+    <h3 class="sub">Steppers</h3>
+    <div class="comp">
+      <div class="comp-head">
+        <h4>Checkout stepper &mdash; click a step to advance</h4>
+        <span class="ref">04:39&ndash;59 &middot; 07:39&ndash;59</span>
+      </div>
+      <div class="stage" data-flip>
+        <span class="stage-label">Artboard &middot; interactive</span>
+        <div class="rm-step" id="stepper"></div>
+      </div>
+      <p class="note" style="margin-top:10px">
+        Stage names are themed rather than literal: Roster &rarr; Extraction &rarr; Intel &rarr; Secure.
+        Theme&nbsp;B uses Travellers &rarr; Details &rarr; Pickup &rarr; Payment for the same four steps.
+      </p>
+      <details class="spec"><summary>Source classes</summary>
+<pre class="code">current   w-6 h-6 rounded-full bg-brand text-accent flex items-center
+          justify-center text-[10px] font-bold
+label     text-[10px] font-black uppercase tracking-widest text-brand
+upcoming  wrapper gets opacity-30; chip is bg-surface border border-border-subtle
+done      numeral swaps for fa-check; connector becomes bg-brand
+connector w-8 h-px bg-border-subtle</pre>
+      </details>
+    </div>
+
+    <div class="comp" style="margin-top:16px">
+      <div class="comp-head"><h4>Journey tracker</h4><span class="ref">09:85&ndash;109</span></div>
+      <div class="stage" data-flip>
+        <span class="stage-label">Artboard</span>
+        <div style="background:var(--rm-surface);border:1px solid var(--rm-line);border-radius:44px;padding:34px 26px">
+          <div class="rm-track">
+            <div class="rail-line"></div>
+            <div class="rm-node" data-state="done"><div class="box">&#10003;</div><div class="cap">Booking</div></div>
+            <div class="rm-node" data-state="done"><div class="box">&#10003;</div><div class="cap">Payment</div></div>
+            <div class="rm-node" data-state="now"><div class="box">&#9968;</div><div class="cap">Pre&#8209;Expedition</div></div>
+            <div class="rm-node" data-state="todo"><div class="box">&#9873;</div><div class="cap">Departure</div></div>
+            <div class="rm-node" data-state="todo"><div class="box">&#127942;</div><div class="cap">Peak Attained</div></div>
+          </div>
+        </div>
+      </div>
+      <details class="spec"><summary>Source classes</summary>
+<pre class="code">node    w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg
+done    bg-brand text-accent
+current bg-accent text-brand animate-pulse
+future  bg-white border border-border-subtle text-muted  +  opacity-30 grayscale on wrapper
+rail    absolute top-6 left-10 right-10 h-0.5 bg-border-subtle hidden md:block</pre>
+      </details>
+    </div>
+
+    <h3 class="sub">Selectable option card</h3>
+    <div class="comp">
+      <div class="comp-head"><h4>Theme B only &mdash; no Theme A equivalent exists</h4><span class="ref">06:72&ndash;115</span></div>
+      <div class="stage" data-sys="b">
+        <span class="stage-label">Artboard &middot; Theme B</span>
+        <div style="display:flex;flex-direction:column;gap:14px" id="pickupGroup">
+          <label class="rm-radio on">
+            <span class="tag">Recommended</span>
+            <input type="radio" name="pickup" value="wakad" checked style="position:absolute;opacity:0;pointer-events:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+              <div>
+                <div style="font-weight:700;font-size:17px;margin-bottom:3px">Wakad, Pune</div>
+                <div style="font-size:13.5px;color:#5c564c">Near Ginger Hotel Highway Exit</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#094c32;margin-bottom:3px">Reporting</div>
+                <div style="font-weight:700;font-size:19px">5:30 AM</div>
+              </div>
+            </div>
+          </label>
+          <label class="rm-radio">
+            <input type="radio" name="pickup" value="shivajinagar" style="position:absolute;opacity:0;pointer-events:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+              <div>
+                <div style="font-weight:700;font-size:17px;margin-bottom:3px">Shivajinagar, Pune</div>
+                <div style="font-size:13.5px;color:#5c564c">Sancheti Hospital Front Gate</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5c564c;margin-bottom:3px">Reporting</div>
+                <div style="font-weight:700;font-size:19px">6:00 AM</div>
+              </div>
+            </div>
+          </label>
+          <label class="rm-radio">
+            <input type="radio" name="pickup" value="katraj" style="position:absolute;opacity:0;pointer-events:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+              <div>
+                <div style="font-weight:700;font-size:17px;margin-bottom:3px">Katraj, Pune</div>
+                <div style="font-size:13.5px;color:#5c564c">Opposite Wonder City Main Gate</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5c564c;margin-bottom:3px">Reporting</div>
+                <div style="font-weight:700;font-size:19px">6:30 AM</div>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+      <p class="note" style="margin-top:10px">
+        Worth keeping through any consolidation: a real <code>&lt;label&gt;</code> wrapping a
+        hidden radio, selected state carried on the border, and a tag pinned to the card edge.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 07 MOTION ============ -->
+  <section id="motion">
+    <div class="sec-head">
+      <div class="eyebrow">07 &middot; Behavior</div>
+      <h2>Motion</h2>
+      <p>Hover is expressed as scale and inversion, almost never as a color tint. Default duration
+         is Tailwind&rsquo;s 150ms; only two things are deliberately slowed.</p>
+    </div>
+
+    <div class="stage">
+      <span class="stage-label">Artboard &middot; hover each</span>
+      <div class="stage-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div style="text-align:center">
+          <button class="rm-btn rm-primary" style="padding:13px 24px;font-size:14px">Scale 105%</button>
+          <div class="rm-eyebrow" style="margin-top:12px">hover:scale-105</div>
+        </div>
+        <div style="text-align:center">
+          <button class="rm-btn rm-primary tilt" style="padding:13px 24px;font-size:14px">Rotate 2&deg;</button>
+          <div class="rm-eyebrow" style="margin-top:12px">hover:rotate-2 &middot; 01:96</div>
+        </div>
+        <div style="text-align:center">
+          <div class="rm-media" style="height:110px;border-radius:22px">
+            <svg class="rm-photo" viewBox="0 0 300 110" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated ridge">
+              <rect width="300" height="110" fill="#b9d4c4"/>
+              <path d="M0 82 L70 34 L140 78 L200 30 L260 76 L300 52 L300 110 L0 110Z" fill="#1a4332"/>
+            </svg>
+          </div>
+          <div class="rm-eyebrow" style="margin-top:12px">scale-1.05 &middot; 700ms</div>
+        </div>
+        <div style="text-align:center">
+          <div class="rm-accordion" style="border-radius:22px;padding:18px 20px">
+            <span class="rm-h" style="font-size:15px">Surface invert</span><span class="plus">+</span>
+          </div>
+          <div class="rm-eyebrow" style="margin-top:12px">hover:bg-brand hover:text-accent</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Full inventory</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Pattern</th><th>Implementation</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Button lift</td><td class="num">hover:scale-105 / scale-[1.02]</td><td><span class="ref">01:76, 02:229</span></td></tr>
+          <tr><td>Button tilt</td><td class="num">hover:rotate-2</td><td><span class="ref">01:96</span></td></tr>
+          <tr><td>Image zoom</td><td class="num">.trip-card:hover .trip-image &rarr; scale(1.05), duration-700</td><td><span class="ref">01:55, 01:204</span></td></tr>
+          <tr><td>Surface invert</td><td class="num">hover:bg-brand hover:text-accent</td><td><span class="ref">01:301, 02:153</span></td></tr>
+          <tr><td>Icon rotate</td><td class="num">group-hover:-rotate-12 / rotate-45</td><td><span class="ref">01:302, 02:159</span></td></tr>
+          <tr><td>Hero float</td><td class="num">animate-float &mdash; 6s ease-in-out infinite</td><td><span class="ref">01:48&ndash;53</span></td></tr>
+          <tr><td>Live indicator</td><td class="num">animate-pulse</td><td><span class="ref">01:86, 02:211, 09:98</span></td></tr>
+          <tr><td>Cursor trail</td><td class="num">transition-transform duration-300 ease-out</td><td><span class="ref">01:457&ndash;464</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:12px">
+      The custom cursor exists on screens 01, 02, and 03 only &mdash; it disappears the moment a
+      user enters checkout. No <code>prefers-reduced-motion</code> guard exists anywhere.
+    </p>
+  </section>
+
+  <!-- ============ 08 VOICE ============ -->
+  <section id="voice">
+    <div class="sec-head">
+      <div class="eyebrow">08 &middot; Content</div>
+      <h2>Voice</h2>
+      <p>An expedition register applied to ordinary commerce nouns. It is a system in its own
+         right &mdash; keep it consistent or drop it entirely, because half-applied it reads as a bug.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Standard term</th><th>Roamly term</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Trip / tour</td><td><b>Expedition, Run, Trail</b></td><td><span class="ref">01:189, 09:76</span></td></tr>
+          <tr><td>Travellers</td><td><b>Roster, Team, Units</b></td><td><span class="ref">04:69, 07:118</span></td></tr>
+          <tr><td>Departure / pickup</td><td><b>Extraction, Extraction Point</b></td><td><span class="ref">04:47, 09:121</span></td></tr>
+          <tr><td>Traveller details</td><td><b>Primary Intel</b></td><td><span class="ref">04:81</span></td></tr>
+          <tr><td>Order summary</td><td><b>Expedition Log, Order Ledger</b></td><td><span class="ref">04:123, 07:108</span></td></tr>
+          <tr><td>Support</td><td><b>Basecamp Help, Chat with Command</b></td><td><span class="ref">09:196, 09:199</span></td></tr>
+          <tr><td>Success</td><td><b>Peak Attained</b></td><td><span class="ref">08:44</span></td></tr>
+          <tr><td>Home</td><td><b>Return to Base</b></td><td><span class="ref">08:105</span></td></tr>
+          <tr><td>Difficulty</td><td><b>Grade: Moderate / Extreme / Hard Core</b></td><td><span class="ref">03:161, 01:117</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-3" style="margin-top:18px">
+      <div class="comp">
+        <div class="comp-head"><h4>Zero-padded numbers</h4></div>
+        <p class="note"><code>02 Units</code>, <code>08 Days</code>, <code>Stage 01</code> &mdash;
+          <span class="ref">07:118</span>, <span class="ref">03:135</span>, <span class="ref">02:156</span>.</p>
+      </div>
+      <div class="comp">
+        <div class="comp-head"><h4>Price setting</h4></div>
+        <p class="note"><code>&#8377;</code> with comma grouping, always
+          <code>font-display font-black tracking-tighter</code> at text-3xl to text-5xl.</p>
+      </div>
+      <div class="comp">
+        <div class="comp-head"><h4>Price is always prefixed</h4></div>
+        <p class="note">A <code>Starting from</code> micro-label precedes every figure &mdash;
+          <span class="ref">01:221</span>, <span class="ref">03:138</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 TWO SYSTEMS ============ -->
+  <section id="systems">
+    <div class="sec-head">
+      <div class="eyebrow">09 &middot; Divergence</div>
+      <h2>Two systems</h2>
+      <p>Booking steps 2 and 3 implement a different design language end to end &mdash; different
+         palette, different typeface, different radius, different casing, different button
+         behavior. Below, the same component in both.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="comp">
+        <div class="comp-head"><h4>Theme A &middot; Expedition</h4><span class="pill a">7 screens</span></div>
+        <div class="stage" data-sys="a">
+          <div class="rm-h" style="font-size:23px;margin-bottom:16px">Traveller Details</div>
+          <label class="rm-label" for="ta1">Full Name</label>
+          <input class="rm-input" id="ta1" type="text" placeholder="e.g. Rahul Mehta" style="margin-bottom:16px">
+          <button class="rm-btn rm-primary" style="width:100%;border-radius:28px;padding:15px;font-size:15px">Proceed to Step 02</button>
+        </div>
+        <div class="grid-auto" id="paletteA2" style="margin-top:14px;grid-template-columns:repeat(auto-fill,minmax(110px,1fr))"></div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-head"><h4>Theme B &middot; Heritage</h4><span class="pill b">2 screens</span></div>
+        <div class="stage" data-sys="b">
+          <div class="rm-h" style="font-size:23px;margin-bottom:16px">Traveller details</div>
+          <label class="rm-label" for="tb1">Full Name</label>
+          <input class="rm-input" id="tb1" type="text" placeholder="e.g. Rahul Mehta" style="margin-bottom:16px">
+          <button class="rm-btn" style="width:100%;background:#094c32;color:#fff;border-radius:16px;padding:14px;font-size:16px;font-weight:700;text-transform:none;letter-spacing:0">Continue to Pickup</button>
+        </div>
+        <div class="grid-auto" id="paletteB" style="margin-top:14px;grid-template-columns:repeat(auto-fill,minmax(110px,1fr))"></div>
+      </div>
+    </div>
+
+    <h3 class="sub">Where they diverge</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Decision</th><th>Theme A &mdash; Expedition</th><th>Theme B &mdash; Heritage</th></tr></thead>
+        <tbody>
+          <tr><td>Ground</td><td class="num">#ffffff</td><td class="num">#faf9f6 warm</td></tr>
+          <tr><td>Brand</td><td class="num">#1a4332</td><td class="num">#094c32</td></tr>
+          <tr><td>Accent</td><td class="num">#d4f27a lime</td><td class="num">none</td></tr>
+          <tr><td>Border</td><td class="num">#e5e7eb cool</td><td class="num">#e0d9cc warm</td></tr>
+          <tr><td>Display face</td><td class="num">Space Grotesk</td><td class="num">Playfair Display</td></tr>
+          <tr><td>Heading case</td><td class="num">UPPERCASE, tracking-tighter</td><td class="num">Sentence case</td></tr>
+          <tr><td>Card radius</td><td class="num">3rem</td><td class="num">1.5rem</td></tr>
+          <tr><td>Input</td><td class="num">bg-white, rounded-2xl, px-6 py-4</td><td class="num">bg-surface-0, rounded-xl, px-4 py-3</td></tr>
+          <tr><td>Primary button</td><td class="num">brand bg, accent text, hover:scale</td><td class="num">brand bg, white text, hover:bg-opacity</td></tr>
+          <tr><td>Header</td><td class="num">Floating glass pill, max-w-7xl</td><td class="num">Solid white bar, max-w-5xl</td></tr>
+          <tr><td>Logo</td><td class="num">R mark in a rounded square</td><td class="num">&#10086; glyph, serif wordmark</td></tr>
+          <tr><td>Stepper labels</td><td class="num">Roster / Extraction / Intel / Secure</td><td class="num">Travellers / Details / Pickup / Payment</td></tr>
+          <tr><td>Navigation</td><td class="num">onclick &rarr; location.href</td><td class="num">&lt;form action&gt; + submit</td></tr>
+          <tr><td>Validation</td><td class="num">none</td><td class="num">required attributes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note" style="margin-top:14px">
+      <b>Recommendation.</b> Theme&nbsp;A carries the brand and owns seven of nine screens, so it
+      should win the visual argument. But Theme&nbsp;B has the better engineering &mdash; real form
+      semantics, <code>required</code>, a genuine submit &mdash; and the selectable option card at
+      <span class="ref">06:72</span> is a pattern Theme&nbsp;A simply never built. Port the
+      behavior into the Expedition skin rather than discarding steps 2&ndash;3 wholesale.
+    </p>
+  </section>
+
+  <!-- ============ 10 ISSUES ============ -->
+  <section id="issues">
+    <div class="sec-head">
+      <div class="eyebrow">10 &middot; Debt</div>
+      <h2>Issues</h2>
+      <p>Thirteen real divergences between files &mdash; not style preferences. Ordered by impact.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="seg" id="sevFilter" role="group" aria-label="Filter by severity">
+        <button data-sev="all" class="on">All 13</button>
+        <button data-sev="critical">Critical</button>
+        <button data-sev="major">Major</button>
+        <button data-sev="minor">Minor</button>
+      </div>
+      <span class="note" id="sevCount"></span>
+    </div>
+
+    <div id="issueList">
+      <div class="issue" data-sev="critical">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">01</span><h4>Two design languages inside one checkout</h4><span class="pill fail">Critical</span></div>
+        <p>Steps 1 and 4 are Expedition; steps 2 and 3 are Heritage. A user crossing 04 &rarr; 05 &rarr; 07 watches the brand change twice.</p>
+        <div class="refs"><span class="ref">04 vs 05</span><span class="ref">06 vs 07</span></div>
+      </div>
+      <div class="issue" data-sev="critical">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">02</span><h4>Every internal link is broken</h4><span class="pill fail">Critical</span></div>
+        <p>Markup points at <code>Home__desktop.html</code>, <code>BookingStep1__desktop.html</code> and siblings. The files on disk are named <code>01-Roamly - Home.html</code>. Nothing navigates as shipped.</p>
+        <div class="refs"><span class="ref">01:64</span><span class="ref">01:96</span><span class="ref">02:229</span><span class="ref">04:153</span><span class="ref">05:31</span><span class="ref">06:125</span><span class="ref">07:138</span><span class="ref">08:91</span></div>
+      </div>
+      <div class="issue" data-sev="critical">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">03</span><h4>Requested font weights are never loaded</h4><span class="pill fail">Critical</span></div>
+        <p>The Google Fonts request loads Inter at <code>300;400;500;600</code>, but the markup uses <code>font-bold</code> (700) and <code>font-black</code> (900) on nearly every label, button, and price. All of them clamp to 600. Space Grotesk stops at 700, so <code>font-extrabold</code> and <code>font-black</code> headings clamp too. The interface is measurably lighter than designed.</p>
+        <div class="refs"><span class="ref">01:14</span><span class="ref">05:14</span></div>
+      </div>
+      <div class="issue" data-sev="major">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">04</span><h4><code>bg-canvas</code> referenced but undefined on four pages</h4><span class="pill large">Major</span></div>
+        <p>Bodies set <code>class="bg-bg-canvas"</code>, but the token is absent from the compact configs. The class is a no-op; those pages render on the browser default rather than an explicit white.</p>
+        <div class="refs"><span class="ref">04:31 vs 04:20</span><span class="ref">07:31 vs 07:20</span><span class="ref">08:31 vs 08:20</span><span class="ref">05:26</span></div>
+      </div>
+      <div class="issue" data-sev="major">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">05</span><h4>Navigation by <code>onclick</code>, not anchors</h4><span class="pill large">Major</span></div>
+        <p><code>&lt;button&gt;</code> and <code>&lt;div&gt;</code> elements push <code>window.location.href</code>. Not keyboard-reachable as links, no middle-click, no visible href, no browser affordances.</p>
+        <div class="refs"><span class="ref">01:96</span><span class="ref">01:202</span><span class="ref">02:229</span><span class="ref">03:120</span><span class="ref">04:153</span><span class="ref">06:125</span><span class="ref">07:138</span></div>
+      </div>
+      <div class="issue" data-sev="major">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">06</span><h4>Focus is removed and never replaced</h4><span class="pill large">Major</span></div>
+        <p>Every input carries <code>outline-none</code> with only <code>focus:border-brand</code> behind it &mdash; a 1px border shift is not a sufficient focus indicator. Clickable card <code>&lt;div&gt;</code>s have no <code>role</code> or <code>tabindex</code> at all.</p>
+        <div class="refs"><span class="ref">04:87</span><span class="ref">05:81</span><span class="ref">01:202</span><span class="ref">03:120</span></div>
+      </div>
+      <div class="issue" data-sev="major">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">07</span><h4>Micro-type carries too much of the interface</h4><span class="pill large">Major</span></div>
+        <p>A large share of the UI is 9&ndash;11px in <code>#666666</code>, plus <code>text-white/40</code> and <code>text-white/30</code> label text on dark panels &mdash; below AA at those sizes. See the contrast audit above.</p>
+        <div class="refs"><span class="ref">02:208</span><span class="ref">07:113</span><span class="ref">07:143</span></div>
+      </div>
+      <div class="issue" data-sev="major">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">08</span><h4>Theme config copy-pasted nine times, already drifting</h4><span class="pill large">Major</span></div>
+        <p>The verbose form (01, 02, 03, 09) includes <code>bg-canvas</code> and the <code>borderRadius</code> extension; the compact form (04, 07, 08) drops both. Any token change requires nine edits.</p>
+        <div class="refs"><span class="ref">01:15&ndash;39</span><span class="ref">04:15&ndash;24</span></div>
+      </div>
+      <div class="issue" data-sev="minor">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">09</span><h4>Font Awesome loaded twice, at two versions</h4><span class="pill">Minor</span></div>
+        <p>The JS kit at 6.4.0 and the CSS build at 6.0.0 ship on all nine pages &mdash; two full icon payloads each.</p>
+        <div class="refs"><span class="ref">01:8</span><span class="ref">01:13</span></div>
+      </div>
+      <div class="issue" data-sev="minor">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">10</span><h4>Nav active state missing on Trip Detail</h4><span class="pill">Minor</span></div>
+        <p>Home and Trips mark &ldquo;Expeditions&rdquo; with <code>text-brand</code>; Trip Detail does not.</p>
+        <div class="refs"><span class="ref">01:68</span><span class="ref">03:60</span><span class="ref">02:59</span></div>
+      </div>
+      <div class="issue" data-sev="minor">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">11</span><h4>Dead config and dead CSS</h4><span class="pill">Minor</span></div>
+        <p><code>borderRadius: { '3xl':'1.5rem', '4xl':'2rem' }</code> changes nothing &mdash; <code>3xl</code> already equals 1.5rem and <code>rounded-4xl</code> is never used. <code>.no-scrollbar</code> is declared on five pages and used on none.</p>
+        <div class="refs"><span class="ref">01:32&ndash;35</span><span class="ref">01:45&ndash;46</span><span class="ref">09:44&ndash;45</span></div>
+      </div>
+      <div class="issue" data-sev="minor">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">12</span><h4>Sex field offers only two options</h4><span class="pill">Minor</span></div>
+        <p>The roster select lists Male and Female with no third option and no way to decline.</p>
+        <div class="refs"><span class="ref">04:104&ndash;107</span></div>
+      </div>
+      <div class="issue" data-sev="minor">
+        <div class="issue-head"><span class="mono" style="color:var(--muted);font-size:11px">13</span><h4>No shared component layer</h4><span class="pill">Minor</span></div>
+        <p>The navbar exists in four variants, the footer in three, the cursor script in three. There is no partial, include, or component boundary anywhere.</p>
+        <div class="refs"><span class="ref">01:61</span><span class="ref">02:52</span><span class="ref">03:53</span><span class="ref">04:34</span><span class="ref">09:51</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11 NEXT ============ -->
+  <section id="next">
+    <div class="sec-head">
+      <div class="eyebrow">11 &middot; Plan</div>
+      <h2>Next steps</h2>
+      <p>In order. Ticks are saved in this browser only.</p>
+    </div>
+    <div class="progress"><i id="progBar" style="width:0%"></i></div>
+    <div id="checklist"></div>
+  </section>
+
+  <div class="footer">
+    <span>Extracted from nine HTML prototypes &middot; <code>/Desktop/Travel A</code></span>
+    <span class="mono">27 Aug 2026</span>
+  </div>
+
+  </main>
+</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- data ---------- */
+  var PALETTE_A = [
+    {n:'bg-canvas',  h:'#ffffff', r:'Page ground',                 ref:'01:58'},
+    {n:'surface',    h:'#f8f9fa', r:'Raised panels, inputs, chips', ref:'01:85'},
+    {n:'brand',      h:'#1a4332', r:'Deep forest green &mdash; primary', ref:'01:26'},
+    {n:'accent',     h:'#d4f27a', r:'Neon lime &mdash; only on brand or ink', ref:'01:27'},
+    {n:'ink',        h:'#0a0a0a', r:'Body text, dark panels',       ref:'01:28'},
+    {n:'muted',      h:'#666666', r:'Secondary text',               ref:'01:29'},
+    {n:'border-subtle', h:'#e5e7eb', r:'Hairlines, card edges',     ref:'01:30'}
+  ];
+  var PALETTE_B = [
+    {n:'bg-base',   h:'#faf9f6', r:'Warm off-white ground', ref:'05:20'},
+    {n:'surface-0', h:'#f3f0e9', r:'Inputs, info notes',    ref:'05:20'},
+    {n:'surface-1', h:'#ebe7de', r:'Inactive stepper chip', ref:'05:20'},
+    {n:'line-1',    h:'#e0d9cc', r:'Warm border',           ref:'05:20'},
+    {n:'ink-900',   h:'#1c1a17', r:'Body text',             ref:'05:20'},
+    {n:'ink-600',   h:'#5c564c', r:'Secondary text',        ref:'05:20'},
+    {n:'brand',     h:'#094c32', r:'Deeper green',          ref:'05:20'}
+  ];
+
+  var TYPE_SCALE = [
+    {c:'text-6xl md:text-8xl', px:64, w:700, tr:'-.05em', up:1, use:'Hero H1', ref:'01:89', s:'Hike Beyond the Edge'},
+    {c:'text-5xl md:text-7xl', px:52, w:700, tr:'-.05em', up:1, use:'Page H1', ref:'02:110', s:'Kashmir Group Escape'},
+    {c:'text-4xl md:text-6xl', px:42, w:700, tr:'-.05em', up:1, use:'Checkout H1', ref:'04:69', s:'Expedition Roster'},
+    {c:'text-3xl', px:30, w:700, tr:'-.04em', up:1, use:'Section H2', ref:'02:141', s:'Expedition Brief'},
+    {c:'text-2xl', px:24, w:700, tr:'-.02em', up:1, use:'Card title H3', ref:'01:217', s:'Sandakphu Ridge Hike'},
+    {c:'text-xl',  px:20, w:700, tr:'-.02em', up:1, use:'Small card H4', ref:'01:257', s:'Star-Gazer Peak'},
+    {c:'text-lg',  px:18, w:500, tr:'0', up:0, use:'Lede paragraph', ref:'01:92', body:1, s:'Premium weekend trekking experiences for those who seek the silence of the summits.'},
+    {c:'text-sm',  px:14, w:600, tr:'0', up:1, use:'Data value', ref:'02:118', body:1, s:'4.9/5 Rating'},
+    {c:'text-[13px]', px:13, w:600, tr:'.05em', up:1, use:'Nav link', ref:'01:67', body:1, s:'Expeditions'},
+    {c:'text-[11px]', px:11, w:600, tr:'.05em', up:1, use:'Footer link', ref:'01:428', body:1, s:'Weekend Peaks'},
+    {c:'text-[10px]', px:10, w:600, tr:'.1em', up:1, use:'Eyebrow / badge', ref:'01:112', body:1, s:'Featured Peak'},
+    {c:'text-[9px]',  px:9,  w:600, tr:'.2em', up:1, use:'Micro-label', ref:'02:208', body:1, s:'Starting From'}
+  ];
+
+  var RADII = [
+    {c:'rounded-lg',       v:'0.5rem',  use:'Logo mark, tiny chips', ref:'01:65'},
+    {c:'rounded-xl',       v:'0.75rem', use:'Small icon tiles',      ref:'09:120'},
+    {c:'rounded-2xl',      v:'1rem',    use:'Inputs, buttons',       ref:'04:87'},
+    {c:'rounded-3xl',      v:'1.5rem',  use:'Glass overlays',        ref:'01:109'},
+    {c:'rounded-[2rem]',   v:'2rem',    use:'CTA buttons, panels',   ref:'04:153'},
+    {c:'rounded-[2.5rem]', v:'2.5rem',  use:'Media cards, tiles',    ref:'01:208'},
+    {c:'rounded-[3rem]',   v:'3rem',    use:'Major surfaces',        ref:'02:205'},
+    {c:'rounded-[4rem]',   v:'4rem',    use:'Full-bleed CTA block',  ref:'01:390'},
+    {c:'rounded-full',     v:'999px',   use:'Nav, badges, icons',    ref:'01:62'}
+  ];
+
+  var CONTRAST = [
+    {fg:'#1a4332', bg:'#ffffff', fgl:'brand', bgl:'canvas', where:'Headings, links'},
+    {fg:'#0a0a0a', bg:'#ffffff', fgl:'ink', bgl:'canvas', where:'Body text'},
+    {fg:'#666666', bg:'#ffffff', fgl:'muted', bgl:'canvas', where:'Secondary copy'},
+    {fg:'#666666', bg:'#f8f9fa', fgl:'muted', bgl:'surface', where:'Labels on panels'},
+    {fg:'#d4f27a', bg:'#1a4332', fgl:'accent', bgl:'brand', where:'Primary buttons'},
+    {fg:'#d4f27a', bg:'#0a0a0a', fgl:'accent', bgl:'ink', where:'Dark panel figures'},
+    {fg:'#d4f27a', bg:'#ffffff', fgl:'accent', bgl:'canvas', where:'Never used &mdash; shown as the rule'},
+    {fg:'#ffffff', bg:'#1a4332', fgl:'white', bgl:'brand', where:'Panel headings', a:1},
+    {fg:'#ffffff', bg:'#1a4332', fgl:'white/60', bgl:'brand', where:'Panel body &middot; 09:197', a:0.6},
+    {fg:'#ffffff', bg:'#1a4332', fgl:'white/40', bgl:'brand', where:'Panel labels &middot; 04:127', a:0.4},
+    {fg:'#ffffff', bg:'#0a0a0a', fgl:'white/30', bgl:'ink', where:'Encryption line &middot; 07:143', a:0.3},
+    {fg:'#094c32', bg:'#faf9f6', fgl:'brand B', bgl:'bg-base', where:'Theme B headings'},
+    {fg:'#5c564c', bg:'#f3f0e9', fgl:'ink-600 B', bgl:'surface-0', where:'Theme B input labels'}
+  ];
+
+  var STEPS = [
+    {n:'01', cap:'Roster'}, {n:'02', cap:'Extraction'},
+    {n:'03', cap:'Intel'},  {n:'04', cap:'Secure'}
+  ];
+
+  var CHECKLIST = [
+    'Extract the tailwind.config block and the &lt;style&gt; rules into one shared theme file referenced by all nine pages.',
+    'Add the missing font weights to the Google Fonts request &mdash; Inter 700/800/900 and the Space Grotesk range actually used.',
+    'Add bg-canvas to the compact configs, or drop bg-bg-canvas from those four bodies.',
+    'Fix the internal hrefs to the on-disk filenames.',
+    'Choose one checkout theme and rebuild steps 2&ndash;3 against it, keeping their form semantics and the radio-card pattern.',
+    'Replace onclick navigation with real anchors; give cards a role and tabindex.',
+    'Restore a visible focus style on every input and interactive card.',
+    'Raise micro-type off 9&ndash;10px, or darken muted, wherever it carries real information.',
+    'Drop one Font Awesome include.',
+    'Delete the dead borderRadius extension and .no-scrollbar.',
+    'Add the missing nav active state on Trip Detail.',
+    'Widen the Sex field, or replace it with an optional free-text field.',
+    'Promote nav, footer, stepper, and cursor into partials once a templating layer exists.'
+  ];
+
+  /* ---------- helpers ---------- */
+  function el(tag, cls, html){
+    var n = document.createElement(tag);
+    if(cls) n.className = cls;
+    if(html != null) n.innerHTML = html;
+    return n;
+  }
+  function srgb(v){ v /= 255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); }
+  function toRGB(hex){
+    var m = hex.replace('#','').match(/.{2}/g);
+    return [parseInt(m[0],16), parseInt(m[1],16), parseInt(m[2],16)];
+  }
+  function lum(hex){
+    var c = toRGB(hex);
+    return 0.2126*srgb(c[0]) + 0.7152*srgb(c[1]) + 0.0722*srgb(c[2]);
+  }
+  function over(fg, alpha, bg){
+    var f = toRGB(fg), b = toRGB(bg), out = '#';
+    for(var i=0;i<3;i++){
+      var v = Math.round(f[i]*alpha + b[i]*(1-alpha)).toString(16);
+      out += v.length < 2 ? '0'+v : v;
+    }
+    return out;
+  }
+  function ratio(a, b){
+    var l1 = lum(a), l2 = lum(b);
+    return (Math.max(l1,l2) + 0.05) / (Math.min(l1,l2) + 0.05);
+  }
+
+  /* ---------- palettes ---------- */
+  function paintPalette(host, data, compact){
+    if(!host) return;
+    data.forEach(function(t){
+      var b = el('button','swatch');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Copy ' + t.h);
+      var chip = el('div','chip');
+      chip.style.background = t.h;
+      b.appendChild(chip);
+      var meta = el('div','meta');
+      meta.appendChild(el('div','nm', t.n));
+      meta.appendChild(el('div','hx', t.h));
+      if(!compact) meta.appendChild(el('div','role', t.r + ' &middot; <span class="ref">' + t.ref + '</span>'));
+      b.appendChild(meta);
+      b.addEventListener('click', function(){ copy(t.h, meta.querySelector('.hx'), t.h); });
+      host.appendChild(b);
+    });
+  }
+  function copy(text, node, restore){
+    var done = function(){
+      node.textContent = 'Copied';
+      node.classList.add('copied');
+      setTimeout(function(){ node.textContent = restore; node.classList.remove('copied'); }, 1100);
+    };
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done, function(){ fallback(text, done); });
+      } else { fallback(text, done); }
+    } catch(e){ fallback(text, done); }
+  }
+  function fallback(text, done){
+    try{
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly','');
+      ta.style.position = 'fixed'; ta.style.top = '-1000px';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      done();
+    } catch(e){ /* clipboard unavailable — leave the value visible */ }
+  }
+  paintPalette(document.getElementById('paletteA'), PALETTE_A, false);
+  paintPalette(document.getElementById('paletteA2'), PALETTE_A, true);
+  paintPalette(document.getElementById('paletteB'), PALETTE_B, true);
+
+  /* ---------- contrast ---------- */
+  (function(){
+    var body = document.getElementById('contrastRows');
+    if(!body) return;
+    CONTRAST.forEach(function(p){
+      var fg = p.a != null ? over(p.fg, p.a, p.bg) : p.fg;
+      var r = ratio(fg, p.bg);
+      var tr = el('tr');
+      tr.innerHTML =
+        '<td class="num">' + p.fgl + '</td>' +
+        '<td class="num">' + p.bgl + '</td>' +
+        '<td class="num"><b>' + r.toFixed(2) + ':1</b></td>' +
+        '<td>' + (r >= 4.5 ? '<span class="pill pass">Pass</span>' : '<span class="pill fail">Fail</span>') + '</td>' +
+        '<td>' + (r >= 3 ? '<span class="pill pass">Pass</span>' : '<span class="pill fail">Fail</span>') + '</td>' +
+        '<td>' + p.where + '</td>';
+      body.appendChild(tr);
+    });
+  })();
+
+  /* ---------- type scale ---------- */
+  (function(){
+    var host = document.getElementById('typeScale');
+    if(!host) return;
+    TYPE_SCALE.forEach(function(t){
+      var row = el('div','spec-row');
+      row.appendChild(el('div','spec-meta',
+        t.c + '<br>' + t.use + ' &middot; <span class="ref">' + t.ref + '</span>'));
+      var demo = el('div','spec-demo', t.s);
+      demo.style.fontFamily = t.body ? "'Inter',sans-serif" : "'Space Grotesk',sans-serif";
+      demo.style.fontSize = Math.min(t.px, 46) + 'px';
+      demo.style.fontWeight = t.w;
+      demo.style.letterSpacing = t.tr;
+      demo.style.lineHeight = t.px > 30 ? '0.95' : '1.4';
+      if(t.up) demo.style.textTransform = 'uppercase';
+      row.appendChild(demo);
+      host.appendChild(row);
+    });
+  })();
+
+  /* ---------- radius ---------- */
+  (function(){
+    var host = document.getElementById('radiusScale');
+    if(!host) return;
+    RADII.forEach(function(r){
+      var d = el('div','shape');
+      var box = el('div','box');
+      box.style.borderRadius = r.v;
+      d.appendChild(box);
+      d.appendChild(el('div','lbl', r.c + '<br>' + r.v + '<br><span class="ref">' + r.ref + '</span>'));
+      host.appendChild(d);
+    });
+  })();
+
+  /* ---------- stepper ---------- */
+  (function(){
+    var host = document.getElementById('stepper');
+    if(!host) return;
+    var current = 0;
+    function render(){
+      host.innerHTML = '';
+      STEPS.forEach(function(s, i){
+        if(i > 0){
+          var c = el('div','rm-connector');
+          c.setAttribute('data-state', i <= current ? 'done' : 'todo');
+          host.appendChild(c);
+        }
+        var state = i < current ? 'done' : (i === current ? 'now' : 'todo');
+        var item = el('button','rm-step-item');
+        item.type = 'button';
+        item.setAttribute('data-state', state);
+        item.style.cssText = 'background:none;border:0;cursor:pointer;padding:4px;font:inherit;color:inherit';
+        item.setAttribute('aria-label', 'Go to step ' + s.n + ', ' + s.cap);
+        item.innerHTML = '<span class="rm-chip">' + (state === 'done' ? '&#10003;' : s.n) +
+                         '</span><span class="cap">' + s.cap + '</span>';
+        item.addEventListener('click', function(){ current = i; render(); });
+        host.appendChild(item);
+      });
+    }
+    render();
+  })();
+
+  /* ---------- Theme A / B toggle ---------- */
+  (function(){
+    var seg = document.getElementById('sysToggle');
+    var note = document.getElementById('sysNote');
+    if(!seg) return;
+    seg.addEventListener('click', function(e){
+      var btn = e.target.closest('button[data-sys]');
+      if(!btn) return;
+      var sys = btn.getAttribute('data-sys');
+      Array.prototype.forEach.call(seg.querySelectorAll('button'), function(b){
+        b.classList.toggle('on', b === btn);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.stage[data-flip]'), function(s){
+        s.setAttribute('data-sys', sys);
+      });
+      note.textContent = sys === 'a'
+        ? 'Artboards below render in Theme A.'
+        : 'Same markup, Heritage tokens — Playfair, warm neutrals, no lime, tighter radii.';
+    });
+  })();
+
+  /* ---------- Theme B radio cards ---------- */
+  (function(){
+    var group = document.getElementById('pickupGroup');
+    if(!group) return;
+    group.addEventListener('click', function(e){
+      var lab = e.target.closest('.rm-radio');
+      if(!lab) return;
+      Array.prototype.forEach.call(group.querySelectorAll('.rm-radio'), function(l){
+        l.classList.toggle('on', l === lab);
+      });
+    });
+  })();
+
+  /* ---------- issue filter ---------- */
+  (function(){
+    var seg = document.getElementById('sevFilter');
+    var count = document.getElementById('sevCount');
+    var items = Array.prototype.slice.call(document.querySelectorAll('#issueList .issue'));
+    if(!seg) return;
+    function apply(sev){
+      var shown = 0;
+      items.forEach(function(it){
+        var on = sev === 'all' || it.getAttribute('data-sev') === sev;
+        it.style.display = on ? '' : 'none';
+        if(on) shown++;
+      });
+      count.textContent = 'Showing ' + shown + ' of ' + items.length + '.';
+    }
+    seg.addEventListener('click', function(e){
+      var btn = e.target.closest('button[data-sev]');
+      if(!btn) return;
+      Array.prototype.forEach.call(seg.querySelectorAll('button'), function(b){
+        b.classList.toggle('on', b === btn);
+      });
+      apply(btn.getAttribute('data-sev'));
+    });
+    apply('all');
+  })();
+
+  /* ---------- checklist ---------- */
+  (function(){
+    var host = document.getElementById('checklist');
+    var bar = document.getElementById('progBar');
+    if(!host) return;
+    var KEY = 'roamly-ds-checklist';
+    var saved = {};
+    try{ saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }catch(e){ saved = {}; }
+
+    function persist(){
+      try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){ /* private mode */ }
+    }
+    function progress(){
+      var done = 0;
+      CHECKLIST.forEach(function(_, i){ if(saved[i]) done++; });
+      bar.style.width = Math.round(done / CHECKLIST.length * 100) + '%';
+    }
+    CHECKLIST.forEach(function(text, i){
+      var lab = el('label','check');
+      var box = document.createElement('input');
+      box.type = 'checkbox';
+      box.checked = !!saved[i];
+      lab.classList.toggle('done', box.checked);
+      lab.appendChild(box);
+      lab.appendChild(el('span', null, text));
+      box.addEventListener('change', function(){
+        saved[i] = box.checked;
+        lab.classList.toggle('done', box.checked);
+        persist(); progress();
+      });
+      host.appendChild(lab);
+    });
+    progress();
+  })();
+
+  /* ---------- scrollspy ---------- */
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('#rail a'));
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var secs = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+    if(!('IntersectionObserver' in window) || !secs.length) return;
+    var visible = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ visible[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0; });
+      var best = null, bestVal = 0;
+      secs.forEach(function(s){
+        var v = visible[s.id] || 0;
+        if(v > bestVal){ bestVal = v; best = s.id; }
+      });
+      links.forEach(function(a){ a.classList.remove('on'); });
+      if(best && map[best]) map[best].classList.add('on');
+    }, { rootMargin: '-10% 0px -55% 0px', threshold: [0, 0.15, 0.4, 0.75, 1] });
+    secs.forEach(function(s){ io.observe(s); });
+  })();
+
+  /* ---------- topographic masthead ---------- */
+  (function(){
+    var cv = document.getElementById('topo');
+    if(!cv) return;
+    var ctx = cv.getContext('2d');
+    if(!ctx) return;
+
+    function stroke(){
+      var cs = getComputedStyle(document.documentElement);
+      return (cs.getPropertyValue('--topo') || '#1a4332').trim();
+    }
+    function draw(){
+      var host = cv.parentElement;
+      var w = host.clientWidth, h = host.clientHeight;
+      if(!w || !h) return;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(w * dpr);
+      cv.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = stroke();
+      ctx.lineWidth = 1;
+
+      var lines = 26;
+      for(var i = 0; i < lines; i++){
+        var t = i / (lines - 1);
+        // contours crowd toward the ridge, the way a real topo map does
+        var base = h * (0.06 + t * 1.02);
+        var amp = 26 + 46 * Math.sin(t * Math.PI);
+        ctx.globalAlpha = 0.05 + 0.13 * Math.sin(t * Math.PI);
+        ctx.beginPath();
+        for(var x = -20; x <= w + 20; x += 6){
+          var u = x / Math.max(w, 1);
+          var y = base
+            + amp * Math.sin(u * 5.1 + t * 2.4)
+            + amp * 0.42 * Math.sin(u * 11.7 - t * 3.1)
+            + amp * 0.19 * Math.sin(u * 23.3 + t * 1.7);
+          if(x === -20) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    draw();
+    var t;
+    window.addEventListener('resize', function(){
+      clearTimeout(t);
+      t = setTimeout(draw, 140);
+    });
+    if(window.matchMedia){
+      var mq = window.matchMedia('(prefers-color-scheme: dark)');
+      if(mq.addEventListener) mq.addEventListener('change', draw);
+      else if(mq.addListener) mq.addListener(draw);
+    }
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  })();
+
+})();
+</script>

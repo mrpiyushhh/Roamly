@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly — Explore Expeditions</title>
+<meta name="description" content="From technical ridges to serene valley walks, find the expedition that speaks to your spirit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/theme.js"></script>
+<link href="assets/roamly.css" rel="stylesheet">
+</head>
+<body class="antialiased bg-canvas text-ink">
+
+<a href="#main" class="skip-link">Skip to content</a>
+<nav data-nav="marketing" data-active="expeditions" aria-label="Main"></nav>
+
+<header class="relative pt-32 pb-12 px-6">
+  <div class="max-w-7xl mx-auto">
+    <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+      Explore 2026 Destinations
+    </p>
+    <h1 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-4 uppercase">
+      Choose your <span class="text-brand italic">horizon.</span>
+    </h1>
+    <p class="text-lg text-muted max-w-2xl leading-relaxed font-medium">
+      From technical ridges to serene valley walks, find the expedition that speaks to your spirit.
+    </p>
+  </div>
+</header>
+
+<!-- Filters -->
+<section class="sticky top-24 z-40 px-6 mb-12" aria-label="Filter and sort">
+  <div class="max-w-7xl mx-auto glass border border-border-subtle p-3 rounded-3xl shadow-xl flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-2" id="filters" role="group" aria-label="Filter by category"></div>
+    <div class="flex items-center gap-4 px-4">
+      <label class="text-[10px] font-black uppercase tracking-widest text-muted" for="sort">Sort:</label>
+      <select id="sort" class="text-xs font-bold uppercase tracking-widest bg-transparent outline-none cursor-pointer">
+        <option value="rec">Recommended</option>
+        <option value="asc">Price: Low–High</option>
+        <option value="desc">Price: High–Low</option>
+        <option value="hard">Most Extreme</option>
+      </select>
+    </div>
+  </div>
+</section>
+
+<main id="main" class="py-12 px-6 min-h-[600px]">
+  <div class="max-w-7xl mx-auto">
+    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-8" id="count" role="status"></p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="grid"></div>
+    <p class="hidden text-center py-24 text-muted font-medium" id="empty">
+      No trails match that filter yet. Try another category.
+    </p>
+  </div>
+</main>
+
+<footer data-footer="full"></footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/roamly.js"></script>
+<script>
+(function () {
+  'use strict';
+  var D = window.RoamlyData, R = window.Roamly;
+  var grid = document.getElementById('grid');
+  var count = document.getElementById('count');
+  var empty = document.getElementById('empty');
+  var filters = document.getElementById('filters');
+
+  var active = 'all';
+  var sort = 'rec';
+
+  /* the hash lets Home, the footer and the category tiles deep-link a filter */
+  var hash = (window.location.hash || '').replace('#', '');
+  if (hash && D.categories.some(function (c) { return c.id === hash; })) active = hash;
+
+  filters.innerHTML = D.categories.map(function (c) {
+    return '<button type="button" data-cat="' + c.id + '" aria-pressed="false" ' +
+      'class="filter px-5 py-2.5 rounded-2xl text-[11px] font-bold uppercase tracking-wider transition-all">' +
+      c.label + '</button>';
+  }).join('') +
+  '<span class="h-8 w-px bg-border-subtle mx-2 hidden md:block" aria-hidden="true"></span>' +
+  '<span class="px-5 py-2.5 rounded-2xl bg-surface border border-border-subtle text-[11px] font-bold uppercase tracking-wider text-muted">' +
+    D.trips.length + ' Trails Live</span>';
+
+  function paintFilters() {
+    Array.prototype.forEach.call(filters.querySelectorAll('.filter'), function (b) {
+      var on = b.getAttribute('data-cat') === active;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.className = 'filter px-5 py-2.5 rounded-2xl text-[11px] font-bold uppercase tracking-wider transition-all ' +
+        (on ? 'bg-brand text-accent shadow-brand'
+            : 'bg-surface border border-border-subtle hover:bg-black/5');
+    });
+  }
+
+  var GRADE_RANK = { 'Entry': 0, 'Moderate': 1, 'Alpine Grade': 2, 'Hard Core': 3, 'Extreme': 4 };
+
+  function render() {
+    var list = D.trips.filter(function (t) { return active === 'all' || t.category === active; });
+
+    if (sort === 'asc')       list.sort(function (a, b) { return a.price - b.price; });
+    else if (sort === 'desc') list.sort(function (a, b) { return b.price - a.price; });
+    else if (sort === 'hard') list.sort(function (a, b) { return (GRADE_RANK[b.grade] || 0) - (GRADE_RANK[a.grade] || 0); });
+    else                      list.sort(function (a, b) { return b.rating - a.rating; });
+
+    grid.innerHTML = list.map(R.tripCard).join('');
+    count.textContent = 'Showing ' + list.length + ' of ' + D.trips.length + ' expeditions';
+    empty.classList.toggle('hidden', list.length > 0);
+    paintFilters();
+  }
+
+  filters.addEventListener('click', function (e) {
+    var b = e.target.closest('.filter');
+    if (!b) return;
+    active = b.getAttribute('data-cat');
+    try { history.replaceState(null, '', active === 'all' ? ' ' : '#' + active); } catch (err) {}
+    render();
+  });
+
+  document.getElementById('sort').addEventListener('change', function (e) {
+    sort = e.target.value;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

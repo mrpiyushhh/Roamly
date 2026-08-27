@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly — Secure Payment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/theme.js"></script>
+<link href="assets/roamly.css" rel="stylesheet">
+</head>
+<body class="antialiased bg-canvas text-ink">
+
+<a href="#main" class="skip-link">Skip to content</a>
+<nav data-nav="checkout" data-step="4" aria-label="Checkout progress"></nav>
+
+<main id="main" class="max-w-7xl mx-auto px-6 pt-32 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+  <form class="lg:col-span-7" id="payForm">
+    <header class="mb-12">
+      <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 uppercase">
+        Secure <span class="text-brand italic">gateway.</span>
+      </h1>
+      <p class="text-muted font-medium text-lg">Hold your slot with the deposit. Balance is due 15 days out.</p>
+    </header>
+
+    <fieldset class="space-y-5">
+      <legend class="sr-only">Payment method</legend>
+
+      <!-- UPI -->
+      <label class="option-card !p-0 overflow-hidden" id="upiCard">
+        <input type="radio" name="method" value="upi" checked>
+        <span class="option-body block">
+          <span class="flex justify-between items-center gap-4 p-8">
+            <span class="flex items-center gap-4">
+              <span class="w-12 h-12 rounded-2xl bg-brand text-accent flex items-center justify-center shadow-brand" aria-hidden="true">
+                <i class="fa-solid fa-mobile-screen"></i>
+              </span>
+              <span class="font-display font-extrabold text-2xl uppercase tracking-tight">UPI Protocol</span>
+            </span>
+            <span class="option-check !static !top-auto !right-auto"><i class="fa-solid fa-check text-[11px]"></i></span>
+          </span>
+          <span class="method-body block px-8 pb-8">
+            <span class="block bg-white p-10 rounded-[2.5rem] border border-border-subtle text-center">
+              <img class="w-44 h-44 mx-auto mb-6 opacity-90" loading="lazy"
+                   src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_f55c1089fc_0f8dd361173bd941.png"
+                   alt="UPI payment QR code">
+              <span class="block text-[10px] font-black uppercase tracking-[0.2em] text-muted" id="qrNote"></span>
+            </span>
+          </span>
+        </span>
+      </label>
+
+      <!-- Card -->
+      <label class="option-card !p-0 overflow-hidden" id="cardCard">
+        <input type="radio" name="method" value="card">
+        <span class="option-body block">
+          <span class="flex justify-between items-center gap-4 p-8">
+            <span class="flex items-center gap-4">
+              <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center" aria-hidden="true">
+                <i class="fa-solid fa-credit-card"></i>
+              </span>
+              <span class="font-display font-extrabold text-2xl uppercase tracking-tight">Credit / Debit Card</span>
+            </span>
+            <span class="flex items-center gap-4">
+              <span class="hidden sm:flex gap-3 text-2xl opacity-40" aria-hidden="true">
+                <i class="fa-brands fa-cc-visa"></i><i class="fa-brands fa-cc-mastercard"></i>
+              </span>
+              <span class="option-check !static !top-auto !right-auto"><i class="fa-solid fa-check text-[11px]"></i></span>
+            </span>
+          </span>
+          <span class="method-body block px-8 pb-8">
+            <span class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <span class="block md:col-span-2">
+                <span class="field-label" aria-hidden="true">Card Number</span>
+                <input class="field-input" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number" id="ccNum" aria-label="Card number">
+              </span>
+              <span class="block">
+                <span class="field-label" aria-hidden="true">Expiry</span>
+                <input class="field-input" type="text" placeholder="09 / 28" autocomplete="cc-exp" id="ccExp" aria-label="Card expiry date">
+              </span>
+              <span class="block">
+                <span class="field-label" aria-hidden="true">CVV</span>
+                <input class="field-input" type="password" inputmode="numeric" placeholder="•••" autocomplete="cc-csc" id="ccCvv" aria-label="Card security code">
+              </span>
+            </span>
+          </span>
+        </span>
+      </label>
+    </fieldset>
+
+    <div class="mt-10 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted">
+      <i class="fa-solid fa-lock" aria-hidden="true"></i> Demo checkout — no card is charged
+    </div>
+  </form>
+
+  <aside class="lg:col-span-5">
+    <div class="sticky top-32 bg-ink text-white rounded-panel p-10 shadow-2xl">
+      <h2 class="font-display font-black text-2xl tracking-tighter text-accent mb-8 uppercase">Order Ledger</h2>
+      <div id="summary"></div>
+      <button type="submit" form="payForm" id="authorize"
+        class="w-full bg-brand text-accent py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 transition-all shadow-lg shadow-black/30">
+        <span id="authLabel">Authorize</span>
+      </button>
+      <p class="mt-8 flex items-center justify-center gap-3 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i> 256-bit AES Encryption
+      </p>
+      <a href="book-3.html" data-keep="book-3.html" class="block text-center mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-accent transition-colors">
+        Back to extraction
+      </a>
+    </div>
+  </aside>
+
+</main>
+
+<script src="assets/data.js"></script>
+<script src="assets/roamly.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.Roamly;
+  var dep = R.deposit();
+
+  document.getElementById('summary').innerHTML = R.summaryBody({ dark: true, deposit: true });
+  document.getElementById('qrNote').textContent =
+    dep > 0 ? 'Scan to authorize ' + R.inr(dep) + ' deposit' : 'No payment needed — this trail is free';
+  document.getElementById('authLabel').textContent =
+    dep > 0 ? 'Authorize ' + R.inr(dep) : 'Confirm Free Slot';
+
+  /* only the selected method shows its body */
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.option-card'));
+  function sync() {
+    cards.forEach(function (l) {
+      var checked = l.querySelector('input').checked;
+      l.classList.toggle('is-selected', checked);
+      l.querySelector('.method-body').style.display = checked ? '' : 'none';
+    });
+  }
+  cards.forEach(function (l) { l.addEventListener('change', sync); });
+  sync();
+
+  /* light formatting so the card fields behave like real ones */
+  var num = document.getElementById('ccNum');
+  num.addEventListener('input', function () {
+    var v = num.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+    num.value = v;
+  });
+  var exp = document.getElementById('ccExp');
+  exp.addEventListener('input', function () {
+    var v = exp.value.replace(/\D/g, '').slice(0, 4);
+    exp.value = v.length > 2 ? v.slice(0, 2) + ' / ' + v.slice(2) : v;
+  });
+
+  document.getElementById('payForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var method = document.querySelector('input[name="method"]:checked').value;
+
+    if (method === 'card' && dep > 0) {
+      var digits = document.getElementById('ccNum').value.replace(/\D/g, '');
+      if (digits.length < 12 || !document.getElementById('ccExp').value ||
+          !document.getElementById('ccCvv').value) {
+        R.toast('Complete the card details');
+        document.getElementById('ccNum').focus();
+        return;
+      }
+    }
+
+    var btn = document.getElementById('authorize');
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+    document.getElementById('authLabel').textContent = 'Authorizing…';
+
+    R.state.set({ method: method, deposited: true });
+    R.makeRef();
+
+    setTimeout(function () { R.go('confirmation.html'); }, 900);
+  });
+})();
+</script>
+</body>
+</html>

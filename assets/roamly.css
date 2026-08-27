@@ -1,0 +1,232 @@
+/* ============================================================
+   Roamly — shared component layer
+   Everything the Tailwind utilities can't express, in one file.
+   Replaces the <style> blocks that used to sit in each page.
+   ============================================================ */
+
+/* ---------- base ---------- */
+body { font-family: 'Inter', system-ui, sans-serif; background: #ffffff; color: #0a0a0a; }
+.font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+
+/* Space Grotesk tops out at 700 — clamp the utility classes to what
+   actually loads so headings render at the weight they were designed for. */
+.font-display.font-extrabold,
+.font-display.font-black { font-weight: 700; }
+
+/* ---------- signature surfaces ---------- */
+.glass {
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, .3);
+}
+.text-outline { -webkit-text-stroke: 1px #0a0a0a; color: transparent; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------- accessibility ---------- */
+/* The prototypes stripped focus outlines and never replaced them. */
+:focus-visible {
+  outline: 3px solid #1a4332;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #1a4332;
+  outline-offset: 1px;
+}
+input.outline-none:focus-visible, select.outline-none:focus-visible, .outline-none:focus-visible {
+  outline: none;
+}
+.skip-link {
+  position: absolute; left: 50%; top: 0; transform: translate(-50%, -120%);
+  z-index: 300; background: #1a4332; color: #d4f27a;
+  padding: 12px 24px; border-radius: 0 0 16px 16px;
+  font-size: 11px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase;
+  transition: transform .18s ease;
+}
+.skip-link:focus { transform: translate(-50%, 0); }
+
+/* ---------- motion ---------- */
+@keyframes rm-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.animate-float { animation: rm-float 6s ease-in-out infinite; }
+
+.trip-card .trip-image { transition: transform .7s ease; }
+.trip-card:hover .trip-image { transform: scale(1.05); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  #cursor { display: none !important; }
+}
+
+/* ---------- marquee ---------- */
+@keyframes rm-marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+.marquee { will-change: transform; }
+.marquee-track { animation: rm-marquee 32s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* ---------- custom cursor ---------- */
+#cursor {
+  position: fixed; top: 0; left: 0;
+  width: 32px; height: 32px; border-radius: 999px;
+  border: 1px solid rgba(26, 67, 50, .25);
+  pointer-events: none; z-index: 200;
+  transition: transform .3s ease-out, opacity .2s;
+  opacity: 0;
+}
+@media (max-width: 1023px) { #cursor { display: none; } }
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+/* ---------- selectable option card ----------
+   Ported from the Heritage checkout into the Expedition skin.
+   A real <label> wrapping a real radio: keyboard-operable,
+   announced correctly, selected state carried on the border. */
+.option-card {
+  display: block; position: relative; cursor: pointer;
+  background: #ffffff; border: 1px solid #e5e7eb;
+  border-radius: 2.5rem; padding: 2rem 2.25rem;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.option-card:hover { border-color: #1a4332; }
+.option-card input { position: absolute; opacity: 0; width: 0; height: 0; }
+.option-card input:focus-visible ~ .option-body {
+  outline: 3px solid #1a4332; outline-offset: 10px; border-radius: 1.5rem;
+}
+.option-card:has(input:checked) {
+  border: 2px solid #1a4332;
+  padding: calc(2rem - 1px) calc(2.25rem - 1px);
+  box-shadow: 0 25px 50px -12px rgba(26, 67, 50, .12);
+}
+.option-card .option-check {
+  position: absolute; top: 2rem; right: 2.25rem;
+  width: 28px; height: 28px; border-radius: 999px;
+  border: 1px solid #e5e7eb; background: #f8f9fa;
+  display: grid; place-items: center; color: transparent;
+  transition: all .18s ease;
+}
+.option-card:has(input:checked) .option-check {
+  background: #1a4332; border-color: #1a4332; color: #d4f27a;
+}
+.option-card .option-tag {
+  position: absolute; top: -12px; left: 2.25rem;
+  background: #1a4332; color: #d4f27a;
+  padding: 5px 16px; border-radius: 999px;
+  font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase;
+}
+/* Fallback for browsers without :has() — JS mirrors the state onto the label. */
+.option-card.is-selected {
+  border: 2px solid #1a4332;
+  padding: calc(2rem - 1px) calc(2.25rem - 1px);
+  box-shadow: 0 25px 50px -12px rgba(26, 67, 50, .12);
+}
+.option-card.is-selected .option-check {
+  background: #1a4332; border-color: #1a4332; color: #d4f27a;
+}
+
+/* ---------- form field ---------- */
+.field-label {
+  display: block; margin: 0 0 .5rem .5rem;
+  font-size: 10px; font-weight: 900; letter-spacing: .1em;
+  text-transform: uppercase; color: #666666;
+}
+.field-input {
+  width: 100%; background: #ffffff;
+  border: 1px solid #e5e7eb; border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700;
+  color: #0a0a0a; transition: border-color .15s ease;
+}
+.field-input::placeholder { color: #666666; opacity: .5; font-weight: 500; }
+.field-input:focus { border-color: #1a4332; }
+.field-input:user-invalid { border-color: #a3341f; }
+select.field-input { appearance: none; cursor: pointer; text-transform: uppercase;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23666'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 1.25rem center; background-size: 16px;
+  padding-right: 3rem;
+}
+.field-error {
+  display: none; margin: .5rem 0 0 .5rem;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #a3341f;
+}
+.field-error.show { display: block; }
+
+/* ---------- itinerary accordion ---------- */
+.stage-row {
+  width: 100%; text-align: left;
+  background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 2.5rem;
+  padding: 2rem 2.5rem; transition: background .2s ease, color .2s ease;
+}
+.stage-row:hover { background: #1a4332; color: #d4f27a; }
+.stage-row .stage-plus { transition: transform .2s ease; }
+.stage-row[aria-expanded="true"] { background: #1a4332; color: #d4f27a; }
+.stage-row[aria-expanded="true"] .stage-plus { transform: rotate(45deg); }
+.stage-body {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .3s ease;
+}
+.stage-body > div { overflow: hidden; }
+.stage-body.open { grid-template-rows: 1fr; }
+
+/* ---------- stepper ---------- */
+.step-item { display: flex; align-items: center; gap: .5rem; transition: opacity .25s ease; }
+.step-item[data-state="todo"] { opacity: .3; }
+.step-chip {
+  width: 24px; height: 24px; border-radius: 999px;
+  display: grid; place-items: center;
+  font-size: 10px; font-weight: 700;
+  background: #f8f9fa; border: 1px solid #e5e7eb; color: #0a0a0a;
+}
+.step-item[data-state="done"] .step-chip,
+.step-item[data-state="now"]  .step-chip {
+  background: #1a4332; border-color: #1a4332; color: #d4f27a;
+}
+.step-cap {
+  font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase;
+}
+.step-item[data-state="done"] .step-cap,
+.step-item[data-state="now"]  .step-cap { color: #1a4332; }
+.step-line { width: 32px; height: 1px; background: #e5e7eb; }
+.step-line[data-state="done"] { background: #1a4332; }
+
+/* ---------- journey tracker ---------- */
+.track-node[data-state="todo"] { opacity: .3; filter: grayscale(1); }
+.track-box {
+  width: 48px; height: 48px; border-radius: 1rem;
+  display: grid; place-items: center; margin: 0 auto 1rem;
+  background: #ffffff; border: 1px solid #e5e7eb; color: #666666;
+}
+.track-node[data-state="done"] .track-box {
+  background: #1a4332; border-color: #1a4332; color: #d4f27a;
+}
+.track-node[data-state="now"] .track-box {
+  background: #d4f27a; border-color: #d4f27a; color: #1a4332;
+  animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite;
+}
+
+/* ---------- toast ---------- */
+#toast {
+  position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 140%);
+  z-index: 250; background: #0a0a0a; color: #d4f27a;
+  padding: 16px 28px; border-radius: 999px;
+  font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .5);
+  transition: transform .32s cubic-bezier(.2, .9, .3, 1);
+}
+#toast.show { transform: translate(-50%, 0); }
+
+/* ---------- print (ticket) ---------- */
+@media print {
+  nav, footer, #cursor, .no-print { display: none !important; }
+  body { background: #fff; }
+}
