@@ -127,10 +127,10 @@
 
   /* ---------- nav ---------- */
   var NAV_LINKS = [
-    { id: 'expeditions', label: 'Expeditions',   href: 'trips.html' },
-    { id: 'weekend',     label: 'Weekend Peaks', href: 'trips.html#weekend' },
-    { id: 'alpine',      label: 'Alpine Tours',  href: 'trips.html#alpine' },
-    { id: 'expert',      label: 'Expert Ridges', href: 'trips.html#expert' }
+    { id: 'home',     label: 'Home',           href: 'index.html' },
+    { id: 'upcoming', label: 'Upcoming Trips', href: 'trips.html' },
+    { id: 'about',    label: 'About Us',       href: 'index.html#about' },
+    { id: 'faqs',     label: 'FAQs',           href: 'index.html#faqs' }
   ];
 
   var STEPS = [
@@ -151,23 +151,24 @@
 
   function navMarketing(active) {
     var links = NAV_LINKS.map(function (l) {
-      var on = l.id === active ? ' text-brand' : '';
-      return '<a href="' + l.href + '" class="hover:text-brand transition-colors' + on + '"' +
-             (l.id === active ? ' aria-current="page"' : '') + '>' + l.label + '</a>';
+      var on = l.id === active;
+      var style = on
+        ? 'bg-brand text-accent shadow-sm font-black'
+        : 'text-muted hover:text-ink hover:bg-black/5 font-bold';
+      return '<a href="' + l.href + '" data-nav-id="' + l.id + '" class="nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider ' + style + '"' +
+             (on ? ' aria-current="page"' : '') + '>' + l.label + '</a>';
     }).join('');
 
-    return '<div class="max-w-7xl mx-auto glass rounded-full px-6 py-3 flex items-center ' +
-      'justify-between border border-border-subtle shadow-sm">' +
-        '<div class="flex items-center gap-12">' + logoMark(false) +
-          '<div class="hidden lg:flex items-center gap-8 text-[13px] font-semibold uppercase tracking-wider">' +
+    return '<div class="max-w-7xl mx-auto glass rounded-full px-5 sm:px-7 py-2.5 sm:py-3 flex items-center ' +
+      'justify-between border border-border-subtle shadow-sm gap-6">' +
+        '<div class="flex items-center gap-6 lg:gap-10">' + logoMark(false) +
+          '<div class="hidden md:flex items-center gap-2.5 lg:gap-3.5">' +
             links +
           '</div>' +
         '</div>' +
-        '<div class="flex items-center gap-2 sm:gap-4">' +
-          '<a href="my-trip.html" class="text-sm font-bold uppercase tracking-widest px-4 py-2 ' +
-            'hover:bg-black/5 rounded-full transition-all">My Trip</a>' +
-          '<a href="trips.html" class="bg-brand text-accent px-6 py-2.5 rounded-full text-sm ' +
-            'font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-brand">Book Now</a>' +
+        '<div class="flex items-center gap-3">' +
+          '<a href="my-trip.html" data-nav-id="account" class="nav-pill-btn px-4 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider text-muted hover:text-ink hover:bg-black/5 font-bold">My Trip</a>' +
+          '<a href="trips.html" class="nav-cta-btn bg-brand text-accent px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[12px] sm:text-xs font-black uppercase tracking-widest shadow-brand">Book Now</a>' +
         '</div>' +
       '</div>';
   }
@@ -441,6 +442,49 @@
     Array.prototype.forEach.call(d.querySelectorAll('a[data-keep]'), function (a) {
       a.setAttribute('href', url(a.getAttribute('data-keep')));
     });
+
+    // Real-time active button tracker & scroll spy
+    function updateNavActiveState() {
+      var marketingNav = d.querySelector('[data-nav="marketing"]');
+      if (!marketingNav) return;
+      var currentPath = (w.location.pathname || '').split('/').pop() || 'index.html';
+      var currentHash = w.location.hash || '';
+
+      var activeId = 'home';
+      if (currentPath.indexOf('trips.html') !== -1 || currentPath.indexOf('trip.html') !== -1) {
+        activeId = 'upcoming';
+      } else if (currentPath.indexOf('my-trip.html') !== -1) {
+        activeId = 'account';
+      } else {
+        var faqsSec = d.getElementById('faqs');
+        var aboutSec = d.getElementById('about');
+        var scrollPos = w.scrollY + 200;
+
+        if (faqsSec && scrollPos >= faqsSec.offsetTop) {
+          activeId = 'faqs';
+        } else if (aboutSec && scrollPos >= aboutSec.offsetTop) {
+          activeId = 'about';
+        } else {
+          activeId = 'home';
+        }
+      }
+
+      var navPillButtons = marketingNav.querySelectorAll('.nav-pill-btn');
+      Array.prototype.forEach.call(navPillButtons, function (btn) {
+        var btnId = btn.getAttribute('data-nav-id');
+        if (btnId === activeId) {
+          btn.className = 'nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider bg-brand text-accent shadow-sm font-black';
+          btn.setAttribute('aria-current', 'page');
+        } else {
+          btn.className = 'nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider text-muted hover:text-ink hover:bg-black/5 font-bold';
+          btn.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    w.addEventListener('scroll', updateNavActiveState, { passive: true });
+    w.addEventListener('hashchange', updateNavActiveState);
+    updateNavActiveState();
 
     mountCursor();
   }

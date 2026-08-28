@@ -16,7 +16,7 @@
 <body class="antialiased bg-canvas text-ink">
 
 <a href="#main" class="skip-link">Skip to content</a>
-<nav data-nav="marketing" aria-label="Main"></nav>
+<nav data-nav="marketing" data-active="home" aria-label="Main"></nav>
 
 <main id="main">
 
@@ -115,94 +115,435 @@
     </div>
   </section>
 
-  <!-- Categories -->
-  <section class="py-16 bg-surface px-6">
+
+  <!-- Story / About Us -->
+  <section class="py-24 px-6" id="about" aria-label="About Roamly">
     <div class="max-w-7xl mx-auto">
-      <h2 class="font-display text-4xl md:text-5xl font-extrabold tracking-tighter mb-12 text-center uppercase">
-        How do you <span class="italic text-brand">want to roam?</span>
-      </h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <a href="trips.html#weekend" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
-          <i class="fa-solid fa-cloud-sun text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
-          <span>
-            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Weekend <br>Peaks</span>
-            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">From ₹4,499</span>
-          </span>
-        </a>
-        <a href="trips.html#alpine" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
-          <i class="fa-solid fa-mountain-city text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
-          <span>
-            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Alpine <br>Tours</span>
-            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">From ₹24,999</span>
-          </span>
-        </a>
-        <a href="trips.html#expert" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
-          <i class="fa-solid fa-tent text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
-          <span>
-            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Expert <br>Ridges</span>
-            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">From ₹18,999</span>
-          </span>
-        </a>
-        <a href="trips.html" data-trip="workshop" class="aspect-square rounded-[2.5rem] border border-border-subtle p-6 flex flex-col justify-between hover:bg-brand hover:text-accent transition-all group text-left">
-          <i class="fa-solid fa-compass text-3xl mb-4 group-hover:-rotate-12 transition-transform" aria-hidden="true"></i>
-          <span>
-            <span class="font-display font-extrabold text-2xl tracking-tight leading-none mb-1 uppercase block">Beginner <br>Workshop</span>
-            <span class="text-[10px] font-black uppercase tracking-widest opacity-60 block">Free</span>
-          </span>
-        </a>
+      <!-- Section Header -->
+      <div class="mb-14">
+        <p class="text-[11px] font-black uppercase tracking-[0.25em] text-brand mb-3">Our Story</p>
+        <h2 class="font-display text-5xl md:text-7xl font-extrabold tracking-tight leading-[0.95] mb-6 uppercase text-ink">
+          More than a<br>journey
+        </h2>
+        <p class="text-muted text-base md:text-lg max-w-2xl font-medium leading-relaxed">
+          Roamly was founded on a single belief: that true adventure happens when you strip away the noise. We curate immersive, expert-led mountaineering expeditions that connect you with the raw, untamed beauty of the world's highest peaks.
+        </p>
+      </div>
+
+      <!-- Photo Gallery Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Left: Large Vertical Mountain Peak -->
+        <div class="lg:col-span-6 rounded-3xl overflow-hidden shadow-lg bg-surface relative min-h-[480px] lg:min-h-full group">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80" 
+               alt="Vibrant mountain summit bathed in golden alpine glow above a sea of clouds" 
+               loading="lazy"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+        </div>
+
+        <!-- Right: 2 Square Images + 1 Landscape Image -->
+        <div class="lg:col-span-6 flex flex-col gap-6">
+          <div class="grid grid-cols-2 gap-6">
+            <!-- Tent Campers -->
+            <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
+              <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80" 
+                   alt="Warm illuminated expedition camp under clear twilight mountain skies" 
+                   loading="lazy"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+            <!-- Crampon on Ice -->
+            <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
+              <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=800&q=80" 
+                   alt="Mountaineer with crampons climbing steep crisp snow and glacial ice under blue skies" 
+                   loading="lazy"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+          </div>
+          <!-- Wide Forest Valley -->
+          <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-[16/9] flex-1 group">
+            <img src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80" 
+                 alt="Emerald green pine forests along rugged alpine mountain ridges" 
+                 loading="lazy"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Story -->
-  <section class="py-24 px-6" id="story">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-      <div class="relative">
-        <span class="absolute -top-8 -left-8 font-display text-[12rem] font-black text-surface leading-none -z-10 select-none" aria-hidden="true">26</span>
-        <h2 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight mb-8 uppercase">
-          Plan less. <br><span class="text-brand italic">Climb more.</span>
-        </h2>
-        <div class="space-y-6">
-          <div class="flex gap-6">
-            <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center shrink-0"><i class="fa-solid fa-leaf text-brand" aria-hidden="true"></i></span>
+  <!-- Testimonials Slider -->
+  <section class="py-24 px-6 bg-white border-y border-border-subtle overflow-hidden" id="testimonials" aria-label="Climber testimonials">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Header with Controls -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+        <div>
+          <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+            Community Voices
+          </p>
+          <h2 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase leading-none text-ink">
+            Loved by <span class="text-brand italic">8,000+ Climbers</span>
+          </h2>
+        </div>
+        
+        <div class="flex flex-wrap items-center gap-4">
+          <!-- Rating badge -->
+          <div class="flex items-center gap-4 bg-surface border border-border-subtle px-5 py-3.5 rounded-2xl">
+            <div class="flex text-amber-500 text-xs gap-1">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="h-5 w-px bg-border-subtle" aria-hidden="true"></div>
             <div>
-              <h3 class="font-display font-black text-sm uppercase tracking-widest mb-1">Zero Waste Policy</h3>
-              <p class="text-sm text-muted font-medium">We carry everything back. Every trail we visit stays as we found it.</p>
+              <p class="text-xs font-black tracking-tight leading-none text-ink">4.9 / 5.0</p>
+              <p class="text-[9px] font-bold uppercase tracking-widest text-muted">1,200+ Reviews</p>
             </div>
           </div>
-          <div class="flex gap-6">
-            <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved text-brand" aria-hidden="true"></i></span>
-            <div>
-              <h3 class="font-display font-black text-sm uppercase tracking-widest mb-1">Elite Safety Gear</h3>
-              <p class="text-sm text-muted font-medium">Satellite phones and oxygen kits on all high-altitude expeditions.</p>
-            </div>
-          </div>
-          <div class="flex gap-6">
-            <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center shrink-0"><i class="fa-solid fa-user-group text-brand" aria-hidden="true"></i></span>
-            <div>
-              <h3 class="font-display font-black text-sm uppercase tracking-widest mb-1">Expert Led Groups</h3>
-              <p class="text-sm text-muted font-medium">Max 8 hikers per guide for personal attention and safe navigation.</p>
-            </div>
+
+          <!-- Slider Navigation Arrows -->
+          <div class="flex items-center gap-2">
+            <button id="prevTestimonial" 
+                    aria-label="Previous testimonial"
+                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink transition-all shadow-sm active:scale-95">
+              <i class="fa-solid fa-arrow-left text-sm" aria-hidden="true"></i>
+            </button>
+            <button id="nextTestimonial" 
+                    aria-label="Next testimonial"
+                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink transition-all shadow-sm active:scale-95">
+              <i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
+            </button>
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="pt-10">
-          <div class="rounded-[2.5rem] overflow-hidden aspect-[3/4] mb-4">
-            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b06b700247_90aa9151b2f2970f.png" alt="Portrait of a Roamly mountain guide">
+
+      <!-- Testimonials Slider Track -->
+      <div id="testimonialTrack" 
+           class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-4 -mx-2 px-2">
+        <!-- Card 1 -->
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-6">
+              <div class="flex items-center gap-1 text-brand text-xs">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+              </div>
+              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                Verified Climber
+              </span>
+            </div>
+            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+              “Sandakphu with Roamly was pure magic. Waking up above the cloud inversion to see Kangchenjunga glowing pink at 5 AM is something I will never forget. The guides were exceptionally skilled and calm.”
+            </p>
           </div>
-          <div class="rounded-[2.5rem] overflow-hidden aspect-square">
-            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_4c16770163_91d331bdae7e14fc.png" alt="A cold mountain stream running over rock">
+          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
+                     alt="Portrait of Priya Sharma" 
+                     loading="lazy" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div>
+                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Priya Sharma</h3>
+                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Bangalore, IN</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+              Sandakphu
+            </span>
           </div>
-        </div>
-        <div>
-          <div class="rounded-[2.5rem] overflow-hidden aspect-square mb-4">
-            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_69827c6679_027396a5bf777abd.png" alt="Hikers eating together at camp">
+        </article>
+
+        <!-- Card 2 -->
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-6">
+              <div class="flex items-center gap-1 text-brand text-xs">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+              </div>
+              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                Verified Climber
+              </span>
+            </div>
+            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+              “I was hesitant about joining solo, but the 8-person cohort dynamic was incredible. Top-tier safety equipment, hot food at 4,000m, and leaders who know every nuance of the route.”
+            </p>
           </div>
-          <div class="rounded-[2.5rem] overflow-hidden aspect-[3/4]">
-            <img class="w-full h-full object-cover" loading="lazy" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_3a04715526_d7ed130b66874447.png" alt="Pine canopy seen from below">
+          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" 
+                     alt="Portrait of Rohan Deshmukh" 
+                     loading="lazy" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div>
+                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Rohan Deshmukh</h3>
+                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Mumbai, IN</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+              Kashmir Lakes
+            </span>
           </div>
-        </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-6">
+              <div class="flex items-center gap-1 text-brand text-xs">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+              </div>
+              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                Verified Climber
+              </span>
+            </div>
+            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+              “Roamly’s zero-waste ethos and small group sizes set them miles apart from commercial trekking operators. The attention to detail from booking to extraction is world-class.”
+            </p>
+          </div>
+          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" 
+                     alt="Portrait of Ananya Iyer" 
+                     loading="lazy" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div>
+                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Ananya Iyer</h3>
+                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Pune, IN</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+              Kuari Pass
+            </span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-6">
+              <div class="flex items-center gap-1 text-brand text-xs">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+              </div>
+              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                Verified Climber
+              </span>
+            </div>
+            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+              “The dark sky stargazing night run at 3,200m was surreal. We saw the entire galactic core of the Milky Way with our guide's laser astronomy tour. An unforgettable weekend!”
+            </p>
+          </div>
+          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" 
+                     alt="Portrait of Kabir Sen" 
+                     loading="lazy" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div>
+                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Kabir Sen</h3>
+                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Delhi, IN</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+              Stargazer Run
+            </span>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-6">
+              <div class="flex items-center gap-1 text-brand text-xs">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+              </div>
+              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                Verified Climber
+              </span>
+            </div>
+            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+              “Every campsite had clean eco-toilets, fresh warm organic meals, and mountain leaders who genuinely cared about nature. I've already booked my second expedition for next spring.”
+            </p>
+          </div>
+          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" 
+                     alt="Portrait of Meera Nair" 
+                     loading="lazy" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div>
+                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Meera Nair</h3>
+                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Kochi, IN</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+              Alpine Valley
+            </span>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-6">
+              <div class="flex items-center gap-1 text-brand text-xs">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+              </div>
+              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                Verified Climber
+              </span>
+            </div>
+            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+              “From satellite check-ins to the perfectly paced altitude acclimation walks, safety was always front and center without ever dampening the raw thrill of the ridge.”
+            </p>
+          </div>
+          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" 
+                     alt="Portrait of Vikram Rathore" 
+                     loading="lazy" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div>
+                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Vikram Rathore</h3>
+                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Hyderabad, IN</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+              Western Ghats
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Slider Progress / Dots Indicator -->
+      <div class="flex items-center justify-center gap-2 mt-8" id="testimonialDots"></div>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="py-24 px-6 bg-surface/50 border-t border-border-subtle" id="faqs" aria-label="Frequently asked questions">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="inline-flex items-center gap-2 bg-white border border-border-subtle px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
+          Got Questions?
+        </p>
+        <h2 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase">
+          Frequently Asked <span class="text-brand italic">Questions</span>
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+            <div class="flex items-center gap-4 text-left">
+              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">01</span>
+              <span class="tracking-tight uppercase">What fitness level is required for expeditions?</span>
+            </div>
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+            </span>
+          </summary>
+          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+            Each trail has a detailed grade from Easy to Extreme. Weekend Peaks suit beginner hikers with basic cardio, while Alpine Tours and Expert Ridges require prior endurance training and high-altitude experience.
+          </div>
+        </details>
+
+        <!-- FAQ 2 -->
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+            <div class="flex items-center gap-4 text-left">
+              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">02</span>
+              <span class="tracking-tight uppercase">What gear do I need to bring?</span>
+            </div>
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+            </span>
+          </summary>
+          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+            We provide all core technical gear (tents, high-altitude sleeping bags, crampons, satellite comms, and medical kits). You only need personal clothing, trekking boots, a daypack, and a reusable water bottle.
+          </div>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+            <div class="flex items-center gap-4 text-left">
+              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">03</span>
+              <span class="tracking-tight uppercase">Can I join as a solo traveler?</span>
+            </div>
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+            </span>
+          </summary>
+          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+            Absolutely! Over 60% of Roamly climbers join solo. You'll be matched with a small cohort of up to 8 climbers led by professional certified mountain guides.
+          </div>
+        </details>
+
+        <!-- FAQ 4 -->
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+            <div class="flex items-center gap-4 text-left">
+              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">04</span>
+              <span class="tracking-tight uppercase">What is the cancellation and refund policy?</span>
+            </div>
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+            </span>
+          </summary>
+          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+            Full deposit refund up to 14 days before your expedition start date. If weather forces a trail closure, we offer free rescheduling or 100% expedition credit with no expiration.
+          </div>
+        </details>
       </div>
     </div>
   </section>
@@ -248,47 +589,86 @@
   var small = ['stargazer', 'workshop', 'coastal'].map(D.byId);
 
   function bigCard(t) {
+    var badge = t.badges && t.badges[0]
+      ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
+      : '';
     return '<article class="md:col-span-8 group trip-card">' +
       '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
       '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle">' +
-        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' +
-        '<div class="absolute top-8 left-8"><span class="bg-accent text-brand px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>' +
+        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
         '<div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-[2.5rem] flex flex-wrap justify-between items-end gap-4">' +
-          '<div><div class="flex gap-1 mb-2">' + R.stars(t.rating) + '</div>' +
-            '<h3 class="font-display font-extrabold text-2xl mb-1 uppercase">' + R.esc(t.name) + '</h3>' +
-            '<p class="text-sm font-black text-brand/70 uppercase tracking-widest">' + R.esc(t.region) + ' • ' + t.days + ' Days</p></div>' +
-          '<div class="text-right"><p class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Starting From</p>' +
-            '<p class="text-3xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</p></div>' +
-        '</div></div></a></article>';
+          '<div>' +
+            '<div class="flex items-center gap-1.5 mb-2 text-xs font-black">' +
+              '<i class="fa-solid fa-star text-brand"></i> ' + t.rating.toFixed(1) +
+            '</div>' +
+            '<h3 class="font-display font-extrabold text-2xl md:text-3xl mb-1 uppercase tracking-tight group-hover:text-brand transition-colors">' + R.esc(t.name) + '</h3>' +
+            '<p class="text-xs font-bold text-muted uppercase tracking-widest">' + R.pad(t.days) + ' Days • Grade: ' + R.esc(t.grade) + '</p>' +
+          '</div>' +
+          '<div class="flex items-end gap-5">' +
+            '<div class="text-right">' +
+              '<p class="text-[9px] font-black uppercase tracking-[0.2em] text-muted mb-0.5">Starting from</p>' +
+              '<p class="text-3xl md:text-4xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
+            '</div>' +
+            '<span class="bg-ink text-white px-7 py-3 rounded-2xl text-[11px] font-bold uppercase tracking-widest group-hover:bg-brand group-hover:text-accent transition-all shadow-sm">View Trail</span>' +
+          '</div>' +
+        '</div>' +
+      '</div></a></article>';
   }
 
   function tallCard(t) {
+    var badge = t.badges && t.badges[0]
+      ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
+      : '';
     return '<article class="md:col-span-4 group trip-card">' +
       '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
       '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle">' +
-        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' +
-        '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>' +
-        '<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>' +
+        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
+        '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"></div>' +
         '<div class="absolute bottom-8 left-8 right-8 text-white">' +
-          '<h3 class="font-display font-extrabold text-2xl mb-1 uppercase">' + R.esc(t.name) + '</h3>' +
-          '<p class="text-xs font-black text-accent uppercase tracking-widest mb-4">' + R.esc(t.region) + ' • ' + t.days + ' Days</p>' +
-          '<div class="flex justify-between items-center">' +
-            '<span class="text-2xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</span>' +
-            '<span class="w-10 h-10 rounded-full bg-white text-brand flex items-center justify-center"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>' +
-          '</div></div></div></a></article>';
+          '<div class="flex items-center gap-1.5 mb-2 text-xs font-black text-accent">' +
+            '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
+          '</div>' +
+          '<h3 class="font-display font-extrabold text-2xl mb-1 uppercase tracking-tight">' + R.esc(t.name) + '</h3>' +
+          '<p class="text-xs font-bold text-white/70 uppercase tracking-widest mb-6">' + R.pad(t.days) + ' Days • Grade: ' + R.esc(t.grade) + '</p>' +
+          '<div class="flex justify-between items-end border-t border-white/20 pt-5">' +
+            '<div>' +
+              '<p class="text-[9px] text-white/60 uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
+              '<span class="text-2xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</span>' +
+            '</div>' +
+            '<span class="bg-white text-ink px-6 py-2.5 rounded-2xl text-[11px] font-black uppercase tracking-widest group-hover:bg-accent group-hover:text-brand transition-all">View Trail</span>' +
+          '</div>' +
+        '</div>' +
+      '</div></a></article>';
   }
 
   function smallCard(t) {
-    var badge = t.badges[0] ? '<div class="absolute top-4 left-4"><span class="bg-accent text-brand px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em]">' + R.esc(t.badges[0]) + '</span></div>' : '';
+    var badge = t.badges && t.badges[0]
+      ? '<div class="absolute top-5 left-5"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg">' + R.esc(t.badges[0]) + '</span></div>'
+      : '';
+    var isFree = t.price === 0;
+    var priceDisplay = isFree ? 'FREE' : R.inr(t.price);
+
     return '<article class="md:col-span-4 group trip-card">' +
       '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
-      '<div class="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-4 border border-border-subtle">' +
+      '<div class="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden mb-5 border border-border-subtle shadow-sm">' +
         '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
-      '</div><div class="px-1">' +
-        '<div class="flex justify-between items-start gap-3 mb-1">' +
-          '<h3 class="font-display font-extrabold text-xl uppercase">' + R.esc(t.name) + '</h3>' +
-          '<span class="text-sm font-black uppercase shrink-0">' + R.inr(t.price) + '</span></div>' +
-        '<p class="text-[10px] font-black text-muted uppercase tracking-widest">' + R.esc(t.region) + ' • ' + (t.days > 1 ? t.days + ' Days' : 'Day Trip') + '</p>' +
+      '</div>' +
+      '<div class="px-2">' +
+        '<div class="flex justify-between items-start gap-3 mb-1.5">' +
+          '<h3 class="font-display font-extrabold text-xl tracking-tight uppercase group-hover:text-brand transition-colors">' + R.esc(t.name) + '</h3>' +
+          '<div class="flex items-center gap-1 text-xs font-black shrink-0 pt-0.5">' +
+            '<i class="fa-solid fa-star text-brand"></i> ' + t.rating.toFixed(1) +
+          '</div>' +
+        '</div>' +
+        '<p class="text-muted text-[10px] font-bold uppercase tracking-widest mb-5">' +
+          (t.days > 1 ? R.pad(t.days) + ' Days' : 'Day Trip') + ' • Grade: ' + R.esc(t.grade) + '</p>' +
+        '<div class="flex justify-between items-end border-t border-border-subtle pt-5">' +
+          '<div>' +
+            '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-0.5">' + (isFree ? 'Admission' : 'Starting from') + '</p>' +
+            '<p class="text-2xl lg:text-3xl font-display font-black tracking-tighter text-ink">' + priceDisplay + '</p>' +
+          '</div>' +
+          '<span class="bg-ink text-white px-6 py-2.5 rounded-2xl text-[11px] font-bold uppercase tracking-widest group-hover:bg-brand group-hover:text-accent transition-all shadow-sm">View Trail</span>' +
+        '</div>' +
       '</div></a></article>';
   }
 
@@ -300,6 +680,90 @@
     e.preventDefault();
     window.location.href = 'trips.html';
   });
+
+  /* Testimonial slider controller */
+  var track = document.getElementById('testimonialTrack');
+  var prevBtn = document.getElementById('prevTestimonial');
+  var nextBtn = document.getElementById('nextTestimonial');
+  var dotsContainer = document.getElementById('testimonialDots');
+
+  if (track && prevBtn && nextBtn && dotsContainer) {
+    var cards = track.querySelectorAll('article');
+    var totalCards = cards.length;
+    dotsContainer.innerHTML = '';
+
+    for (var i = 0; i < totalCards; i++) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+      dot.className = 'h-2.5 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-brand w-8' : 'bg-black/15 hover:bg-black/30 w-2.5');
+      (function (idx) {
+        dot.addEventListener('click', function () {
+          var targetCard = cards[idx];
+          if (targetCard) {
+            var targetScroll;
+            var maxScroll = track.scrollWidth - track.clientWidth;
+            if (idx === totalCards - 1) {
+              targetScroll = maxScroll;
+            } else {
+              targetScroll = Math.min(maxScroll, Math.max(0, targetCard.offsetLeft - track.offsetLeft));
+            }
+            track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+          }
+        });
+      })(i);
+      dotsContainer.appendChild(dot);
+    }
+
+    var ticking = false;
+    function updateSliderRealtime() {
+      var scrollLeft = track.scrollLeft;
+      var maxScroll = track.scrollWidth - track.clientWidth;
+
+      prevBtn.style.opacity = scrollLeft <= 8 ? '0.35' : '1';
+      prevBtn.style.pointerEvents = scrollLeft <= 8 ? 'none' : 'auto';
+
+      nextBtn.style.opacity = scrollLeft >= maxScroll - 8 ? '0.35' : '1';
+      nextBtn.style.pointerEvents = scrollLeft >= maxScroll - 8 ? 'none' : 'auto';
+
+      var activeIndex = 0;
+      if (maxScroll > 0) {
+        var progress = Math.min(1, Math.max(0, scrollLeft / maxScroll));
+        activeIndex = Math.min(totalCards - 1, Math.max(0, Math.round(progress * (totalCards - 1))));
+      }
+
+      var dots = dotsContainer.querySelectorAll('button');
+      Array.prototype.forEach.call(dots, function (d, idx) {
+        if (idx === activeIndex) {
+          d.className = 'h-2.5 w-8 rounded-full bg-brand transition-all duration-300';
+        } else {
+          d.className = 'h-2.5 w-2.5 rounded-full bg-black/15 hover:bg-black/30 transition-all duration-300';
+        }
+      });
+      ticking = false;
+    }
+
+    function onScrollTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateSliderRealtime);
+        ticking = true;
+      }
+    }
+
+    prevBtn.addEventListener('click', function () {
+      var step = cards[0] ? cards[0].offsetWidth + 24 : 420;
+      track.scrollBy({ left: -step, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', function () {
+      var step = cards[0] ? cards[0].offsetWidth + 24 : 420;
+      track.scrollBy({ left: step, behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', onScrollTick, { passive: true });
+    window.addEventListener('resize', onScrollTick);
+    updateSliderRealtime();
+  }
 })();
 </script>
 </body>

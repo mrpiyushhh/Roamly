@@ -16,7 +16,7 @@
 <body class="antialiased bg-canvas text-ink">
 
 <a href="#main" class="skip-link">Skip to content</a>
-<nav data-nav="marketing" data-active="expeditions" aria-label="Main"></nav>
+<nav data-nav="marketing" data-active="upcoming" aria-label="Main"></nav>
 
 <header class="relative pt-32 pb-12 px-6">
   <div class="max-w-7xl mx-auto">
@@ -33,18 +33,65 @@
   </div>
 </header>
 
-<!-- Filters -->
-<section class="sticky top-24 z-40 px-6 mb-12" aria-label="Filter and sort">
-  <div class="max-w-7xl mx-auto glass border border-border-subtle p-3 rounded-3xl shadow-xl flex flex-wrap items-center justify-between gap-4">
-    <div class="flex flex-wrap items-center gap-2" id="filters" role="group" aria-label="Filter by category"></div>
-    <div class="flex items-center gap-4 px-4">
-      <label class="text-[10px] font-black uppercase tracking-widest text-muted" for="sort">Sort:</label>
-      <select id="sort" class="text-xs font-bold uppercase tracking-widest bg-transparent outline-none cursor-pointer">
-        <option value="rec">Recommended</option>
-        <option value="asc">Price: Low–High</option>
-        <option value="desc">Price: High–Low</option>
-        <option value="hard">Most Extreme</option>
-      </select>
+<!-- Search & Sort Controls -->
+<section class="relative px-6 mb-12" aria-label="Search and sort expeditions">
+  <div class="max-w-7xl mx-auto glass border border-border-subtle px-5 sm:px-6 py-2.5 rounded-full shadow-xl flex items-center justify-between gap-4 relative">
+    
+    <!-- Search Input -->
+    <div class="flex items-center gap-3.5 flex-1 min-w-0">
+      <i class="fa-solid fa-magnifying-glass text-muted text-sm shrink-0 flex items-center" aria-hidden="true"></i>
+      <input type="text" 
+             id="tripSearchInput" 
+             autocomplete="off"
+             placeholder="SEARCH BY TRAIL NAME, REGION, GRADE, OR DURATION..." 
+             class="w-full bg-transparent border-0 outline-none text-xs sm:text-[13px] font-bold uppercase tracking-wider text-ink placeholder:text-muted/60 focus:outline-none p-0 m-0 leading-normal flex-1">
+      <button type="button" 
+              id="clearSearchBtn" 
+              aria-label="Clear search"
+              class="hidden text-muted hover:text-ink text-xs w-6 h-6 rounded-full hover:bg-black/5 flex items-center justify-center shrink-0 transition-colors cursor-pointer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="h-6 w-px bg-border-subtle shrink-0 hidden sm:block" aria-hidden="true"></div>
+
+    <!-- Themed Custom Dropdown -->
+    <div class="relative shrink-0" id="customSortDropdown">
+      <button type="button" 
+              id="sortToggleBtn" 
+              aria-haspopup="listbox" 
+              aria-expanded="false"
+              class="flex items-center gap-2 bg-surface hover:bg-white border border-border-subtle hover:border-brand/40 px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-ink transition-all shadow-sm active:scale-95 cursor-pointer">
+        <span class="text-[10px] font-black uppercase tracking-widest text-muted hidden sm:inline-block">Sort:</span>
+        <span id="selectedSortLabel" class="text-ink font-extrabold tracking-wider">Recommended</span>
+        <i class="fa-solid fa-chevron-down text-[10px] text-muted transition-transform duration-300 ml-1" id="sortChevron" aria-hidden="true"></i>
+      </button>
+
+      <!-- Menu Options Panel -->
+      <div id="sortMenu" 
+           role="listbox"
+           class="hidden absolute right-0 top-full mt-2 w-56 bg-white/95 backdrop-blur-xl border border-border-subtle rounded-2xl p-2 shadow-2xl z-50 transition-all space-y-1">
+        <button type="button" role="option" data-value="rec" aria-selected="true"
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all bg-brand text-accent shadow-sm cursor-pointer">
+          <span>Recommended</span>
+          <i class="fa-solid fa-check text-accent text-xs"></i>
+        </button>
+        <button type="button" role="option" data-value="asc" aria-selected="false"
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer">
+          <span>Price: Low–High</span>
+          <i class="fa-solid fa-check text-accent text-xs opacity-0"></i>
+        </button>
+        <button type="button" role="option" data-value="desc" aria-selected="false"
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer">
+          <span>Price: High–Low</span>
+          <i class="fa-solid fa-check text-accent text-xs opacity-0"></i>
+        </button>
+        <button type="button" role="option" data-value="hard" aria-selected="false"
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer">
+          <span>Most Extreme</span>
+          <i class="fa-solid fa-check text-accent text-xs opacity-0"></i>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -54,7 +101,7 @@
     <p class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-8" id="count" role="status"></p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="grid"></div>
     <p class="hidden text-center py-24 text-muted font-medium" id="empty">
-      No trails match that filter yet. Try another category.
+      No expeditions match your search. Try different keywords.
     </p>
   </div>
 </main>
@@ -70,38 +117,25 @@
   var grid = document.getElementById('grid');
   var count = document.getElementById('count');
   var empty = document.getElementById('empty');
-  var filters = document.getElementById('filters');
-
-  var active = 'all';
+  var searchInput = document.getElementById('tripSearchInput');
+  var clearBtn = document.getElementById('clearSearchBtn');
   var sort = 'rec';
-
-  /* the hash lets Home, the footer and the category tiles deep-link a filter */
-  var hash = (window.location.hash || '').replace('#', '');
-  if (hash && D.categories.some(function (c) { return c.id === hash; })) active = hash;
-
-  filters.innerHTML = D.categories.map(function (c) {
-    return '<button type="button" data-cat="' + c.id + '" aria-pressed="false" ' +
-      'class="filter px-5 py-2.5 rounded-2xl text-[11px] font-bold uppercase tracking-wider transition-all">' +
-      c.label + '</button>';
-  }).join('') +
-  '<span class="h-8 w-px bg-border-subtle mx-2 hidden md:block" aria-hidden="true"></span>' +
-  '<span class="px-5 py-2.5 rounded-2xl bg-surface border border-border-subtle text-[11px] font-bold uppercase tracking-wider text-muted">' +
-    D.trips.length + ' Trails Live</span>';
-
-  function paintFilters() {
-    Array.prototype.forEach.call(filters.querySelectorAll('.filter'), function (b) {
-      var on = b.getAttribute('data-cat') === active;
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      b.className = 'filter px-5 py-2.5 rounded-2xl text-[11px] font-bold uppercase tracking-wider transition-all ' +
-        (on ? 'bg-brand text-accent shadow-brand'
-            : 'bg-surface border border-border-subtle hover:bg-black/5');
-    });
-  }
+  var query = '';
 
   var GRADE_RANK = { 'Entry': 0, 'Moderate': 1, 'Alpine Grade': 2, 'Hard Core': 3, 'Extreme': 4 };
 
   function render() {
-    var list = D.trips.filter(function (t) { return active === 'all' || t.category === active; });
+    var q = query.trim().toLowerCase();
+    var list = D.trips.filter(function (t) {
+      if (!q) return true;
+      var matchName = t.name.toLowerCase().indexOf(q) !== -1;
+      var matchRegion = t.region.toLowerCase().indexOf(q) !== -1;
+      var matchGrade = t.grade.toLowerCase().indexOf(q) !== -1;
+      var matchSummary = (t.summary || '').toLowerCase().indexOf(q) !== -1;
+      var matchCategory = (t.category || '').toLowerCase().indexOf(q) !== -1;
+      var matchBadges = (t.badges || []).some(function (b) { return b.toLowerCase().indexOf(q) !== -1; });
+      return matchName || matchRegion || matchGrade || matchSummary || matchCategory || matchBadges;
+    });
 
     if (sort === 'asc')       list.sort(function (a, b) { return a.price - b.price; });
     else if (sort === 'desc') list.sort(function (a, b) { return b.price - a.price; });
@@ -109,23 +143,92 @@
     else                      list.sort(function (a, b) { return b.rating - a.rating; });
 
     grid.innerHTML = list.map(R.tripCard).join('');
-    count.textContent = 'Showing ' + list.length + ' of ' + D.trips.length + ' expeditions';
+    count.textContent = q ? 'Found ' + list.length + ' matching expedition' + (list.length === 1 ? '' : 's') : 'Showing all ' + list.length + ' expeditions';
     empty.classList.toggle('hidden', list.length > 0);
-    paintFilters();
   }
 
-  filters.addEventListener('click', function (e) {
-    var b = e.target.closest('.filter');
-    if (!b) return;
-    active = b.getAttribute('data-cat');
-    try { history.replaceState(null, '', active === 'all' ? ' ' : '#' + active); } catch (err) {}
-    render();
-  });
+  if (searchInput) {
+    searchInput.addEventListener('input', function (e) {
+      query = e.target.value;
+      if (clearBtn) clearBtn.classList.toggle('hidden', !query);
+      render();
+    });
+  }
 
-  document.getElementById('sort').addEventListener('change', function (e) {
-    sort = e.target.value;
-    render();
-  });
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () {
+      if (searchInput) searchInput.value = '';
+      query = '';
+      clearBtn.classList.add('hidden');
+      if (searchInput) searchInput.focus();
+      render();
+    });
+  }
+
+  /* Custom Themed Dropdown Logic */
+  var sortDropdown = document.getElementById('customSortDropdown');
+  var sortToggleBtn = document.getElementById('sortToggleBtn');
+  var sortMenu = document.getElementById('sortMenu');
+  var sortChevron = document.getElementById('sortChevron');
+  var selectedSortLabel = document.getElementById('selectedSortLabel');
+  var sortOptions = document.querySelectorAll('.sort-opt');
+
+  function toggleSortMenu(open) {
+    var isOpen = open !== undefined ? open : sortMenu.classList.contains('hidden');
+    if (isOpen) {
+      sortMenu.classList.remove('hidden');
+      sortChevron.style.transform = 'rotate(180deg)';
+      sortToggleBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      sortMenu.classList.add('hidden');
+      sortChevron.style.transform = 'rotate(0deg)';
+      sortToggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  if (sortToggleBtn && sortMenu) {
+    sortToggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleSortMenu();
+    });
+
+    Array.prototype.forEach.call(sortOptions, function (opt) {
+      opt.addEventListener('click', function (e) {
+        e.stopPropagation();
+        sort = opt.getAttribute('data-value');
+        var labelSpan = opt.querySelector('span');
+        if (labelSpan) selectedSortLabel.textContent = labelSpan.textContent;
+
+        Array.prototype.forEach.call(sortOptions, function (o) {
+          var isSelected = o === opt;
+          o.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+          var check = o.querySelector('.fa-check');
+          if (isSelected) {
+            o.className = 'sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider text-left transition-all bg-brand text-accent shadow-sm cursor-pointer';
+            if (check) check.classList.remove('opacity-0');
+          } else {
+            o.className = 'sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer';
+            if (check) check.classList.add('opacity-0');
+          }
+        });
+
+        toggleSortMenu(false);
+        render();
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (sortDropdown && !sortDropdown.contains(e.target)) {
+        toggleSortMenu(false);
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        toggleSortMenu(false);
+      }
+    });
+  }
 
   render();
 })();
