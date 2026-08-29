@@ -43,10 +43,10 @@
 
   <aside class="lg:col-span-4">
     <div class="sticky top-32 bg-brand text-accent rounded-panel p-10 shadow-brand">
-      <h2 class="font-display font-black text-2xl tracking-tighter mb-8 uppercase">Expedition Log</h2>
+      <h2 class="font-display font-black text-2xl tracking-tighter mb-8 uppercase">Trip Log</h2>
       <div id="summary"></div>
       <button type="submit" form="intelForm"
-        class="w-full bg-accent text-brand py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 transition-all">
+        class="rm-btn rm-btn-accent w-full py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter">
         Proceed to Step 03
       </button>
       <a href="book-1.html" data-keep="book-1.html" class="block text-center mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-accent transition-colors">
@@ -73,7 +73,7 @@
   function card(i) {
     var lead = i === 0;
     var ribbon = lead
-      ? '<p class="absolute top-0 right-0 px-8 py-3 bg-brand text-accent text-[10px] font-black uppercase tracking-widest rounded-bl-[2rem]">Expedition Lead</p>'
+      ? '<p class="absolute top-0 right-0 px-8 py-3 bg-brand text-accent text-[10px] font-black uppercase tracking-widest rounded-bl-[2rem]">Trip Lead</p>'
       : '';
     var shell = lead
       ? 'bg-surface border-2 border-brand'
@@ -117,11 +117,25 @@
           '</div>' +
           '<div>' +
             '<label class="field-label" for="gender' + i + '">Gender</label>' +
-            '<select class="field-input" id="gender' + i + '" name="gender' + i + '">' +
-              ['Female', 'Male', 'Non-binary', 'Prefer not to say'].map(function (g) {
-                return '<option' + (val(i, 'gender') === g ? ' selected' : '') + '>' + g + '</option>';
-              }).join('') +
-            '</select>' +
+            '<div class="relative custom-gender-dropdown" data-index="' + i + '">' +
+              '<button type="button" id="genderBtn' + i + '" aria-haspopup="listbox" aria-expanded="false" ' +
+                'class="field-input flex items-center justify-between cursor-pointer w-full text-left uppercase font-bold text-xs tracking-wider bg-surface hover:bg-white transition-all">' +
+                '<span class="gender-label truncate text-ink font-extrabold">' + (val(i, 'gender') || 'Female') + '</span>' +
+                '<i class="fa-solid fa-chevron-down text-[10px] text-muted transition-transform duration-200 ml-2" aria-hidden="true"></i>' +
+              '</button>' +
+              '<input type="hidden" id="gender' + i + '" name="gender' + i + '" value="' + (val(i, 'gender') || 'Female') + '">' +
+              '<div class="gender-menu hidden absolute left-0 right-0 top-full mt-2 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-2xl p-1.5 shadow-[0_20px_45px_-10px_rgba(0,0,0,0.25)] z-50 space-y-1 transition-all" role="listbox">' +
+                ['Female', 'Male', 'Non-binary', 'Prefer not to say'].map(function (g) {
+                  var sel = (val(i, 'gender') || 'Female') === g;
+                  return '<button type="button" role="option" data-value="' + g + '" aria-selected="' + (sel ? 'true' : 'false') + '" ' +
+                    'class="gender-opt w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all ' +
+                    (sel ? 'bg-brand text-accent shadow-sm' : 'text-muted hover:text-ink hover:bg-surface') + ' cursor-pointer">' +
+                    '<span>' + g + '</span>' +
+                    '<i class="fa-solid fa-check text-accent text-xs ' + (sel ? '' : 'opacity-0') + '"></i>' +
+                  '</button>';
+                }).join('') +
+              '</div>' +
+            '</div>' +
           '</div>' +
         '</div>' +
       '</div>' +
@@ -133,6 +147,91 @@
   for (var i = 0; i < s.pax; i++) html += card(i);
   cards.innerHTML = html;
 
+  /* Custom Gender Dropdowns Logic */
+  function initGenderDropdowns() {
+    var dropdowns = document.querySelectorAll('.custom-gender-dropdown');
+    dropdowns.forEach(function (dd) {
+      var btn = dd.querySelector('button[id^="genderBtn"]');
+      var menu = dd.querySelector('.gender-menu');
+      var hiddenInput = dd.querySelector('input[type="hidden"]');
+      var label = dd.querySelector('.gender-label');
+      var chevron = dd.querySelector('.fa-chevron-down');
+      var options = dd.querySelectorAll('.gender-opt');
+
+      function toggle(open) {
+        var isOpen = open !== undefined ? open : menu.classList.contains('hidden');
+        document.querySelectorAll('.gender-menu').forEach(function (m) {
+          if (m !== menu) {
+            m.classList.add('hidden');
+            var otherBtn = m.parentElement.querySelector('button[id^="genderBtn"]');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+            var otherChevron = m.parentElement.querySelector('.fa-chevron-down');
+            if (otherChevron) otherChevron.classList.remove('rotate-180');
+          }
+        });
+
+        menu.classList.toggle('hidden', !isOpen);
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (chevron) chevron.classList.toggle('rotate-180', isOpen);
+      }
+
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggle();
+      });
+
+      options.forEach(function (opt) {
+        opt.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var val = opt.getAttribute('data-value');
+          hiddenInput.value = val;
+          if (label) label.textContent = val;
+
+          options.forEach(function (o) {
+            var isSel = o === opt;
+            o.setAttribute('aria-selected', isSel ? 'true' : 'false');
+            var check = o.querySelector('.fa-check');
+            if (isSel) {
+              o.className = 'gender-opt w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all bg-brand text-accent shadow-sm cursor-pointer';
+              if (check) check.classList.remove('opacity-0');
+            } else {
+              o.className = 'gender-opt w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer';
+              if (check) check.classList.add('opacity-0');
+            }
+          });
+
+          toggle(false);
+        });
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.custom-gender-dropdown')) {
+        document.querySelectorAll('.gender-menu').forEach(function (m) {
+          m.classList.add('hidden');
+          var otherBtn = m.parentElement.querySelector('button[id^="genderBtn"]');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          var otherChevron = m.parentElement.querySelector('.fa-chevron-down');
+          if (otherChevron) otherChevron.classList.remove('rotate-180');
+        });
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.gender-menu').forEach(function (m) {
+          m.classList.add('hidden');
+          var otherBtn = m.parentElement.querySelector('button[id^="genderBtn"]');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          var otherChevron = m.parentElement.querySelector('.fa-chevron-down');
+          if (otherChevron) otherChevron.classList.remove('rotate-180');
+        });
+      }
+    });
+  }
+
+  initGenderDropdowns();
+
   function fieldError(id, show) {
     var input = document.getElementById(id);
     var err = document.getElementById('err-' + id);
@@ -141,7 +240,7 @@
     return !show;
   }
 
-  function validate(report) {
+  function validate(report, focusFirst) {
     var ok = true, first = null;
     for (var i = 0; i < s.pax; i++) {
       var name  = document.getElementById('name' + i);
@@ -150,32 +249,68 @@
       var age   = document.getElementById('age' + i);
 
       var checks = [
-        ['name' + i,  name.value.trim().length < 2],
-        ['email' + i, email.hasAttribute('required') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())],
-        ['phone' + i, phone.hasAttribute('required') && phone.value.replace(/\D/g, '').length < 8],
-        ['age' + i,   !age.value || Number(age.value) < 12 || Number(age.value) > 90]
+        ['name' + i,  name && name.value.trim().length < 2],
+        ['email' + i, email && email.hasAttribute('required') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())],
+        ['phone' + i, phone && phone.hasAttribute('required') && phone.value.replace(/\D/g, '').length < 8],
+        ['age' + i,   age && (!age.value || Number(age.value) < 12 || Number(age.value) > 90)]
       ];
 
       checks.forEach(function (c) {
-        var bad = c[1];
+        var bad = !!c[1];
         if (bad) { ok = false; if (!first) first = c[0]; }
         if (report) fieldError(c[0], bad);
       });
     }
-    if (report && first) {
+    if (focusFirst && first) {
       var el = document.getElementById(first);
-      el.focus();
-      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      if (el) {
+        el.focus();
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
     }
     return ok;
   }
 
-  /* clear an error as soon as the field is corrected */
-  cards.addEventListener('input', function (e) {
-    var id = e.target.id;
-    if (!id) return;
+  /* Clear error for the specific field being edited without stealing focus or scrolling */
+  function validateSingle(inputEl) {
+    if (!inputEl || !inputEl.id) return;
+    var id = inputEl.id;
+
+    var isBad = false;
+    if (id.startsWith('name')) {
+      isBad = inputEl.value.trim().length < 2;
+    } else if (id.startsWith('email')) {
+      isBad = inputEl.hasAttribute('required') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEl.value.trim());
+    } else if (id.startsWith('phone')) {
+      var digits = inputEl.value.replace(/\D/g, '');
+      isBad = inputEl.hasAttribute('required') && digits.length < 8;
+    } else if (id.startsWith('age')) {
+      var val = Number(inputEl.value);
+      isBad = !inputEl.value || val < 12 || val > 90;
+    }
+
     var err = document.getElementById('err-' + id);
-    if (err && err.classList.contains('show')) validate(true);
+    if (err && err.classList.contains('show')) {
+      fieldError(id, isBad);
+    }
+  }
+
+  cards.addEventListener('input', function (e) {
+    if (e.target && e.target.id) {
+      validateSingle(e.target);
+    }
+  });
+
+  /* Prevent Enter key inside input fields from prematurely submitting the form and jumping sections */
+  document.getElementById('intelForm').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+      e.preventDefault();
+      var inputs = Array.prototype.slice.call(document.querySelectorAll('#intelForm input:not([type="hidden"])'));
+      var idx = inputs.indexOf(e.target);
+      if (idx !== -1 && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
+      }
+    }
   });
 
   function collect() {
@@ -194,7 +329,7 @@
 
   document.getElementById('intelForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!validate(true)) {
+    if (!validate(true, true)) {
       R.toast('Check the highlighted fields');
       return;
     }

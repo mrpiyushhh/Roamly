@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roamly — Expedition Roster</title>
+<title>Roamly — Trip Roster</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
   <form class="lg:col-span-8" id="rosterForm">
     <header class="mb-12">
       <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 uppercase">
-        Expedition <span class="text-brand italic">roster.</span>
+        Trip <span class="text-brand italic">roster.</span>
       </h1>
       <p class="text-muted font-medium text-lg" id="sub"></p>
     </header>
@@ -37,7 +37,7 @@
 
       <div class="flex items-center justify-between gap-6 max-w-md">
         <button type="button" id="minus" aria-label="Remove a traveller"
-          class="w-16 h-16 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-xl hover:bg-brand hover:text-accent transition-all disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-inherit">
+          class="w-16 h-16 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-xl hover:bg-brand hover:text-accent tx disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-inherit">
           <i class="fa-solid fa-minus"></i>
         </button>
         <div class="text-center">
@@ -45,7 +45,7 @@
           <span class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mt-2 block" id="paxWord">Traveller</span>
         </div>
         <button type="button" id="plus" aria-label="Add a traveller"
-          class="w-16 h-16 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-xl hover:bg-brand hover:text-accent transition-all disabled:opacity-30">
+          class="w-16 h-16 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-xl hover:bg-brand hover:text-accent tx disabled:opacity-30">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
@@ -53,11 +53,7 @@
       <p class="text-[10px] font-black uppercase tracking-widest text-brand mt-8" id="slotNote" role="status"></p>
     </section>
 
-    <!-- Departure -->
-    <section class="bg-white border border-border-subtle rounded-panel p-10 mb-6">
-      <h2 class="font-display font-extrabold text-2xl uppercase tracking-tight mb-8">Pick your run</h2>
-      <div class="space-y-4" id="dateOptions"></div>
-    </section>
+
 
     <!-- Included -->
     <section class="bg-white border border-border-subtle rounded-panel p-10">
@@ -75,14 +71,14 @@
 
   <aside class="lg:col-span-4">
     <div class="sticky top-32 bg-brand text-accent rounded-panel p-10 shadow-brand">
-      <h2 class="font-display font-black text-2xl tracking-tighter mb-8 uppercase">Expedition Log</h2>
+      <h2 class="font-display font-black text-2xl tracking-tighter mb-8 uppercase">Trip Log</h2>
       <div id="summary"></div>
       <button type="submit" form="rosterForm"
-        class="w-full bg-accent text-brand py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 transition-all">
+        class="rm-btn rm-btn-accent w-full py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter">
         Proceed to Step 02
       </button>
       <a href="trip.html" data-keep="trip.html" class="block text-center mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-accent transition-colors">
-        Back to expedition
+        Back to trip
       </a>
     </div>
   </aside>
@@ -126,26 +122,6 @@
   plus.addEventListener('click', function () {
     if (pax < MAX) { pax++; paint(); }
     else R.toast('Max ' + MAX + ' on this run');
-  });
-
-  /* Only the published departure is bookable online. Anything else is a
-     coordinator conversation, so it is a request rather than a fake option. */
-  document.getElementById('dateOptions').innerHTML =
-    '<label class="option-card is-selected">' +
-      '<input type="radio" name="run" value="' + R.esc(t.dates) + '" checked>' +
-      '<span class="option-check"><i class="fa-solid fa-check text-[11px]"></i></span>' +
-      '<span class="option-body block pr-12">' +
-        '<span class="block font-display text-2xl font-extrabold tracking-tight mb-1">' + R.esc(t.dates) + '</span>' +
-        '<span class="block text-[11px] font-bold uppercase tracking-widest text-muted">' +
-          'Confirmed departure • ' + t.slots + ' slots open</span>' +
-      '</span></label>' +
-    '<div class="flex flex-wrap items-center justify-between gap-4 p-8 border-2 border-dashed border-border-subtle rounded-[2.5rem]">' +
-      '<p class="text-sm font-medium text-muted">Need different dates for a private group?</p>' +
-      '<button type="button" id="customDates" class="text-[11px] font-black uppercase tracking-[0.2em] text-brand border-b-2 border-brand pb-1">Request a custom run</button>' +
-    '</div>';
-
-  document.getElementById('customDates').addEventListener('click', function () {
-    R.toast('A coordinator will email you within 24 hours');
   });
 
   chosenDate = t.dates;

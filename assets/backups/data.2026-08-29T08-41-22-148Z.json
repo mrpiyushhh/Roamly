@@ -1,15 +1,4 @@
-/* ============================================================
-   Roamly — content
-   GENERATED FILE — do not edit by hand.
-   Source of truth is assets/data.json; this is rewritten by
-   server.js whenever the admin panel saves.
-   Member records are intentionally NOT included here.
-   Last generated: 2026-08-29T08:44:28.618Z
-   ============================================================ */
-(function (w) {
-  'use strict';
-
-  var DATA = {
+{
   "deposit": 1000,
   "categories": [
     {
@@ -30,6 +19,103 @@
     }
   ],
   "trips": [
+    {
+      "id": "harishchandragad",
+      "code": "HCG",
+      "name": "Harishchandragad & Kokankada",
+      "short": "Harishchandragad",
+      "accent": "Kokankada.",
+      "region": "Sahyadri / Ahmednagar",
+      "category": "weekend",
+      "days": 2,
+      "grade": "Moderate",
+      "price": 1497,
+      "rating": 4.9,
+      "reviews": 312,
+      "slots": 7,
+      "badges": [
+        "Best Seller",
+        "Kokankada Cliff"
+      ],
+      "featured": "large",
+      "hero": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+      "heroAlt": "Breathtaking panoramic view of Kokankada concave cliff bathed in golden sunset clouds",
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Mountain peak in golden sunset glow"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Starry night sky above the high mountain plateau"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Misty green valleys and cloud inversion"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sunrise over rugged Sahyadri mountain ridges"
+        }
+      ],
+      "blurb": [
+        "The crown jewel of Sahyadri trekking. Harishchandragad is renowned for the mighty Kokankada — a massive, semi-circular concave cliff offering one of the most theatrical sunsets and cloud inversions in Asia.",
+        "Explore the 6th-century Harishchandreshwar temple, ancient Kedareshwar water cave, and pitch tents at Kokankada for a night under the stars with hot local Maharashtrian meals."
+      ],
+      "dates": "Every Sat – Sun Departure",
+      "itinerary": [
+        {
+          "t": "Overnight Departure from Pune / Mumbai",
+          "d": "Board overnight AC/Non-AC pushback transport. Multiple pickup hubs across Pune (Wakad, Swargate) and Mumbai (Dadar, Thane, Vashi)."
+        },
+        {
+          "t": "Basecamp Arrival & Pachnai Ascent",
+          "d": "Reach base village by 05:30 AM. Fresh breakfast, gear check, and commence the 3.5-hour climb through lush plateau trails."
+        },
+        {
+          "t": "Temple, Caves & Kokankada Sunset",
+          "d": "Visit Harishchandreshwar temple & Kedareshwar cave. Reach Kokankada by 16:30 for the legendary sunset and vertical cliff vista."
+        },
+        {
+          "t": "Taramati Peak Summit & Descent",
+          "d": "Early dawn hike to Taramati Peak (1,429m) for sunrise. Village-style Pithla Bhakri lunch at basecamp, return to city by 21:30."
+        }
+      ],
+      "guide": {
+        "name": "Omkar Shinde",
+        "role": "Sahyadri Lead Explorer",
+        "bio": "Certified mountaineer with 80+ Harishchandragad ascents. Specialist in Western Ghats trail geology and emergency response.",
+        "quote": "\"Kokankada at sunset is pure silence. You never forget your first view.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
+      },
+      "pickups": [
+        {
+          "id": "pune-wakad",
+          "place": "Wakad Bridge, Pune",
+          "note": "Near Ginger Hotel service road",
+          "time": "11:00 PM",
+          "recommended": true
+        },
+        {
+          "id": "pune-swargate",
+          "place": "Swargate, Pune",
+          "note": "Opposite Bus Stand main gate",
+          "time": "10:30 PM"
+        },
+        {
+          "id": "mumbai-dadar",
+          "place": "Dadar TT Circle, Mumbai",
+          "note": "Near Swami Narayan Temple",
+          "time": "10:00 PM"
+        },
+        {
+          "id": "mumbai-thane",
+          "place": "Teen Hath Naka, Thane",
+          "note": "Eternity Mall flyover pillar 12",
+          "time": "11:15 PM"
+        }
+      ]
+    },
     {
       "id": "kalsubai",
       "code": "KLB",
@@ -1265,18 +1351,25 @@
         }
       ]
     }
-  ]
-};
-
-  w.RoamlyData = {
-    trips: DATA.trips,
-    categories: DATA.categories,
-    DEPOSIT: DATA.deposit,
-    byId: function (id) {
-      for (var i = 0; i < DATA.trips.length; i++) {
-        if (DATA.trips[i].id === id) return DATA.trips[i];
-      }
-      return DATA.trips[0];
+  ],
+  "updated": "2026-08-29T08:39:37.308Z",
+  "members": [
+    {
+      "id": "mmtd47lhivpgpd",
+      "tripId": "harishchandragad",
+      "name": "Piyush",
+      "phone": "0987654321",
+      "email": "Piyush@gmail.com",
+      "age": 27,
+      "gender": "Female",
+      "pickupId": "0",
+      "ref": "HCG-2023",
+      "amount": 1499,
+      "paid": 1499,
+      "status": "paid",
+      "note": "",
+      "bookedAt": "2026-08-28T15:37:11.046Z",
+      "paidAt": "2026-08-28T15:37:11.048Z"
     }
-  };
-})(window);
+  ]
+}

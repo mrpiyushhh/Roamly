@@ -21,7 +21,7 @@
 <main id="main">
 
   <!-- Hero -->
-  <header class="relative pt-32 pb-16 px-6 overflow-hidden">
+  <header class="relative pt-32 pb-16 px-6 overflow-hidden" id="hero" aria-label="Hero">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       <div class="lg:col-span-6 relative z-10">
         <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
@@ -36,26 +36,26 @@
           No crowds, just the climb.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="trips.html" class="bg-brand text-accent px-10 py-5 rounded-2xl font-black text-lg hover:rotate-2 transition-all shadow-brand-lg uppercase tracking-tighter">Enroll Now</a>
+          <a href="trips.html" class="bg-brand text-accent px-10 py-5 rounded-2xl font-black text-lg hover:rotate-2 tx shadow-brand-lg uppercase tracking-tighter">Book Now</a>
         </div>
       </div>
 
       <div class="lg:col-span-6 relative">
-        <div class="relative aspect-[4/5] rounded-panel overflow-hidden shadow-2xl animate-float max-h-[600px] mx-auto">
-          <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b480f492a1_5d5662a06cc88467.png" alt="A lone hiker with a full pack standing on a sharp rocky ridge">
-          <div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-3xl">
+        <a href="trip.html?trip=harishchandragad" id="heroTripLink" aria-label="Explore featured trip: Harishchandragad" class="group block relative aspect-[4/5] rounded-panel overflow-hidden shadow-2xl animate-float max-h-[600px] mx-auto cursor-pointer">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b480f492a1_5d5662a06cc88467.png" alt="A lone hiker with a full pack standing on a sharp rocky ridge">
+          <div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-3xl group-hover:bg-white/90 group-hover:border-brand/30 transition-all duration-300">
             <div class="flex justify-between items-center gap-4">
               <div>
                 <p class="text-[10px] font-black uppercase tracking-widest text-brand mb-1">Featured Peak</p>
-                <p class="font-display font-extrabold text-xl uppercase" id="heroTripName">Kudremukh Trail</p>
+                <p class="font-display font-extrabold text-xl uppercase group-hover:text-brand transition-colors" id="heroTripName">Harishchandragad & Kokankada</p>
               </div>
               <div class="text-right">
                 <p class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Difficulty</p>
-                <p class="font-bold text-brand uppercase" id="heroTripGrade">Hard Core</p>
+                <p class="font-bold text-brand uppercase" id="heroTripGrade">Moderate</p>
               </div>
             </div>
           </div>
-        </div>
+        </a>
         <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accent rounded-full blur-3xl opacity-30 -z-10" aria-hidden="true"></div>
         <div class="absolute -top-10 -right-10 w-60 h-60 bg-brand rounded-full blur-3xl opacity-10 -z-10" aria-hidden="true"></div>
       </div>
@@ -63,79 +63,97 @@
   </header>
 
   <!-- Search -->
-  <section class="px-6 -mt-6 mb-16 relative z-20" aria-label="Find a trail">
-    <form id="searchForm" class="max-w-4xl mx-auto bg-white border border-border-subtle p-2 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row gap-2">
-      <div class="flex-1 flex items-center gap-4 px-6 py-4 bg-surface rounded-[2rem]">
-        <i class="fa-solid fa-map-pin text-brand" aria-hidden="true"></i>
-        <div class="flex-1">
-          <input id="basecamp" name="basecamp" type="text" placeholder="Where do you start?" aria-label="Where do you start?" autocomplete="off" class="bg-transparent w-full text-sm font-bold outline-none border-none focus:outline-none focus-visible:outline-none focus:ring-0 placeholder:text-muted/50 uppercase">
+  <section class="px-6 -mt-6 mb-16 relative z-30" aria-label="Find a trip">
+    <div class="max-w-4xl mx-auto relative">
+      <form id="searchForm" class="bg-white border border-border-subtle p-2 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row gap-2 relative z-20">
+        <div class="flex-1 flex items-center gap-4 px-6 py-4 bg-surface rounded-[2rem]">
+          <i class="fa-solid fa-map-pin text-brand text-base shrink-0" aria-hidden="true"></i>
+          <div class="flex-1 min-w-0">
+            <input id="basecamp" name="basecamp" type="text" placeholder="Where do you start? e.g. Kalsubai, Sahyadri, Devkund" aria-label="Where do you start?" autocomplete="off" class="bg-transparent w-full text-sm font-bold outline-none border-none focus:outline-none focus-visible:outline-none focus:ring-0 placeholder:text-muted/50 uppercase text-ink tracking-wide">
+          </div>
+          <button type="button" id="clearHeroSearch" class="hidden text-muted hover:text-ink text-xs w-6 h-6 rounded-full hover:bg-black/5 flex items-center justify-center shrink-0 transition-colors">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
-      </div>
-      <button type="submit" class="bg-brand text-accent px-8 py-4 rounded-[2rem] font-black uppercase tracking-widest hover:scale-[1.02] transition-all">
-        Search Trails
-      </button>
-    </form>
+        <button type="submit" class="rm-btn rm-btn-primary px-8 py-4 rounded-[2rem] font-black uppercase tracking-widest text-xs shrink-0">
+          Search Trips
+        </button>
+      </form>
+
+      <!-- Live Search Suggestions Dropdown -->
+      <div id="searchSuggestions" class="hidden absolute left-0 right-0 top-full mt-3 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-[2rem] p-3 shadow-[0_24px_50px_-12px_rgba(0,0,0,0.25)] z-50 max-h-[380px] overflow-y-auto space-y-1.5 transition-all"></div>
+    </div>
   </section>
 
   <!-- Marquee -->
-  <section class="py-10 border-y border-border-subtle overflow-hidden" aria-hidden="true">
-    <div class="marquee flex whitespace-nowrap">
-      <div class="marquee-track flex items-center gap-4 text-4xl font-display font-black tracking-tighter italic uppercase pr-4">
-        <span class="text-brand">150+ Summits</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">8K Community</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">Expert Guides</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle">/</span>
+  <section class="py-8 border-y border-border-subtle overflow-hidden bg-surface/30" aria-hidden="true">
+    <div class="marquee flex whitespace-nowrap overflow-hidden select-none">
+      <div class="marquee-track flex items-center gap-6 text-3xl md:text-4xl font-display font-black tracking-tighter italic uppercase pr-6 shrink-0 min-w-full">
+        <span class="text-brand">150+ Summits</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">8K Community</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Expert Guides</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Certified Safety</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Zero Hidden Fees</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Basecamp Pickups</span><span class="text-border-subtle font-normal">/</span>
       </div>
-      <div class="marquee-track flex items-center gap-4 text-4xl font-display font-black tracking-tighter italic uppercase pr-4">
-        <span class="text-brand">150+ Summits</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">8K Community</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">Expert Guides</span><span class="text-border-subtle">/</span>
-        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle">/</span>
+      <div class="marquee-track flex items-center gap-6 text-3xl md:text-4xl font-display font-black tracking-tighter italic uppercase pr-6 shrink-0 min-w-full" aria-hidden="true">
+        <span class="text-brand">150+ Summits</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">8K Community</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Expert Guides</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Certified Safety</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Zero Hidden Fees</span><span class="text-border-subtle font-normal">/</span>
+        <span class="text-brand">Basecamp Pickups</span><span class="text-border-subtle font-normal">/</span>
       </div>
     </div>
   </section>
 
-  <!-- Featured -->
-  <section class="py-24 px-6">
+  <!-- Upcoming Trips -->
+  <section class="py-14 md:py-16 px-6" id="upcoming" aria-label="Upcoming trips">
     <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
-        <div class="max-w-xl">
-          <h2 class="font-display text-5xl md:text-6xl font-extrabold tracking-tighter leading-none mb-4 uppercase">
-            Upcoming <br><span class="text-outline italic">Expeditions</span>
-          </h2>
-          <p class="text-muted font-medium">Curated weekend escapes for the modern hiker. From the Sahyadris to the Himalayas.</p>
-        </div>
-        <a href="trips.html" class="shrink-0 flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em] text-brand border-b-2 border-brand pb-1">
-          See all 9 trails <i class="fa-solid fa-arrow-right"></i>
+      <div class="max-w-3xl mb-10">
+        <h2 class="font-display text-5xl md:text-6xl font-extrabold tracking-tighter leading-none mb-4 uppercase">
+          Upcoming <span class="text-outline italic">Trips</span>
+        </h2>
+        <p class="text-muted font-medium">Curated weekend escapes for the modern hiker. From the Sahyadris to the Himalayas.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8" id="featured"></div>
+
+      <div class="flex justify-center mt-8">
+        <a href="trips.html"
+           class="rm-btn rm-btn-primary px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest inline-flex items-center gap-3">
+          <span>View All Trips</span>
+          <i class="fa-solid fa-arrow-right text-[11px]" aria-hidden="true"></i>
         </a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8" id="featured"></div>
     </div>
   </section>
 
 
   <!-- Story / About Us -->
-  <section class="py-24 px-6" id="about" aria-label="About Roamly">
+  <section class="py-14 md:py-16 px-6" id="about" aria-label="About Roamly">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
-      <div class="mb-14">
+      <div class="mb-10">
         <p class="text-[11px] font-black uppercase tracking-[0.25em] text-brand mb-3">Our Story</p>
         <h2 class="font-display text-5xl md:text-7xl font-extrabold tracking-tight leading-[0.95] mb-6 uppercase text-ink">
           More than a<br>journey
         </h2>
         <p class="text-muted text-base md:text-lg max-w-2xl font-medium leading-relaxed">
-          Roamly was founded on a single belief: that true adventure happens when you strip away the noise. We curate immersive, expert-led mountaineering expeditions that connect you with the raw, untamed beauty of the world's highest peaks.
+          Roamly was founded on a single belief: that true adventure happens when you strip away the noise. We curate immersive, expert-led mountaineering trips that connect you with the raw, untamed beauty of the world's highest peaks.
         </p>
       </div>
 
       <!-- Photo Gallery Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        <!-- Left: Large Vertical Mountain Peak -->
+        <!-- Left: Large Vertical Group Photo of Indian Explorers on Waterfall Trip -->
         <div class="lg:col-span-6 rounded-3xl overflow-hidden shadow-lg bg-surface relative min-h-[480px] lg:min-h-full group">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80" 
-               alt="Vibrant mountain summit bathed in golden alpine glow above a sea of clouds" 
+          <img src="assets/images/about-group-waterfall.jpg" 
+               alt="Group of friends happily taking a selfie in front of a majestic Sahyadri monsoon waterfall" 
                loading="lazy"
                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
         </div>
@@ -143,25 +161,25 @@
         <!-- Right: 2 Square Images + 1 Landscape Image -->
         <div class="lg:col-span-6 flex flex-col gap-6">
           <div class="grid grid-cols-2 gap-6">
-            <!-- Tent Campers -->
+            <!-- Majestic Sahyadri Waterfall Cliffs -->
             <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
-              <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80" 
-                   alt="Warm illuminated expedition camp under clear twilight mountain skies" 
+              <img src="assets/images/about-waterfall-cliffs.jpg" 
+                   alt="Twin waterfalls cascading down lush green Sahyadri mountain cliff faces in monsoon" 
                    loading="lazy"
                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
-            <!-- Crampon on Ice -->
+            <!-- Sahyadri Mountain Ridge Group Summit -->
             <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
-              <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=800&q=80" 
-                   alt="Mountaineer with crampons climbing steep crisp snow and glacial ice under blue skies" 
+              <img src="assets/images/about-group-sahyadri-summit.png" 
+                   alt="Group of trekkers standing together on a lush green Sahyadri mountain ridge overlooking the misty valley" 
                    loading="lazy"
                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
           </div>
-          <!-- Wide Forest Valley -->
+          <!-- Kedarnath Dham Himalayan Temple -->
           <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-[16/9] flex-1 group">
-            <img src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80" 
-                 alt="Emerald green pine forests along rugged alpine mountain ridges" 
+            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80" 
+                 alt="Ancient Kedarnath Dham stone temple standing against towering snow-covered Himalayan peaks" 
                  loading="lazy"
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
           </div>
@@ -171,7 +189,7 @@
   </section>
 
   <!-- Testimonials Slider -->
-  <section class="py-24 px-6 bg-white border-y border-border-subtle overflow-hidden" id="testimonials" aria-label="Climber testimonials">
+  <section class="py-14 md:py-16 px-6 bg-white border-y border-border-subtle overflow-hidden" id="testimonials" aria-label="Climber testimonials">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header with Controls -->
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
@@ -206,12 +224,12 @@
           <div class="flex items-center gap-2">
             <button id="prevTestimonial" 
                     aria-label="Previous testimonial"
-                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink transition-all shadow-sm active:scale-95">
+                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink tx shadow-sm active:scale-95">
               <i class="fa-solid fa-arrow-left text-sm" aria-hidden="true"></i>
             </button>
             <button id="nextTestimonial" 
                     aria-label="Next testimonial"
-                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink transition-all shadow-sm active:scale-95">
+                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink tx shadow-sm active:scale-95">
               <i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
             </button>
           </div>
@@ -222,7 +240,7 @@
       <div id="testimonialTrack" 
            class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-4 -mx-2 px-2">
         <!-- Card 1 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
           <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
           <div>
             <div class="flex items-center justify-between gap-3 mb-6">
@@ -262,7 +280,7 @@
         </article>
 
         <!-- Card 2 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
           <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
           <div>
             <div class="flex items-center justify-between gap-3 mb-6">
@@ -302,7 +320,7 @@
         </article>
 
         <!-- Card 3 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
           <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
           <div>
             <div class="flex items-center justify-between gap-3 mb-6">
@@ -342,7 +360,7 @@
         </article>
 
         <!-- Card 4 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
           <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
           <div>
             <div class="flex items-center justify-between gap-3 mb-6">
@@ -382,7 +400,7 @@
         </article>
 
         <!-- Card 5 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
           <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
           <div>
             <div class="flex items-center justify-between gap-3 mb-6">
@@ -399,7 +417,7 @@
               </span>
             </div>
             <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
-              “Every campsite had clean eco-toilets, fresh warm organic meals, and mountain leaders who genuinely cared about nature. I've already booked my second expedition for next spring.”
+              “Every campsite had clean eco-toilets, fresh warm organic meals, and mountain leaders who genuinely cared about nature. I've already booked my second trip for next spring.”
             </p>
           </div>
           <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
@@ -422,7 +440,7 @@
         </article>
 
         <!-- Card 6 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative">
+        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
           <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
           <div>
             <div class="flex items-center justify-between gap-3 mb-6">
@@ -468,9 +486,9 @@
   </section>
 
   <!-- FAQs -->
-  <section class="py-24 px-6 bg-surface/50 border-t border-border-subtle" id="faqs" aria-label="Frequently asked questions">
+  <section class="py-14 md:py-16 px-6 bg-surface/50 border-t border-border-subtle" id="faqs" aria-label="Frequently asked questions">
     <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
+      <div class="text-center mb-12">
         <p class="inline-flex items-center gap-2 bg-white border border-border-subtle px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
           <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
           Got Questions?
@@ -482,13 +500,13 @@
 
       <div class="space-y-4">
         <!-- FAQ 1 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
           <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
             <div class="flex items-center gap-4 text-left">
               <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">01</span>
-              <span class="tracking-tight uppercase">What fitness level is required for expeditions?</span>
+              <span class="tracking-tight uppercase">What fitness level is required for trips?</span>
             </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
               <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
             </span>
           </summary>
@@ -498,13 +516,13 @@
         </details>
 
         <!-- FAQ 2 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
           <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
             <div class="flex items-center gap-4 text-left">
               <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">02</span>
               <span class="tracking-tight uppercase">What gear do I need to bring?</span>
             </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
               <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
             </span>
           </summary>
@@ -514,13 +532,13 @@
         </details>
 
         <!-- FAQ 3 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
           <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
             <div class="flex items-center gap-4 text-left">
               <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">03</span>
               <span class="tracking-tight uppercase">Can I join as a solo traveler?</span>
             </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
               <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
             </span>
           </summary>
@@ -530,18 +548,18 @@
         </details>
 
         <!-- FAQ 4 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 transition-all duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
           <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
             <div class="flex items-center gap-4 text-left">
               <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">04</span>
               <span class="tracking-tight uppercase">What is the cancellation and refund policy?</span>
             </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-all duration-300 shadow-sm">
+            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
               <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
             </span>
           </summary>
           <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
-            Full deposit refund up to 14 days before your expedition start date. If weather forces a trail closure, we offer free rescheduling or 100% expedition credit with no expiration.
+            Full deposit refund up to 14 days before your trip start date. If weather forces a trail closure, we offer free rescheduling or 100% trip credit with no expiration.
           </div>
         </details>
       </div>
@@ -549,7 +567,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="px-6 py-16">
+  <section class="px-6 py-14 md:py-16">
     <div class="max-w-7xl mx-auto bg-brand rounded-block p-12 md:p-20 relative overflow-hidden text-center">
       <i class="fa-solid fa-mountain text-[15rem] absolute top-0 right-0 p-12 opacity-10 text-accent" aria-hidden="true"></i>
       <div class="relative z-10">
@@ -557,11 +575,13 @@
           Stop scrolling. <br>Start <span class="italic">climbing.</span>
         </h2>
         <p class="text-white/70 text-lg max-w-xl mx-auto mb-10 font-medium">
-          Join our next weekend expedition. Limited slots available for the Winter ’26 Sahyadri Ridge run.
+          Join our next weekend trip. Limited slots available for the Winter ’26 Sahyadri Ridge run.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="trips.html" class="bg-accent text-brand px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-all uppercase tracking-tighter">Enroll Now</a>
-          <a href="my-trip.html" class="border border-white/25 text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all uppercase tracking-tighter">Contact Basecamp</a>
+          <a href="trips.html" class="bg-accent text-brand px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 tx uppercase tracking-tighter">Book Now</a>
+          <a href="https://wa.link/77nyt0" target="_blank" rel="noopener noreferrer" class="border-2 border-white/30 text-white px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 hover:bg-white/15 hover:border-accent tx uppercase tracking-tighter inline-flex items-center justify-center gap-3">
+            <i class="fa-brands fa-whatsapp text-2xl text-accent"></i> Contact Us
+          </a>
         </div>
       </div>
     </div>
@@ -579,27 +599,33 @@
   var D = window.RoamlyData, R = window.Roamly;
 
   /* hero caption reflects the flagship trip */
-  var flagship = D.byId('sandakphu');
-  document.getElementById('heroTripName').textContent = flagship.name;
-  document.getElementById('heroTripGrade').textContent = flagship.grade;
+  var flagship = D.byId('harishchandragad') || (D.trips && D.trips[0]);
+  if (flagship) {
+    var nameEl = document.getElementById('heroTripName');
+    var gradeEl = document.getElementById('heroTripGrade');
+    var linkEl = document.getElementById('heroTripLink');
+    if (nameEl) nameEl.textContent = flagship.name;
+    if (gradeEl) gradeEl.textContent = flagship.grade;
+    if (linkEl) linkEl.href = 'trip.html?trip=' + flagship.id;
+  }
 
   /* featured bento — one large, one tall, three compact */
-  var big   = D.byId('sandakphu');
-  var tall  = D.byId('cloudforest');
-  var small = ['stargazer', 'workshop', 'coastal'].map(D.byId);
+  var big   = D.byId('harishchandragad');
+  var tall  = D.byId('kalsubai');
+  var small = ['devkund', 'rajgad', 'andharban'].map(D.byId);
 
   function bigCard(t) {
     var badge = t.badges && t.badges[0]
       ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
       : '';
-    return '<article class="md:col-span-8 group trip-card">' +
-      '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
-      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle">' +
+    return '<article class="md:col-span-8 group trip-card flex flex-col h-full">' +
+      '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="block flex flex-col h-full">' +
+      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle shrink-0">' +
         '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
         '<div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-[2.5rem] flex flex-wrap justify-between items-end gap-4">' +
           '<div>' +
-            '<div class="flex items-center gap-1.5 mb-2 text-xs font-black">' +
-              '<i class="fa-solid fa-star text-brand"></i> ' + t.rating.toFixed(1) +
+            '<div class="flex items-center gap-1.5 mb-2 text-xs font-black text-brand">' +
+              '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
             '</div>' +
             '<h3 class="font-display font-extrabold text-2xl md:text-3xl mb-1 uppercase tracking-tight group-hover:text-brand transition-colors">' + R.esc(t.name) + '</h3>' +
             '<p class="text-xs font-bold text-muted uppercase tracking-widest">' + R.pad(t.days) + ' Days • Grade: ' + R.esc(t.grade) + '</p>' +
@@ -609,7 +635,7 @@
               '<p class="text-[9px] font-black uppercase tracking-[0.2em] text-muted mb-0.5">Starting from</p>' +
               '<p class="text-3xl md:text-4xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
             '</div>' +
-            '<span class="bg-ink text-white px-7 py-3 rounded-2xl text-[11px] font-bold uppercase tracking-widest group-hover:bg-brand group-hover:text-accent transition-all shadow-sm">View Trail</span>' +
+            '<span class="rm-btn-trail">View Trip</span>' +
           '</div>' +
         '</div>' +
       '</div></a></article>';
@@ -619,9 +645,9 @@
     var badge = t.badges && t.badges[0]
       ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
       : '';
-    return '<article class="md:col-span-4 group trip-card">' +
-      '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
-      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle">' +
+    return '<article class="md:col-span-4 group trip-card flex flex-col h-full">' +
+      '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="block flex flex-col h-full">' +
+      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle shrink-0">' +
         '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
         '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"></div>' +
         '<div class="absolute bottom-8 left-8 right-8 text-white">' +
@@ -635,7 +661,7 @@
               '<p class="text-[9px] text-white/60 uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
               '<span class="text-2xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</span>' +
             '</div>' +
-            '<span class="bg-white text-ink px-6 py-2.5 rounded-2xl text-[11px] font-black uppercase tracking-widest group-hover:bg-accent group-hover:text-brand transition-all">View Trail</span>' +
+            '<span class="rm-btn-accent px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest">View Trip</span>' +
           '</div>' +
         '</div>' +
       '</div></a></article>';
@@ -645,29 +671,28 @@
     var badge = t.badges && t.badges[0]
       ? '<div class="absolute top-5 left-5"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg">' + R.esc(t.badges[0]) + '</span></div>'
       : '';
-    var isFree = t.price === 0;
-    var priceDisplay = isFree ? 'FREE' : R.inr(t.price);
+    var cleanTitle = t.name.length > 36 ? t.name.slice(0, 34) + '…' : t.name;
 
-    return '<article class="md:col-span-4 group trip-card">' +
-      '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
-      '<div class="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden mb-5 border border-border-subtle shadow-sm">' +
+    return '<article class="md:col-span-4 group trip-card flex flex-col h-full">' +
+      '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="flex flex-col h-full block">' +
+      '<div class="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-5 border border-border-subtle shadow-sm shrink-0">' +
         '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
       '</div>' +
-      '<div class="px-2">' +
+      '<div class="px-2 flex flex-col flex-1">' +
         '<div class="flex justify-between items-start gap-3 mb-1.5">' +
-          '<h3 class="font-display font-extrabold text-xl tracking-tight uppercase group-hover:text-brand transition-colors">' + R.esc(t.name) + '</h3>' +
-          '<div class="flex items-center gap-1 text-xs font-black shrink-0 pt-0.5">' +
-            '<i class="fa-solid fa-star text-brand"></i> ' + t.rating.toFixed(1) +
+          '<h3 class="font-display font-extrabold text-xl tracking-tight uppercase min-h-[3.2rem] line-clamp-2 group-hover:text-brand transition-colors">' + R.esc(cleanTitle) + '</h3>' +
+          '<div class="flex items-center gap-1 text-xs font-black shrink-0 pt-0.5 text-brand">' +
+            '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
           '</div>' +
         '</div>' +
         '<p class="text-muted text-[10px] font-bold uppercase tracking-widest mb-5">' +
           (t.days > 1 ? R.pad(t.days) + ' Days' : 'Day Trip') + ' • Grade: ' + R.esc(t.grade) + '</p>' +
-        '<div class="flex justify-between items-end border-t border-border-subtle pt-5">' +
+        '<div class="flex justify-between items-end border-t border-border-subtle pt-5 mt-auto">' +
           '<div>' +
-            '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-0.5">' + (isFree ? 'Admission' : 'Starting from') + '</p>' +
-            '<p class="text-2xl lg:text-3xl font-display font-black tracking-tighter text-ink">' + priceDisplay + '</p>' +
+            '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
+            '<p class="text-2xl lg:text-3xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
           '</div>' +
-          '<span class="bg-ink text-white px-6 py-2.5 rounded-2xl text-[11px] font-bold uppercase tracking-widest group-hover:bg-brand group-hover:text-accent transition-all shadow-sm">View Trail</span>' +
+          '<span class="rm-btn-trail">View Trip</span>' +
         '</div>' +
       '</div></a></article>';
   }
@@ -675,10 +700,93 @@
   document.getElementById('featured').innerHTML =
     bigCard(big) + tallCard(tall) + small.map(smallCard).join('');
 
-  /* search routes into the browse page */
-  document.getElementById('searchForm').addEventListener('submit', function (e) {
+  /* Interactive Search & Live Suggestions */
+  var searchInput = document.getElementById('basecamp');
+  var searchForm = document.getElementById('searchForm');
+  var suggestionsBox = document.getElementById('searchSuggestions');
+  var clearBtn = document.getElementById('clearHeroSearch');
+
+  function renderSuggestions(q) {
+    if (!q || !suggestionsBox) {
+      if (suggestionsBox) suggestionsBox.classList.add('hidden');
+      return;
+    }
+    var query = q.toLowerCase().trim();
+    var matches = D.trips.filter(function (t) {
+      return t.name.toLowerCase().indexOf(query) !== -1 ||
+             t.region.toLowerCase().indexOf(query) !== -1 ||
+             t.grade.toLowerCase().indexOf(query) !== -1 ||
+             (t.summary || '').toLowerCase().indexOf(query) !== -1 ||
+             (t.badges || []).some(function (b) { return b.toLowerCase().indexOf(query) !== -1; });
+    }).slice(0, 5);
+
+    if (matches.length === 0) {
+      suggestionsBox.innerHTML = '<div class="p-4 text-center text-xs font-bold uppercase tracking-wider text-muted">No trips matching "' + R.esc(q) + '"</div>';
+      suggestionsBox.classList.remove('hidden');
+      return;
+    }
+
+    var html = matches.map(function (t) {
+      return '<a href="trip.html?trip=' + t.id + '" class="flex items-center justify-between p-3 rounded-2xl hover:bg-surface transition-all group">' +
+        '<div class="flex items-center gap-3.5 min-w-0">' +
+          '<img src="' + t.hero + '" alt="' + R.esc(t.heroAlt || t.name) + '" class="w-12 h-12 rounded-xl object-cover shrink-0 border border-border-subtle">' +
+          '<div class="min-w-0">' +
+            '<p class="text-sm font-extrabold tracking-tight text-ink group-hover:text-brand transition-colors truncate">' + R.esc(t.name) + '</p>' +
+            '<p class="text-[10px] font-bold text-muted uppercase tracking-wider">' + R.pad(t.days) + ' Days • ' + R.esc(t.region) + ' • ' + R.esc(t.grade) + '</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="text-right shrink-0 pl-3">' +
+          '<p class="text-sm font-display font-black text-ink">' + R.inr(t.price) + '</p>' +
+          '<span class="text-[9px] font-black uppercase tracking-widest text-brand group-hover:underline">View Trip →</span>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+
+    html += '<div class="border-t border-border-subtle pt-2 mt-1 px-3 pb-1 text-center">' +
+      '<button type="submit" form="searchForm" class="text-xs font-black uppercase tracking-widest text-brand hover:underline">' +
+        'See all results for "' + R.esc(q) + '" (' + matches.length + ' shown) →' +
+      '</button>' +
+    '</div>';
+
+    suggestionsBox.innerHTML = html;
+    suggestionsBox.classList.remove('hidden');
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function (e) {
+      var val = e.target.value;
+      if (clearBtn) clearBtn.classList.toggle('hidden', !val);
+      renderSuggestions(val);
+    });
+
+    searchInput.addEventListener('focus', function () {
+      if (searchInput.value.trim()) renderSuggestions(searchInput.value);
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        searchInput.value = '';
+        clearBtn.classList.add('hidden');
+        if (suggestionsBox) suggestionsBox.classList.add('hidden');
+        searchInput.focus();
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#searchForm') && !e.target.closest('#searchSuggestions')) {
+        if (suggestionsBox) suggestionsBox.classList.add('hidden');
+      }
+    });
+  }
+
+  searchForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    window.location.href = 'trips.html';
+    var val = (searchInput ? searchInput.value : '').trim();
+    if (val) {
+      window.location.href = 'trips.html?q=' + encodeURIComponent(val);
+    } else {
+      window.location.href = 'trips.html';
+    }
   });
 
   /* Testimonial slider controller */
@@ -696,7 +804,7 @@
       var dot = document.createElement('button');
       dot.type = 'button';
       dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
-      dot.className = 'h-2.5 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-brand w-8' : 'bg-black/15 hover:bg-black/30 w-2.5');
+      dot.className = 'h-2.5 rounded-full tx duration-300 ' + (i === 0 ? 'bg-brand w-8' : 'bg-black/15 hover:bg-black/30 w-2.5');
       (function (idx) {
         dot.addEventListener('click', function () {
           var targetCard = cards[idx];
@@ -735,9 +843,9 @@
       var dots = dotsContainer.querySelectorAll('button');
       Array.prototype.forEach.call(dots, function (d, idx) {
         if (idx === activeIndex) {
-          d.className = 'h-2.5 w-8 rounded-full bg-brand transition-all duration-300';
+          d.className = 'h-2.5 w-8 rounded-full bg-brand tx duration-300';
         } else {
-          d.className = 'h-2.5 w-2.5 rounded-full bg-black/15 hover:bg-black/30 transition-all duration-300';
+          d.className = 'h-2.5 w-2.5 rounded-full bg-black/15 hover:bg-black/30 tx duration-300';
         }
       });
       ticking = false;
@@ -764,6 +872,7 @@
     window.addEventListener('resize', onScrollTick);
     updateSliderRealtime();
   }
+
 })();
 </script>
 </body>

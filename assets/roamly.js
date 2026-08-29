@@ -28,6 +28,7 @@
 
   /* ---------- state ---------- */
   var state = null;
+  var hashPlacer = null;   // set in mount(); backs Roamly.scrollToHash
 
   function readQuery() {
     try {
@@ -128,7 +129,7 @@
   /* ---------- nav ---------- */
   var NAV_LINKS = [
     { id: 'home',     label: 'Home',           href: 'index.html' },
-    { id: 'upcoming', label: 'Upcoming Trips', href: 'trips.html' },
+    { id: 'upcoming', label: 'Upcoming Trips', href: 'index.html#upcoming' },
     { id: 'about',    label: 'About Us',       href: 'index.html#about' },
     { id: 'faqs',     label: 'FAQs',           href: 'index.html#faqs' }
   ];
@@ -207,7 +208,7 @@
         logoMark(false) +
         '<div class="flex items-center gap-6">' +
           '<a href="trips.html" class="text-[10px] font-black uppercase tracking-widest ' +
-            'text-muted hover:text-brand transition-colors">Browse Trails</a>' +
+            'text-muted hover:text-brand transition-colors">Browse Trips</a>' +
           '<a href="index.html" class="bg-brand text-accent w-10 h-10 rounded-full flex ' +
             'items-center justify-center shadow-brand" aria-label="Account">' +
             '<i class="fa-solid fa-user text-xs"></i></a>' +
@@ -227,13 +228,15 @@
             'stay with you.</p>' +
           '<div class="flex gap-4">' +
             ['instagram', 'whatsapp', 'tiktok'].map(function (b) {
-              return '<a href="#" aria-label="' + b + '" class="w-12 h-12 rounded-2xl bg-surface ' +
+              var href = b === 'whatsapp' ? 'https://wa.link/77nyt0' : '#';
+              var target = b === 'whatsapp' ? ' target="_blank" rel="noopener noreferrer"' : '';
+              return '<a href="' + href + '"' + target + ' aria-label="' + b + '" class="w-12 h-12 rounded-2xl bg-surface ' +
                 'border border-border-subtle flex items-center justify-center hover:bg-brand ' +
-                'hover:text-accent transition-all"><i class="fa-brands fa-' + b + ' text-xl"></i></a>';
+                'hover:text-accent tx"><i class="fa-brands fa-' + b + ' text-xl"></i></a>';
             }).join('') +
           '</div>' +
         '</div>' +
-        '<div><h4 class="font-display font-black text-sm uppercase tracking-widest mb-8">Expeditions</h4>' +
+        '<div><h4 class="font-display font-black text-sm uppercase tracking-widest mb-8">Trips</h4>' +
           '<ul class="space-y-4 text-[11px] font-black text-muted uppercase tracking-wider">' +
             '<li><a href="trips.html#weekend" class="hover:text-brand transition-colors">Weekend Peaks</a></li>' +
             '<li><a href="trips.html#alpine" class="hover:text-brand transition-colors">Alpine Tours</a></li>' +
@@ -242,7 +245,7 @@
           '</ul></div>' +
         '<div><h4 class="font-display font-black text-sm uppercase tracking-widest mb-8">Support</h4>' +
           '<ul class="space-y-4 text-[11px] font-black text-muted uppercase tracking-wider">' +
-            '<li><a href="my-trip.html" class="hover:text-brand transition-colors">Basecamp Help</a></li>' +
+            '<li><a href="https://wa.link/77nyt0" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition-colors">Basecamp Help / WhatsApp</a></li>' +
             '<li><a href="#" class="hover:text-brand transition-colors">Safety Protocols</a></li>' +
             '<li><a href="#" class="hover:text-brand transition-colors">Eco-Policy</a></li>' +
             '<li><a href="#" class="hover:text-brand transition-colors">Careers</a></li>' +
@@ -268,45 +271,37 @@
   }
 
   /* ---------- trip card ---------- */
-  function stars(n) {
-    var out = '';
-    for (var i = 0; i < 5; i++) {
-      out += '<i class="fa-solid fa-star text-brand text-[10px]' +
-             (i < Math.round(n) ? '' : ' opacity-25') + '"></i>';
-    }
-    return out;
-  }
-
   function tripCard(t) {
     var badge = t.badges && t.badges[0]
       ? '<div class="absolute top-6 left-6"><span class="bg-brand text-accent px-4 py-1.5 ' +
         'rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' +
         esc(t.badges[0]) + '</span></div>' : '';
 
-    return '<article class="group trip-card">' +
-      '<a href="trip.html" data-trip="' + t.id + '" class="block">' +
-        '<div class="relative aspect-[4/5] rounded-card overflow-hidden mb-6 border ' +
-          'border-border-subtle shadow-sm">' +
+    var cleanTitle = t.name.length > 38 ? t.name.slice(0, 36) + '…' : t.name;
+
+    return '<article class="group trip-card flex flex-col h-full">' +
+      '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="flex flex-col h-full block">' +
+        '<div class="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 border ' +
+          'border-border-subtle shadow-sm shrink-0">' +
           '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero +
             '" alt="' + esc(t.heroAlt) + '">' + badge +
         '</div>' +
-        '<div class="px-2">' +
+        '<div class="px-2 flex flex-col flex-1">' +
           '<div class="flex justify-between items-start gap-4 mb-2">' +
-            '<h3 class="font-display font-extrabold text-2xl tracking-tight leading-tight ' +
-              'group-hover:text-brand transition-colors">' + esc(t.name) + '</h3>' +
-            '<div class="flex items-center gap-1.5 text-xs font-black shrink-0 pt-1">' +
-              '<i class="fa-solid fa-star text-brand"></i> ' + t.rating.toFixed(1) +
+            '<h3 class="font-display font-extrabold text-2xl tracking-tight leading-tight min-h-[3.75rem] line-clamp-2 ' +
+              'group-hover:text-brand transition-colors">' + esc(cleanTitle) + '</h3>' +
+            '<div class="flex items-center gap-1.5 text-xs font-black shrink-0 pt-1 text-brand">' +
+              '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
             '</div>' +
           '</div>' +
           '<p class="text-muted text-[11px] font-bold uppercase tracking-widest mb-6">' +
             pad(t.days) + ' Days • Grade: ' + esc(t.grade) + '</p>' +
-          '<div class="flex justify-between items-end border-t border-border-subtle pt-6">' +
+          '<div class="flex justify-between items-end border-t border-border-subtle pt-6 mt-auto">' +
             '<div>' +
               '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-1">Starting from</p>' +
-              '<p class="text-3xl font-display font-black tracking-tighter">' + inr(t.price) + '</p>' +
+              '<p class="text-3xl font-display font-black tracking-tighter text-ink">' + inr(t.price) + '</p>' +
             '</div>' +
-            '<span class="bg-ink text-white px-8 py-3 rounded-2xl text-[11px] font-bold uppercase ' +
-              'tracking-widest group-hover:bg-brand group-hover:text-accent transition-all">View Trail</span>' +
+            '<span class="rm-btn-trail">View Trip</span>' +
           '</div>' +
         '</div>' +
       '</a></article>';
@@ -378,6 +373,77 @@
     el._t = setTimeout(function () { el.classList.remove('show'); }, 2600);
   }
 
+  /* ---------- scroll reveal ----------
+     Trip grids are injected all at once, which reads as a single flash.
+     Reveal them in document order with a short stagger so the eye gets a
+     path to follow. Cards are added by page scripts after load, so a
+     MutationObserver picks them up rather than every page opting in. */
+  function mountReveal() {
+    if (!('IntersectionObserver' in w) || !('MutationObserver' in w)) return;
+    if (w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        io.unobserve(el);
+        // stagger by position within the parent grid, capped so a long
+        // list never leaves the last card waiting
+        var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) {
+          return c.classList.contains('rv');
+        });
+        var i = Math.min(sibs.indexOf(el), 7);
+        el.style.transitionDelay = (i * 60) + 'ms';
+        el.classList.add('rv-in');
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    function claim(el) {
+      if (el.classList.contains('rv') || el.classList.contains('rv-in')) return;
+      el.classList.add('rv');
+      io.observe(el);
+    }
+    function scan(root) {
+      if (!root.querySelectorAll) return;
+      Array.prototype.forEach.call(root.querySelectorAll('.trip-card, [data-reveal]'), claim);
+    }
+
+    scan(d);
+    new MutationObserver(function (muts) {
+      muts.forEach(function (m) {
+        Array.prototype.forEach.call(m.addedNodes, function (nd) {
+          if (nd.nodeType !== 1) return;
+          if (nd.classList && (nd.classList.contains('trip-card') || nd.hasAttribute('data-reveal'))) claim(nd);
+          scan(nd);
+        });
+      });
+    }).observe(d.body, { childList: true, subtree: true });
+
+    // No blanket timer here on purpose. `.rv` (opacity 0) is only ever
+    // applied by this function, so if the script fails to run the content
+    // is visible by default — and a timed fallback would prematurely
+    // reveal everything below the fold for anyone who scrolls late.
+  }
+
+  /* ---------- floating chrome ----------
+     Translucent nav thickens once content is passing under it. */
+  function mountNavMaterial() {
+    var nav = d.querySelector('nav[data-nav]');
+    if (!nav) return;
+    var on = false, tick = false;
+    function check() {
+      tick = false;
+      var should = w.scrollY > 8;
+      if (should !== on) { on = should; nav.classList.toggle('is-scrolled', on); }
+    }
+    w.addEventListener('scroll', function () {
+      if (tick) return;
+      tick = true;
+      w.requestAnimationFrame(check);
+    }, { passive: true });
+    check();
+  }
+
   /* ---------- cursor ---------- */
   function mountCursor() {
     if (!w.matchMedia || !w.matchMedia('(min-width: 1024px)').matches) return;
@@ -412,11 +478,76 @@
       f.innerHTML = f.getAttribute('data-footer') === 'slim' ? footerSlim() : footerFull();
     }
 
+    function getElementTop(el) {
+      var top = 0;
+      while (el) {
+        top += el.offsetTop || 0;
+        el = el.offsetParent;
+      }
+      return top;
+    }
+
+    function smoothScrollToTarget(targetEl, instant) {
+      if (!targetEl) return;
+      var targetTop = 0;
+      if (targetEl.id !== 'hero' && targetEl.id !== 'top' && targetEl.id !== 'main' && targetEl.tagName !== 'BODY') {
+        var nav = d.querySelector('nav[data-nav]');
+        var navHeight = nav ? nav.offsetHeight : 80;
+        targetTop = Math.max(0, getElementTop(targetEl) - navHeight - 12);
+      }
+      w.scrollTo({
+        top: targetTop,
+        behavior: instant ? 'auto' : 'smooth'
+      });
+    }
+
     // Internal links rebuild their target at click time, so they always
     // carry the booking as it stands right now rather than as it was on load.
     d.addEventListener('click', function (e) {
       var el = e.target;
       if (!el || !el.closest) return;
+
+      var link = el.closest('a');
+      if (link) {
+        var href = link.getAttribute('href') || '';
+        var currentPath = (w.location.pathname || '').split('/').pop() || 'index.html';
+        var isHome = currentPath === '' || currentPath === 'index.html' || currentPath === '/';
+
+        var isHomeTarget = href === 'index.html' || href === 'index.html#hero' || href === '#hero' || href === '#top' || href === '#' || href === './' || href === '/' || link.getAttribute('data-nav-id') === 'home';
+
+        // When on Home page and clicking Home link or Logo: smooth scroll to top
+        if (isHome && isHomeTarget) {
+          e.preventDefault();
+          if (w.history && w.history.replaceState) {
+            w.history.replaceState(null, '', 'index.html');
+          }
+          w.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          updateNavActiveState();
+          return;
+        }
+
+        var hashIndex = href.indexOf('#');
+        if (hashIndex !== -1) {
+          var targetHash = href.slice(hashIndex);
+          var targetPath = href.slice(0, hashIndex) || 'index.html';
+
+          if (isHome && (targetPath === 'index.html' || targetPath === '' || targetPath === './')) {
+            var targetEl = d.querySelector(targetHash);
+            if (targetEl) {
+              e.preventDefault();
+              if (w.history && w.history.pushState) {
+                w.history.pushState(null, '', targetHash);
+              }
+              updateNavActiveState();
+              smoothScrollToTarget(targetEl, false);
+              return;
+            }
+          }
+        }
+      }
 
       var trip = el.closest('[data-trip]');
       if (trip) {
@@ -444,11 +575,12 @@
     });
 
     // Real-time active button tracker & scroll spy
+    var lastActiveId = null;
     function updateNavActiveState() {
       var marketingNav = d.querySelector('[data-nav="marketing"]');
       if (!marketingNav) return;
       var currentPath = (w.location.pathname || '').split('/').pop() || 'index.html';
-      var currentHash = w.location.hash || '';
+      var currentHash = (w.location.hash || '').replace('#', '');
 
       var activeId = 'home';
       if (currentPath.indexOf('trips.html') !== -1 || currentPath.indexOf('trip.html') !== -1) {
@@ -456,18 +588,34 @@
       } else if (currentPath.indexOf('my-trip.html') !== -1) {
         activeId = 'account';
       } else {
+        var scrollY = w.scrollY || d.documentElement.scrollTop || 0;
         var faqsSec = d.getElementById('faqs');
         var aboutSec = d.getElementById('about');
-        var scrollPos = w.scrollY + 200;
+        var upcomingSec = d.getElementById('upcoming');
+        var scrollPos = scrollY + 220;
 
-        if (faqsSec && scrollPos >= faqsSec.offsetTop) {
+        if (scrollY < 180) {
+          activeId = 'home';
+          if (w.history && w.history.replaceState && currentHash) {
+            w.history.replaceState(null, '', currentPath || 'index.html');
+          }
+        } else if (faqsSec && scrollPos >= getElementTop(faqsSec)) {
           activeId = 'faqs';
-        } else if (aboutSec && scrollPos >= aboutSec.offsetTop) {
+        } else if (aboutSec && scrollPos >= getElementTop(aboutSec)) {
           activeId = 'about';
+        } else if (upcomingSec && scrollPos >= getElementTop(upcomingSec)) {
+          activeId = 'upcoming';
         } else {
           activeId = 'home';
         }
       }
+
+      // Bail before touching the DOM if nothing changed. This runs on every
+      // scroll frame; rewriting className each time invalidates layout right
+      // after getElementTop has just forced it, which is what made the
+      // scroll feel like it was stalling.
+      if (activeId === lastActiveId) return;
+      lastActiveId = activeId;
 
       var navPillButtons = marketingNav.querySelectorAll('.nav-pill-btn');
       Array.prototype.forEach.call(navPillButtons, function (btn) {
@@ -482,11 +630,120 @@
       });
     }
 
-    w.addEventListener('scroll', updateNavActiveState, { passive: true });
-    w.addEventListener('hashchange', updateNavActiveState);
+    /* Landing on a hash from another page (trips.html → index.html#about).
+
+       Three things used to fight each other here and produced the visible
+       jitter: html{scroll-behavior:smooth} made the browser animate its own
+       hash jump all the way down from the top, this function then fired
+       three more scrolls at 0/200/500ms, and each one recomputed a target
+       that had moved as late assets settled.
+
+       Now: smooth is suppressed while the page places itself, the position
+       is set instantly (so corrections are silent rather than animated),
+       and smooth is handed back once things are stable. */
+    var hashSettleTimer = null;
+
+    function suppressSmooth() {
+      d.documentElement.style.scrollBehavior = 'auto';
+    }
+    function restoreSmooth() {
+      d.documentElement.style.scrollBehavior = '';
+    }
+
+    function placeOnHash() {
+      var targetEl;
+      try { targetEl = w.location.hash ? d.querySelector(w.location.hash) : null; }
+      catch (e) { return; }          // hashes like "#pay/x" are not valid selectors
+      if (!targetEl) { restoreSmooth(); return; }
+
+      suppressSmooth();
+      smoothScrollToTarget(targetEl, true);
+
+      // Re-place silently for one short window in case a late image or
+      // font shifts the layout, then give smooth scrolling back.
+      clearTimeout(hashSettleTimer);
+      w.requestAnimationFrame(function () { smoothScrollToTarget(targetEl, true); });
+      hashSettleTimer = setTimeout(function () {
+        smoothScrollToTarget(targetEl, true);
+        restoreSmooth();
+        updateNavActiveState();
+      }, 180);
+    }
+
+    hashPlacer = placeOnHash;
+
+    // Kill the browser's animated hash jump before it can start.
+    if (w.location.hash) suppressSmooth();
+
+    // One layout read per frame at most, instead of one per scroll event.
+    var spyTick = false;
+    w.addEventListener('scroll', function () {
+      if (spyTick) return;
+      spyTick = true;
+      w.requestAnimationFrame(function () {
+        spyTick = false;
+        updateNavActiveState();
+      });
+    }, { passive: true });
+
+    w.addEventListener('hashchange', function () {
+      var targetEl;
+      try { targetEl = d.querySelector(w.location.hash); } catch (e) { return; }
+      if (targetEl) smoothScrollToTarget(targetEl, false);   // one smooth scroll
+      updateNavActiveState();
+    });
+
     updateNavActiveState();
 
+    if (d.readyState === 'complete') placeOnHash();
+    else w.addEventListener('load', placeOnHash);
+
     mountCursor();
+    mountNavMaterial();
+    mountReveal();
+    mountHomeSmoothTransitions();
+  }
+
+  /* ---------- smooth return to home ---------- */
+  function mountHomeSmoothTransitions() {
+    if (w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var currentPath = (w.location.pathname || '').split('/').pop() || 'index.html';
+    var isHome = currentPath === 'index.html' || currentPath === '';
+
+    // Smooth reveal when landing on home page
+    if (isHome) {
+      d.body.classList.add('home-entering');
+      setTimeout(function () {
+        d.body.classList.remove('home-entering');
+      }, 400);
+    }
+
+    // Smooth exit when leaving any subpage to return to Home
+    d.addEventListener('click', function (e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      var href = link.getAttribute('href');
+      if (!href) return;
+
+      var isGoingHome = href === 'index.html' || href.startsWith('index.html#') || href === '/' || href.startsWith('/#');
+
+      // If we are currently on a subpage and navigating to Home:
+      if (!isHome && isGoingHome) {
+        e.preventDefault();
+        d.body.classList.add('page-smooth-exit');
+        setTimeout(function () {
+          w.location.href = href;
+        }, 140);
+      }
+    });
+
+    w.addEventListener('pageshow', function () {
+      d.body.classList.remove('page-smooth-exit');
+      d.body.classList.remove('home-entering');
+    });
   }
 
   w.Roamly = {
@@ -502,10 +759,13 @@
     inr: inr,
     pad: pad,
     esc: esc,
-    stars: stars,
     tripCard: tripCard,
     summaryBody: summaryBody,
-    toast: toast
+    toast: toast,
+    // Delegates to the one real implementation. This used to be a second,
+    // stale copy of the scroll maths that still measured <header> (the
+    // 792px hero) instead of the nav, so callers landed ~800px short.
+    scrollToHash: function () { if (hashPlacer) hashPlacer(); }
   };
 
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', mount);

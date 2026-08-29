@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roamly — Explore Expeditions</title>
-<meta name="description" content="From technical ridges to serene valley walks, find the expedition that speaks to your spirit.">
+<title>Roamly — Explore Trips</title>
+<meta name="description" content="From technical ridges to serene valley walks, find the trip that speaks to your spirit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -28,13 +28,13 @@
       Choose your <span class="text-brand italic">horizon.</span>
     </h1>
     <p class="text-lg text-muted max-w-2xl leading-relaxed font-medium">
-      From technical ridges to serene valley walks, find the expedition that speaks to your spirit.
+      From technical ridges to serene valley walks, find the trip that speaks to your spirit.
     </p>
   </div>
 </header>
 
 <!-- Search & Sort Controls -->
-<section class="relative px-6 mb-12" aria-label="Search and sort expeditions">
+<section class="relative z-50 px-6 mb-12" aria-label="Search and sort trips">
   <div class="max-w-7xl mx-auto glass border border-border-subtle px-5 sm:px-6 py-2.5 rounded-full shadow-xl flex items-center justify-between gap-4 relative">
     
     <!-- Search Input -->
@@ -43,7 +43,7 @@
       <input type="text" 
              id="tripSearchInput" 
              autocomplete="off"
-             placeholder="SEARCH BY TRAIL NAME, REGION, GRADE, OR DURATION..." 
+             placeholder="SEARCH BY TRIP NAME, REGION, GRADE, OR DURATION..." 
              class="w-full bg-transparent border-0 outline-none text-xs sm:text-[13px] font-bold uppercase tracking-wider text-ink placeholder:text-muted/60 focus:outline-none p-0 m-0 leading-normal flex-1">
       <button type="button" 
               id="clearSearchBtn" 
@@ -61,7 +61,7 @@
               id="sortToggleBtn" 
               aria-haspopup="listbox" 
               aria-expanded="false"
-              class="flex items-center gap-2 bg-surface hover:bg-white border border-border-subtle hover:border-brand/40 px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-ink transition-all shadow-sm active:scale-95 cursor-pointer">
+              class="flex items-center gap-2 bg-surface hover:bg-white border border-border-subtle hover:border-brand/40 px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-ink tx shadow-sm active:scale-95 cursor-pointer">
         <span class="text-[10px] font-black uppercase tracking-widest text-muted hidden sm:inline-block">Sort:</span>
         <span id="selectedSortLabel" class="text-ink font-extrabold tracking-wider">Recommended</span>
         <i class="fa-solid fa-chevron-down text-[10px] text-muted transition-transform duration-300 ml-1" id="sortChevron" aria-hidden="true"></i>
@@ -70,24 +70,24 @@
       <!-- Menu Options Panel -->
       <div id="sortMenu" 
            role="listbox"
-           class="hidden absolute right-0 top-full mt-2 w-56 bg-white/95 backdrop-blur-xl border border-border-subtle rounded-2xl p-2 shadow-2xl z-50 transition-all space-y-1">
+           class="hidden absolute right-0 top-full mt-2.5 w-60 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-2xl p-2 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.25)] z-[100] tx space-y-1">
         <button type="button" role="option" data-value="rec" aria-selected="true"
-                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left transition-all bg-brand text-accent shadow-sm cursor-pointer">
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left tx bg-brand text-accent shadow-sm cursor-pointer">
           <span>Recommended</span>
           <i class="fa-solid fa-check text-accent text-xs"></i>
         </button>
         <button type="button" role="option" data-value="asc" aria-selected="false"
-                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer">
-          <span>Price: Low–High</span>
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface tx cursor-pointer">
+          <span>Price: Low to High</span>
           <i class="fa-solid fa-check text-accent text-xs opacity-0"></i>
         </button>
         <button type="button" role="option" data-value="desc" aria-selected="false"
-                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer">
-          <span>Price: High–Low</span>
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface tx cursor-pointer">
+          <span>Price: High to Low</span>
           <i class="fa-solid fa-check text-accent text-xs opacity-0"></i>
         </button>
         <button type="button" role="option" data-value="hard" aria-selected="false"
-                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer">
+                class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface tx cursor-pointer">
           <span>Most Extreme</span>
           <i class="fa-solid fa-check text-accent text-xs opacity-0"></i>
         </button>
@@ -101,7 +101,7 @@
     <p class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-8" id="count" role="status"></p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="grid"></div>
     <p class="hidden text-center py-24 text-muted font-medium" id="empty">
-      No expeditions match your search. Try different keywords.
+      No trips match your search. Try different keywords.
     </p>
   </div>
 </main>
@@ -120,7 +120,13 @@
   var searchInput = document.getElementById('tripSearchInput');
   var clearBtn = document.getElementById('clearSearchBtn');
   var sort = 'rec';
-  var query = '';
+  var urlParams = new URLSearchParams(window.location.search);
+  var query = urlParams.get('q') || urlParams.get('search') || '';
+
+  if (query && searchInput) {
+    searchInput.value = query;
+    if (clearBtn) clearBtn.classList.remove('hidden');
+  }
 
   var GRADE_RANK = { 'Entry': 0, 'Moderate': 1, 'Alpine Grade': 2, 'Hard Core': 3, 'Extreme': 4 };
 
@@ -143,7 +149,7 @@
     else                      list.sort(function (a, b) { return b.rating - a.rating; });
 
     grid.innerHTML = list.map(R.tripCard).join('');
-    count.textContent = q ? 'Found ' + list.length + ' matching expedition' + (list.length === 1 ? '' : 's') : 'Showing all ' + list.length + ' expeditions';
+    count.textContent = q ? 'Found ' + list.length + ' matching trip' + (list.length === 1 ? '' : 's') : 'Showing all ' + list.length + ' trips';
     empty.classList.toggle('hidden', list.length > 0);
   }
 
@@ -204,10 +210,10 @@
           o.setAttribute('aria-selected', isSelected ? 'true' : 'false');
           var check = o.querySelector('.fa-check');
           if (isSelected) {
-            o.className = 'sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider text-left transition-all bg-brand text-accent shadow-sm cursor-pointer';
+            o.className = 'sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider text-left tx bg-brand text-accent shadow-sm cursor-pointer';
             if (check) check.classList.remove('opacity-0');
           } else {
-            o.className = 'sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface transition-all cursor-pointer';
+            o.className = 'sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider text-left text-muted hover:text-ink hover:bg-surface tx cursor-pointer';
             if (check) check.classList.add('opacity-0');
           }
         });

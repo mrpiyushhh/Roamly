@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roamly — My Expedition</title>
+<title>Roamly — My Trip</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -26,10 +26,10 @@
     No runs <span class="text-brand italic">logged.</span>
   </h1>
   <p class="text-muted font-medium text-lg mb-10">
-    Once you secure a slot, your expedition log lives here — extraction point, gear list, guide contact and balance.
+    Once you secure a slot, your trip log lives here — extraction point, gear list, guide contact and balance.
   </p>
-  <a href="trips.html" class="inline-block bg-brand text-accent px-12 py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 transition-all shadow-brand">
-    Browse Expeditions
+  <a href="trips.html" class="inline-block bg-brand text-accent px-12 py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 tx shadow-brand">
+    Browse Trips
   </a>
 </main>
 
@@ -78,10 +78,10 @@
       <section>
         <div class="flex items-center gap-4 mb-10">
           <span class="w-10 h-10 rounded-xl bg-brand text-accent flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-file-shield"></i></span>
-          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">Expedition Intel</h2>
+          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">Trip Intel</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent transition-all">
+          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent tx">
             <span class="flex items-center gap-6">
               <i class="fa-solid fa-file-pdf text-3xl" aria-hidden="true"></i>
               <span class="text-left">
@@ -91,7 +91,7 @@
             </span>
             <i class="fa-solid fa-download" aria-hidden="true"></i>
           </button>
-          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent transition-all">
+          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent tx">
             <span class="flex items-center gap-6">
               <i class="fa-solid fa-file-pdf text-3xl" aria-hidden="true"></i>
               <span class="text-left">
@@ -111,7 +111,7 @@
       <div class="bg-brand text-accent rounded-panel p-10">
         <h2 class="font-display text-2xl font-extrabold tracking-tight mb-4 uppercase">Basecamp Help</h2>
         <p class="text-white/70 font-medium mb-10">Stuck at basecamp? Need to reschedule your run?</p>
-        <button type="button" id="chat" class="w-full bg-accent text-brand py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-lg shadow-black/10">
+        <button type="button" id="chat" class="w-full bg-accent text-brand py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] hover:scale-105 tx shadow-lg shadow-black/10">
           Chat with Command
         </button>
       </div>
@@ -161,7 +161,7 @@
         '<i class="fa-solid fa-circle-check"></i> Paid in full</p>';
     } else {
       el.innerHTML = '<button type="button" id="payBal" class="bg-brand text-accent px-10 py-5 ' +
-        'rounded-[2rem] font-black text-lg uppercase tracking-tighter hover:scale-105 transition-all ' +
+        'rounded-[2rem] font-black text-lg uppercase tracking-tighter hover:scale-105 tx ' +
         'shadow-brand">Pay Balance (' + R.inr(bal) + ')</button>';
       document.getElementById('payBal').addEventListener('click', function () {
         R.state.set({ settled: true });
@@ -178,7 +178,7 @@
     var stages = [
       { cap: 'Booking',        icon: 'fa-check',           state: 'done' },
       { cap: 'Payment',        icon: 'fa-check',           state: s.settled ? 'done' : 'now' },
-      { cap: 'Pre-Expedition', icon: 'fa-mountain',        state: s.settled ? 'now' : 'todo' },
+      { cap: 'Pre-Trip', icon: 'fa-mountain',        state: s.settled ? 'now' : 'todo' },
       { cap: 'Departure',      icon: 'fa-flag-checkered',  state: 'todo' },
       { cap: 'Peak Attained',  icon: 'fa-trophy',          state: 'todo' }
     ];
@@ -198,7 +198,7 @@
   document.getElementById('extraction').innerHTML =
     '<div><p class="font-display text-3xl font-extrabold tracking-tight mb-2">' + R.esc(p.place) + '</p>' +
       '<p class="text-white/70 font-medium mb-6">' + R.esc(p.note) + '</p>' +
-      '<button type="button" id="gps" class="bg-accent text-brand px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">Get GPS Pin</button></div>' +
+      '<button type="button" id="gps" class="bg-accent text-brand px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:scale-105 tx">Get GPS Pin</button></div>' +
     '<div class="flex gap-10 text-center md:border-l border-white/15 md:pl-10">' +
       '<div><span class="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 block mb-2">Report</span>' +
         '<p class="font-display text-4xl font-black tracking-tighter text-accent">' + R.esc(p.time) + '</p></div>' +
@@ -224,8 +224,8 @@
     '<h2 class="font-display text-2xl font-extrabold tracking-tight mb-2">' + R.esc(t.guide.name) + '</h2>' +
     '<p class="text-xs text-muted font-bold uppercase tracking-widest mb-10">' + R.esc(t.guide.quote) + '</p>' +
     '<div class="grid grid-cols-2 gap-4">' +
-      '<a href="tel:+910000000000" class="bg-white border border-border-subtle py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand hover:text-accent transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-phone"></i> Call</a>' +
-      '<a href="#" class="bg-white border border-border-subtle py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand hover:text-accent transition-all flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Chat</a>' +
+      '<a href="tel:+910000000000" class="bg-white border border-border-subtle py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand hover:text-accent tx flex items-center justify-center gap-2"><i class="fa-solid fa-phone"></i> Call</a>' +
+      '<a href="https://wa.link/77nyt0" target="_blank" rel="noopener noreferrer" class="bg-white border border-border-subtle py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand hover:text-accent tx flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Chat</a>' +
     '</div>';
 
   document.getElementById('gps').addEventListener('click', function () { R.toast('GPS pin sent to your phone'); });

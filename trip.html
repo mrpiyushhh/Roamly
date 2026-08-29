@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roamly — Expedition Detail</title>
+<title>Roamly — Trip Detail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 <nav data-nav="marketing" data-active="upcoming" aria-label="Main"></nav>
 
 <!-- Gallery -->
-<section class="pt-28 px-6" aria-label="Expedition gallery">
+<section class="pt-28 px-6" aria-label="Trip gallery">
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-[420px] md:h-[650px]" id="gallery"></div>
   </div>
@@ -32,7 +32,7 @@
       <ol class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted">
         <li><a href="index.html" class="hover:text-brand">Base</a></li>
         <li aria-hidden="true">/</li>
-        <li><a href="trips.html" class="hover:text-brand">Expeditions</a></li>
+        <li><a href="trips.html" class="hover:text-brand">Trips</a></li>
         <li aria-hidden="true">/</li>
         <li class="text-brand" id="crumb"></li>
       </ol>
@@ -45,7 +45,7 @@
     <div class="grid grid-cols-2 md:grid-cols-3 gap-8 py-10 border-y border-border-subtle" id="stats"></div>
 
     <section class="mt-16 mb-20">
-      <h2 class="font-display text-3xl font-extrabold tracking-tighter mb-6 uppercase">Expedition Brief</h2>
+      <h2 class="font-display text-3xl font-extrabold tracking-tighter mb-6 uppercase">Trip Brief</h2>
       <div class="text-muted font-medium leading-relaxed space-y-6 text-lg max-w-3xl" id="blurb"></div>
     </section>
 
@@ -58,7 +58,7 @@
   </div>
 
   <!-- Booking widget -->
-  <aside class="lg:col-span-4" aria-label="Book this expedition">
+  <aside class="lg:col-span-4" aria-label="Book this trip">
     <form class="sticky top-32 bg-white border border-border-subtle rounded-panel p-10 shadow-soft" id="bookForm">
       <div class="flex justify-between items-start gap-4 mb-8">
         <div>
@@ -84,12 +84,12 @@
           <p class="text-[9px] font-black uppercase tracking-widest text-muted mb-3">Roster Size</p>
           <div class="flex items-center justify-between gap-4">
             <button type="button" id="minus" aria-label="Remove a traveller"
-              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-inherit">
+              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent tx disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-inherit">
               <i class="fa-solid fa-minus"></i>
             </button>
             <span class="font-display text-3xl font-black tracking-tighter tabular-nums" id="paxOut" aria-live="polite">1</span>
             <button type="button" id="plus" aria-label="Add a traveller"
-              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent transition-all disabled:opacity-30">
+              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent tx disabled:opacity-30">
               <i class="fa-solid fa-plus"></i>
             </button>
           </div>
@@ -102,11 +102,8 @@
       </div>
 
       <div class="space-y-4">
-        <button type="submit" class="w-full bg-brand text-accent py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-[1.02] transition-all shadow-brand">
+        <button type="submit" class="rm-btn rm-btn-primary w-full py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter shadow-brand">
           Secure My Slot
-        </button>
-        <button type="button" id="download" class="w-full border border-border-subtle py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-surface transition-all">
-          <i class="fa-solid fa-file-pdf"></i> Download Itinerary
         </button>
       </div>
 
@@ -150,12 +147,9 @@
         '<img class="w-full h-full object-cover" loading="lazy" src="' + g.src + '" alt="' + R.esc(g.alt) + '">' + btn + '</div>';
     }).join('');
 
-  document.getElementById('badges').innerHTML =
-    t.badges.map(function (b, i) {
-      return i === 0
-        ? '<span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-brand">' + R.esc(b) + '</span>'
-        : '<span class="bg-surface border border-border-subtle px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">' + R.esc(b) + '</span>';
-    }).join('');
+  document.getElementById('badges').innerHTML = (t.badges && t.badges[0])
+    ? '<span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-brand">' + R.esc(t.badges[0]) + '</span>'
+    : '';
 
   function stat(icon, big, small) {
     return '<div class="flex items-center gap-4">' +
@@ -211,7 +205,7 @@
       '<p class="text-[10px] font-black uppercase tracking-[0.2em] text-accent/70 mb-2">' + R.esc(t.guide.role) + '</p>' +
       '<h2 class="font-display text-3xl font-extrabold text-white tracking-tight mb-2">' + R.esc(t.guide.name) + '</h2>' +
       '<p class="text-white/70 font-medium mb-6">' + R.esc(t.guide.bio) + '</p>' +
-      '<a href="#" class="inline-flex bg-accent text-brand px-8 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest items-center gap-2 hover:scale-105 transition-all">' +
+      '<a href="https://wa.link/77nyt0" target="_blank" rel="noopener noreferrer" class="inline-flex bg-accent text-brand px-8 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest items-center gap-2 hover:scale-105 tx">' +
         '<i class="fa-brands fa-whatsapp text-lg"></i> Contact Coordinator</a></div>';
 
   /* ---- booking widget ---- */
@@ -256,9 +250,6 @@
     R.go('book-1.html');
   });
 
-  document.getElementById('download').addEventListener('click', function () {
-    R.toast('Itinerary sent to your email');
-  });
   var sg = document.getElementById('showGallery');
   if (sg) sg.addEventListener('click', function () { R.toast('Full gallery coming soon'); });
 })();

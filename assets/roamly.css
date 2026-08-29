@@ -5,8 +5,14 @@
    ============================================================ */
 
 /* ---------- base ---------- */
+html { scroll-behavior: smooth; }
 body { font-family: 'Inter', system-ui, sans-serif; background: #ffffff; color: #0a0a0a; }
 .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+
+/* Sticky Navbar Scroll Offsets */
+#about, #faqs, #featured, [id] {
+  scroll-margin-top: 110px;
+}
 
 /* Space Grotesk tops out at 700 — clamp the utility classes to what
    actually loads so headings render at the weight they were designed for. */
@@ -48,23 +54,91 @@ input.outline-none:focus-visible, select.outline-none:focus-visible, .outline-no
 }
 .skip-link:focus { transform: translate(-50%, 0); }
 
-/* ---------- motion ---------- */
+/* ============================================================
+   MOTION
+   Curves and durations are tokens, taken from the reference
+   tables — never approximated inline.
+   ============================================================ */
+:root {
+  --ease-out:   cubic-bezier(0.23, 1, 0.32, 1);   /* entrances, exits, hover */
+
+  --dur-press:  120ms;   /* press feedback           */
+  --dur-1:      140ms;   /* hover — seen many times/day, stays imperceptible */
+  --dur-2:      200ms;   /* standard UI state change */
+  --dur-reveal: 520ms;   /* marketing scroll reveal  */
+}
+
+/* The single transition utility. Replaces `transition-all`, which
+   animates every property including layout ones. */
+.tx {
+  transition-property: transform, background-color, border-color, color, box-shadow, opacity, filter;
+  transition-duration: var(--dur-1);
+  transition-timing-function: var(--ease-out);
+}
+
+/* Hover motion only where there is a real pointer — touch fires a
+   false hover on tap and leaves the element stuck in its hover state. */
+@media (hover: none), (pointer: coarse) {
+  .tx:hover { transform: none !important; }
+}
+
+/* Press feedback lands on pointer-down, not on release — and only on
+   things that are actually pressable, so a container that merely shares
+   the transition utility never scales under the cursor. */
+@media (hover: hover) and (pointer: fine) {
+  a.tx:active,
+  button.tx:active,
+  label.tx:active,
+  [role="button"].tx:active { transform: scale(.97); transition-duration: var(--dur-press); }
+}
+
 @keyframes rm-float {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }
 }
 .animate-float { animation: rm-float 6s ease-in-out infinite; }
 
-.trip-card .trip-image { transition: transform .7s ease; }
-.trip-card:hover .trip-image { transform: scale(1.05); }
+.trip-card .trip-image { transition: transform 600ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .trip-card:hover .trip-image { transform: scale(1.05); }
+}
+
+/* ---------- scroll reveal ----------
+   Lists entering all at once read as a single flash; a small
+   stagger gives the eye an order to follow. */
+.rv    { opacity: 0; transform: translateY(14px); }
+.rv-in {
+  opacity: 1; transform: none;
+  transition: opacity var(--dur-reveal) var(--ease-out),
+              transform var(--dur-reveal) var(--ease-out);
+}
+
+/* ---------- floating chrome ----------
+   The nav is a material, not a bar: it thickens as content passes
+   under it rather than sitting on a permanent hard divider. */
+nav[data-nav] > div {
+  transition: background-color var(--dur-2) var(--ease-out),
+              box-shadow     var(--dur-2) var(--ease-out),
+              backdrop-filter var(--dur-2) var(--ease-out);
+}
+nav[data-nav].is-scrolled > div {
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 30px -12px rgba(14, 20, 16, .28);
+}
 
 /* ---------- navbar enlarge & shadow effect ---------- */
 .nav-pill-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, color 0.2s ease, box-shadow 0.25s ease !important;
-  will-change: transform;
+  /* A nav item is seen dozens of times a day: no overshoot, and short
+     enough to read as instant. */
+  transition: transform var(--dur-1) var(--ease-out),
+              background-color var(--dur-1) var(--ease-out),
+              color var(--dur-1) var(--ease-out),
+              box-shadow var(--dur-1) var(--ease-out) !important;
 }
 .nav-pill-btn[aria-current="page"],
 .nav-pill-btn.bg-brand {
@@ -90,8 +164,9 @@ input.outline-none:focus-visible, select.outline-none:focus-visible, .outline-no
   align-items: center;
   justify-content: center;
   box-shadow: 0 12px 24px -2px rgba(26, 67, 50, 0.42), 0 6px 12px -2px rgba(26, 67, 50, 0.28) !important;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.25s ease !important;
-  will-change: transform;
+  transition: transform var(--dur-1) var(--ease-out),
+              background-color var(--dur-1) var(--ease-out),
+              box-shadow var(--dur-1) var(--ease-out) !important;
 }
 .nav-cta-btn:hover {
   transform: scale(1.06) !important;
@@ -114,20 +189,67 @@ details summary::marker {
   content: "" !important;
 }
 
+/* ---------- reduced motion ----------
+   Fewer and gentler, not zero: colour and opacity changes still aid
+   comprehension, so they stay. Movement goes.
+
+   The old blanket rule forced `animation-iteration-count: 1` onto the
+   infinite marquee, which ended it at translateX(-100%) and left the
+   strip blank. Each looping animation is now switched off by name. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important;
-  }
+  .tx { transition-property: background-color, border-color, color, opacity; }
+  .tx:hover, .tx:active,
+  .nav-pill-btn:hover, .nav-pill-btn:active,
+  .nav-cta-btn:hover,  .nav-cta-btn:active { transform: none !important; }
+
+  .trip-card:hover .trip-image { transform: none; }
+
+  .animate-float,
+  .animate-pulse,
+  .marquee-track { animation: none !important; }
+
+  /* content is simply present rather than revealed */
+  .rv    { opacity: 1; transform: none; }
+  .rv-in { transition: none; }
+
   #cursor { display: none !important; }
 }
 
+/* ---------- reduced transparency ----------
+   The site leans on translucent chrome; make it solid when asked. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  nav[data-nav] > div,
+  nav[data-nav].is-scrolled > div {
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid #e5e7eb;
+  }
+}
+
 /* ---------- marquee ---------- */
-@keyframes rm-marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
-.marquee { will-change: transform; }
-.marquee-track { animation: rm-marquee 32s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes rm-marquee { 
+  0% { transform: translate3d(0, 0, 0); } 
+  100% { transform: translate3d(-100%, 0, 0); } 
+}
+.marquee { 
+  display: flex; 
+  overflow: hidden; 
+  user-select: none;
+  width: 100%;
+}
+.marquee-track { 
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  align-items: center;
+  animation: rm-marquee 25s linear infinite; 
+  will-change: transform;
+}
+.marquee:hover .marquee-track { 
+  animation-play-state: paused; 
+}
 
 /* ---------- custom cursor ---------- */
 #cursor {
@@ -192,7 +314,6 @@ details summary::marker {
 
 /* ---------- typography helpers ---------- */
 .balance { text-wrap: balance; }
-.measure { max-width: 54ch; }
 
 /* ---------- form field ---------- */
 .field-label {
@@ -285,8 +406,127 @@ select.field-input { appearance: none; cursor: pointer; text-transform: uppercas
 }
 #toast.show { transform: translate(-50%, 0); }
 
+/* ---------- unified design system components ---------- */
+.rm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 1rem;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, color 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+  will-change: transform;
+  cursor: pointer;
+}
+.rm-btn:hover {
+  transform: scale(1.03) translateY(-1px);
+}
+.rm-btn:active {
+  transform: scale(0.97);
+}
+
+.rm-btn-primary {
+  background: #1a4332;
+  color: #d4f27a;
+  box-shadow: 0 10px 25px -4px rgba(26, 67, 50, 0.35);
+}
+.rm-btn-primary:hover {
+  box-shadow: 0 16px 32px -4px rgba(26, 67, 50, 0.45);
+}
+
+.rm-btn-accent {
+  background: #d4f27a;
+  color: #1a4332;
+  box-shadow: 0 10px 25px -4px rgba(212, 242, 122, 0.4);
+}
+.rm-btn-accent:hover {
+  box-shadow: 0 16px 32px -4px rgba(212, 242, 122, 0.55);
+}
+
+.rm-btn-trail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  color: #ffffff;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.rm-btn-trail:hover,
+.trip-card:hover .rm-btn-trail {
+  background: #1a4332;
+  color: #d4f27a;
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(26, 67, 50, 0.3);
+}
+.rm-btn-trail:active {
+  transform: scale(0.96);
+}
+
+/* ---------- unified trip card styling ---------- */
+.trip-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 2.5rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 1.25rem;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.35s ease;
+}
+.trip-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 67, 50, 0.35);
+  box-shadow: 0 20px 40px -10px rgba(26, 67, 50, 0.12);
+}
+
 /* ---------- print (ticket) ---------- */
 @media print {
-  nav, footer, #cursor, .no-print { display: none !important; }
+  nav, footer, #cursor { display: none !important; }
   body { background: #fff; }
 }
+
+/* ---------- smooth return-to-home entrance & exit ---------- */
+@keyframes rm-home-smooth-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-entering {
+  animation: rm-home-smooth-in 340ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page-smooth-exit {
+  opacity: 0 !important;
+  transform: translateY(-8px) !important;
+  transition: opacity 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 160ms cubic-bezier(0.23, 1, 0.32, 1) !important;
+  pointer-events: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-entering,
+  .page-smooth-exit {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+

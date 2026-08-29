@@ -1,15 +1,4 @@
-/* ============================================================
-   Roamly — content
-   GENERATED FILE — do not edit by hand.
-   Source of truth is assets/data.json; this is rewritten by
-   server.js whenever the admin panel saves.
-   Member records are intentionally NOT included here.
-   Last generated: 2026-08-29T08:44:28.618Z
-   ============================================================ */
-(function (w) {
-  'use strict';
-
-  var DATA = {
+{
   "deposit": 1000,
   "categories": [
     {
@@ -1265,18 +1254,7 @@
         }
       ]
     }
-  ]
-};
-
-  w.RoamlyData = {
-    trips: DATA.trips,
-    categories: DATA.categories,
-    DEPOSIT: DATA.deposit,
-    byId: function (id) {
-      for (var i = 0; i < DATA.trips.length; i++) {
-        if (DATA.trips[i].id === id) return DATA.trips[i];
-      }
-      return DATA.trips[0];
-    }
-  };
-})(window);
+  ],
+  "updated": "2026-08-29T08:44:28.618Z",
+  "members": []
+}

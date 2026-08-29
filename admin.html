@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roamly — Admin Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #1a4332;
+      --brand-light: #245a43;
+      --brand-dark: #123024;
+      --accent: #d4f27a;
+      --accent-hover: #c5e665;
+      --ink: #0a0f0d;
+      --ink-2: #212925;
+      --muted: #5e6b64;
+      --muted-light: #8b9991;
+      --ground: #f4f6f4;
+      --panel: #ffffff;
+      --panel-2: #f8faf8;
+      --panel-3: #eef2ef;
+      --line: #e1e7e2;
+      --line-subtle: #edf2ee;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --warn: #d97706;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --ok: #15803d;
+      --ok-bg: #f0fdf4;
+      --ok-border: #bbf7d0;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 16px 36px -8px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+      --shadow-brand: 0 12px 28px -6px rgba(26, 67, 50, 0.35);
+      --shadow-glow: 0 0 0 1px rgba(26, 67, 50, 0.1), 0 8px 24px -4px rgba(26, 67, 50, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    body {
+      background: var(--ground);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    .tnum {
+      font-variant-numeric: tabular-nums;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ---------- Global Custom Scrollbars ---------- */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.12);
+      border-radius: var(--radius-pill);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    /* ---------- Top Navigation Header ---------- */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--brand);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-style: italic;
+      font-size: 16px;
+      box-shadow: var(--shadow-brand);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .brand-group:hover .brand-mark {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+
+    .top-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+    }
+
+    /* Segmented Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--panel-3);
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--line);
+    }
+
+    .nav-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      background: transparent;
+      padding: 7px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-tab-btn:hover {
+      color: var(--ink);
+    }
+    .nav-tab-btn.active {
+      background: var(--brand);
+      color: var(--accent);
+      box-shadow: 0 4px 12px rgba(26, 67, 50, 0.25);
+    }
+
+    /* Top Action Buttons */
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:hover {
+      background: var(--panel-2);
+      border-color: var(--line-2);
+      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none;
+    }
+
+    .btn.primary {
+      background: var(--brand);
+      color: var(--accent);
+      border-color: var(--brand);
+      box-shadow: var(--shadow-brand);
+    }
+    .btn.primary:hover {
+      background: var(--brand-light);
+      color: #fff;
+    }
+
+    .btn.accent {
+      background: var(--accent);
+      color: var(--brand);
+      border-color: var(--accent);
+      font-weight: 800;
+    }
+    .btn.accent:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn.danger {
+      background: var(--panel);
+      color: var(--danger);
+      border-color: var(--danger-border);
+    }
+    .btn.danger:hover {
+      background: var(--danger-bg);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+      color: var(--muted);
+    }
+    .btn.ghost:hover {
+      background: var(--panel-3);
+      color: var(--ink);
+    }
+
+    .btn.icon-only {
+      padding: 8px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+    }
+
+    .btn.sm {
+      padding: 5px 11px;
+      font-size: 11.5px;
+      border-radius: 9px;
+    }
+
+    /* ---------- Main Layout Containers ---------- */
+    .app-body {
+      display: flex;
+      height: calc(100vh - 61px);
+      overflow: hidden;
+    }
+
+    /* Left Sidebar */
+    .sidebar {
+      width: 360px;
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      height: 100%;
+    }
+
+    .sidebar-head {
+      padding: 16px;
+      border-bottom: 1px solid var(--line-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--panel);
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-box i {
+      position: absolute;
+      left: 14px;
+      color: var(--muted-light);
+      font-size: 13px;
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      padding: 9px 14px 9px 36px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      transition: all 0.2s ease;
+    }
+    .search-input:focus {
+      background: var(--panel);
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(26, 67, 50, 0.1);
+      outline: none;
+    }
+    .search-input::placeholder {
+      color: var(--muted-light);
+      font-weight: 500;
+    }
+
+    /* Category Chips Filter */
+    .cat-chips {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .cat-chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip-btn {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--muted);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .chip-btn:hover {
+      background: var(--panel-3);
+      color: var(--ink);
+    }
+    .chip-btn.active {
+      background: var(--brand);
+      color: var(--accent);
+      border-color: var(--brand);
+      box-shadow: 0 2px 8px rgba(26, 67, 50, 0.2);
+    }
+
+    /* Trip List Cards */
+    .trip-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .trip-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--panel);
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: left;
+      position: relative;
+    }
+    .trip-item:hover {
+      background: var(--panel-2);
+      border-color: var(--line);
+      transform: translateX(3px);
+    }
+    .trip-item.active {
+      background: var(--ok-bg);
+      border-color: var(--brand);
+      box-shadow: 0 4px 14px -3px rgba(26, 67, 50, 0.12);
+    }
+    .trip-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      background: var(--brand);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .trip-item-thumb {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--panel-3);
+      border: 1px solid var(--line);
+    }
+
+    .trip-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .trip-item-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+    .trip-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .trip-item-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--panel-3);
+      color: var(--brand);
+    }
+
+    .trip-item-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 13.5px;
+      color: var(--ink);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* Content & Editor Area */
+    .main-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px;
+      background: var(--ground);
+    }
+
+    /* Empty States */
+    .empty-state {
+      min-height: 480px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+    .empty-card {
+      max-width: 420px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .empty-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: var(--panel-3);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    /* Editor Grid Layout */
+    .editor-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 24px;
+      align-items: start;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1200px) {
+      .editor-layout {
+        grid-template-columns: 1fr;
+      }
+      .live-preview-col {
+        display: none;
+      }
+    }
+
+    /* Editor Sections & Panels */
+    .form-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .panel-header {
+      padding: 16px 22px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line-subtle);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .panel-header-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--panel-3);
+      color: var(--brand);
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+    }
+    .panel-chevron {
+      font-size: 11px;
+      color: var(--muted-light);
+      transition: transform 0.2s ease;
+    }
+    details[open] .panel-chevron {
+      transform: rotate(180deg);
+    }
+
+    .panel-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Form Fields & Grid */
+    .fields-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .field-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .field-input, .in {
+      width: 100%;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: all 0.18s ease;
+    }
+    .field-input:focus, .in:focus {
+      background: #fff;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(26, 67, 50, 0.1);
+      outline: none;
+    }
+    textarea.field-input, textarea.in {
+      min-height: 80px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    /* Custom Themed Select Dropdown in Forms */
+    .custom-select {
+      position: relative;
+    }
+    .custom-select-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s ease;
+    }
+    .custom-select-btn:hover {
+      background: #fff;
+      border-color: var(--line-2);
+    }
+    .custom-select-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      min-width: 100%;
+      max-height: 280px;
+      overflow-y: auto;
+      background: #ffffff;
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 6px;
+      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.2), 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .custom-select-opt {
+      border: 0;
+      background: transparent;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+    .custom-select-opt:hover {
+      background: var(--panel-2);
+      color: var(--ink);
+    }
+    .custom-select-opt.is-selected {
+      background: var(--brand);
+      color: var(--accent);
+    }
+
+    /* Badges & Tags */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 4px;
+    }
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand);
+      color: var(--accent);
+      padding: 4px 10px 4px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-sm);
+    }
+    .tag-rm-btn {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 2px 4px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transition: opacity 0.15s;
+    }
+    .tag-rm-btn:hover {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    /* Repeat Item Card (Itinerary / Pickups / Highlights) */
+    .repeat-item {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      transition: all 0.15s ease;
+    }
+    .repeat-item:hover {
+      background: #fff;
+      border-color: var(--line-2);
+      box-shadow: var(--shadow-sm);
+    }
+    .repeat-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--brand);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 12px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .repeat-fields {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .repeat-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Live Preview Card Widget */
+    .live-preview-box {
+      position: sticky;
+      top: 24px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      box-shadow: var(--shadow-md);
+    }
+    .preview-header {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .preview-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--panel);
+      box-shadow: var(--shadow-sm);
+    }
+    .preview-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: var(--panel-3);
+    }
+    .preview-content {
+      padding: 14px;
+    }
+    .preview-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .preview-meta {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .preview-price-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-top: 1px solid var(--line-subtle);
+      padding-top: 12px;
+    }
+    .preview-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--ink);
+    }
+    .preview-trail-btn {
+      background: var(--ink);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* ---------- Payments & Financial View ---------- */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .kpi-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .kpi-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--panel-3);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+    .kpi-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+    .kpi-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* Data Tables */
+    .table-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .table-head {
+      padding: 16px 20px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .table-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .roamly-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    .roamly-table th {
+      background: var(--panel-2);
+      padding: 12px 18px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    .roamly-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line-subtle);
+      color: var(--ink-2);
+    }
+    .roamly-table tr:last-child td {
+      border-bottom: none;
+    }
+    .roamly-table tr:hover td {
+      background: var(--panel-2);
+    }
+
+    /* Status Pills in Tables */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-badge.paid {
+      background: var(--ok-bg);
+      color: var(--ok);
+      border: 1px solid var(--ok-border);
+    }
+    .status-badge.pending {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid var(--warn-border);
+    }
+    .status-badge.attended {
+      background: var(--panel-3);
+      color: var(--brand);
+      border: 1px solid var(--line);
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 15, 13, 0.6);
+      backdrop-filter: blur(8px);
+      display: grid;
+      place-items: center;
+      z-index: 200;
+      padding: 20px;
+      animation: fadeIn 0.2s ease;
+    }
+    .modal-card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .modal-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Floating Toast Alerts */
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translate(-50%, 150%);
+      z-index: 300;
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.45);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #toast.show {
+      transform: translate(-50%, 0);
+    }
+    #toast.ok {
+      background: var(--brand);
+      color: var(--accent);
+      box-shadow: var(--shadow-brand);
+    }
+    #toast.err {
+      background: var(--danger);
+      color: #fff;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Top Navigation Header -->
+  <header class="top-nav">
+    <div class="brand-group">
+      <div class="brand-mark">R.</div>
+      <div class="brand-text">
+        <span class="brand-title">Roamly Admin</span>
+      </div>
+    </div>
+
+    <div class="top-center">
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" role="tablist">
+        <button type="button" class="nav-tab-btn active" id="tab-payments" role="tab" aria-selected="true">
+          <i class="fa-solid fa-wallet"></i> Financial Ledger & Roster
+        </button>
+        <button type="button" class="nav-tab-btn" id="tab-trips" role="tab" aria-selected="false">
+          <i class="fa-solid fa-compass"></i> Trips
+        </button>
+      </nav>
+    </div>
+
+    <div class="top-actions">
+      <button type="button" class="btn accent" id="newBtn" title="Create new trip" hidden>
+        <i class="fa-solid fa-plus"></i> New Trip
+      </button>
+      <button type="button" class="btn ghost icon-only" id="dupBtn" title="Duplicate current trip" hidden>
+        <i class="fa-regular fa-copy"></i>
+      </button>
+      <button type="button" class="btn ghost icon-only" id="revertBtn" title="Discard unsaved changes" hidden>
+        <i class="fa-solid fa-rotate-left"></i>
+      </button>
+      <button type="button" class="btn danger icon-only" id="delBtn" title="Delete trip" hidden>
+        <i class="fa-regular fa-trash-can"></i>
+      </button>
+      <a href="index.html" target="_blank" class="btn ghost" id="previewLink" title="View live site">
+        <span>Site</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Workspaces Container -->
+  <div class="app-body">
+    
+    <!-- Tab 1: Trips Management Workspace -->
+    <div id="tripsTab" hidden style="display:flex;width:100%;height:100%">
+      
+      <!-- Left Sidebar Directory -->
+      <aside class="sidebar" id="listCol">
+        <div class="sidebar-head">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="filter" class="search-input" placeholder="Search trails, region, grade..." autocomplete="off">
+          </div>
+          <div class="cat-chips" id="catFilter"></div>
+        </div>
+
+        <div class="trip-list" id="list" role="listbox"></div>
+      </aside>
+
+      <!-- Main Trip Editor / Empty Workspace -->
+      <main class="main-content" id="main">
+        <div id="errBox"></div>
+
+        <!-- Empty State Message -->
+        <div class="empty-state" id="empty">
+          <div class="empty-card">
+            <div class="empty-icon"><i class="fa-solid fa-compass"></i></div>
+            <h3 style="font-size:20px;font-weight:800">Select an Trip</h3>
+            <p style="color:var(--muted);font-size:13px;line-height:1.5">Pick a trail from the left directory to edit dates, pricing, pickups, itineraries, and media, or create a brand new trip.</p>
+            <button type="button" class="btn primary" onclick="document.getElementById('newBtn').click()">
+              <i class="fa-solid fa-plus"></i> Create New Trip
+            </button>
+          </div>
+        </div>
+
+        <!-- Trip Editor Form -->
+        <div class="editor-layout" id="editorForm" hidden>
+          <div class="editor-main-col">
+            
+            <!-- Quick Summary Panel -->
+            <div class="form-panel">
+              <div class="panel-body">
+                <div class="fields-grid">
+                  <div class="field-group" style="grid-column: span 2">
+                    <label class="field-label" for="f-name">Trip Title</label>
+                    <input type="text" class="field-input in" id="f-name" data-path="name" placeholder="e.g. Harishchandragad & Kokankada Cliff" required>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-id">URL Slug / ID</label>
+                    <input type="text" class="field-input in mono" id="f-id" data-path="id" placeholder="harishchandragad" required>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-short">Short Label</label>
+                    <input type="text" class="field-input in" id="f-short" data-path="short" placeholder="Harishchandragad">
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-price">Starting Price (₹ INR)</label>
+                    <input type="number" class="field-input in mono" id="f-price" data-path="price" placeholder="1499" min="0" required>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-days">Duration (Days)</label>
+                    <input type="number" class="field-input in mono" id="f-days" data-path="days" placeholder="2" min="1" required>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-grade">Difficulty Grade</label>
+                    <div class="custom-select" data-select-key="grade"></div>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-slots">Available Slots</label>
+                    <input type="number" class="field-input in mono" id="f-slots" data-path="slots" placeholder="14" min="1" required>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-category">Trip Category</label>
+                    <div class="custom-select" data-select-key="category"></div>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="f-region">Region / State</label>
+                    <input type="text" class="field-input in" id="f-region" data-path="region" placeholder="Maharashtra, Western Ghats">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Basic Info & Summary -->
+            <details class="form-panel" open>
+              <summary class="panel-header">
+                <span class="panel-header-title"><i class="fa-solid fa-circle-info text-brand"></i> Trail Overview & Dates</span>
+                <i class="fa-solid fa-chevron-down panel-chevron"></i>
+              </summary>
+              <div class="panel-body">
+                <div class="fields-grid">
+                  <div class="field-group">
+                    <label class="field-label">Departure Schedule</label>
+                    <input type="text" class="field-input in" data-path="dates" placeholder="Every Sat – Sun Departure">
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">Altitude / Key Stat</label>
+                    <input type="text" class="field-input in" data-path="difficulty" placeholder="1,422m Altitude">
+                  </div>
+                  <div class="field-group" style="grid-column: 1 / -1">
+                    <label class="field-label">Executive Trail Summary</label>
+                    <textarea class="field-input in" data-path="summary" rows="3" placeholder="Brief 1-2 sentence overview shown in directory cards..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <!-- Badges & Highlight Tags -->
+            <details class="form-panel" open>
+              <summary class="panel-header">
+                <span class="panel-header-title"><i class="fa-solid fa-tag text-brand"></i> Trip Badges & Highlight Tags</span>
+                <i class="fa-solid fa-chevron-down panel-chevron"></i>
+              </summary>
+              <div class="panel-body">
+                <div class="tag-container" id="badgesList"></div>
+                <div style="display:flex;gap:8px;margin-top:10px">
+                  <input type="text" id="badgeIn" class="field-input" placeholder="Type badge name and press Enter (e.g. Kokankada Cliff)..." style="max-width:380px">
+                  <button type="button" class="btn" id="addBadgeBtn"><i class="fa-solid fa-plus"></i> Add Tag</button>
+                </div>
+              </div>
+            </details>
+
+            <!-- Itinerary Timeline -->
+            <details class="form-panel" open id="card-itinerary">
+              <summary class="panel-header">
+                <span class="panel-header-title">
+                  <i class="fa-solid fa-timeline text-brand"></i> Daily Itinerary Breakdown
+                  <span class="panel-count count">0</span>
+                </span>
+                <i class="fa-solid fa-chevron-down panel-chevron"></i>
+              </summary>
+              <div class="panel-body">
+                <div id="itineraryList"></div>
+                <button type="button" class="btn" data-add="itinerary" style="align-self:flex-start">
+                  <i class="fa-solid fa-plus"></i> Add Timeline Phase
+                </button>
+              </div>
+            </details>
+
+            <!-- Pickups & Departure Points -->
+            <details class="form-panel" open id="card-pickups">
+              <summary class="panel-header">
+                <span class="panel-header-title">
+                  <i class="fa-solid fa-bus text-brand"></i> Pickup & Reporting Points
+                  <span class="panel-count count">0</span>
+                </span>
+                <i class="fa-solid fa-chevron-down panel-chevron"></i>
+              </summary>
+              <div class="panel-body">
+                <div id="pickupsList"></div>
+                <button type="button" class="btn" data-add="pickups" style="align-self:flex-start">
+                  <i class="fa-solid fa-plus"></i> Add Pickup Stop
+                </button>
+              </div>
+            </details>
+
+            <!-- What's Included / Excluded -->
+            <details class="form-panel">
+              <summary class="panel-header">
+                <span class="panel-header-title">
+                  <i class="fa-solid fa-list-check text-brand"></i> Inclusions & Exclusions
+                </span>
+                <i class="fa-solid fa-chevron-down panel-chevron"></i>
+              </summary>
+              <div class="panel-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+                  <div class="field-group">
+                    <label class="field-label">Included in Trip Fee (1 per line)</label>
+                    <textarea class="field-input in" data-path="included" rows="6" placeholder="Lead Certified Guide&#10;Meals on trail&#10;Forest entry fees..."></textarea>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">Excluded from Trip Fee (1 per line)</label>
+                    <textarea class="field-input in" data-path="excluded" rows="6" placeholder="Travel to basecamp&#10;Personal gear rental..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <!-- Coordinator & Guide Details -->
+            <details class="form-panel" open id="card-coordinator">
+              <summary class="panel-header">
+                <span class="panel-header-title">
+                  <i class="fa-solid fa-user-tie text-brand"></i> Coordinator & Guide Details
+                </span>
+                <i class="fa-solid fa-chevron-down panel-chevron"></i>
+              </summary>
+              <div class="panel-body">
+                <div class="fields-grid" style="margin-bottom:20px">
+                  <div class="field-group">
+                    <label class="field-label">Coordinator Full Name</label>
+                    <input type="text" class="field-input in" data-path="guide.name" placeholder="e.g. Stanzin Dorje" required>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">Role / Official Title</label>
+                    <input type="text" class="field-input in" data-path="guide.role" placeholder="e.g. Chief Road Marshal & Himalayan Medic">
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">Avatar Photo URL</label>
+                    <input type="text" class="field-input in mono" data-path="guide.photo" placeholder="https://images.unsplash.com/photo-...">
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">WhatsApp / Contact Phone</label>
+                    <input type="text" class="field-input in mono" data-path="guide.phone" placeholder="+91 98765 43210">
+                  </div>
+                  <div class="field-group" style="grid-column: 1 / -1">
+                    <label class="field-label">Coordinator On-Trail Bio</label>
+                    <textarea class="field-input in" data-path="guide.bio" rows="3" placeholder="Leh native with 14 years leading motorcycle expeditions across Ladakh, Spiti, and Zanskar. Trained in high-altitude emergency trauma."></textarea>
+                  </div>
+                  <div class="field-group" style="grid-column: 1 / -1">
+                    <label class="field-label">Philosophy / Quote (Optional)</label>
+                    <input type="text" class="field-input in" data-path="guide.quote" placeholder="&quot;Kokankada at sunset is pure silence. You never forget your first view.&quot;">
+                  </div>
+                </div>
+
+                <!-- Live Coordinator Card Preview (Matches trip page dark card) -->
+                <div>
+                  <label class="field-label" style="margin-bottom:8px;display:flex;align-items:center;gap:6px">
+                    <i class="fa-solid fa-eye text-brand"></i> Coordinator Card Live Preview
+                  </label>
+                  <div style="background:#0e1410;border-radius:1.5rem;padding:24px;display:flex;flex-direction:column;gap:18px;border:1px solid rgba(212,242,122,0.15);box-shadow:0 12px 30px -10px rgba(0,0,0,0.4)" id="coordLiveCard">
+                    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+                      <div style="width:84px;height:84px;border-radius:1.25rem;overflow:hidden;flex-shrink:0;border:3px solid rgba(212,242,122,0.25);background:#1a4332">
+                        <img id="coordPvImg" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Coordinator Avatar" style="width:100%;height:100%;object-fit:cover">
+                      </div>
+                      <div style="flex:1;min-width:200px">
+                        <p id="coordPvRole" style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:#d4f27a;margin-bottom:4px">Chief Road Marshal & Himalayan Medic</p>
+                        <h4 id="coordPvName" style="font-size:22px;font-weight:800;color:#ffffff;letter-spacing:-0.02em;margin-bottom:6px">Stanzin Dorje</h4>
+                        <p id="coordPvBio" style="font-size:12.5px;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:14px;font-weight:500">Leh native with 14 years leading motorcycle expeditions across Ladakh, Spiti, and Zanskar. Trained in high-altitude emergency trauma.</p>
+                        <span style="display:inline-flex;align-items:center;gap:8px;background:#d4f27a;color:#1a4332;padding:8px 18px;border-radius:12px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em">
+                          <i class="fa-brands fa-whatsapp" style="font-size:14px"></i> Contact Coordinator
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </details>
+
+            <!-- Media Gallery -->
+            <details class="form-panel" open>
+              <summary class="panel-header">
+                <span class="panel-header-title"><i class="fa-solid fa-photo-film text-brand"></i> Trip Media & Gallery (4 Slots)</span>
+                <i class="fa-solid fa-chevron-down panel-chevron"></i>
+              </summary>
+              <div class="panel-body">
+                <div class="field-group" style="margin-bottom:12px">
+                  <label class="field-label">Hero Cover Image URL</label>
+                  <input type="text" class="field-input in mono" data-path="hero" placeholder="https://images.unsplash.com/photo-...">
+                </div>
+                <div id="galleryList" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px"></div>
+              </div>
+            </details>
+
+          </div>
+
+          <!-- Right Sticky Live Preview Card -->
+          <div class="live-preview-col">
+            <div class="live-preview-box">
+              <div class="preview-header">
+                <span><i class="fa-regular fa-eye"></i> Live Card Preview</span>
+                <span style="color:var(--ok)"><i class="fa-solid fa-circle" style="font-size:7px"></i> SYNC</span>
+              </div>
+              <div class="preview-card" id="pvCard">
+                <img class="preview-img" id="pvImg" src="" alt="">
+                <div class="preview-content">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+                    <h4 class="preview-title" id="pvName">Trip Name</h4>
+                    <span style="font-size:11px;font-weight:800;color:var(--brand);white-space:nowrap"><i class="fa-solid fa-star"></i> <span id="pvRating">4.9</span></span>
+                  </div>
+                  <p class="preview-meta" id="pvMeta">02 Days • Moderate</p>
+                  <div class="preview-price-row">
+                    <div>
+                      <p style="font-size:9px;text-transform:uppercase;color:var(--muted);font-weight:800;letter-spacing:0.1em;margin-bottom:2px">Starting from</p>
+                      <p class="preview-price" id="pvPrice">₹1,499</p>
+                    </div>
+                    <span class="preview-trail-btn">View Trip</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+    <!-- Tab 2: Financial Ledger & Roster Workspace -->
+    <div id="paymentsTab" style="width:100%;height:100%;overflow-y:auto;padding:28px">
+      <div style="max-width:1240px;margin:0 auto">
+        
+        <!-- Global Financial Overview -->
+        <div id="payGlobal">
+          <div class="page-head" style="margin-bottom:24px">
+            <h2 style="font-size:28px;font-weight:800;letter-spacing:-0.03em">Financial Ledger & Roster Command</h2>
+            <p style="color:var(--muted);font-size:13.5px;margin-top:4px">Real-time breakdown of confirmed member bookings, financial cash flow, and trip attendance.</p>
+          </div>
+
+          <!-- KPI Metric Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Gross Revenue</span>
+                <div class="kpi-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+              </div>
+              <div class="kpi-value tnum" id="statRevenue">₹0</div>
+              <span class="kpi-sub">Total collected bookings</span>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Confirmed Climbers</span>
+                <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+              </div>
+              <div class="kpi-value tnum" id="statMembers">0</div>
+              <span class="kpi-sub">Registered team members</span>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Pending Balances</span>
+                <div class="kpi-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+              </div>
+              <div class="kpi-value tnum" id="statPending">₹0</div>
+              <span class="kpi-sub">Due at basecamp reporting</span>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Active Trips</span>
+                <div class="kpi-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+              </div>
+              <div class="kpi-value tnum" id="statTrips">0</div>
+              <span class="kpi-sub">Scheduled departures</span>
+            </div>
+          </div>
+
+          <!-- Per-Trip Financial Summary Table -->
+          <div class="table-panel">
+            <div class="table-head">
+              <span class="table-title">Trip Financial Status</span>
+            </div>
+            <table class="roamly-table">
+              <thead>
+                <tr>
+                  <th>Trip</th>
+                  <th>Dates</th>
+                  <th>Fee</th>
+                  <th>Confirmed</th>
+                  <th>Capacity</th>
+                  <th>Collected</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="payTripList"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Drill-down Per-Trip Member Roster View -->
+        <div id="payDetail" hidden>
+          <button type="button" class="btn ghost" id="backToPayBtn" style="margin-bottom:18px">
+            <i class="fa-solid fa-arrow-left"></i> Back to Financial Overview
+          </button>
+          
+          <div class="table-panel" style="margin-bottom:24px">
+            <div class="table-head" id="payTripHead"></div>
+          </div>
+
+          <div class="table-panel">
+            <div class="table-head">
+              <span class="table-title">Confirmed Climber Roster</span>
+              <div style="display:flex;gap:8px">
+                <button type="button" class="btn primary sm" id="addMemberBtn">
+                  <i class="fa-solid fa-user-plus"></i> Add Climber
+                </button>
+                <button type="button" class="btn sm" id="downloadRosterBtn">
+                  <i class="fa-solid fa-file-pdf"></i> Download PDF Roster
+                </button>
+              </div>
+            </div>
+            <table class="roamly-table">
+              <thead>
+                <tr>
+                  <th>Climber Name</th>
+                  <th>Contact Info</th>
+                  <th>Age / Gender</th>
+                  <th>Pickup Location</th>
+                  <th>Payment</th>
+                  <th>Attendance</th>
+                  <th>Manage</th>
+                </tr>
+              </thead>
+              <tbody id="payMembers"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Add Climber Modal Dialog -->
+  <div class="modal-overlay" id="addModal" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 class="modal-title">Record Climber Booking</h3>
+        <button type="button" class="btn ghost icon-only sm" id="closeAddModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="addForm" style="display:flex;flex-direction:column;gap:14px">
+        <div class="field-group">
+          <label class="field-label" for="m-name">Full Name</label>
+          <input type="text" class="field-input" id="m-name" name="name" placeholder="e.g. Tanvi Deshmukh" required>
+        </div>
+        <div class="fields-grid">
+          <div class="field-group">
+            <label class="field-label" for="m-email">Email</label>
+            <input type="email" class="field-input" id="m-email" name="email" placeholder="tanvi@gmail.com" required>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="m-phone">Phone</label>
+            <input type="tel" class="field-input" id="m-phone" name="phone" placeholder="+91 98765 43210" required>
+          </div>
+        </div>
+        <div class="fields-grid">
+          <div class="field-group">
+            <label class="field-label" for="m-age">Age</label>
+            <input type="number" class="field-input" id="m-age" name="age" placeholder="26" min="12" max="90" required>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="m-gender">Gender</label>
+            <div class="custom-select" id="m-gender-select">
+              <button type="button" class="custom-select-btn">
+                <span id="m-gender-label">Female</span>
+                <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--muted)"></i>
+              </button>
+              <input type="hidden" id="m-gender" name="gender" value="Female">
+              <div class="custom-select-menu" hidden>
+                <button type="button" class="custom-select-opt is-selected" data-val="Female"><span>Female</span><i class="fa-solid fa-check" style="font-size:10px"></i></button>
+                <button type="button" class="custom-select-opt" data-val="Male"><span>Male</span></button>
+                <button type="button" class="custom-select-opt" data-val="Non-binary"><span>Non-binary</span></button>
+                <button type="button" class="custom-select-opt" data-val="Prefer not to say"><span>Prefer not to say</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="m-pickup">Pickup Point</label>
+          <div class="custom-select" id="m-pickup-select">
+            <button type="button" class="custom-select-btn">
+              <span id="m-pickup-label">Select Pickup Point</span>
+              <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--muted)"></i>
+            </button>
+            <input type="hidden" id="m-pickup" name="pickupId" value="0">
+            <div class="custom-select-menu" id="m-pickup-menu" hidden></div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="m-status">Payment Status</label>
+          <div class="custom-select" id="m-status-select">
+            <button type="button" class="custom-select-btn">
+              <span id="m-status-label">Paid in full</span>
+              <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--muted)"></i>
+            </button>
+            <input type="hidden" id="m-status" name="status" value="paid">
+            <div class="custom-select-menu" hidden>
+              <button type="button" class="custom-select-opt is-selected" data-val="paid"><span>Paid in full</span><i class="fa-solid fa-check" style="font-size:10px"></i></button>
+              <button type="button" class="custom-select-opt" data-val="pending"><span>Deposit Paid (Balance Pending)</span></button>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">
+          <button type="button" class="btn ghost" onclick="document.getElementById('addModal').hidden=true">Cancel</button>
+          <button type="submit" class="btn primary"><i class="fa-solid fa-check"></i> Add to Roster</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast"><i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Saved</span></div>
+
+  <!-- Main Application Script -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* Global State */
+      var DATA = { trips: [], categories: [] };
+      var PAY = null;
+      var draft = null;
+      var originalId = null;
+      var clean = '';
+      var tab = 'payments';
+      var payTripId = null;
+      var categoryFilter = 'all';
+
+      var SELECT_OPTS = {
+        grade: ['Entry', 'Moderate', 'Alpine Grade', 'Hard Core', 'Extreme'],
+        category: []
+      };
+
+      function $(sel) { return document.querySelector(sel); }
+      function esc(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function inr(n) {
+        return '₹' + Number(n || 0).toLocaleString('en-IN');
+      }
+
+      /* REST API Client */
+      function api(method, path, body) {
+        return fetch(path, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: body ? JSON.stringify(body) : undefined
+        }).then(function (res) {
+          return res.json().then(function (data) {
+            if (!res.ok) {
+              var e = new Error(data.message || (data.errors ? data.errors.join(', ') : 'HTTP ' + res.status));
+              e.status = res.status;
+              e.errors = data.errors;
+              throw e;
+            }
+            return data;
+          });
+        });
+      }
+
+      /* Toast Notification Helper */
+      var toastTimer = null;
+      function toast(msg, kind) {
+        var t = $('#toast');
+        var tm = $('#toastMsg');
+        if (!t) return;
+        tm.textContent = msg;
+        t.className = kind ? kind : 'ok';
+        var icon = t.querySelector('i');
+        if (icon) {
+          icon.className = kind === 'err' ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-circle-check';
+        }
+        t.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { t.classList.remove('show'); }, 3200);
+      }
+
+      function isDirty() {
+        return draft && JSON.stringify(draft) !== clean;
+      }
+
+      var autoSaveTimer = null;
+      function triggerAutoSave() {
+        if (!draft) return;
+        clearTimeout(autoSaveTimer);
+        autoSaveTimer = setTimeout(function () {
+          save(true);
+        }, 500);
+      }
+
+      function setStatus() {
+        triggerAutoSave();
+      }
+
+      function guard() {
+        return true;
+      }
+
+      function setTab(name) {
+        tab = name;
+        $('#tab-trips').classList.toggle('active', tab === 'trips');
+        $('#tab-payments').classList.toggle('active', tab === 'payments');
+        $('#tripsTab').hidden = tab !== 'trips';
+        $('#paymentsTab').hidden = tab !== 'payments';
+        $('#newBtn').hidden = tab !== 'trips';
+        $('#dupBtn').hidden = tab !== 'trips';
+        $('#revertBtn').hidden = tab !== 'trips';
+        $('#delBtn').hidden = tab !== 'trips';
+
+        if (tab === 'payments') {
+          refreshPayments();
+        }
+      }
+
+      $('#tab-trips').addEventListener('click', function () { setTab('trips'); });
+      $('#tab-payments').addEventListener('click', function () { setTab('payments'); });
+
+      /* ================= Renderers ================= */
+      function renderCats() {
+        var raw = DATA.categories || [];
+        var cats = raw.map(function (c) {
+          if (typeof c === 'string') return { id: c.toLowerCase(), label: c };
+          return { id: c.id, label: c.label || c.name || c.id };
+        });
+        if (!cats.some(function (c) { return c.id === 'all'; })) {
+          cats.unshift({ id: 'all', label: 'All Trips' });
+        }
+        SELECT_OPTS.category = cats.filter(function (c) { return c.id !== 'all'; });
+
+        var box = $('#catFilter');
+        if (!box) return;
+        box.innerHTML = cats.map(function (c) {
+          var active = c.id === categoryFilter ? ' active' : '';
+          return '<button type="button" class="chip-btn' + active + '" data-cat="' + esc(c.id) + '">' + esc(c.label) + '</button>';
+        }).join('');
+      }
+
+      function renderList() {
+        var q = ($('#filter').value || '').trim().toLowerCase();
+        var box = $('#list');
+        if (!box) return;
+
+        var items = DATA.trips.filter(function (t) {
+          if (categoryFilter !== 'all' && categoryFilter !== 'ALL' && t.category !== categoryFilter) return false;
+          if (!q) return true;
+          return t.name.toLowerCase().indexOf(q) !== -1 ||
+                 t.id.toLowerCase().indexOf(q) !== -1 ||
+                 (t.region || '').toLowerCase().indexOf(q) !== -1 ||
+                 (t.grade || '').toLowerCase().indexOf(q) !== -1;
+        });
+
+        if (items.length === 0) {
+          box.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:12px;font-weight:600">No matching trips</div>';
+          return;
+        }
+
+        box.innerHTML = items.map(function (t) {
+          var isSel = draft && draft.id === t.id;
+          var catObj = (DATA.categories || []).find(function (c) { return c.id === t.category; });
+          var catLabel = catObj ? (catObj.label || catObj.name || catObj.id) : (t.category || 'Trail');
+          return '<div class="trip-item' + (isSel ? ' active' : '') + '" data-id="' + esc(t.id) + '">' +
+            '<img class="trip-item-thumb" src="' + t.hero + '" alt="' + esc(t.name) + '">' +
+            '<div class="trip-item-info">' +
+              '<div class="trip-item-title">' + esc(t.name) + '</div>' +
+              '<div class="trip-item-meta">' +
+                '<span class="trip-item-badge">' + esc(catLabel) + '</span>' +
+                '<span>' + t.days + 'D</span> • <span>' + esc(t.grade) + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="trip-item-price">' + inr(t.price) + '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      function renderBadges() {
+        var box = $('#badgesList');
+        if (!box || !draft) return;
+        box.innerHTML = (draft.badges || []).map(function (b, i) {
+          return '<span class="tag-pill">' +
+            '<span>' + esc(b) + '</span>' +
+            '<button type="button" class="tag-rm-btn" data-badge-rm="' + i + '" title="Remove tag"><i class="fa-solid fa-xmark"></i></button>' +
+          '</span>';
+        }).join('');
+      }
+
+      function renderRepeat(key) {
+        if (!draft) return;
+        var list = draft[key] || [];
+
+        if (key === 'itinerary') {
+          var box = $('#itineraryList');
+          if (!box) return;
+          box.innerHTML = list.map(function (it, i) {
+            return '<div class="repeat-item">' +
+              '<div class="repeat-num">' + (i + 1) + '</div>' +
+              '<div class="repeat-fields">' +
+                '<div style="display:grid;grid-template-columns:140px 1fr;gap:10px">' +
+                  '<input type="text" class="field-input in mono" data-path="itinerary.' + i + '.time" value="' + esc(it.time) + '" placeholder="Day 01 / Time">' +
+                  '<input type="text" class="field-input in" data-path="itinerary.' + i + '.title" value="' + esc(it.title) + '" placeholder="Phase Title (e.g. Basecamp Ascend)">' +
+                '</div>' +
+                '<textarea class="field-input in" data-path="itinerary.' + i + '.desc" rows="2" placeholder="Phase description and trek milestones...">' + esc(it.desc) + '</textarea>' +
+              '</div>' +
+              '<div class="repeat-actions">' +
+                '<button type="button" class="btn sm icon-only" data-mv="itinerary:' + i + ':-1"' + (i === 0 ? ' disabled' : '') + '><i class="fa-solid fa-arrow-up"></i></button>' +
+                '<button type="button" class="btn sm icon-only" data-mv="itinerary:' + i + ':1"' + (i === list.length - 1 ? ' disabled' : '') + '><i class="fa-solid fa-arrow-down"></i></button>' +
+                '<button type="button" class="btn danger sm icon-only" data-rm="itinerary:' + i + '"><i class="fa-regular fa-trash-can"></i></button>' +
+              '</div>' +
+            '</div>';
+          }).join('');
+        }
+
+        if (key === 'pickups') {
+          var box = $('#pickupsList');
+          if (!box) return;
+          box.innerHTML = list.map(function (pk, i) {
+            return '<div class="repeat-item">' +
+              '<div class="repeat-num"><i class="fa-solid fa-map-pin"></i></div>' +
+              '<div class="repeat-fields">' +
+                '<div style="display:grid;grid-template-columns:1fr 120px 1fr;gap:10px">' +
+                  '<input type="text" class="field-input in" data-path="pickups.' + i + '.place" value="' + esc(pk.place) + '" placeholder="Pickup Station / Hub">' +
+                  '<input type="text" class="field-input in mono" data-path="pickups.' + i + '.time" value="' + esc(pk.time) + '" placeholder="09:30 PM">' +
+                  '<input type="text" class="field-input in" data-path="pickups.' + i + '.landmark" value="' + esc(pk.landmark) + '" placeholder="Near Landmark / Gate">' +
+                '</div>' +
+                '<label style="display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--muted)">' +
+                  '<input type="radio" name="recPickup" data-rec="' + i + '"' + (pk.recommended ? ' checked' : '') + ' style="accent-color:var(--brand)"> Recommended Default Hub' +
+                '</label>' +
+              '</div>' +
+              '<div class="repeat-actions">' +
+                '<button type="button" class="btn sm icon-only" data-mv="pickups:' + i + ':-1"' + (i === 0 ? ' disabled' : '') + '><i class="fa-solid fa-arrow-up"></i></button>' +
+                '<button type="button" class="btn sm icon-only" data-mv="pickups:' + i + ':1"' + (i === list.length - 1 ? ' disabled' : '') + '><i class="fa-solid fa-arrow-down"></i></button>' +
+                '<button type="button" class="btn danger sm icon-only" data-rm="pickups:' + i + '"><i class="fa-regular fa-trash-can"></i></button>' +
+              '</div>' +
+            '</div>';
+          }).join('');
+        }
+
+        syncCounts();
+      }
+
+      function syncCounts() {
+        if (!draft) return;
+        var itCard = $('#card-itinerary .count');
+        if (itCard) itCard.textContent = (draft.itinerary || []).length;
+        var pkCard = $('#card-pickups .count');
+        if (pkCard) pkCard.textContent = (draft.pickups || []).length;
+      }
+
+      function renderCustomSelects() {
+        document.querySelectorAll('#editorForm .custom-select[data-select-key]').forEach(function (el) {
+          var key = el.getAttribute('data-select-key');
+          var opts = SELECT_OPTS[key] || [];
+          var curVal = draft ? draft[key] : '';
+
+          var curLabel = curVal || 'Select';
+          var optItems = opts.map(function (o) {
+            var val = typeof o === 'object' ? o.id : o;
+            var lbl = typeof o === 'object' ? (o.label || o.name || o.id) : o;
+            if (val === curVal) curLabel = lbl;
+            return { val: val, label: lbl };
+          });
+
+          el.innerHTML = '<button type="button" class="custom-select-btn">' +
+            '<span>' + esc(curLabel) + '</span>' +
+            '<i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--muted)"></i>' +
+          '</button>' +
+          '<div class="custom-select-menu" hidden>' +
+            optItems.map(function (o) {
+              var sel = o.val === curVal;
+              return '<button type="button" class="custom-select-opt' + (sel ? ' is-selected' : '') + '" data-val="' + esc(o.val) + '">' +
+                '<span>' + esc(o.label) + '</span>' +
+                (sel ? '<i class="fa-solid fa-check" style="font-size:10px"></i>' : '') +
+              '</button>';
+            }).join('') +
+          '</div>';
+
+          var btn = el.querySelector('.custom-select-btn');
+          var menu = el.querySelector('.custom-select-menu');
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isHidden = menu.hidden;
+            document.querySelectorAll('.custom-select-menu').forEach(function (m) { m.hidden = true; });
+            menu.hidden = !isHidden;
+          });
+
+          menu.querySelectorAll('.custom-select-opt').forEach(function (opt) {
+            opt.addEventListener('click', function (e) {
+              e.stopPropagation();
+              var v = opt.getAttribute('data-val');
+              if (draft) {
+                draft[key] = v;
+                renderCustomSelects();
+                renderPreview();
+                renderList();
+                setStatus();
+              }
+              menu.hidden = true;
+            });
+          });
+        });
+      }
+
+      document.addEventListener('click', function () {
+        document.querySelectorAll('.custom-select-menu').forEach(function (m) { m.hidden = true; });
+      });
+
+      function renderPreview() {
+        if (!draft) return;
+        $('#pvImg').src = draft.hero || 'assets/placeholder.jpg';
+        $('#pvName').textContent = draft.name || 'Untitled Trip';
+        $('#pvRating').textContent = (draft.rating || 4.9).toFixed(1);
+        $('#pvMeta').textContent = (draft.days || 1) + ' Days • ' + (draft.grade || 'Moderate');
+        $('#pvPrice').textContent = inr(draft.price);
+
+        // Update Coordinator Live Preview
+        var g = draft.guide || {};
+        var gPhoto = g.photo || g.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80';
+        var cpImg = $('#coordPvImg');
+        var cpRole = $('#coordPvRole');
+        var cpName = $('#coordPvName');
+        var cpBio = $('#coordPvBio');
+        if (cpImg) cpImg.src = gPhoto;
+        if (cpRole) cpRole.textContent = g.role || 'Chief Road Marshal & Himalayan Medic';
+        if (cpName) cpName.textContent = g.name || 'Coordinator Name';
+        if (cpBio) cpBio.textContent = g.bio || 'Experienced outdoor guide and wilderness responder.';
+      }
+
+      function renderGalleryInputs() {
+        var box = $('#galleryList');
+        if (!box || !draft) return;
+        box.innerHTML = (draft.gallery || []).slice(0, 4).map(function (g, i) {
+          return '<div style="background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-md);padding:12px;display:flex;flex-direction:column;gap:8px">' +
+            '<span style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--muted)">Gallery Slot 0' + (i + 1) + '</span>' +
+            '<img src="' + (g.src || '') + '" alt="" style="aspect-ratio:4/3;border-radius:8px;object-fit:cover;background:var(--panel-3);border:1px solid var(--line)">' +
+            '<input type="text" class="field-input in mono sm" data-path="gallery.' + i + '.src" value="' + esc(g.src) + '" placeholder="Image URL">' +
+            '<input type="text" class="field-input in sm" data-path="gallery.' + i + '.alt" value="' + esc(g.alt) + '" placeholder="Alt description">' +
+          '</div>';
+        }).join('');
+      }
+
+      function renderEditor() {
+        var form = $('#editorForm');
+        var empty = $('#empty');
+        if (!draft) {
+          form.hidden = true;
+          empty.hidden = false;
+          return;
+        }
+        form.hidden = false;
+        empty.hidden = true;
+
+        document.querySelectorAll('#editorForm [data-path]').forEach(function (el) {
+          var path = el.getAttribute('data-path');
+          var parts = path.split('.');
+          var v = draft;
+          for (var k = 0; k < parts.length; k++) {
+            if (v == null) break;
+            v = v[parts[k]];
+          }
+          if (path === 'guide.photo' && v == null && draft.guide) {
+            v = draft.guide.avatar;
+          }
+          if (Array.isArray(v) && (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT')) {
+            el.value = v.join('\n');
+          } else {
+            el.value = (v != null ? v : '');
+          }
+        });
+
+        renderCustomSelects();
+        renderBadges();
+        renderRepeat('itinerary');
+        renderRepeat('pickups');
+        renderGalleryInputs();
+        renderPreview();
+      }
+
+      /* Data Path Change Listener */
+      document.addEventListener('input', function (e) {
+        var el = e.target.closest('[data-path]');
+        if (!el || !draft) return;
+        var path = el.getAttribute('data-path');
+        var parts = path.split('.');
+        var target = draft;
+        for (var k = 0; k < parts.length - 1; k++) {
+          if (!target[parts[k]]) target[parts[k]] = {};
+          target = target[parts[k]];
+        }
+        var last = parts[parts.length - 1];
+        var val = el.value;
+
+        if (el.type === 'number') val = val === '' ? 0 : Number(val);
+        else if (path === 'included' || path === 'excluded') val = val.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+
+        target[last] = val;
+        if (path === 'guide.photo') {
+          target['avatar'] = val;
+        }
+        renderPreview();
+        renderList();
+        setStatus();
+      });
+
+      /* Click actions */
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+
+        var catBtn = t.closest('.chip-btn[data-cat]');
+        if (catBtn) {
+          categoryFilter = catBtn.getAttribute('data-cat');
+          renderCats();
+          renderList();
+          return;
+        }
+
+        var tripRow = t.closest('.trip-item[data-id]');
+        if (tripRow) {
+          selectTrip(tripRow.getAttribute('data-id'));
+          return;
+        }
+
+        var addBadge = t.closest('#addBadgeBtn');
+        if (addBadge) {
+          var inp = $('#badgeIn');
+          if (inp && inp.value.trim()) {
+            if (!draft.badges) draft.badges = [];
+            draft.badges.push(inp.value.trim());
+            inp.value = '';
+            renderBadges();
+            setStatus();
+          }
+          return;
+        }
+
+        var badgeRm = t.closest('[data-badge-rm]');
+        if (badgeRm && draft) {
+          draft.badges.splice(Number(badgeRm.getAttribute('data-badge-rm')), 1);
+          renderBadges();
+          setStatus();
+          return;
+        }
+
+        var addBtn = t.closest('[data-add]');
+        if (addBtn && draft) {
+          var k = addBtn.getAttribute('data-add');
+          if (k === 'itinerary') {
+            if (!draft.itinerary) draft.itinerary = [];
+            draft.itinerary.push({ time: 'Day ' + (draft.itinerary.length + 1), title: '', desc: '' });
+          } else if (k === 'pickups') {
+            if (!draft.pickups) draft.pickups = [];
+            draft.pickups.push({ place: '', time: '', landmark: '', recommended: draft.pickups.length === 0 });
+          }
+          renderRepeat(k);
+          setStatus();
+          return;
+        }
+
+        var rmBtn = t.closest('[data-rm]');
+        if (rmBtn && draft) {
+          var pair = rmBtn.getAttribute('data-rm').split(':');
+          draft[pair[0]].splice(Number(pair[1]), 1);
+          renderRepeat(pair[0]);
+          setStatus();
+          return;
+        }
+
+        var mvBtn = t.closest('[data-mv]');
+        if (mvBtn && draft) {
+          var parts = mvBtn.getAttribute('data-mv').split(':');
+          var arrKey = parts[0], idx = Number(parts[1]), delta = Number(parts[2]);
+          var arr = draft[arrKey];
+          var nextIdx = idx + delta;
+          if (nextIdx >= 0 && nextIdx < arr.length) {
+            var temp = arr[idx];
+            arr[idx] = arr[nextIdx];
+            arr[nextIdx] = temp;
+            renderRepeat(arrKey);
+            setStatus();
+          }
+          return;
+        }
+
+        if (t.closest('#saveBtn')) { save(); return; }
+        if (t.closest('#newBtn')) { newTrip(); return; }
+        if (t.closest('#delBtn')) { del(); return; }
+        if (t.closest('#dupBtn')) { duplicate(); return; }
+        if (t.closest('#revertBtn')) { revert(); return; }
+      });
+
+      document.addEventListener('change', function (e) {
+        var r = e.target.getAttribute && e.target.getAttribute('data-rec');
+        if (r != null && draft && draft.pickups) {
+          draft.pickups.forEach(function (p, i) { p.recommended = i === Number(r); });
+          renderRepeat('pickups');
+          setStatus();
+        }
+      });
+
+      $('#filter').addEventListener('input', renderList);
+
+      /* Keyboard Shortcuts */
+      document.addEventListener('keydown', function (e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+          e.preventDefault();
+          if (tab === 'trips' && draft) save();
+        }
+        if (e.target.id === 'badgeIn' && e.key === 'Enter') {
+          e.preventDefault();
+          $('#addBadgeBtn').click();
+        }
+      });
+
+      /* ================= Trip CRUD Actions ================= */
+      function blankTrip() {
+        return {
+          id: 'new-trail-' + Date.now().toString(36),
+          name: 'New Mountain Trip',
+          short: 'New Trip',
+          days: 2,
+          grade: 'Moderate',
+          slots: 14,
+          price: 1499,
+          category: DATA.categories[0] || 'Western Ghats',
+          region: 'Maharashtra, India',
+          hero: 'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80',
+          heroAlt: 'Trip Trail View',
+          dates: 'Every Sat – Sun Departure',
+          difficulty: '1,400m Peak',
+          summary: 'Authentic high-mountain trek with scenic valleys and campsite setup.',
+          badges: ['New Trip', 'Weekend Batch'],
+          itinerary: [
+            { time: 'Day 01 - 09:30 PM', title: 'Basecamp Assembly', desc: 'Board private coach and travel to trail basecamp.' },
+            { time: 'Day 02 - 05:30 AM', title: 'Summit Ascent', desc: 'Trek through panoramic mountain ridges to the peak.' }
+          ],
+          pickups: [
+            { place: 'Dadar Station Central', time: '09:30 PM', landmark: 'Swami Narayan Temple', recommended: true }
+          ],
+          included: ['Certified Lead Guide', 'Trail Meals', 'First Response Kit'],
+          excluded: ['Personal Porter', 'Travel to Pickup'],
+          guide: { name: 'Lead Coordinator', role: 'Certified Mountaineer', avatar: '', bio: '10+ years experience.' },
+          gallery: [
+            { src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }, { src: '', alt: '' }
+          ],
+          rating: 4.9,
+          reviews: 120
+        };
+      }
+
+      function selectTrip(id) {
+        if (!guard()) return;
+        var t = DATA.trips.find(function (x) { return x.id === id; });
+        if (!t) return;
+        draft = JSON.parse(JSON.stringify(t));
+        if (!draft.gallery) draft.gallery = [];
+        while (draft.gallery.length < 4) draft.gallery.push({ src: '', alt: '' });
+        originalId = id;
+        clean = JSON.stringify(draft);
+        try { history.replaceState(null, '', '#' + id); } catch (e) {}
+        renderList();
+        renderEditor();
+        setStatus();
+      }
+
+      function newTrip() {
+        if (!guard()) return;
+        draft = blankTrip();
+        originalId = null;
+        clean = '';
+        renderList();
+        renderEditor();
+        setStatus();
+        toast('New draft initialized', 'ok');
+      }
+
+      function save(isAuto) {
+        if (!draft) return;
+        var isNew = originalId === null;
+
+        (isNew ? api('POST', '/api/trips', draft) : api('PUT', '/api/trips/' + encodeURIComponent(originalId), draft))
+          .then(function (r) {
+            return api('GET', '/api/trips').then(function (all) {
+              DATA = all;
+              originalId = r.trip.id;
+              clean = JSON.stringify(draft);
+              renderCats();
+              renderList();
+              if (!isAuto) {
+                toast(isNew ? 'Trip created' : 'Changes saved', 'ok');
+              }
+              return api('GET', '/api/payments').then(function (p) { PAY = p; });
+            });
+          })
+          .catch(function (err) {
+            if (!isAuto) {
+              toast(err.errors ? err.errors[0] : err.message, 'err');
+            }
+          });
+      }
+
+      function del() {
+        if (!draft) return;
+        if (!confirm('Are you sure you want to delete "' + draft.name + '"?\nThis will immediately update assets/data.js and keep a backup in assets/backups/.')) return;
+        api('DELETE', '/api/trips/' + encodeURIComponent(originalId) + '?force=1')
+          .then(function () {
+            return api('GET', '/api/trips').then(function (all) {
+              DATA = all;
+              draft = null;
+              originalId = null;
+              clean = '';
+              renderList();
+              renderEditor();
+              toast('Trip deleted', 'ok');
+            });
+          })
+          .catch(function (err) { toast(err.message, 'err'); });
+      }
+
+      function duplicate() {
+        if (!originalId || !guard()) return;
+        api('POST', '/api/trips/' + encodeURIComponent(originalId) + '/duplicate')
+          .then(function (r) {
+            return api('GET', '/api/trips').then(function (all) {
+              DATA = all;
+              renderList();
+              selectTrip(r.trip.id);
+              toast('Duplicated as ' + r.trip.id, 'ok');
+            });
+          })
+          .catch(function (err) { toast(err.message, 'err'); });
+      }
+
+      function revert() {
+        if (!isDirty()) { toast('No unsaved changes'); return; }
+        if (!confirm('Discard all unsaved edits?')) return;
+        selectTrip(originalId);
+        toast('Changes reverted', 'ok');
+      }
+
+      /* ================= Payments & Roster Logic ================= */
+      function refreshPayments() {
+        return api('GET', '/api/payments').then(function (p) {
+          PAY = p;
+          renderPaymentsGlobal();
+        });
+      }
+
+      function renderPaymentsGlobal() {
+        if (!PAY) return;
+        $('#payGlobal').hidden = false;
+        $('#payDetail').hidden = true;
+
+        var totalRev = 0, totalMem = 0, totalPending = 0;
+        PAY.trips.forEach(function (t) {
+          totalRev += (t.revenue || 0);
+          totalMem += (t.members || 0);
+          totalPending += (t.pendingBalance || 0);
+        });
+
+        $('#statRevenue').textContent = inr(totalRev);
+        $('#statMembers').textContent = totalMem;
+        $('#statPending').textContent = inr(totalPending);
+        $('#statTrips').textContent = PAY.trips.length;
+
+        var box = $('#payTripList');
+        box.innerHTML = PAY.trips.map(function (t) {
+          var pct = Math.min(100, Math.round((t.members / (t.slots || 14)) * 100));
+          return '<tr>' +
+            '<td style="font-weight:700;color:var(--ink)">' + esc(t.name) + '</td>' +
+            '<td class="mono" style="font-size:12px">' + esc(t.dates) + '</td>' +
+            '<td class="mono" style="font-weight:700">' + inr(t.price) + '</td>' +
+            '<td><span class="status-badge paid"><i class="fa-solid fa-user-check"></i> ' + t.members + '</span></td>' +
+            '<td>' +
+              '<div style="display:flex;align-items:center;gap:8px">' +
+                '<div style="width:70px;height:6px;background:var(--line);border-radius:4px;overflow:hidden">' +
+                  '<div style="width:' + pct + '%;height:100%;background:var(--brand)"></div>' +
+                '</div>' +
+                '<span style="font-size:11px;font-weight:700;color:var(--muted)">' + pct + '%</span>' +
+              '</div>' +
+            '</td>' +
+            '<td class="mono" style="font-weight:800;color:var(--brand)">' + inr(t.revenue) + '</td>' +
+            '<td>' +
+              '<button type="button" class="btn sm" onclick="window.RoamlyAdminOpenTrip(\'' + esc(t.id) + '\')">' +
+                '<i class="fa-solid fa-clipboard-user"></i> Manage Roster' +
+              '</button>' +
+            '</td>' +
+          '</tr>';
+        }).join('');
+      }
+
+      window.RoamlyAdminOpenTrip = function (id) {
+        payTripId = id;
+        var trip = DATA.trips.find(function (t) { return t.id === id; });
+        var payStat = PAY ? PAY.trips.find(function (t) { return t.id === id; }) : null;
+        if (!trip) return;
+
+        $('#payGlobal').hidden = true;
+        $('#payDetail').hidden = false;
+
+        $('#payTripHead').innerHTML = '<div style="display:flex;align-items:center;gap:14px">' +
+          '<img src="' + trip.hero + '" style="width:48px;height:48px;border-radius:12px;object-fit:cover">' +
+          '<div>' +
+            '<h3 style="font-size:18px;font-weight:800;letter-spacing:-0.02em">' + esc(trip.name) + '</h3>' +
+            '<p style="font-size:11.5px;font-weight:600;color:var(--muted)">' + esc(trip.dates) + ' • Fee: ' + inr(trip.price) + ' • Registered: ' + (payStat ? payStat.members : 0) + '/' + trip.slots + ' Slots</p>' +
+          '</div>' +
+        '</div>';
+
+        // Populate modal pickup options
+        var pickInput = $('#m-pickup');
+        var pickLabel = $('#m-pickup-label');
+        var pickMenu = $('#m-pickup-menu');
+        var pickups = trip.pickups || [];
+        if (pickInput && pickLabel && pickMenu) {
+          if (pickups.length > 0) {
+            pickInput.value = '0';
+            pickLabel.textContent = pickups[0].place + ' (' + pickups[0].time + ')';
+            pickMenu.innerHTML = pickups.map(function (pk, i) {
+              return '<button type="button" class="custom-select-opt' + (i === 0 ? ' is-selected' : '') + '" data-val="' + i + '">' +
+                '<span>' + esc(pk.place + ' (' + pk.time + ')') + '</span>' +
+                (i === 0 ? '<i class="fa-solid fa-check" style="font-size:10px"></i>' : '') +
+              '</button>';
+            }).join('');
+          } else {
+            pickInput.value = '0';
+            pickLabel.textContent = 'Basecamp Direct';
+            pickMenu.innerHTML = '<button type="button" class="custom-select-opt is-selected" data-val="0"><span>Basecamp Direct</span><i class="fa-solid fa-check" style="font-size:10px"></i></button>';
+          }
+        }
+
+        renderMembersRoster();
+      };
+
+      // Modal custom select dropdown binding
+      document.querySelectorAll('#addModal .custom-select').forEach(function (el) {
+        var btn = el.querySelector('.custom-select-btn');
+        var menu = el.querySelector('.custom-select-menu');
+        var hiddenInput = el.querySelector('input[type="hidden"]');
+        var labelSpan = btn ? btn.querySelector('span') : null;
+
+        if (btn && menu) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isHidden = menu.hidden;
+            document.querySelectorAll('.custom-select-menu').forEach(function (m) { m.hidden = true; });
+            menu.hidden = !isHidden;
+          });
+
+          menu.addEventListener('click', function (e) {
+            var opt = e.target.closest('.custom-select-opt');
+            if (!opt) return;
+            e.stopPropagation();
+            var val = opt.getAttribute('data-val');
+            var optSpan = opt.querySelector('span');
+            var text = optSpan ? optSpan.textContent : val;
+
+            if (hiddenInput) hiddenInput.value = val;
+            if (labelSpan) labelSpan.textContent = text;
+
+            menu.querySelectorAll('.custom-select-opt').forEach(function (o) {
+              var isSel = o === opt;
+              o.classList.toggle('is-selected', isSel);
+              var chk = o.querySelector('.fa-check');
+              if (isSel) {
+                if (!chk) o.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check" style="font-size:10px"></i>');
+              } else {
+                if (chk) chk.remove();
+              }
+            });
+
+            menu.hidden = true;
+          });
+        }
+      });
+
+      $('#backToPayBtn').addEventListener('click', function () {
+        $('#payGlobal').hidden = false;
+        $('#payDetail').hidden = true;
+      });
+
+      function renderMembersRoster() {
+        if (!payTripId) return;
+        api('GET', '/api/members?tripId=' + encodeURIComponent(payTripId)).then(function (res) {
+          var list = res.members || [];
+          var box = $('#payMembers');
+          if (list.length === 0) {
+            box.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--muted);font-weight:600">No climbers booked on this trip yet.</td></tr>';
+            return;
+          }
+          box.innerHTML = list.map(function (m) {
+            var isPaid = m.status === 'paid';
+            return '<tr>' +
+              '<td style="font-weight:700">' + esc(m.name) + '</td>' +
+              '<td><div>' + esc(m.email) + '</div><div class="mono" style="font-size:11px;color:var(--muted)">' + esc(m.phone) + '</div></td>' +
+              '<td>' + (m.age || '-') + ' / ' + esc(m.gender || '-') + '</td>' +
+              '<td>' + esc(m.pickupLocation || m.pickupId || 'Basecamp') + '</td>' +
+              '<td><span class="status-badge ' + (isPaid ? 'paid' : 'pending') + '">' + (isPaid ? 'Paid' : 'Pending') + '</span></td>' +
+              '<td>' +
+                '<button type="button" class="btn sm ' + (m.attended ? 'primary' : 'ghost') + '" onclick="window.RoamlyToggleAttendance(\'' + m.id + '\', ' + !m.attended + ')">' +
+                  (m.attended ? '<i class="fa-solid fa-check"></i> Present' : 'Mark Present') +
+                '</button>' +
+              '</td>' +
+              '<td>' +
+                '<button type="button" class="btn danger sm icon-only" onclick="window.RoamlyDeleteMember(\'' + m.id + '\')" title="Remove member"><i class="fa-regular fa-trash-can"></i></button>' +
+              '</td>' +
+            '</tr>';
+          }).join('');
+        });
+      }
+
+      window.RoamlyToggleAttendance = function (memberId, attended) {
+        api('PUT', '/api/members/' + memberId, { attended: attended }).then(function () {
+          renderMembersRoster();
+          toast('Attendance updated', 'ok');
+        });
+      };
+
+      window.RoamlyDeleteMember = function (memberId) {
+        if (!confirm('Remove this climber record?')) return;
+        api('DELETE', '/api/members/' + memberId).then(function () {
+          renderMembersRoster();
+          refreshPayments();
+          toast('Member removed', 'ok');
+        });
+      };
+
+      $('#addMemberBtn').addEventListener('click', function () {
+        $('#addModal').hidden = false;
+        $('#m-name').focus();
+      });
+      $('#closeAddModal').addEventListener('click', function () {
+        $('#addModal').hidden = true;
+      });
+
+      $('#addForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var f = new FormData(e.target);
+        var m = { tripId: payTripId };
+        f.forEach(function (v, k) { m[k] = v; });
+
+        api('POST', '/api/members', m).then(function (r) {
+          $('#addModal').hidden = true;
+          e.target.reset();
+          renderMembersRoster();
+          refreshPayments();
+          toast(r.member.name + ' added to roster', 'ok');
+        }).catch(function (err) {
+          toast(err.errors ? err.errors[0] : err.message, 'err');
+        });
+      });
+
+      $('#downloadRosterBtn').addEventListener('click', function () {
+        if (!payTripId) return;
+        window.open('/api/download-itinerary?tripId=' + encodeURIComponent(payTripId), '_blank');
+      });
+
+      /* ================= Initial Boot ================= */
+      Promise.all([api('GET', '/api/trips'), api('GET', '/api/payments')])
+        .then(function (r) {
+          DATA = r[0];
+          PAY = r[1];
+          renderCats();
+          renderList();
+
+          var h = decodeURIComponent(location.hash.slice(1));
+          if (h.indexOf('pay/') === 0) {
+            var wanted = h.slice(4);
+            setTab('payments');
+            if (DATA.trips.some(function (t) { return t.id === wanted; })) window.RoamlyAdminOpenTrip(wanted);
+          } else if (h === 'trips' || (h && DATA.trips.some(function (t) { return t.id === h; }))) {
+            setTab('trips');
+            if (h !== 'trips') selectTrip(h);
+          } else {
+            setTab('payments');
+          }
+        })
+        .catch(function (err) {
+          $('#empty').innerHTML = '<div class="empty-card" style="border-color:var(--danger-border)">' +
+            '<div class="empty-icon" style="background:var(--danger-bg);color:var(--danger)"><i class="fa-solid fa-plug-circle-xmark"></i></div>' +
+            '<h3 style="font-size:20px;font-weight:800;color:var(--danger)">API Connection Offline</h3>' +
+            '<p style="color:var(--muted);font-size:13px">Could not reach the local server: ' + esc(err.message) + '</p>' +
+            '<p style="font-size:12px;font-weight:700;margin-top:6px">Start the backend API server:<br><code class="mono" style="background:#fff;border:1px solid var(--line);padding:3px 8px;border-radius:6px;display:inline-block;margin-top:6px">node server.js</code></p>' +
+          '</div>';
+        });
+
+    })();
+  </script>
+</body>
+
+</html>

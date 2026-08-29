@@ -102,7 +102,7 @@
       <h2 class="font-display font-black text-2xl tracking-tighter text-accent mb-8 uppercase">Order Ledger</h2>
       <div id="summary"></div>
       <button type="submit" form="payForm" id="authorize"
-        class="w-full bg-brand text-accent py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 transition-all shadow-lg shadow-black/30">
+        class="rm-btn rm-btn-primary w-full py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter shadow-lg shadow-black/30">
         <span id="authLabel">Authorize</span>
       </button>
       <p class="mt-8 flex items-center justify-center gap-3 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
@@ -126,7 +126,7 @@
 
   document.getElementById('summary').innerHTML = R.summaryBody({ dark: true, deposit: true });
   document.getElementById('qrNote').textContent =
-    dep > 0 ? 'Scan to authorize ' + R.inr(dep) + ' deposit' : 'No payment needed — this trail is free';
+    dep > 0 ? 'Scan to authorize ' + R.inr(dep) + ' deposit' : 'No payment needed — this trip is free';
   document.getElementById('authLabel').textContent =
     dep > 0 ? 'Authorize ' + R.inr(dep) : 'Confirm Free Slot';
 
