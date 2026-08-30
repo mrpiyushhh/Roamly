@@ -6,7 +6,9 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" }
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/login", "destination": "/admin-login.html" },
+    { "source": "/admin-login", "destination": "/admin-login.html" }
   ],
   "headers": [
     {
@@ -31,6 +33,12 @@
     },
     {
       "source": "/admin.html",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/admin-login.html",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
       ]

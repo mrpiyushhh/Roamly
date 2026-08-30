@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Roamly — Admin Authentication</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/theme.js"></script>
+  <link rel="stylesheet" href="assets/roamly.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%231a4332'/><text y='.9em' x='-0.05em' font-size='82' font-family='sans-serif' font-weight='900' font-style='italic' fill='%23e9f5db'>R.</text></svg>">
+
+  <style>
+    :root {
+      --brand: #1a4332;
+      --brand-dark: #0f291e;
+      --accent: #d4f27a;
+      --accent-soft: #e9f5db;
+      --canvas: #f8f9fa;
+      --ink: #0a0a0a;
+      --muted: #666666;
+    }
+
+    body {
+      background: #0d1a14;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(26, 67, 50, 0.45) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(212, 242, 122, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(13, 26, 20, 0.9) 0px, transparent 100%);
+      min-height: 100vh;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .field-wrap:focus-within .field-icon {
+      color: var(--brand);
+    }
+  </style>
+</head>
+
+<body class="antialiased flex flex-col justify-between p-4 sm:p-6 md:p-8">
+
+  <!-- Header / Brand -->
+  <header class="max-w-6xl w-full mx-auto flex items-center justify-between py-2">
+    <a href="index.html" class="flex items-center gap-2.5 group transition-transform hover:scale-[1.02]">
+      <span class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand text-accent flex items-center justify-center font-display font-black text-base italic shadow-brand border border-white/20">
+        R.
+      </span>
+      <div class="flex flex-col">
+        <span class="font-display font-black text-lg sm:text-xl tracking-tight text-white uppercase leading-none">
+          Roamly
+        </span>
+        <span class="text-[9px] font-black uppercase tracking-[0.25em] text-accent/80 mt-0.5">
+          Admin Portal
+        </span>
+      </div>
+    </a>
+
+    <a href="index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white/90 text-xs font-bold uppercase tracking-wider transition-all">
+      <i class="fa-solid fa-arrow-left text-[10px]"></i>
+      <span class="hidden sm:inline">Back to Live Site</span>
+      <span class="sm:hidden">Site</span>
+    </a>
+  </header>
+
+  <!-- Login Main Container -->
+  <main class="w-full max-w-md mx-auto my-8 sm:my-12">
+    <div class="login-card rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 relative overflow-hidden">
+      
+      <!-- Top Badge -->
+      <div class="flex items-center justify-between mb-6">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand/10 text-brand text-[9px] font-black uppercase tracking-widest rounded-full border border-brand/15">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
+          Secure Access
+        </span>
+      </div>
+
+      <div class="mb-8">
+        <h1 class="font-display text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-ink mb-2">
+          Command <span class="text-brand italic">Center.</span>
+        </h1>
+        <p class="text-muted text-xs sm:text-sm font-medium leading-relaxed">
+          Sign in with your verified administrator credentials to manage trip logistics, rosters, and finances.
+        </p>
+      </div>
+
+      <!-- Error / Alert Banner -->
+      <div id="authAlert" class="hidden mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-start gap-3 transition-all" role="alert">
+        <i class="fa-solid fa-circle-exclamation text-base text-red-600 mt-0.5 shrink-0"></i>
+        <div class="flex-1" id="authAlertMsg">Invalid credentials.</div>
+      </div>
+
+      <!-- Success Banner -->
+      <div id="authSuccess" class="hidden mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-3 transition-all">
+        <i class="fa-solid fa-circle-check text-base text-emerald-600 shrink-0"></i>
+        <div class="flex-1">Authentication verified. Launching dashboard…</div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="adminLoginForm" class="space-y-4 sm:space-y-5" novalidate>
+        
+        <!-- Email Input -->
+        <div class="field-wrap">
+          <label for="adminEmail" class="field-label mb-1.5 block">Admin Email</label>
+          <div class="relative">
+            <span class="field-icon absolute left-4 top-1/2 -translate-y-1/2 text-muted transition-colors text-sm pointer-events-none">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+            <input type="email" id="adminEmail" name="email" required autocomplete="username"
+                   placeholder="admin@roamly.com"
+                   class="field-input !pl-11 h-12 text-sm font-bold bg-surface hover:bg-white border-2 border-border-subtle focus:border-brand rounded-2xl transition-all">
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="field-wrap">
+          <div class="flex items-center justify-between mb-1.5">
+            <label for="adminPassword" class="field-label !mb-0">Password</label>
+            <button type="button" id="forgotBtn" class="text-[10px] font-extrabold uppercase tracking-wider text-muted hover:text-brand transition-colors">
+              Forgot?
+            </button>
+          </div>
+          <div class="relative">
+            <span class="field-icon absolute left-4 top-1/2 -translate-y-1/2 text-muted transition-colors text-sm pointer-events-none">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input type="password" id="adminPassword" name="password" required autocomplete="current-password"
+                   placeholder="••••••••••••"
+                   class="field-input !pl-11 !pr-11 h-12 text-sm font-bold bg-surface hover:bg-white border-2 border-border-subtle focus:border-brand rounded-2xl transition-all">
+            <button type="button" id="togglePasswordBtn" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink p-1 text-sm transition-colors" aria-label="Toggle password visibility">
+              <i class="fa-solid fa-eye" id="togglePasswordIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="loginSubmitBtn"
+                class="w-full py-4 rounded-2xl bg-brand text-accent font-black text-sm uppercase tracking-wider hover:bg-brand-dark hover:scale-[1.01] active:scale-[0.99] transition-all shadow-brand flex items-center justify-center gap-2 mt-6 cursor-pointer">
+          <span id="btnText">Sign In to Dashboard</span>
+          <i class="fa-solid fa-arrow-right text-xs" id="btnIcon"></i>
+          <span id="btnSpinner" class="hidden">
+            <i class="fa-solid fa-spinner animate-spin text-sm"></i>
+          </span>
+        </button>
+
+      </form>
+
+      <!-- Footer Info -->
+      <div class="mt-8 pt-6 border-t border-border-subtle flex items-center justify-between text-[11px] text-muted font-semibold">
+        <span class="flex items-center gap-1.5">
+          <i class="fa-solid fa-lock text-[10px]"></i> 256-bit TLS Encrypted
+        </span>
+        <span>RLS Protected</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bottom Footer -->
+  <footer class="max-w-6xl w-full mx-auto text-center py-2 text-xs font-medium text-white/40">
+    &copy; 2026 Roamly Expeditions. Restricted administrative access.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/admin-config.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      var cfg = window.ROAMLY_SUPABASE || {};
+      if (!cfg.url || !cfg.anonKey) {
+        showAlert('Supabase configuration missing in assets/admin-config.js.');
+        return;
+      }
+
+      var sb = window.supabase.createClient(cfg.url, cfg.anonKey, {
+        auth: { persistSession: true, autoRefreshToken: true }
+      });
+
+      var form = document.getElementById('adminLoginForm');
+      var emailInput = document.getElementById('adminEmail');
+      var passInput = document.getElementById('adminPassword');
+      var submitBtn = document.getElementById('loginSubmitBtn');
+      var btnText = document.getElementById('btnText');
+      var btnIcon = document.getElementById('btnIcon');
+      var btnSpinner = document.getElementById('btnSpinner');
+      var alertBox = document.getElementById('authAlert');
+      var alertMsg = document.getElementById('authAlertMsg');
+      var successBox = document.getElementById('authSuccess');
+      var togglePassBtn = document.getElementById('togglePasswordBtn');
+      var togglePassIcon = document.getElementById('togglePasswordIcon');
+      var forgotBtn = document.getElementById('forgotBtn');
+
+      function showAlert(msg) {
+        alertMsg.textContent = msg;
+        alertBox.classList.remove('hidden');
+        successBox.classList.add('hidden');
+      }
+
+      function hideAlert() {
+        alertBox.classList.add('hidden');
+      }
+
+      function setLoading(loading) {
+        submitBtn.disabled = loading;
+        if (loading) {
+          btnText.textContent = 'Authenticating…';
+          btnIcon.classList.add('hidden');
+          btnSpinner.classList.remove('hidden');
+        } else {
+          btnText.textContent = 'Sign In to Dashboard';
+          btnIcon.classList.remove('hidden');
+          btnSpinner.classList.add('hidden');
+        }
+      }
+
+      // Check if already authenticated
+      sb.auth.getSession().then(function (res) {
+        if (res.data && res.data.session) {
+          successBox.classList.remove('hidden');
+          successBox.querySelector('div').textContent = 'Session active. Redirecting to dashboard…';
+          setTimeout(function () {
+            window.location.replace('admin.html');
+          }, 350);
+        }
+      });
+
+      // Toggle password visibility
+      togglePassBtn.addEventListener('click', function () {
+        var isPass = passInput.type === 'password';
+        passInput.type = isPass ? 'text' : 'password';
+        togglePassIcon.className = isPass ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+      });
+
+      // Forgot password helper
+      forgotBtn.addEventListener('click', async function () {
+        var email = emailInput.value.trim();
+        if (!email) {
+          showAlert('Please enter your admin email address first.');
+          emailInput.focus();
+          return;
+        }
+        setLoading(true);
+        hideAlert();
+        var res = await sb.auth.resetPasswordForEmail(email, {
+          redirectTo: window.location.origin + '/admin-login.html'
+        });
+        setLoading(false);
+        if (res.error) {
+          showAlert(res.error.message);
+        } else {
+          successBox.classList.remove('hidden');
+          successBox.querySelector('div').textContent = 'Password reset instructions sent to ' + email;
+        }
+      });
+
+      // Handle sign-in submission
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideAlert();
+
+        var email = emailInput.value.trim();
+        var password = passInput.value;
+
+        if (!email || !password) {
+          showAlert('Please provide both email and password.');
+          return;
+        }
+
+        setLoading(true);
+
+        try {
+          var res = await sb.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
+
+          if (res.error) {
+            setLoading(false);
+            showAlert(res.error.message || 'Invalid email or password.');
+            passInput.value = '';
+            passInput.focus();
+            return;
+          }
+
+          successBox.classList.remove('hidden');
+          btnText.textContent = 'Success!';
+          setTimeout(function () {
+            window.location.replace('admin.html');
+          }, 350);
+
+        } catch (err) {
+          setLoading(false);
+          showAlert(err.message || 'Connection error. Please try again.');
+        }
+      });
+
+    })();
+  </script>
+</body>
+
+</html>

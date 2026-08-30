@@ -286,43 +286,20 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
   }
 
-  /* ---------- sign-in gate ---------- */
-  function gate() {
-    var el = d.createElement('div');
-    el.id = 'authGate';
-    el.innerHTML =
-      '<div class="auth-card">' +
-        '<div class="auth-mark">R</div>' +
-        '<h1>Roamly Admin</h1>' +
-        '<p>Sign in to manage trips and rosters.</p>' +
-        '<form id="authForm">' +
-          '<label>Email<input type="email" id="authEmail" required autocomplete="username"></label>' +
-          '<label>Password<input type="password" id="authPass" required autocomplete="current-password"></label>' +
-          '<p class="auth-err" id="authErr" hidden></p>' +
-          '<button type="submit" id="authBtn">Sign in</button>' +
-        '</form>' +
-      '</div>';
-    d.body.appendChild(el);
-
-    d.getElementById('authForm').addEventListener('submit', async function (ev) {
-      ev.preventDefault();
-      var btn = d.getElementById('authBtn'), err = d.getElementById('authErr');
-      btn.disabled = true; btn.textContent = 'Signing in…'; err.hidden = true;
-      var r = await sb.auth.signInWithPassword({
-        email: d.getElementById('authEmail').value.trim(),
-        password: d.getElementById('authPass').value
-      });
-      if (r.error) {
-        err.textContent = r.error.message;
-        err.hidden = false;
-        btn.disabled = false; btn.textContent = 'Sign in';
-        return;
-      }
-      location.reload();
-    });
+  /* ---------- sign-in gate & redirect ---------- */
+  function redirectToLogin() {
+    var path = (w.location.pathname || '').split('/').pop();
+    if (path !== 'admin-login.html' && path !== 'login.html') {
+      w.location.replace('admin-login.html');
+    }
   }
 
-  async function signOut() { await sb.auth.signOut(); location.reload(); }
+  async function signOut() {
+    try {
+      await sb.auth.signOut();
+    } catch (e) {}
+    w.location.replace('admin-login.html');
+  }
 
   /* ---------- boot ---------- */
   w.RoamlyBackend = {
@@ -331,9 +308,17 @@
     signOut: signOut,
     client: sb,
     ready: (async function () {
-      var s = await sb.auth.getSession();
-      if (!s.data.session) { gate(); return false; }
-      return true;
+      try {
+        var s = await sb.auth.getSession();
+        if (!s.data || !s.data.session) {
+          redirectToLogin();
+          return false;
+        }
+        return true;
+      } catch (err) {
+        redirectToLogin();
+        return false;
+      }
     })()
   };
 })(window, document);

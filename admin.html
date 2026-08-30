@@ -156,6 +156,27 @@
       gap: 6px;
     }
 
+    .admin-user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--panel-3);
+      border: 1px solid var(--line);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--brand);
+    }
+    .admin-user-pill i {
+      font-size: 11px;
+      color: var(--brand-light);
+    }
+
+    @media (max-width: 640px) {
+      .hidden-mobile { display: none !important; }
+    }
+
     /* Breadcrumbs */
     .breadcrumb-bar {
       display: flex;
@@ -1159,15 +1180,22 @@
 
     <!-- Top Action Buttons -->
     <div class="top-actions">
+      <div class="admin-user-pill" id="adminUserPill" style="display:none;" title="Authenticated administrator">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span id="adminUserEmail" class="mono">admin</span>
+      </div>
       <button type="button" class="btn ghost sm icon-only" id="topRefreshBtn" onclick="window.RoamlyRefreshData(true)" title="Refresh data">
         <i class="fa-solid fa-arrows-rotate"></i>
       </button>
       <button type="button" class="btn primary sm" id="topNewTripBtn" onclick="window.RoamlyNewTrip()">
-        <i class="fa-solid fa-plus"></i> New Trip
+        <i class="fa-solid fa-plus"></i> <span class="hidden-mobile">New Trip</span>
       </button>
       <a href="index.html" target="_blank" class="btn ghost sm" title="View live site">
         <span>Site</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i>
       </a>
+      <button type="button" class="btn ghost sm" id="topSignOutBtn" onclick="window.RoamlySignOut()" title="Sign out of Admin">
+        <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden-mobile">Sign Out</span>
+      </button>
     </div>
   </header>
 
@@ -2110,6 +2138,14 @@
         return window.RoamlyRefreshData(false);
       }
 
+      window.RoamlySignOut = function () {
+        if (window.RoamlyBackend) {
+          window.RoamlyBackend.signOut();
+        } else {
+          window.location.replace('admin-login.html');
+        }
+      };
+
       /* ================= Initial Boot & Hash Routing ================= */
       window.addEventListener('popstate', function () {
         if (!$('#addClientModal').hidden || !$('#editTripModal').hidden) {
@@ -2123,15 +2159,35 @@
         syncFromHash();
       });
 
-      Promise.all([api('GET', '/api/trips'), api('GET', '/api/payments')])
-        .then(function (r) {
-          DATA = r[0];
-          PAY = r[1];
-          syncFromHash();
-        })
-        .catch(function (err) {
-          toast('Failed to load data: ' + (err.message || 'Check server connection'), 'err');
-        });
+      async function boot() {
+        if (window.RoamlyBackend) {
+          var isAuthed = await window.RoamlyBackend.ready;
+          if (!isAuthed) return;
+
+          try {
+            var sess = await window.RoamlyBackend.client.auth.getSession();
+            if (sess && sess.data && sess.data.session && sess.data.session.user) {
+              var uEmail = sess.data.session.user.email;
+              var emailEl = $('#adminUserEmail');
+              var pillEl = $('#adminUserPill');
+              if (emailEl) emailEl.textContent = uEmail;
+              if (pillEl) pillEl.style.display = 'inline-flex';
+            }
+          } catch (e) {}
+        }
+
+        Promise.all([api('GET', '/api/trips'), api('GET', '/api/payments')])
+          .then(function (r) {
+            DATA = r[0];
+            PAY = r[1];
+            syncFromHash();
+          })
+          .catch(function (err) {
+            toast('Failed to load data: ' + (err.message || 'Check server connection'), 'err');
+          });
+      }
+
+      boot();
 
     })();
   </script>

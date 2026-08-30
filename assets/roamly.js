@@ -403,7 +403,7 @@
     return '<div class="pt-8 md:pt-12 border-t border-border-subtle flex flex-col md:flex-row ' +
       'justify-between items-center gap-4 md:gap-6 text-center md:text-left">' +
       '<p class="text-[10px] font-bold uppercase tracking-widest text-muted">' +
-        '© 2026 Roamly Adventures Pvt Ltd. All rights reserved.</p>' +
+        '© 2026 Piyush Yadav. All rights reserved.</p>' +
       '<div class="flex flex-wrap justify-center gap-6 sm:gap-8 text-[10px] font-bold uppercase tracking-widest text-muted">' +
         '<a href="index.html" class="hover:text-brand">Back to Base</a>' +
         '<a href="#" class="hover:text-brand">Privacy</a>' +

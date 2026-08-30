@@ -382,7 +382,7 @@ function buildRosterPDF(trip, members, opts) {
 
     // footer
     c += line(L, BOTTOM + 16, R, BOTTOM + 16, 0.7);
-    c += txt(L, BOTTOM, 'Roamly Adventures Pvt Ltd  ·  carry a photo ID  ·  reporting times are fixed', 8, false);
+    c += txt(L, BOTTOM, 'Piyush Yadav  ·  carry a photo ID  ·  reporting times are fixed', 8, false);
     c += txt(R - 92, BOTTOM, `Page ${pi + 1} of ${pages.length}`, 8, false);
     return c;
   });
@@ -452,6 +452,7 @@ function serveStatic(req, res, urlPath) {
   let rel = decodeURIComponent(urlPath.split('?')[0]);
   if (rel === '/')      rel = '/index.html';
   if (rel === '/admin') rel = '/admin.html';
+  if (rel === '/login' || rel === '/admin-login') rel = '/admin-login.html';
   const file = path.join(ROOT, rel);
   if (!file.startsWith(ROOT + path.sep)) return json(res, 403, { error:'forbidden' });
   fs.stat(file, (err, st) => {
