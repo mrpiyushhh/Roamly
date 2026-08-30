@@ -28,13 +28,20 @@
 
   /* ---------- state ---------- */
   var state = null;
-  var hashPlacer = null;   // set in mount(); backs Roamly.scrollToHash
 
   function readQuery() {
     try {
+      var result = null;
       var m = w.location.search.match(/[?&]s=([^&]+)/);
-      if (!m) return null;
-      return JSON.parse(decodeURIComponent(m[1]));
+      if (m) {
+        result = JSON.parse(decodeURIComponent(m[1]));
+      }
+      var tMatch = w.location.search.match(/[?&](?:trip|id)=([^&]+)/);
+      if (tMatch) {
+        if (!result) result = {};
+        result.trip = decodeURIComponent(tMatch[1]);
+      }
+      return result;
     } catch (e) { return null; }
   }
 
@@ -50,7 +57,9 @@
 
   function load() {
     if (state) return state;
-    var s = readQuery() || readStore() || {};
+    var queryState = readQuery();
+    var storeState = readStore() || {};
+    var s = queryState ? Object.assign({}, storeState, queryState) : storeState;
     state = {};
     for (var k in DEFAULTS) {
       if (Object.prototype.hasOwnProperty.call(DEFAULTS, k)) {
@@ -58,6 +67,7 @@
       }
     }
     if (state.pax < 1) state.pax = 1;
+    writeStore(state);
     return state;
   }
 
@@ -87,8 +97,10 @@
   /* ---------- derived ---------- */
   function trip() { return w.RoamlyData.byId(load().trip); }
   function total() { return trip().price * load().pax; }
-  function deposit() { return Math.min(w.RoamlyData.DEPOSIT, total()); }
-  function balance() { return Math.max(0, total() - deposit()); }
+  function isDeposit() { return (load().payMode || 'deposit') === 'deposit'; }
+  function deposit() { return Math.min(w.RoamlyData.DEPOSIT || 1000, total()); }
+  function amountToPay() { return isDeposit() ? deposit() : total(); }
+  function balance() { return isDeposit() ? Math.max(0, total() - deposit()) : 0; }
 
   function makeRef() {
     var s = load();
@@ -142,36 +154,151 @@
   ];
 
   function logoMark(small) {
-    var box = small ? 'w-6 h-6 rounded text-[10px]' : 'w-8 h-8 rounded-lg text-sm';
-    var size = small ? 'text-xl' : 'text-2xl';
+    var box = small ? 'w-6 h-6 rounded text-[10px]' : 'w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs sm:text-sm';
+    var size = small ? 'text-lg sm:text-xl' : 'text-lg sm:text-2xl';
+    // Wordmark is its own element so narrow viewports can drop it and keep
+    // the R mark — otherwise the logo, CTA and menu button don't fit at 320.
     return '<a href="index.html" class="font-display font-extrabold ' + size +
-           ' tracking-tighter flex items-center gap-2">' +
+           ' tracking-tighter flex items-center gap-1.5 sm:gap-2 shrink-0">' +
            '<span class="bg-brand text-accent ' + box +
-           ' flex items-center justify-center italic font-black">R</span> ROAMLY</a>';
+           ' flex items-center justify-center italic font-black shrink-0">R</span>' +
+           '<span class="wordmark tracking-tighter">ROAMLY</span></a>';
   }
 
   function navMarketing(active) {
+    // Active state is a single toggled class, never a className rewrite —
+    // rewriting it dropped the responsive utilities (`hidden md:inline-flex`)
+    // and un-hid desktop-only pills on phones.
+    var PILL = 'nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider';
     var links = NAV_LINKS.map(function (l) {
       var on = l.id === active;
-      var style = on
-        ? 'bg-brand text-accent shadow-sm font-black'
-        : 'text-muted hover:text-ink hover:bg-black/5 font-bold';
-      return '<a href="' + l.href + '" data-nav-id="' + l.id + '" class="nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider ' + style + '"' +
-             (on ? ' aria-current="page"' : '') + '>' + l.label + '</a>';
+      return '<a href="' + l.href + '" data-nav-id="' + l.id + '" class="' + PILL +
+             (on ? ' is-active' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' +
+             l.label + '</a>';
     }).join('');
 
-    return '<div class="max-w-7xl mx-auto glass rounded-full px-5 sm:px-7 py-2.5 sm:py-3 flex items-center ' +
-      'justify-between border border-border-subtle shadow-sm gap-6">' +
-        '<div class="flex items-center gap-6 lg:gap-10">' + logoMark(false) +
-          '<div class="hidden md:flex items-center gap-2.5 lg:gap-3.5">' +
+    // Same links again for the mobile drawer. Kept as separate nodes rather
+    // than moved, so the desktop row never has to be re-parented on resize.
+    var drawerLinks = NAV_LINKS.concat([
+      { id: 'account', label: 'My Trip', href: 'my-trip.html', tag: 'Soon' }
+    ]).map(function (l) {
+      var tag = l.tag ? '<span class="ml-2 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-accent text-brand inline-block">' + l.tag + '</span>' : '';
+      return '<a href="' + l.href + '" data-nav-id="' + l.id + '" class="drawer-link' +
+        (l.id === active ? ' is-active' : '') + '"><span>' + l.label + tag + '</span>' +
+        '<i class="fa-solid fa-chevron-right chev" aria-hidden="true"></i></a>';
+    }).join('') +
+    '<a href="trips.html" class="drawer-cta-btn">' +
+      '<span>Book Now</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>';
+
+    return '<div class="max-w-7xl mx-auto glass rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center ' +
+      'justify-between border border-border-subtle shadow-sm gap-4 sm:gap-6">' +
+        '<div class="flex items-center gap-6 lg:gap-10 min-w-0">' + logoMark(false) +
+          '<div class="nav-links-desktop">' +
             links +
           '</div>' +
         '</div>' +
         '<div class="flex items-center gap-3">' +
-          '<a href="my-trip.html" data-nav-id="account" class="nav-pill-btn px-4 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider text-muted hover:text-ink hover:bg-black/5 font-bold">My Trip</a>' +
-          '<a href="trips.html" class="nav-cta-btn bg-brand text-accent px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[12px] sm:text-xs font-black uppercase tracking-widest shadow-brand">Book Now</a>' +
+          '<a href="my-trip.html" data-nav-id="account" class="nav-pill-btn nav-desktop-only px-4 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider text-muted hover:text-ink hover:bg-black/5 font-bold inline-flex items-center gap-1.5"><span>My Trip</span><span class="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-accent text-brand">Soon</span></a>' +
+          '<a href="trips.html" class="nav-cta-btn nav-desktop-only bg-brand text-accent px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs font-black uppercase tracking-widest shadow-brand whitespace-nowrap">Book Now</a>' +
+          '<button type="button" class="nav-toggle nav-mobile-only" id="navToggle" aria-expanded="false" ' +
+            'aria-controls="navDrawer" aria-label="Open menu">' +
+            '<i class="fa-solid fa-bars" aria-hidden="true"></i></button>' +
         '</div>' +
+      '</div>' +
+      '<div class="nav-scrim" id="navScrim" hidden></div>' +
+      '<div class="nav-drawer" id="navDrawer" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1">' +
+        drawerLinks +
       '</div>';
+  }
+
+  /* ---------- responsive copy ----------
+     Swap search placeholders cleanly based on viewport so they never clip
+     on compact mobile screens while remaining descriptive on desktop. */
+  function mountResponsiveText() {
+    if (!w.matchMedia) return;
+    var mq = w.matchMedia('(max-width: 640px)');
+
+    function apply() {
+      var isMobile = mq.matches;
+
+      var heroInput = d.getElementById('basecamp');
+      if (heroInput) {
+        heroInput.setAttribute('placeholder', isMobile ? 'Search by trip name...' : 'Search by trip name, peak, or region...');
+      }
+
+      var tripInput = d.getElementById('tripSearchInput');
+      if (tripInput) {
+        tripInput.setAttribute('placeholder', isMobile ? 'Search by trip name...' : 'Search by trip name, region, grade...');
+      }
+    }
+
+    apply();
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else if (mq.addListener) mq.addListener(apply);
+  }
+
+  /* ---------- mobile drawer ---------- */
+  function mountDrawer() {
+    var toggle = d.getElementById('navToggle');
+    var drawer = d.getElementById('navDrawer');
+    var scrim  = d.getElementById('navScrim');
+    if (!toggle || !drawer || !scrim) return;
+
+    var open = false;
+
+    function setOpen(next) {
+      if (next === open) return;
+      open = next;
+      drawer.classList.toggle('open', open);
+      scrim.classList.toggle('open', open);
+      scrim.hidden = !open;
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.innerHTML = '<i class="fa-solid fa-' + (open ? 'xmark' : 'bars') + '" aria-hidden="true"></i>';
+      d.body.classList.toggle('nav-open', open);
+
+      if (open) {
+        drawer.focus({ preventScroll: true });
+      } else {
+        toggle.focus({ preventScroll: true });
+      }
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setOpen(!open);
+    });
+
+    scrim.addEventListener('click', function () {
+      setOpen(false);
+    });
+
+    // Following a link closes the drawer immediately
+    drawer.addEventListener('click', function (e) {
+      if (e.target.closest('.drawer-link, .drawer-cta-btn')) {
+        setOpen(false);
+      }
+    });
+
+    d.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') { e.preventDefault(); setOpen(false); return; }
+      if (e.key !== 'Tab') return;
+      // keep focus inside the panel while it is modal
+      var items = drawer.querySelectorAll('.drawer-link, .drawer-cta-btn');
+      if (!items.length) return;
+      var firstEl = items[0], lastEl = items[items.length - 1];
+      if (e.shiftKey && d.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && d.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+    });
+
+    // Crossing into desktop must not leave a hidden drawer holding the scroll lock.
+    if (w.matchMedia) {
+      var mq = w.matchMedia('(min-width: 768px)');
+      var onChange = function (e) { if (e.matches) setOpen(false); };
+      if (mq.addEventListener) mq.addEventListener('change', onChange);
+      else if (mq.addListener) mq.addListener(onChange);
+    }
   }
 
   function navCheckout(step) {
@@ -193,25 +320,51 @@
           (st === 'now' ? ' aria-current="step"' : '') + '>' + inner + '</div>';
     });
 
-    return '<div class="max-w-7xl mx-auto glass rounded-full px-6 py-3 flex items-center ' +
-      'justify-between border border-border-subtle shadow-sm">' +
-        logoMark(true) +
-        '<div class="hidden md:flex items-center gap-6">' + parts + '</div>' +
-        '<a href="' + url('trip.html') + '" class="text-[10px] font-black uppercase ' +
-          'tracking-widest hover:text-brand transition-colors">Cancel</a>' +
+    // Phones get a compact counter instead of nothing at all.
+    var dots = STEPS.map(function (s, i) {
+      var idx = i + 1;
+      return '<i class="' + (idx < cur ? 'done' : (idx === cur ? 'now' : '')) + '"></i>';
+    }).join('');
+    var mini = '<div class="step-mini" role="progressbar" aria-valuemin="1" aria-valuemax="' +
+      STEPS.length + '" aria-valuenow="' + cur + '" aria-label="Booking step ' + cur +
+      ' of ' + STEPS.length + ': ' + STEPS[cur - 1].cap + '">' +
+      '<span class="step-mini-dots" aria-hidden="true">' + dots + '</span>' +
+      '<span class="step-mini-cap">' + pad(cur) + '/' + pad(STEPS.length) + ' ' + STEPS[cur - 1].cap + '</span>' +
+      '</div>';
+
+    // At 320px the three children overflowed the pill — and because the nav is
+    // `fixed`, that overflow never showed up in document scrollWidth. Each
+    // child now shrinks or drops its label instead of pushing the row wider.
+    var compactLogo =
+      '<a href="index.html" class="font-display font-extrabold text-lg sm:text-xl tracking-tighter ' +
+      'flex items-center gap-2 shrink-0">' +
+      '<span class="bg-brand text-accent w-6 h-6 rounded flex items-center justify-center text-[10px] italic font-black">R</span>' +
+      '<span class="hidden sm:inline">ROAMLY</span></a>';
+
+    return '<div class="max-w-7xl mx-auto glass rounded-full px-4 sm:px-6 py-3 flex items-center ' +
+      'justify-between border border-border-subtle shadow-sm gap-2 sm:gap-3 min-w-0">' +
+        compactLogo +
+        mini +
+        '<div class="hidden lg:flex items-center gap-6">' + parts + '</div>' +
+        '<a href="' + url('trip.html') + '" aria-label="Cancel booking" ' +
+          'class="shrink-0 inline-flex items-center justify-center min-w-[44px] min-h-[44px] ' +
+          'rounded-full text-[10px] font-black uppercase tracking-widest text-muted ' +
+          'hover:text-brand hover:bg-black/5 transition-colors">' +
+          '<span class="hidden sm:inline">Cancel</span>' +
+          '<i class="fa-solid fa-xmark text-base sm:hidden" aria-hidden="true"></i></a>' +
       '</div>';
   }
 
   function navAccount() {
-    return '<div class="max-w-7xl mx-auto glass rounded-full px-6 py-3 flex items-center ' +
-      'justify-between border border-border-subtle shadow-sm">' +
+    return '<div class="max-w-7xl mx-auto glass rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center ' +
+      'justify-between border border-border-subtle shadow-sm gap-3">' +
         logoMark(false) +
-        '<div class="flex items-center gap-6">' +
-          '<a href="trips.html" class="text-[10px] font-black uppercase tracking-widest ' +
+        '<div class="flex items-center gap-3 sm:gap-6">' +
+          '<a href="trips.html" class="hidden xs:inline-block sm:inline-block text-[11px] font-extrabold uppercase tracking-wider ' +
             'text-muted hover:text-brand transition-colors">Browse Trips</a>' +
-          '<a href="index.html" class="bg-brand text-accent w-10 h-10 rounded-full flex ' +
-            'items-center justify-center shadow-brand" aria-label="Account">' +
-            '<i class="fa-solid fa-user text-xs"></i></a>' +
+          '<a href="index.html" class="bg-brand text-accent w-9 h-9 sm:w-10 sm:h-10 rounded-full flex ' +
+            'items-center justify-center shadow-brand" aria-label="Home">' +
+            '<i class="fa-solid fa-house text-xs"></i></a>' +
         '</div>' +
       '</div>';
   }
@@ -219,32 +372,25 @@
   /* ---------- footer ---------- */
   function footerFull() {
     return '<div class="max-w-7xl mx-auto">' +
-      '<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">' +
+      '<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-10 md:mb-16">' +
         '<div class="md:col-span-2">' +
-          '<a href="index.html" class="font-display font-extrabold text-4xl tracking-tighter ' +
-            'inline-flex items-center gap-2 mb-8">ROAMLY</a>' +
-          '<p class="text-muted max-w-sm mb-8 leading-relaxed font-medium">Redefining adventure ' +
+          '<a href="index.html" class="font-display font-extrabold text-3xl sm:text-4xl tracking-tighter ' +
+            'inline-flex items-center gap-2 mb-4 sm:mb-6">ROAMLY</a>' +
+          '<p class="text-muted max-w-sm mb-6 sm:mb-8 leading-relaxed font-medium text-sm sm:text-base">Redefining adventure ' +
             'for the modern explorer. We build experiences that challenge you and stories that ' +
             'stay with you.</p>' +
-          '<div class="flex gap-4">' +
-            ['instagram', 'whatsapp', 'tiktok'].map(function (b) {
+          '<div class="flex gap-3.5 sm:gap-4">' +
+            ['instagram', 'whatsapp'].map(function (b) {
               var href = b === 'whatsapp' ? 'https://wa.link/77nyt0' : '#';
               var target = b === 'whatsapp' ? ' target="_blank" rel="noopener noreferrer"' : '';
-              return '<a href="' + href + '"' + target + ' aria-label="' + b + '" class="w-12 h-12 rounded-2xl bg-surface ' +
+              return '<a href="' + href + '"' + target + ' aria-label="' + b + '" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-surface ' +
                 'border border-border-subtle flex items-center justify-center hover:bg-brand ' +
-                'hover:text-accent tx"><i class="fa-brands fa-' + b + ' text-xl"></i></a>';
+                'hover:text-accent tx"><i class="fa-brands fa-' + b + ' text-lg sm:text-xl"></i></a>';
             }).join('') +
           '</div>' +
         '</div>' +
-        '<div><h4 class="font-display font-black text-sm uppercase tracking-widest mb-8">Trips</h4>' +
-          '<ul class="space-y-4 text-[11px] font-black text-muted uppercase tracking-wider">' +
-            '<li><a href="trips.html#weekend" class="hover:text-brand transition-colors">Weekend Peaks</a></li>' +
-            '<li><a href="trips.html#alpine" class="hover:text-brand transition-colors">Alpine Tours</a></li>' +
-            '<li><a href="trips.html#weekend" class="hover:text-brand transition-colors">Coastal Hikes</a></li>' +
-            '<li><a href="trips.html#expert" class="hover:text-brand transition-colors">Expert Ridges</a></li>' +
-          '</ul></div>' +
-        '<div><h4 class="font-display font-black text-sm uppercase tracking-widest mb-8">Support</h4>' +
-          '<ul class="space-y-4 text-[11px] font-black text-muted uppercase tracking-wider">' +
+        '<div class="pt-4 md:pt-0"><h4 class="font-display font-black text-xs sm:text-sm uppercase tracking-[0.2em] text-ink mb-4 sm:mb-6">Support</h4>' +
+          '<ul class="space-y-3 sm:space-y-4 text-[11px] font-extrabold text-muted uppercase tracking-wider">' +
             '<li><a href="https://wa.link/77nyt0" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition-colors">Basecamp Help / WhatsApp</a></li>' +
             '<li><a href="#" class="hover:text-brand transition-colors">Safety Protocols</a></li>' +
             '<li><a href="#" class="hover:text-brand transition-colors">Eco-Policy</a></li>' +
@@ -254,11 +400,11 @@
   }
 
   function footerBar() {
-    return '<div class="pt-12 border-t border-border-subtle flex flex-col md:flex-row ' +
-      'justify-between items-center gap-6">' +
+    return '<div class="pt-8 md:pt-12 border-t border-border-subtle flex flex-col md:flex-row ' +
+      'justify-between items-center gap-4 md:gap-6 text-center md:text-left">' +
       '<p class="text-[10px] font-bold uppercase tracking-widest text-muted">' +
         '© 2026 Roamly Adventures Pvt Ltd. All rights reserved.</p>' +
-      '<div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-muted">' +
+      '<div class="flex flex-wrap justify-center gap-6 sm:gap-8 text-[10px] font-bold uppercase tracking-widest text-muted">' +
         '<a href="index.html" class="hover:text-brand">Back to Base</a>' +
         '<a href="#" class="hover:text-brand">Privacy</a>' +
         '<a href="#" class="hover:text-brand">Terms</a>' +
@@ -273,8 +419,8 @@
   /* ---------- trip card ---------- */
   function tripCard(t) {
     var badge = t.badges && t.badges[0]
-      ? '<div class="absolute top-6 left-6"><span class="bg-brand text-accent px-4 py-1.5 ' +
-        'rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' +
+      ? '<div class="absolute top-3.5 left-3.5 sm:top-6 sm:left-6"><span class="bg-brand text-accent px-3 py-1 sm:px-4 sm:py-1.5 ' +
+        'rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-wider sm:tracking-widest shadow-md sm:shadow-xl">' +
         esc(t.badges[0]) + '</span></div>' : '';
 
     var cleanTitle = t.name.length > 38 ? t.name.slice(0, 36) + '…' : t.name;
@@ -319,39 +465,56 @@
 
     function row(label, value, right) {
       return '<div' + (right ? ' class="text-right"' : '') + '>' +
-        '<p class="text-[9px] font-black uppercase tracking-[0.2em] ' + dim + ' mb-1">' + label + '</p>' +
-        '<p class="font-bold ' + val + ' uppercase text-sm">' + value + '</p></div>';
+        '<p class="text-[9px] font-black uppercase tracking-[0.2em] ' + dim + ' mb-0.5 sm:mb-1">' + label + '</p>' +
+        '<p class="font-bold ' + val + ' uppercase text-xs sm:text-sm tracking-wide">' + value + '</p></div>';
     }
 
     var html =
-      '<div class="space-y-6 mb-8">' +
-        row('Target', esc(t.name)) +
+      '<div class="space-y-4 sm:space-y-6 mb-6 sm:mb-8">' +
+        row('Target Expedition', esc(t.name)) +
         '<div class="flex justify-between gap-4">' +
-          row('Duration', t.days + ' Days') +
-          row('Start', esc(s.date || t.dates), true) +
+          row('Duration', t.days === 1 ? '1 Day' : (t.days + ' Days')) +
+          row('Schedule', esc(s.date || t.dates), true) +
         '</div>' +
         '<div class="flex justify-between gap-4">' +
-          row('Team', pad(s.pax) + (s.pax === 1 ? ' Unit' : ' Units')) +
+          row('Team Size', pad(s.pax) + (s.pax === 1 ? ' Climber' : ' Climbers')) +
           row('Grade', esc(t.grade), true) +
         '</div>' +
       '</div>' +
-      '<div class="pt-8 border-t ' + line + ' space-y-4 mb-8">' +
-        '<div class="flex justify-between text-xs font-bold uppercase tracking-widest ' + dim + '">' +
-          '<span>Base cost × ' + s.pax + '</span><span>' + inr(t.price) + '</span></div>' +
+      '<div class="pt-6 sm:pt-8 border-t ' + line + ' space-y-3 sm:space-y-4 mb-6 sm:mb-8">' +
+        '<div class="flex justify-between text-xs font-bold uppercase tracking-wider ' + dim + '">' +
+          '<span>Base fee × ' + s.pax + '</span><span>' + inr(t.price) + '</span></div>' +
         '<div class="flex justify-between items-end pt-2">' +
-          '<span class="' + dim + ' font-black uppercase tracking-[0.2em] text-[10px]">Total Extraction</span>' +
-          '<span class="text-4xl font-display font-black tracking-tighter ' + val + ' tabular-nums">' + inr(total()) + '</span>' +
+          '<span class="' + dim + ' font-black uppercase tracking-[0.2em] text-[10px]">Total Amount</span>' +
+          '<span class="text-3xl sm:text-4xl font-display font-black tracking-tighter ' + val + ' tabular-nums">' + inr(total()) + '</span>' +
         '</div>' +
       '</div>';
 
+    var payMode = opts.payMode || (load().payMode || 'deposit');
+    var isDep = (payMode === 'deposit') && (deposit() < total());
+    var toPay = isDep ? deposit() : total();
+    var bal = isDep ? Math.max(0, total() - deposit()) : 0;
+
     if (opts.deposit && total() > 0) {
-      html += '<div class="p-6 bg-accent text-brand rounded-[2rem] shadow-xl mb-8">' +
-        '<div class="flex justify-between items-center mb-2">' +
-          '<span class="text-[10px] font-black uppercase tracking-[0.2em]">Authorized Deposit</span>' +
-          '<span class="text-2xl font-display font-black tracking-tighter tabular-nums">' + inr(deposit()) + '</span></div>' +
-        '<p class="text-[10px] font-bold opacity-75 uppercase tracking-widest leading-relaxed">' +
-          'Secure seats now. Settle the balance of ' + inr(balance()) +
-          ' 15 days before extraction.</p></div>';
+      if (isDep) {
+        html += '<div class="p-5 sm:p-6 bg-accent text-brand rounded-[1.75rem] sm:rounded-[2rem] shadow-xl mb-6 sm:mb-8" id="depositCallout">' +
+          '<div class="flex justify-between items-center mb-1.5 sm:mb-2">' +
+            '<span class="text-[10px] font-black uppercase tracking-[0.2em]">Token Deposit</span>' +
+            '<span class="text-2xl sm:text-3xl font-display font-black tracking-tighter tabular-nums">' + inr(deposit()) + '</span></div>' +
+          '<div class="flex justify-between items-center text-[10px] font-extrabold uppercase tracking-wider mb-2 opacity-80">' +
+            '<span>Pending Balance</span><span>' + inr(bal) + '</span></div>' +
+          '<p class="text-[10px] font-bold opacity-75 uppercase tracking-widest leading-relaxed">' +
+            'Secure seats now. Settle remaining ' + inr(bal) + ' 15 days before departure.</p></div>';
+      } else {
+        html += '<div class="p-5 sm:p-6 bg-accent text-brand rounded-[1.75rem] sm:rounded-[2rem] shadow-xl mb-6 sm:mb-8" id="depositCallout">' +
+          '<div class="flex justify-between items-center mb-1.5 sm:mb-2">' +
+            '<span class="text-[10px] font-black uppercase tracking-[0.2em]">Full Payment (100%)</span>' +
+            '<span class="text-2xl sm:text-3xl font-display font-black tracking-tighter tabular-nums">' + inr(total()) + '</span></div>' +
+          '<div class="flex justify-between items-center text-[10px] font-extrabold uppercase tracking-wider mb-2 opacity-80">' +
+            '<span>Pending Balance</span><span class="text-brand font-black">₹0 (Paid in Full)</span></div>' +
+          '<p class="text-[10px] font-bold opacity-75 uppercase tracking-widest leading-relaxed">' +
+            'Complete booking with zero remaining balance.</p></div>';
+      }
     }
     return html;
   }
@@ -465,7 +628,7 @@
     var nav = d.querySelector('[data-nav]');
     if (nav) {
       var kind = nav.getAttribute('data-nav');
-      nav.className = 'fixed top-0 left-0 right-0 z-[100] px-6 py-4';
+      nav.className = 'fixed top-0 left-0 right-0 z-[130] px-4 sm:px-6 py-3 sm:py-4';
       if (kind === 'checkout')      nav.innerHTML = navCheckout(nav.getAttribute('data-step'));
       else if (kind === 'account')  nav.innerHTML = navAccount();
       else                          nav.innerHTML = navMarketing(nav.getAttribute('data-active'));
@@ -521,11 +684,13 @@
           if (w.history && w.history.replaceState) {
             w.history.replaceState(null, '', 'index.html');
           }
-          w.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-          updateNavActiveState();
+          setTimeout(function () {
+            w.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+            updateNavActiveState();
+          }, 30);
           return;
         }
 
@@ -542,7 +707,9 @@
                 w.history.pushState(null, '', targetHash);
               }
               updateNavActiveState();
-              smoothScrollToTarget(targetEl, false);
+              setTimeout(function () {
+                smoothScrollToTarget(targetEl, false);
+              }, 30);
               return;
             }
           }
@@ -617,16 +784,18 @@
       if (activeId === lastActiveId) return;
       lastActiveId = activeId;
 
-      var navPillButtons = marketingNav.querySelectorAll('.nav-pill-btn');
-      Array.prototype.forEach.call(navPillButtons, function (btn) {
-        var btnId = btn.getAttribute('data-nav-id');
-        if (btnId === activeId) {
-          btn.className = 'nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider bg-brand text-accent shadow-sm font-black';
-          btn.setAttribute('aria-current', 'page');
-        } else {
-          btn.className = 'nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider text-muted hover:text-ink hover:bg-black/5 font-bold';
-          btn.removeAttribute('aria-current');
-        }
+      Array.prototype.forEach.call(marketingNav.querySelectorAll('.nav-pill-btn'), function (btn) {
+        var on = btn.getAttribute('data-nav-id') === activeId;
+        btn.classList.toggle('is-active', on);
+        if (on) btn.setAttribute('aria-current', 'page'); else btn.removeAttribute('aria-current');
+      });
+
+      // Drawer links mirror the same active state. Toggled by class rather
+      // than rewriting className, so their own styling survives.
+      Array.prototype.forEach.call(marketingNav.querySelectorAll('.drawer-link'), function (a) {
+        var on = a.getAttribute('data-nav-id') === activeId;
+        a.classList.toggle('is-active', on);
+        if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
       });
     }
 
@@ -670,8 +839,6 @@
       }, 180);
     }
 
-    hashPlacer = placeOnHash;
-
     // Kill the browser's animated hash jump before it can start.
     if (w.location.hash) suppressSmooth();
 
@@ -693,6 +860,14 @@
       updateNavActiveState();
     });
 
+    w.addEventListener('popstate', function () {
+      if (w.location.hash) {
+        placeOnHash();
+      } else {
+        updateNavActiveState();
+      }
+    });
+
     updateNavActiveState();
 
     if (d.readyState === 'complete') placeOnHash();
@@ -701,6 +876,8 @@
     mountCursor();
     mountNavMaterial();
     mountReveal();
+    mountDrawer();
+    mountResponsiveText();
     mountHomeSmoothTransitions();
   }
 
@@ -753,6 +930,8 @@
     total: total,
     deposit: deposit,
     balance: balance,
+    isDeposit: isDeposit,
+    amountToPay: amountToPay,
     makeRef: makeRef,
     pickup: pickup,
     lead: lead,
@@ -761,11 +940,7 @@
     esc: esc,
     tripCard: tripCard,
     summaryBody: summaryBody,
-    toast: toast,
-    // Delegates to the one real implementation. This used to be a second,
-    // stale copy of the scroll maths that still measured <header> (the
-    // 792px hero) instead of the nav, so callers landed ~800px short.
-    scrollToHash: function () { if (hashPlacer) hashPlacer(); }
+    toast: toast
   };
 
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', mount);

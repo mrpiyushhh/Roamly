@@ -1,10 +1,10 @@
 /* ============================================================
-   Roamly — content
-   GENERATED FILE — do not edit by hand.
+   Roamly - content
+   GENERATED FILE - do not edit by hand.
    Source of truth is assets/data.json; this is rewritten by
    server.js whenever the admin panel saves.
    Member records are intentionally NOT included here.
-   Last generated: 2026-08-29T08:44:28.618Z
+   Last generated: 2026-08-29T17:16:00.742Z
    ============================================================ */
 (function (w) {
   'use strict';
@@ -125,7 +125,10 @@
           "note": "Flyover junction",
           "time": "10:15 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-05",
+      "endDate": "2026-09-06"
     },
     {
       "id": "devkund",
@@ -215,7 +218,10 @@
           "note": "Near Vashi Plaza flyover",
           "time": "05:00 AM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-12"
     },
     {
       "id": "andharban",
@@ -305,91 +311,10 @@
           "note": "Opposite Swami Narayan Gate",
           "time": "04:30 AM"
         }
-      ]
-    },
-    {
-      "id": "vasota",
-      "code": "VST",
-      "name": "Vasota Fort Jungle Trek & Koyna Boating",
-      "short": "Vasota Fort",
-      "accent": "Boating.",
-      "region": "Koyna Wildlife Sanctuary / Satara",
-      "category": "weekend",
-      "days": 2,
-      "grade": "Moderate",
-      "price": 1699,
-      "rating": 4.9,
-      "reviews": 198,
-      "slots": 6,
-      "badges": [
-        "Boat Safari + Trek",
-        "Wildlife Forest"
       ],
-      "hero": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      "heroAlt": "Scenic motorboat navigating the deep blue Koyna backwaters flanked by dense emerald jungle hills",
-      "gallery": [
-        {
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Dense jungle canopy in Koyna Wildlife Sanctuary"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Babu Kada sheer cliff view plunging into the valley"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Ancient fortress battlements overgrown with jungle vines"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Campsite along the serene Koyna backwaters"
-        }
-      ],
-      "blurb": [
-        "Vasota Fort (Vyaghragad) is one of the most adventurous jungle treks in Maharashtra, located entirely inside the core zone of the Koyna Tiger Reserve.",
-        "The journey begins with an exhilarating 1.5-hour boat safari across the vast Koyna backwaters, followed by a guided deep forest ascent to the dizzying Babu Kada cliff."
-      ],
-      "dates": "Every Sat – Sun (Post-Monsoon to Summer)",
-      "itinerary": [
-        {
-          "t": "Pune Departure & Bamnoli Base",
-          "d": "Depart Pune at 04:30 AM via Satara. Arrive at Bamnoli lakeside jetty by 08:30 AM."
-        },
-        {
-          "t": "Koyna Backwaters Boat Safari",
-          "d": "Board speedboats for a scenic 1.5-hour water safari through the misty Koyna Tiger Reserve."
-        },
-        {
-          "t": "Deep Forest Climb & Babu Kada Cliff",
-          "d": "Enter core jungle trail with forest guards. Summit Vasota and witness the sheer 2,000ft Babu Kada vertical drop."
-        },
-        {
-          "t": "Return Boat Cruise & Satara Delicacies",
-          "d": "Cruise back to Bamnoli for local organic village lunch. Reach Pune by 21:00."
-        }
-      ],
-      "guide": {
-        "name": "Tanaji Patil",
-        "role": "Wildlife Sanctuary Guide",
-        "bio": "Satara native registered with Koyna Forest Department. 12+ years experience navigating remote Vasota jungle corridors.",
-        "quote": "\"The Koyna water cruise combined with the Babu Kada cliff makes Vasota unbeatable.\"",
-        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
-      },
-      "pickups": [
-        {
-          "id": "pune-swargate",
-          "place": "Swargate, Pune",
-          "note": "Opposite Natraj Hotel",
-          "time": "04:30 AM",
-          "recommended": true
-        },
-        {
-          "id": "pune-katraj",
-          "place": "Katraj Wonder City",
-          "note": "Main highway junction",
-          "time": "05:00 AM"
-        }
-      ]
+      "status": "active",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19"
     },
     {
       "id": "rajgad",
@@ -473,7 +398,10 @@
           "note": "Highway flyover",
           "time": "06:30 AM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-26",
+      "endDate": "2026-09-27"
     },
     {
       "id": "bhandardara",
@@ -557,7 +485,10 @@
           "note": "Service road pillar 12",
           "time": "11:00 AM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04"
     },
     {
       "id": "nanemachi",
@@ -641,7 +572,10 @@
           "note": "Near main bridge",
           "time": "11:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10"
     },
     {
       "id": "bhairavgad",
@@ -725,7 +659,10 @@
           "note": "Main junction pillar 8",
           "time": "10:30 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-18"
     },
     {
       "id": "gokarna",
@@ -815,7 +752,10 @@
           "note": "Near Police station",
           "time": "09:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-26"
     },
     {
       "id": "hampi",
@@ -899,7 +839,10 @@
           "note": "Pritam Hotel",
           "time": "05:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-11-06",
+      "endDate": "2026-11-09"
     },
     {
       "id": "kedarnath",
@@ -991,7 +934,10 @@
           "note": "Main exit gate",
           "time": "05:00 AM"
         }
-      ]
+      ],
+      "status": "completed",
+      "startDate": "2026-07-10",
+      "endDate": "2026-07-16"
     },
     {
       "id": "kutch",
@@ -1075,7 +1021,10 @@
           "note": "Arrivals gate",
           "time": "09:30 AM"
         }
-      ]
+      ],
+      "status": "completed",
+      "startDate": "2026-01-15",
+      "endDate": "2026-01-19"
     },
     {
       "id": "himachal",
@@ -1167,7 +1116,10 @@
           "note": "Near ISBT Sector 43",
           "time": "10:30 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-02"
     },
     {
       "id": "ladakh",
@@ -1263,7 +1215,10 @@
           "note": "Upper Changspa Road",
           "time": "12:00 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-02"
     }
   ]
 };

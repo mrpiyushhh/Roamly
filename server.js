@@ -51,6 +51,7 @@ const MIME = {
 function readData() {
   const d = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
   if (!Array.isArray(d.members)) d.members = [];
+  if (!Array.isArray(d.expenses)) d.expenses = [];
   return d;
 }
 
@@ -69,7 +70,7 @@ function writeData(data) {
 
   fs.writeFileSync(DATA_JSON, JSON.stringify(data, null, 2) + '\n');
 
-  // NOTE: members are deliberately excluded - the public site must not ship PII.
+  // NOTE: members & expenses are deliberately excluded - public site must not ship PII/financials.
   const publicData = { deposit: data.deposit, categories: data.categories, trips: data.trips };
 
   fs.writeFileSync(DATA_JS,
@@ -154,6 +155,9 @@ function normaliseTrip(t) {
   return {
     id:s(t.id), code:s(t.code).toUpperCase(), name:s(t.name), short:s(t.short),
     accent:s(t.accent), region:s(t.region), category:s(t.category)||'weekend',
+    status: ['active','upcoming','completed','archived'].includes(s(t.status).toLowerCase()) ? s(t.status).toLowerCase() : 'active',
+    startDate: s(t.startDate) || '',
+    endDate: s(t.endDate) || '',
     days:n(t.days), grade:s(t.grade), price:n(t.price),
     rating:Math.round(n(t.rating)*10)/10, reviews:n(t.reviews), slots:n(t.slots),
     badges:(t.badges||[]).map(s).filter(Boolean),
@@ -194,8 +198,8 @@ function normaliseMember(m, trips) {
   const trip = trips.find(t => t.id === m.tripId);
   const amount = m.amount === '' || m.amount == null ? (trip ? trip.price : 0) : n(m.amount);
   const status = m.status === 'paid' ? 'paid' : 'pending';
-  // Marking someone paid means the money is fully in.
-  const paid = status === 'paid' ? amount : n(m.paid);
+  // Marking someone paid means the money is fully in; pending means deposit or 0.
+  const paid = status === 'paid' ? amount : (m.paid != null && m.paid !== '' ? n(m.paid) : 0);
   return {
     id: s(m.id) || newId(),
     tripId: s(m.tripId),
@@ -207,9 +211,22 @@ function normaliseMember(m, trips) {
     pickupId: s(m.pickupId),
     ref: s(m.ref) || (trip ? trip.code : 'RML') + '-' + Math.floor(1000 + Math.random()*9000),
     amount, paid, status,
+    attended: Boolean(m.attended),
     note: s(m.note),
     bookedAt: s(m.bookedAt) || new Date().toISOString(),
     paidAt: status === 'paid' ? (s(m.paidAt) || new Date().toISOString()) : ''
+  };
+}
+
+function normaliseExpense(e, trips) {
+  return {
+    id: s(e.id) || ('exp_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)),
+    tripId: s(e.tripId),
+    title: s(e.title) || 'General Expense',
+    category: s(e.category) || 'other',
+    amount: Math.max(0, n(e.amount)),
+    date: s(e.date) || new Date().toISOString().slice(0, 10),
+    notes: s(e.notes)
   };
 }
 
@@ -222,19 +239,27 @@ function newId() {
    ============================================================ */
 
 function paymentSummary(data) {
+  if (!Array.isArray(data.expenses)) data.expenses = [];
   const byTrip = data.trips.map(t => {
     const ms = data.members.filter(m => m.tripId === t.id);
+    const ex = data.expenses.filter(e => e.tripId === t.id);
     const confirmed = ms.filter(m => m.status === 'paid');
     const collected = ms.reduce((a, m) => a + n(m.paid), 0);
     const expected  = ms.reduce((a, m) => a + n(m.amount), 0);
+    const expensesTotal = ex.reduce((a, e) => a + n(e.amount), 0);
+    const status = t.status || 'active';
     return {
       id: t.id, name: t.name, short: t.short, region: t.region,
       price: t.price, slots: t.slots, dates: t.dates,
+      status, startDate: t.startDate || '', endDate: t.endDate || '',
+      category: t.category || 'weekend',
       members: ms.length,
       confirmed: confirmed.length,
       pending: ms.length - confirmed.length,
       collected, expected,
       outstanding: expected - collected,
+      expensesTotal,
+      netProfit: collected - expensesTotal,
       fill: t.slots ? Math.round((ms.length / t.slots) * 100) : 0
     };
   });
@@ -245,11 +270,21 @@ function paymentSummary(data) {
     pending: a.pending + t.pending,
     collected: a.collected + t.collected,
     expected: a.expected + t.expected,
-    outstanding: a.outstanding + t.outstanding
-  }), { members:0, confirmed:0, pending:0, collected:0, expected:0, outstanding:0 });
+    outstanding: a.outstanding + t.outstanding,
+    expenses: a.expenses + t.expensesTotal,
+    netProfit: a.netProfit + t.netProfit
+  }), { members:0, confirmed:0, pending:0, collected:0, expected:0, outstanding:0, expenses:0, netProfit:0 });
+
+  const counts = {
+    all: byTrip.length,
+    active: byTrip.filter(t => (t.status || 'active') === 'active').length,
+    upcoming: byTrip.filter(t => t.status === 'upcoming').length,
+    completed: byTrip.filter(t => t.status === 'completed').length,
+    archived: byTrip.filter(t => t.status === 'archived').length
+  };
 
   totals.tripsWithBookings = byTrip.filter(t => t.members > 0).length;
-  return { totals, trips: byTrip };
+  return { totals, counts, trips: byTrip };
 }
 
 /* ============================================================
@@ -484,7 +519,7 @@ const server = http.createServer(async (req, res) => {
 
     /* ---------- members ---------- */
     if (pathname === '/api/members' && req.method === 'GET') {
-      const trip = params.get('trip');
+      const trip = params.get('trip') || params.get('tripId');
       const list = trip ? data.members.filter(m => m.tripId === trip) : data.members;
       return json(res, 200, { members: list, count: list.length });
     }
@@ -521,6 +556,39 @@ const server = http.createServer(async (req, res) => {
         const [gone] = data.members.splice(idx, 1);
         writeData(data);
         console.log(`  - member   ${gone.name} removed from ${gone.tripId}`);
+        return json(res, 200, { ok:true, deleted:gone.id });
+      }
+    }
+
+    /* ---------- expenses ---------- */
+    if (pathname === '/api/expenses' && req.method === 'GET') {
+      const trip = params.get('trip') || params.get('tripId');
+      const list = trip ? data.expenses.filter(e => e.tripId === trip) : data.expenses;
+      const total = list.reduce((a, e) => a + n(e.amount), 0);
+      return json(res, 200, { expenses: list, count: list.length, total });
+    }
+
+    if (pathname === '/api/expenses' && req.method === 'POST') {
+      const exp = normaliseExpense(await body(req), data.trips);
+      if (!exp.tripId || !data.trips.some(t => t.id === exp.tripId)) {
+        return json(res, 422, { error:'valid tripId is required' });
+      }
+      data.expenses.push(exp);
+      writeData(data);
+      console.log(`  + expense  ${exp.title} (₹${exp.amount}) → ${exp.tripId}`);
+      return json(res, 201, { ok:true, expense: exp });
+    }
+
+    const expMatch = pathname.match(/^\/api\/expenses\/([^/]+)$/);
+    if (expMatch) {
+      const id = decodeURIComponent(expMatch[1]);
+      const idx = data.expenses.findIndex(e => e.id === id);
+      if (idx === -1) return json(res, 404, { error:`no expense "${id}"` });
+
+      if (req.method === 'DELETE') {
+        const [gone] = data.expenses.splice(idx, 1);
+        writeData(data);
+        console.log(`  - expense  ${gone.title} removed from ${gone.tripId}`);
         return json(res, 200, { ok:true, deleted:gone.id });
       }
     }

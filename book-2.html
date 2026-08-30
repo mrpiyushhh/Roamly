@@ -16,25 +16,24 @@
 
 <a href="#main" class="skip-link">Skip to content</a>
 <nav data-nav="checkout" data-step="2" aria-label="Checkout progress"></nav>
-
-<main id="main" class="max-w-7xl mx-auto px-6 pt-32 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+<main id="main" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-32 pb-16 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
 
   <!-- Real form semantics, ported from the Heritage checkout into the Expedition skin -->
   <form class="lg:col-span-8" id="intelForm" novalidate>
-    <header class="mb-12">
-      <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 uppercase">
+    <header class="mb-6 sm:mb-10">
+      <h1 class="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter mb-2 sm:mb-3 uppercase">
         Primary <span class="text-brand italic">intel.</span>
       </h1>
-      <p class="text-muted font-medium text-lg">
+      <p class="text-muted font-medium text-xs sm:text-base leading-relaxed">
         Who is on the roster. The lead traveller receives every confirmation and the emergency line.
       </p>
     </header>
 
     <div class="space-y-6" id="cards"></div>
 
-    <div class="mt-10 p-8 bg-surface border border-border-subtle rounded-[2.5rem] flex gap-5 items-start">
-      <i class="fa-solid fa-shield-halved text-brand text-xl mt-1" aria-hidden="true"></i>
-      <p class="text-sm text-muted font-medium leading-relaxed">
+    <div class="mt-6 sm:mt-10 p-5 sm:p-8 bg-surface border border-border-subtle rounded-[2rem] sm:rounded-[2.5rem] flex gap-3.5 sm:gap-5 items-start">
+      <i class="fa-solid fa-shield-halved text-brand text-lg sm:text-xl mt-0.5 sm:mt-1" aria-hidden="true"></i>
+      <p class="text-xs sm:text-sm text-muted font-medium leading-relaxed">
         Details go to your lead guide and the basecamp coordinator only. We ask for age because
         several permits require it, and for a contact so someone can reach you above the treeline.
       </p>
@@ -42,14 +41,14 @@
   </form>
 
   <aside class="lg:col-span-4">
-    <div class="sticky top-32 bg-brand text-accent rounded-panel p-10 shadow-brand">
-      <h2 class="font-display font-black text-2xl tracking-tighter mb-8 uppercase">Trip Log</h2>
+    <div class="sticky top-32 bg-brand text-accent rounded-[2rem] sm:rounded-panel p-5 sm:p-8 md:p-10 shadow-brand">
+      <h2 class="font-display font-black text-xl sm:text-2xl tracking-tighter mb-4 sm:mb-6 uppercase">Trip Log</h2>
       <div id="summary"></div>
       <button type="submit" form="intelForm"
-        class="rm-btn rm-btn-accent w-full py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter">
+        class="rm-btn rm-btn-accent w-full py-4 sm:py-5 rounded-2xl sm:rounded-[2rem] font-black text-base sm:text-lg uppercase tracking-tight">
         Proceed to Step 03
       </button>
-      <a href="book-1.html" data-keep="book-1.html" class="block text-center mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-accent transition-colors">
+      <a href="book-1.html" data-keep="book-1.html" class="block text-center mt-5 text-[10px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-accent transition-colors">
         Back to roster
       </a>
     </div>
@@ -73,45 +72,45 @@
   function card(i) {
     var lead = i === 0;
     var ribbon = lead
-      ? '<p class="absolute top-0 right-0 px-8 py-3 bg-brand text-accent text-[10px] font-black uppercase tracking-widest rounded-bl-[2rem]">Trip Lead</p>'
+      ? '<p class="absolute top-0 right-0 px-5 sm:px-8 py-2 sm:py-3 bg-brand text-accent text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded-bl-2xl sm:rounded-bl-[2rem] rounded-tr-[1.75rem] sm:rounded-tr-panel z-10 pointer-events-none">Trip Lead</p>'
       : '';
     var shell = lead
-      ? 'bg-surface border-2 border-brand'
-      : 'bg-white border border-border-subtle';
+      ? 'bg-surface border-2 border-brand shadow-sm'
+      : 'bg-white border-2 border-border-subtle hover:border-brand/30 transition-colors shadow-sm';
 
-    return '<fieldset class="' + shell + ' rounded-panel p-10 relative overflow-hidden">' +
+    return '<fieldset class="' + shell + ' rounded-[2rem] sm:rounded-panel p-5 sm:p-8 md:p-10 relative mb-6 transition-all" id="cardFieldset' + i + '">' +
       ribbon +
       '<legend class="sr-only">Traveller ' + (i + 1) + '</legend>' +
-      '<div class="flex items-center gap-4 mb-10">' +
-        '<span class="w-12 h-12 rounded-2xl bg-brand text-accent flex items-center justify-center font-display font-black text-xl italic" aria-hidden="true">' + (i + 1) + '</span>' +
-        '<h2 class="font-display font-extrabold text-2xl uppercase tracking-tight">' +
+      '<div class="flex items-center gap-3.5 sm:gap-4 mb-6 sm:mb-8">' +
+        '<span class="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand text-accent flex items-center justify-center font-display font-black text-base sm:text-xl italic shadow-sm" aria-hidden="true">' + (i + 1) + '</span>' +
+        '<h2 class="font-display font-extrabold text-lg sm:text-2xl uppercase tracking-tight">' +
           (lead ? 'Lead Traveller' : 'Traveller ' + (i + 1)) + '</h2>' +
       '</div>' +
-      '<div class="grid grid-cols-1 md:grid-cols-2 gap-8">' +
+      '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">' +
         '<div>' +
-          '<label class="field-label" for="name' + i + '">Full Name</label>' +
-          '<input class="field-input uppercase" id="name' + i + '" name="name' + i + '" type="text" ' +
+          '<label class="field-label" for="name' + i + '">Full Name <span class="text-brand">*</span></label>' +
+          '<input class="field-input uppercase h-11 sm:h-12 px-3.5 sm:px-5 text-xs sm:text-sm font-bold" id="name' + i + '" name="name' + i + '" type="text" ' +
             'placeholder="e.g. Rahul Mehta" autocomplete="name" required value="' + val(i, 'name') + '">' +
-          '<p class="field-error" id="err-name' + i + '">Enter the name as printed on their ID.</p>' +
+          '<p class="field-error" id="err-name' + i + '">Enter the full name as printed on government ID.</p>' +
         '</div>' +
         '<div>' +
-          '<label class="field-label" for="email' + i + '">' + (lead ? 'Secure Email' : 'Email (optional)') + '</label>' +
-          '<input class="field-input" id="email' + i + '" name="email' + i + '" type="email" ' +
-            'placeholder="rahul@climb.com" autocomplete="email"' + (lead ? ' required' : '') +
+          '<label class="field-label" for="email' + i + '">' + (lead ? 'Secure Email <span class="text-brand">*</span>' : 'Email (optional)') + '</label>' +
+          '<input class="field-input h-11 sm:h-12 px-3.5 sm:px-5 text-xs sm:text-sm font-bold" id="email' + i + '" name="email' + i + '" type="email" ' +
+            'placeholder="rahul@gmail.com" autocomplete="email"' + (lead ? ' required' : '') +
             ' value="' + val(i, 'email') + '">' +
-          '<p class="field-error" id="err-email' + i + '">We need a working email to send the confirmation.</p>' +
+          '<p class="field-error" id="err-email' + i + '">Enter a valid personal or work email (temporary emails not accepted).</p>' +
         '</div>' +
         '<div>' +
-          '<label class="field-label" for="phone' + i + '">' + (lead ? 'Phone Link' : 'Phone (optional)') + '</label>' +
-          '<input class="field-input" id="phone' + i + '" name="phone' + i + '" type="tel" ' +
-            'placeholder="+91 98765 43210" autocomplete="tel"' + (lead ? ' required' : '') +
-            ' value="' + val(i, 'phone') + '">' +
-          '<p class="field-error" id="err-phone' + i + '">Enter a number the coordinator can reach.</p>' +
+          '<label class="field-label" for="phone' + i + '">Mobile Number <span class="text-brand">*</span></label>' +
+          '<input class="field-input h-11 sm:h-12 px-3.5 sm:px-5 text-xs sm:text-sm font-bold" id="phone' + i + '" name="phone' + i + '" type="tel" ' +
+            'placeholder="+91 98765 43210" autocomplete="tel" required ' +
+            'value="' + val(i, 'phone') + '">' +
+          '<p class="field-error" id="err-phone' + i + '">Enter a valid 10-digit mobile number.</p>' +
         '</div>' +
-        '<div class="grid grid-cols-2 gap-4">' +
+        '<div class="grid grid-cols-2 gap-3 sm:gap-4">' +
           '<div>' +
-            '<label class="field-label" for="age' + i + '">Age</label>' +
-            '<input class="field-input" id="age' + i + '" name="age' + i + '" type="number" min="12" max="90" ' +
+            '<label class="field-label" for="age' + i + '">Age <span class="text-brand">*</span></label>' +
+            '<input class="field-input h-11 sm:h-12 px-3 sm:px-4 text-xs sm:text-sm font-bold" id="age' + i + '" name="age' + i + '" type="number" min="12" max="90" ' +
               'placeholder="24" required value="' + val(i, 'age') + '">' +
             '<p class="field-error" id="err-age' + i + '">Ages 12–90.</p>' +
           '</div>' +
@@ -119,12 +118,12 @@
             '<label class="field-label" for="gender' + i + '">Gender</label>' +
             '<div class="relative custom-gender-dropdown" data-index="' + i + '">' +
               '<button type="button" id="genderBtn' + i + '" aria-haspopup="listbox" aria-expanded="false" ' +
-                'class="field-input flex items-center justify-between cursor-pointer w-full text-left uppercase font-bold text-xs tracking-wider bg-surface hover:bg-white transition-all">' +
-                '<span class="gender-label truncate text-ink font-extrabold">' + (val(i, 'gender') || 'Female') + '</span>' +
-                '<i class="fa-solid fa-chevron-down text-[10px] text-muted transition-transform duration-200 ml-2" aria-hidden="true"></i>' +
+                'class="field-input h-11 sm:h-12 px-3 sm:px-4 flex items-center justify-between cursor-pointer w-full text-left uppercase font-bold text-xs tracking-wider bg-surface hover:bg-white transition-all">' +
+                '<span class="gender-label truncate text-ink font-extrabold leading-none">' + (val(i, 'gender') || 'Female') + '</span>' +
+                '<i class="fa-solid fa-chevron-down text-[10px] text-muted transition-transform duration-200 ml-1.5 shrink-0" aria-hidden="true"></i>' +
               '</button>' +
               '<input type="hidden" id="gender' + i + '" name="gender' + i + '" value="' + (val(i, 'gender') || 'Female') + '">' +
-              '<div class="gender-menu hidden absolute left-0 right-0 top-full mt-2 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-2xl p-1.5 shadow-[0_20px_45px_-10px_rgba(0,0,0,0.25)] z-50 space-y-1 transition-all" role="listbox">' +
+              '<div class="gender-menu hidden absolute right-0 sm:left-0 top-full mt-1.5 min-w-[170px] sm:min-w-full bg-white/98 backdrop-blur-2xl border-2 border-brand/20 rounded-2xl p-1.5 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.3)] z-[99] space-y-1 transition-all" role="listbox">' +
                 ['Female', 'Male', 'Non-binary', 'Prefer not to say'].map(function (g) {
                   var sel = (val(i, 'gender') || 'Female') === g;
                   return '<button type="button" role="option" data-value="' + g + '" aria-selected="' + (sel ? 'true' : 'false') + '" ' +
@@ -157,6 +156,7 @@
       var label = dd.querySelector('.gender-label');
       var chevron = dd.querySelector('.fa-chevron-down');
       var options = dd.querySelectorAll('.gender-opt');
+      var fieldset = dd.closest('fieldset');
 
       function toggle(open) {
         var isOpen = open !== undefined ? open : menu.classList.contains('hidden');
@@ -167,12 +167,15 @@
             if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
             var otherChevron = m.parentElement.querySelector('.fa-chevron-down');
             if (otherChevron) otherChevron.classList.remove('rotate-180');
+            var otherFs = m.closest('fieldset');
+            if (otherFs) otherFs.style.zIndex = '';
           }
         });
 
         menu.classList.toggle('hidden', !isOpen);
         btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         if (chevron) chevron.classList.toggle('rotate-180', isOpen);
+        if (fieldset) fieldset.style.zIndex = isOpen ? '60' : '';
       }
 
       btn.addEventListener('click', function (e) {
@@ -213,6 +216,8 @@
           if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
           var otherChevron = m.parentElement.querySelector('.fa-chevron-down');
           if (otherChevron) otherChevron.classList.remove('rotate-180');
+          var otherFs = m.closest('fieldset');
+          if (otherFs) otherFs.style.zIndex = '';
         });
       }
     });
@@ -225,6 +230,8 @@
           if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
           var otherChevron = m.parentElement.querySelector('.fa-chevron-down');
           if (otherChevron) otherChevron.classList.remove('rotate-180');
+          var otherFs = m.closest('fieldset');
+          if (otherFs) otherFs.style.zIndex = '';
         });
       }
     });
@@ -232,10 +239,79 @@
 
   initGenderDropdowns();
 
-  function fieldError(id, show) {
+  /* Disposable / Temporary email domains list */
+  var TEMP_EMAIL_DOMAINS = [
+    'mailinator.com', 'tempmail.com', 'temp-mail.org', 'temp-mail.io', 'tempmail.net',
+    'guerrillamail.com', 'guerrillamail.info', 'guerrillamail.biz', 'guerrillamail.de', 'guerrillamail.net', 'guerrillamail.org',
+    'sharklasers.com', 'grr.la', 'guerrillamailblock.com', 'pokemail.net', 'spam4.me',
+    '10minutemail.com', '10minutemail.net', '10minmail.com', '20minutemail.com',
+    'throwawaymail.com', 'yopmail.com', 'yopmail.fr', 'yopmail.net', 'cool.fr.nf',
+    'jetable.fr.nf', 'courriel.fr.nf', 'moncourrier.fr.nf', 'monemail.fr.nf', 'monmail.fr.nf',
+    'trashmail.com', 'trashmail.net', 'trashmail.me', 'dispostable.com', 'fakeinbox.com',
+    'getairmail.com', 'mohmal.com', 'crazymailing.com', 'mytemp.email', 'tempail.com',
+    'burnermail.io', 'inboxkitten.com', 'nada.ltd', 'dropmail.me', 'getnada.com',
+    'emailondeck.com', 'fakemailgenerator.com', 'generator.email', 'tempmailo.com',
+    'tmail.ws', 'disposablemail.com', 'minuteinbox.com', 'zillamail.com', 'crazymail.com',
+    'trash-mail.com', 'tempinbox.com', 'maildrop.cc', 'harakirimail.com', 'mailcatch.com',
+    'discard.email', 'spambog.com', 'mailnull.com', 'jetable.org', 'incognitoid.com',
+    'byom.de', 'mytempmail.com', 'mytrashmail.com', 'mailnesia.com', 'mailsac.com'
+  ];
+
+  function validateEmail(val, isRequired) {
+    var str = (val || '').trim().toLowerCase();
+    if (!str) {
+      return isRequired ? { bad: true, msg: 'Email address is mandatory for the lead traveller.' } : { bad: false };
+    }
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(str)) {
+      return { bad: true, msg: 'Enter a valid email address (e.g. name@gmail.com).' };
+    }
+    var parts = str.split('@');
+    if (parts.length !== 2) {
+      return { bad: true, msg: 'Enter a valid email address.' };
+    }
+    var domain = parts[1];
+    for (var d = 0; d < TEMP_EMAIL_DOMAINS.length; d++) {
+      var tDomain = TEMP_EMAIL_DOMAINS[d];
+      if (domain === tDomain || domain.endsWith('.' + tDomain)) {
+        return { bad: true, msg: 'Temporary/disposable emails are not permitted. Please use personal/work email.' };
+      }
+    }
+    return { bad: false };
+  }
+
+  function validatePhone(val) {
+    var str = (val || '').trim();
+    if (!str) {
+      return { bad: true, msg: 'Mobile number is mandatory for all travellers.' };
+    }
+    var digits = str.replace(/\D/g, '');
+    if (digits.length === 12 && digits.startsWith('91')) {
+      digits = digits.slice(2);
+    } else if (digits.length === 11 && digits.startsWith('0')) {
+      digits = digits.slice(1);
+    }
+
+    if (digits.length === 10) {
+      if (!/^[6-9]\d{9}$/.test(digits)) {
+        return { bad: true, msg: 'Enter a valid 10-digit mobile number (starts with 6-9).' };
+      }
+      return { bad: false };
+    }
+
+    if (digits.length >= 10 && digits.length <= 15) {
+      return { bad: false };
+    }
+
+    return { bad: true, msg: 'Enter a valid 10-digit mobile number.' };
+  }
+
+  function fieldError(id, show, customMsg) {
     var input = document.getElementById(id);
     var err = document.getElementById('err-' + id);
-    if (err) err.classList.toggle('show', show);
+    if (err) {
+      if (customMsg) err.textContent = customMsg;
+      err.classList.toggle('show', show);
+    }
     if (input) input.setAttribute('aria-invalid', show ? 'true' : 'false');
     return !show;
   }
@@ -248,17 +324,22 @@
       var phone = document.getElementById('phone' + i);
       var age   = document.getElementById('age' + i);
 
+      var emailRes = validateEmail(email ? email.value : '', email ? email.hasAttribute('required') : (i === 0));
+      var phoneRes = validatePhone(phone ? phone.value : '');
+      var nameBad = !name || name.value.trim().length < 2;
+      var ageBad = !age || !age.value || Number(age.value) < 12 || Number(age.value) > 90;
+
       var checks = [
-        ['name' + i,  name && name.value.trim().length < 2],
-        ['email' + i, email && email.hasAttribute('required') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())],
-        ['phone' + i, phone && phone.hasAttribute('required') && phone.value.replace(/\D/g, '').length < 8],
-        ['age' + i,   age && (!age.value || Number(age.value) < 12 || Number(age.value) > 90)]
+        ['name' + i, nameBad, 'Enter the full name as printed on ID.'],
+        ['email' + i, emailRes.bad, emailRes.msg],
+        ['phone' + i, phoneRes.bad, phoneRes.msg],
+        ['age' + i, ageBad, 'Age must be between 12 and 90.']
       ];
 
       checks.forEach(function (c) {
         var bad = !!c[1];
         if (bad) { ok = false; if (!first) first = c[0]; }
-        if (report) fieldError(c[0], bad);
+        if (report) fieldError(c[0], bad, c[2]);
       });
     }
     if (focusFirst && first) {
@@ -271,35 +352,53 @@
     return ok;
   }
 
-  /* Clear error for the specific field being edited without stealing focus or scrolling */
+  /* Real-time single field validation */
   function validateSingle(inputEl) {
     if (!inputEl || !inputEl.id) return;
     var id = inputEl.id;
 
     var isBad = false;
+    var msg = '';
+
     if (id.startsWith('name')) {
       isBad = inputEl.value.trim().length < 2;
+      msg = 'Enter the full name as printed on ID.';
     } else if (id.startsWith('email')) {
-      isBad = inputEl.hasAttribute('required') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEl.value.trim());
+      var res = validateEmail(inputEl.value, inputEl.hasAttribute('required'));
+      isBad = res.bad;
+      msg = res.msg;
     } else if (id.startsWith('phone')) {
-      var digits = inputEl.value.replace(/\D/g, '');
-      isBad = inputEl.hasAttribute('required') && digits.length < 8;
+      var pRes = validatePhone(inputEl.value);
+      isBad = pRes.bad;
+      msg = pRes.msg;
     } else if (id.startsWith('age')) {
       var val = Number(inputEl.value);
       isBad = !inputEl.value || val < 12 || val > 90;
+      msg = 'Age must be between 12 and 90.';
     }
 
     var err = document.getElementById('err-' + id);
-    if (err && err.classList.contains('show')) {
-      fieldError(id, isBad);
+    if (err && (err.classList.contains('show') || isBad)) {
+      fieldError(id, isBad, msg);
     }
   }
 
   cards.addEventListener('input', function (e) {
     if (e.target && e.target.id) {
+      if (e.target.id.startsWith('phone')) {
+        // format phone input neatly
+        var raw = e.target.value.replace(/[^\d+ ]/g, '');
+        if (e.target.value !== raw) e.target.value = raw;
+      }
       validateSingle(e.target);
     }
   });
+
+  cards.addEventListener('blur', function (e) {
+    if (e.target && e.target.id) {
+      validateSingle(e.target);
+    }
+  }, true);
 
   /* Prevent Enter key inside input fields from prematurely submitting the form and jumping sections */
   document.getElementById('intelForm').addEventListener('keydown', function (e) {
@@ -330,7 +429,7 @@
   document.getElementById('intelForm').addEventListener('submit', function (e) {
     e.preventDefault();
     if (!validate(true, true)) {
-      R.toast('Check the highlighted fields');
+      R.toast('Please check the highlighted fields');
       return;
     }
     R.state.set({ travellers: collect() });

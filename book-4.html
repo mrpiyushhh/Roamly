@@ -17,35 +17,92 @@
 <a href="#main" class="skip-link">Skip to content</a>
 <nav data-nav="checkout" data-step="4" aria-label="Checkout progress"></nav>
 
-<main id="main" class="max-w-7xl mx-auto px-6 pt-32 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+<main id="main" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-32 pb-16 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
 
   <form class="lg:col-span-7" id="payForm">
-    <header class="mb-12">
-      <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 uppercase">
+    <header class="mb-6 sm:mb-10">
+      <h1 class="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter mb-2 sm:mb-3 uppercase">
         Secure <span class="text-brand italic">gateway.</span>
       </h1>
-      <p class="text-muted font-medium text-lg">Hold your slot with the deposit. Balance is due 15 days out.</p>
+      <p class="text-muted font-medium text-xs sm:text-base leading-relaxed" id="gatewaySub">
+        Choose token deposit or pay in full to reserve your slots.
+      </p>
     </header>
 
-    <fieldset class="space-y-5">
-      <legend class="sr-only">Payment method</legend>
+    <!-- Merged Payment Plan Card -->
+    <fieldset class="mb-6 sm:mb-8" id="planSelector">
+      <legend class="field-label mb-2 sm:mb-3">Choose Payment Plan</legend>
+      <div class="bg-white border-2 border-brand rounded-[2rem] overflow-hidden shadow-sm">
+        <!-- Token Deposit Option -->
+        <label class="plan-row flex items-center justify-between gap-3 sm:gap-4 p-4 sm:p-6 cursor-pointer hover:bg-surface/60 tx transition-colors relative" id="planDepositRow">
+          <input type="radio" name="payPlan" value="deposit" class="sr-only" checked>
+          <div class="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+            <span class="plan-indicator w-6 h-6 rounded-full border-2 border-brand bg-brand text-accent flex items-center justify-center shrink-0 text-xs shadow-sm">
+              <i class="fa-solid fa-check text-[10px]"></i>
+            </span>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                <span class="font-display font-extrabold text-base sm:text-lg uppercase tracking-tight text-ink">Pay Token Deposit</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 bg-brand text-accent text-[8px] sm:text-[9px] font-black uppercase tracking-wider rounded-full shadow-sm">
+                  Reserve Seat
+                </span>
+              </div>
+              <p class="text-xs text-muted font-medium leading-snug">Hold slot today. Settle balance 15 days out.</p>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="block font-display text-xl sm:text-2xl font-black tracking-tight text-ink tabular-nums" id="planDepositAmt">₹1,000</span>
+            <span class="block text-[9px] font-black uppercase tracking-widest text-muted">Today</span>
+          </div>
+        </label>
+
+        <!-- Subtle Divider -->
+        <div class="border-t border-border-subtle"></div>
+
+        <!-- Full Payment Option -->
+        <label class="plan-row flex items-center justify-between gap-3 sm:gap-4 p-4 sm:p-6 cursor-pointer hover:bg-surface/60 tx transition-colors relative" id="planFullRow">
+          <input type="radio" name="payPlan" value="full" class="sr-only">
+          <div class="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+            <span class="plan-indicator w-6 h-6 rounded-full border-2 border-border-subtle bg-white text-transparent flex items-center justify-center shrink-0 text-xs">
+              <i class="fa-solid fa-check text-[10px]"></i>
+            </span>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                <span class="font-display font-extrabold text-base sm:text-lg uppercase tracking-tight text-ink">Pay Full Amount</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 bg-surface text-muted border border-border-subtle text-[8px] sm:text-[9px] font-black uppercase tracking-wider rounded-full">
+                  100% Upfront
+                </span>
+              </div>
+              <p class="text-xs text-muted font-medium leading-snug">Pay in full now. Zero remaining balance.</p>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="block font-display text-xl sm:text-2xl font-black tracking-tight text-ink tabular-nums" id="planFullAmt">₹2,598</span>
+            <span class="block text-[9px] font-black uppercase tracking-widest text-muted">Total</span>
+          </div>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="space-y-4 sm:space-y-5">
+      <legend class="field-label mb-2 sm:mb-3">Payment Protocol</legend>
 
       <!-- UPI -->
       <label class="option-card !p-0 overflow-hidden" id="upiCard">
         <input type="radio" name="method" value="upi" checked>
         <span class="option-body block">
-          <span class="flex justify-between items-center gap-4 p-8">
-            <span class="flex items-center gap-4">
-              <span class="w-12 h-12 rounded-2xl bg-brand text-accent flex items-center justify-center shadow-brand" aria-hidden="true">
+          <span class="flex justify-between items-center gap-4 p-4 sm:p-6 md:p-8">
+            <span class="flex items-center gap-3 sm:gap-4">
+              <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand text-accent flex items-center justify-center shadow-brand text-sm sm:text-base" aria-hidden="true">
                 <i class="fa-solid fa-mobile-screen"></i>
               </span>
-              <span class="font-display font-extrabold text-2xl uppercase tracking-tight">UPI Protocol</span>
+              <span class="font-display font-extrabold text-lg sm:text-2xl uppercase tracking-tight">UPI Protocol</span>
             </span>
-            <span class="option-check !static !top-auto !right-auto"><i class="fa-solid fa-check text-[11px]"></i></span>
+            <span class="option-check !static !top-auto !right-auto"><i class="fa-solid fa-check text-[10px] sm:text-[11px]"></i></span>
           </span>
-          <span class="method-body block px-8 pb-8">
-            <span class="block bg-white p-10 rounded-[2.5rem] border border-border-subtle text-center">
-              <img class="w-44 h-44 mx-auto mb-6 opacity-90" loading="lazy"
+          <span class="method-body block px-4 pb-4 sm:px-8 sm:pb-8">
+            <span class="block bg-white p-5 sm:p-8 md:p-10 rounded-[1.5rem] sm:rounded-[2.5rem] border border-border-subtle text-center">
+              <img class="w-32 h-32 sm:w-44 sm:h-44 mx-auto mb-4 sm:mb-6 opacity-90" loading="lazy"
                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_f55c1089fc_0f8dd361173bd941.png"
                    alt="UPI payment QR code">
               <span class="block text-[10px] font-black uppercase tracking-[0.2em] text-muted" id="qrNote"></span>
@@ -58,33 +115,33 @@
       <label class="option-card !p-0 overflow-hidden" id="cardCard">
         <input type="radio" name="method" value="card">
         <span class="option-body block">
-          <span class="flex justify-between items-center gap-4 p-8">
-            <span class="flex items-center gap-4">
-              <span class="w-12 h-12 rounded-2xl bg-surface border border-border-subtle flex items-center justify-center" aria-hidden="true">
+          <span class="flex justify-between items-center gap-4 p-4 sm:p-6 md:p-8">
+            <span class="flex items-center gap-3 sm:gap-4">
+              <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-surface border border-border-subtle flex items-center justify-center text-sm sm:text-base" aria-hidden="true">
                 <i class="fa-solid fa-credit-card"></i>
               </span>
-              <span class="font-display font-extrabold text-2xl uppercase tracking-tight">Credit / Debit Card</span>
+              <span class="font-display font-extrabold text-base sm:text-2xl uppercase tracking-tight">Credit / Debit Card</span>
             </span>
-            <span class="flex items-center gap-4">
+            <span class="flex items-center gap-3 sm:gap-4">
               <span class="hidden sm:flex gap-3 text-2xl opacity-40" aria-hidden="true">
                 <i class="fa-brands fa-cc-visa"></i><i class="fa-brands fa-cc-mastercard"></i>
               </span>
-              <span class="option-check !static !top-auto !right-auto"><i class="fa-solid fa-check text-[11px]"></i></span>
+              <span class="option-check !static !top-auto !right-auto"><i class="fa-solid fa-check text-[10px] sm:text-[11px]"></i></span>
             </span>
           </span>
-          <span class="method-body block px-8 pb-8">
-            <span class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <span class="method-body block px-4 pb-4 sm:px-8 sm:pb-8">
+            <span class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-6">
               <span class="block md:col-span-2">
                 <span class="field-label" aria-hidden="true">Card Number</span>
-                <input class="field-input" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number" id="ccNum" aria-label="Card number">
+                <input class="field-input h-11 sm:h-12 px-3.5 sm:px-5 text-xs sm:text-sm font-bold" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number" id="ccNum" aria-label="Card number">
               </span>
               <span class="block">
                 <span class="field-label" aria-hidden="true">Expiry</span>
-                <input class="field-input" type="text" placeholder="09 / 28" autocomplete="cc-exp" id="ccExp" aria-label="Card expiry date">
+                <input class="field-input h-11 sm:h-12 px-3.5 sm:px-5 text-xs sm:text-sm font-bold" type="text" placeholder="09 / 28" autocomplete="cc-exp" id="ccExp" aria-label="Card expiry date">
               </span>
               <span class="block">
                 <span class="field-label" aria-hidden="true">CVV</span>
-                <input class="field-input" type="password" inputmode="numeric" placeholder="•••" autocomplete="cc-csc" id="ccCvv" aria-label="Card security code">
+                <input class="field-input h-11 sm:h-12 px-3.5 sm:px-5 text-xs sm:text-sm font-bold" type="password" inputmode="numeric" placeholder="•••" autocomplete="cc-csc" id="ccCvv" aria-label="Card security code">
               </span>
             </span>
           </span>
@@ -92,24 +149,24 @@
       </label>
     </fieldset>
 
-    <div class="mt-10 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted">
+    <div class="mt-6 sm:mt-10 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted">
       <i class="fa-solid fa-lock" aria-hidden="true"></i> Demo checkout — no card is charged
     </div>
   </form>
 
   <aside class="lg:col-span-5">
-    <div class="sticky top-32 bg-ink text-white rounded-panel p-10 shadow-2xl">
-      <h2 class="font-display font-black text-2xl tracking-tighter text-accent mb-8 uppercase">Order Ledger</h2>
+    <div class="sticky top-32 bg-ink text-white rounded-[2rem] sm:rounded-panel p-5 sm:p-8 md:p-10 shadow-2xl">
+      <h2 class="font-display font-black text-xl sm:text-2xl tracking-tighter text-accent mb-4 sm:mb-6 uppercase">Order Ledger</h2>
       <div id="summary"></div>
       <button type="submit" form="payForm" id="authorize"
-        class="rm-btn rm-btn-primary w-full py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter shadow-lg shadow-black/30">
+        class="rm-btn rm-btn-primary w-full py-4 sm:py-5 rounded-2xl sm:rounded-[2rem] font-black text-base sm:text-lg uppercase tracking-tight shadow-lg shadow-black/30">
         <span id="authLabel">Authorize</span>
       </button>
-      <p class="mt-8 flex items-center justify-center gap-3 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
+      <p class="mt-6 sm:mt-8 flex items-center justify-center gap-3 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
         <i class="fa-solid fa-lock" aria-hidden="true"></i> 256-bit AES Encryption
       </p>
-      <a href="book-3.html" data-keep="book-3.html" class="block text-center mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-accent transition-colors">
-        Back to extraction
+      <a href="book-3.html" data-keep="book-3.html" class="block text-center mt-5 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-accent transition-colors">
+        Back to pickup point
       </a>
     </div>
   </aside>
@@ -122,43 +179,101 @@
 (function () {
   'use strict';
   var R = window.Roamly;
-  var dep = R.deposit();
+  var s = R.state.get();
+  var totalAmt = R.total();
+  var depAmt = R.deposit();
+  var currentPlan = s.payMode || 'deposit';
 
-  document.getElementById('summary').innerHTML = R.summaryBody({ dark: true, deposit: true });
-  document.getElementById('qrNote').textContent =
-    dep > 0 ? 'Scan to authorize ' + R.inr(dep) + ' deposit' : 'No payment needed — this trip is free';
-  document.getElementById('authLabel').textContent =
-    dep > 0 ? 'Authorize ' + R.inr(dep) : 'Confirm Free Slot';
+  document.getElementById('planDepositAmt').textContent = R.inr(depAmt);
+  document.getElementById('planFullAmt').textContent = R.inr(totalAmt);
+
+  var planDepRow = document.getElementById('planDepositRow');
+  var planFullRow = document.getElementById('planFullRow');
+  var planDepRadio = planDepRow.querySelector('input');
+  var planFullRadio = planFullRow.querySelector('input');
+
+  function renderPlan() {
+    var isDep = (currentPlan === 'deposit') && (depAmt < totalAmt);
+    var due = isDep ? depAmt : totalAmt;
+
+    // sync radio states
+    planDepRadio.checked = isDep;
+    planFullRadio.checked = !isDep;
+
+    // sync row styling
+    if (isDep) {
+      planDepRow.classList.add('bg-brand/5');
+      planDepRow.querySelector('.plan-indicator').className = 'plan-indicator w-6 h-6 rounded-full border-2 border-brand bg-brand text-accent flex items-center justify-center shrink-0 text-xs shadow-sm';
+      
+      planFullRow.classList.remove('bg-brand/5');
+      planFullRow.querySelector('.plan-indicator').className = 'plan-indicator w-6 h-6 rounded-full border-2 border-border-subtle bg-white text-transparent flex items-center justify-center shrink-0 text-xs';
+    } else {
+      planDepRow.classList.remove('bg-brand/5');
+      planDepRow.querySelector('.plan-indicator').className = 'plan-indicator w-6 h-6 rounded-full border-2 border-border-subtle bg-white text-transparent flex items-center justify-center shrink-0 text-xs';
+
+      planFullRow.classList.add('bg-brand/5');
+      planFullRow.querySelector('.plan-indicator').className = 'plan-indicator w-6 h-6 rounded-full border-2 border-brand bg-brand text-accent flex items-center justify-center shrink-0 text-xs shadow-sm';
+    }
+
+    R.state.set({ payMode: isDep ? 'deposit' : 'full' });
+    document.getElementById('summary').innerHTML = R.summaryBody({ dark: true, deposit: true, payMode: isDep ? 'deposit' : 'full' });
+
+    document.getElementById('qrNote').textContent =
+      due > 0 ? 'Scan to pay ' + R.inr(due) + (isDep ? ' token deposit' : ' in full') : 'No payment needed — this trip is free';
+    
+    document.getElementById('authLabel').textContent =
+      due > 0 ? (isDep ? 'Authorize ' + R.inr(due) : 'Pay ' + R.inr(due) + ' in Full') : 'Confirm Free Slot';
+  }
+
+  planDepRow.addEventListener('click', function () {
+    currentPlan = 'deposit';
+    renderPlan();
+  });
+
+  planFullRow.addEventListener('click', function () {
+    currentPlan = 'full';
+    renderPlan();
+  });
+
+  renderPlan();
 
   /* only the selected method shows its body */
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.option-card'));
-  function sync() {
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#payForm > fieldset:nth-of-type(2) .option-card'));
+  function syncMethod() {
     cards.forEach(function (l) {
       var checked = l.querySelector('input').checked;
       l.classList.toggle('is-selected', checked);
-      l.querySelector('.method-body').style.display = checked ? '' : 'none';
+      var mb = l.querySelector('.method-body');
+      if (mb) mb.style.display = checked ? '' : 'none';
     });
   }
-  cards.forEach(function (l) { l.addEventListener('change', sync); });
-  sync();
+  cards.forEach(function (l) { l.addEventListener('change', syncMethod); });
+  syncMethod();
 
   /* light formatting so the card fields behave like real ones */
   var num = document.getElementById('ccNum');
-  num.addEventListener('input', function () {
-    var v = num.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
-    num.value = v;
-  });
+  if (num) {
+    num.addEventListener('input', function () {
+      var v = num.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+      num.value = v;
+    });
+  }
   var exp = document.getElementById('ccExp');
-  exp.addEventListener('input', function () {
-    var v = exp.value.replace(/\D/g, '').slice(0, 4);
-    exp.value = v.length > 2 ? v.slice(0, 2) + ' / ' + v.slice(2) : v;
-  });
+  if (exp) {
+    exp.addEventListener('input', function () {
+      var v = exp.value.replace(/\D/g, '').slice(0, 4);
+      exp.value = v.length > 2 ? v.slice(0, 2) + ' / ' + v.slice(2) : v;
+    });
+  }
 
   document.getElementById('payForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var method = document.querySelector('input[name="method"]:checked').value;
+    var methodInput = document.querySelector('input[name="method"]:checked');
+    var method = methodInput ? methodInput.value : 'upi';
+    var isDep = (currentPlan === 'deposit') && (depAmt < totalAmt);
+    var due = isDep ? depAmt : totalAmt;
 
-    if (method === 'card' && dep > 0) {
+    if (method === 'card' && due > 0) {
       var digits = document.getElementById('ccNum').value.replace(/\D/g, '');
       if (digits.length < 12 || !document.getElementById('ccExp').value ||
           !document.getElementById('ccCvv').value) {
@@ -171,9 +286,9 @@
     var btn = document.getElementById('authorize');
     btn.disabled = true;
     btn.style.opacity = '.6';
-    document.getElementById('authLabel').textContent = 'Authorizing…';
+    document.getElementById('authLabel').textContent = 'Processing Payment…';
 
-    R.state.set({ method: method, deposited: true });
+    R.state.set({ method: method, payMode: isDep ? 'deposit' : 'full', deposited: true });
     R.makeRef();
 
     setTimeout(function () { R.go('confirmation.html'); }, 900);

@@ -18,33 +18,33 @@
 <a href="#main" class="skip-link">Skip to content</a>
 <nav data-nav="marketing" data-active="upcoming" aria-label="Main"></nav>
 
-<header class="relative pt-32 pb-12 px-6">
+<header class="relative pt-28 sm:pt-32 pb-8 sm:pb-12 px-4 sm:px-6">
   <div class="max-w-7xl mx-auto">
-    <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+    <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4 sm:mb-6">
       <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
       Explore 2026 Destinations
     </p>
-    <h1 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-4 uppercase">
+    <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-3 sm:mb-4 uppercase">
       Choose your <span class="text-brand italic">horizon.</span>
     </h1>
-    <p class="text-lg text-muted max-w-2xl leading-relaxed font-medium">
+    <p class="text-base sm:text-lg text-muted max-w-2xl leading-relaxed font-medium">
       From technical ridges to serene valley walks, find the trip that speaks to your spirit.
     </p>
   </div>
 </header>
 
 <!-- Search & Sort Controls -->
-<section class="relative z-50 px-6 mb-12" aria-label="Search and sort trips">
-  <div class="max-w-7xl mx-auto glass border border-border-subtle px-5 sm:px-6 py-2.5 rounded-full shadow-xl flex items-center justify-between gap-4 relative">
+<section class="relative z-50 px-4 sm:px-6 mb-8 sm:mb-12" aria-label="Search and sort trips">
+  <div class="max-w-7xl mx-auto glass border border-border-subtle px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-xl flex items-center justify-between gap-2.5 sm:gap-4 relative">
     
     <!-- Search Input -->
-    <div class="flex items-center gap-3.5 flex-1 min-w-0">
-      <i class="fa-solid fa-magnifying-glass text-muted text-sm shrink-0 flex items-center" aria-hidden="true"></i>
+    <div class="flex items-center gap-2.5 sm:gap-3.5 flex-1 min-w-0">
+      <i class="fa-solid fa-magnifying-glass text-muted text-xs sm:text-sm shrink-0 flex items-center" aria-hidden="true"></i>
       <input type="text" 
              id="tripSearchInput" 
              autocomplete="off"
-             placeholder="SEARCH BY TRIP NAME, REGION, GRADE, OR DURATION..." 
-             class="w-full bg-transparent border-0 outline-none text-xs sm:text-[13px] font-bold uppercase tracking-wider text-ink placeholder:text-muted/60 focus:outline-none p-0 m-0 leading-normal flex-1">
+             placeholder="Search by trip name..." 
+             class="w-full bg-transparent border-0 outline-none text-xs sm:text-[13px] font-bold tracking-wide text-ink placeholder:text-muted/60 placeholder:normal-case focus:outline-none p-0 m-0 leading-normal flex-1">
       <button type="button" 
               id="clearSearchBtn" 
               aria-label="Clear search"
@@ -61,16 +61,16 @@
               id="sortToggleBtn" 
               aria-haspopup="listbox" 
               aria-expanded="false"
-              class="flex items-center gap-2 bg-surface hover:bg-white border border-border-subtle hover:border-brand/40 px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-ink tx shadow-sm active:scale-95 cursor-pointer">
+              class="flex items-center gap-1 sm:gap-2 bg-surface hover:bg-white border border-border-subtle hover:border-brand/40 px-2.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-bold uppercase tracking-wider text-ink tx shadow-sm active:scale-95 cursor-pointer">
         <span class="text-[10px] font-black uppercase tracking-widest text-muted hidden sm:inline-block">Sort:</span>
-        <span id="selectedSortLabel" class="text-ink font-extrabold tracking-wider">Recommended</span>
-        <i class="fa-solid fa-chevron-down text-[10px] text-muted transition-transform duration-300 ml-1" id="sortChevron" aria-hidden="true"></i>
+        <span id="selectedSortLabel" class="text-ink font-extrabold tracking-wider text-[11px] sm:text-xs">Recommended</span>
+        <i class="fa-solid fa-chevron-down text-[10px] text-muted transition-transform duration-300 ml-0.5 sm:ml-1" id="sortChevron" aria-hidden="true"></i>
       </button>
 
       <!-- Menu Options Panel -->
       <div id="sortMenu" 
            role="listbox"
-           class="hidden absolute right-0 top-full mt-2.5 w-60 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-2xl p-2 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.25)] z-[100] tx space-y-1">
+           class="hidden absolute right-0 top-full mt-2.5 w-56 sm:w-60 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-2xl p-2 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.25)] z-[100] tx space-y-1">
         <button type="button" role="option" data-value="rec" aria-selected="true"
                 class="sort-opt w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-left tx bg-brand text-accent shadow-sm cursor-pointer">
           <span>Recommended</span>
@@ -96,10 +96,10 @@
   </div>
 </section>
 
-<main id="main" class="py-12 px-6 min-h-[600px]">
+<main id="main" class="py-6 sm:py-12 px-4 sm:px-6 min-h-[600px]">
   <div class="max-w-7xl mx-auto">
-    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-8" id="count" role="status"></p>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="grid"></div>
+    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-6 sm:mb-8" id="count" role="status"></p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12" id="grid"></div>
     <p class="hidden text-center py-24 text-muted font-medium" id="empty">
       No trips match your search. Try different keywords.
     </p>

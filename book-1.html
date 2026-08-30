@@ -17,67 +17,89 @@
 <a href="#main" class="skip-link">Skip to content</a>
 <nav data-nav="checkout" data-step="1" aria-label="Checkout progress"></nav>
 
-<main id="main" class="max-w-7xl mx-auto px-6 pt-32 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+<main id="main" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-32 pb-16 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
 
   <form class="lg:col-span-8" id="rosterForm">
-    <header class="mb-12">
-      <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 uppercase">
+    <header class="mb-6 sm:mb-10">
+      <h1 class="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter mb-2 sm:mb-3 uppercase">
         Trip <span class="text-brand italic">roster.</span>
       </h1>
-      <p class="text-muted font-medium text-lg" id="sub"></p>
+      <p class="text-muted font-medium text-xs sm:text-base leading-relaxed" id="sub"></p>
     </header>
 
     <!-- Team size -->
-    <section class="bg-surface border-2 border-brand rounded-panel p-10 mb-6 relative overflow-hidden">
-      <p class="absolute top-0 right-0 px-8 py-3 bg-brand text-accent text-[10px] font-black uppercase tracking-widest rounded-bl-[2rem]">
+    <section class="bg-surface border-2 border-brand rounded-[2rem] sm:rounded-panel p-6 sm:p-10 mb-6 relative overflow-hidden">
+      <p class="absolute top-0 right-0 px-5 sm:px-8 py-2 sm:py-3 bg-brand text-accent text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded-bl-2xl sm:rounded-bl-[2rem] z-10">
         Step One
       </p>
-      <h2 class="font-display font-extrabold text-2xl uppercase tracking-tight mb-2">How many are climbing?</h2>
-      <p class="text-muted font-medium text-sm mb-10">Max 8 hikers per guide. Larger groups are split across two coordinators.</p>
+      <h2 class="font-display font-extrabold text-xl sm:text-2xl uppercase tracking-tight leading-tight pr-24 sm:pr-28 mb-2">
+        How many are climbing?
+      </h2>
+      <p class="text-muted font-medium text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed">
+        Max 8 hikers per guide. Larger groups are split across two coordinators.
+      </p>
 
-      <div class="flex items-center justify-between gap-6 max-w-md">
+      <div class="flex items-center justify-between gap-4 sm:gap-6 max-w-xs sm:max-w-sm mx-auto">
         <button type="button" id="minus" aria-label="Remove a traveller"
-          class="w-16 h-16 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-xl hover:bg-brand hover:text-accent tx disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-inherit">
+          class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-base sm:text-lg hover:bg-brand hover:text-accent tx disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-inherit shadow-sm">
           <i class="fa-solid fa-minus"></i>
         </button>
-        <div class="text-center">
-          <span class="font-display text-7xl font-black tracking-tighter tabular-nums block leading-none" id="paxOut" aria-live="polite">1</span>
-          <span class="text-[10px] font-black uppercase tracking-[0.2em] text-muted mt-2 block" id="paxWord">Traveller</span>
+        <div class="text-center min-w-[90px]">
+          <span class="font-display text-5xl sm:text-6xl font-black tracking-tight tabular-nums block leading-none text-ink" id="paxOut" aria-live="polite">01</span>
+          <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-muted mt-2 block" id="paxWord">Traveller</span>
         </div>
         <button type="button" id="plus" aria-label="Add a traveller"
-          class="w-16 h-16 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-xl hover:bg-brand hover:text-accent tx disabled:opacity-30">
+          class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl border border-border-subtle bg-white flex items-center justify-center text-base sm:text-lg hover:bg-brand hover:text-accent tx disabled:opacity-30 shadow-sm">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
 
-      <p class="text-[10px] font-black uppercase tracking-widest text-brand mt-8" id="slotNote" role="status"></p>
+      <p class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-brand mt-6 sm:mt-8 text-center" id="slotNote" role="status"></p>
     </section>
 
-
-
     <!-- Included -->
-    <section class="bg-white border border-border-subtle rounded-panel p-10">
-      <h2 class="font-display font-extrabold text-2xl uppercase tracking-tight mb-8">What the fee covers</h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <li class="flex gap-4"><i class="fa-solid fa-check text-brand mt-1" aria-hidden="true"></i><span class="text-sm font-medium text-muted"><b class="text-ink">All camping and stay</b> from basecamp to basecamp</span></li>
-        <li class="flex gap-4"><i class="fa-solid fa-check text-brand mt-1" aria-hidden="true"></i><span class="text-sm font-medium text-muted"><b class="text-ink">Every meal on the trail</b>, including dietary swaps</span></li>
-        <li class="flex gap-4"><i class="fa-solid fa-check text-brand mt-1" aria-hidden="true"></i><span class="text-sm font-medium text-muted"><b class="text-ink">Certified lead guide</b> and support crew</span></li>
-        <li class="flex gap-4"><i class="fa-solid fa-check text-brand mt-1" aria-hidden="true"></i><span class="text-sm font-medium text-muted"><b class="text-ink">Safety kit</b> — oxygen, satellite phone, first response</span></li>
-        <li class="flex gap-4"><i class="fa-solid fa-xmark text-muted mt-1" aria-hidden="true"></i><span class="text-sm font-medium text-muted">Travel to the pickup point</span></li>
-        <li class="flex gap-4"><i class="fa-solid fa-xmark text-muted mt-1" aria-hidden="true"></i><span class="text-sm font-medium text-muted">Personal gear rental (available on request)</span></li>
+    <section class="bg-white border border-border-subtle rounded-[2rem] sm:rounded-panel p-6 sm:p-10 mb-8 lg:mb-0">
+      <h2 class="font-display font-extrabold text-xl sm:text-2xl uppercase tracking-tight leading-tight mb-6 sm:mb-8">
+        What the fee covers
+      </h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <li class="flex gap-3.5 sm:gap-4 items-start">
+          <span class="w-5 h-5 rounded-full bg-brand/10 text-brand flex items-center justify-center shrink-0 mt-0.5 text-xs"><i class="fa-solid fa-check"></i></span>
+          <span class="text-xs sm:text-sm font-medium text-muted leading-snug"><b class="text-ink font-bold">All camping and stay</b> from basecamp to basecamp</span>
+        </li>
+        <li class="flex gap-3.5 sm:gap-4 items-start">
+          <span class="w-5 h-5 rounded-full bg-brand/10 text-brand flex items-center justify-center shrink-0 mt-0.5 text-xs"><i class="fa-solid fa-check"></i></span>
+          <span class="text-xs sm:text-sm font-medium text-muted leading-snug"><b class="text-ink font-bold">Every meal on the trail</b>, including dietary swaps</span>
+        </li>
+        <li class="flex gap-3.5 sm:gap-4 items-start">
+          <span class="w-5 h-5 rounded-full bg-brand/10 text-brand flex items-center justify-center shrink-0 mt-0.5 text-xs"><i class="fa-solid fa-check"></i></span>
+          <span class="text-xs sm:text-sm font-medium text-muted leading-snug"><b class="text-ink font-bold">Certified lead guide</b> and support crew</span>
+        </li>
+        <li class="flex gap-3.5 sm:gap-4 items-start">
+          <span class="w-5 h-5 rounded-full bg-brand/10 text-brand flex items-center justify-center shrink-0 mt-0.5 text-xs"><i class="fa-solid fa-check"></i></span>
+          <span class="text-xs sm:text-sm font-medium text-muted leading-snug"><b class="text-ink font-bold">Safety kit</b> — oxygen, satellite phone, first response</span>
+        </li>
+        <li class="flex gap-3.5 sm:gap-4 items-start">
+          <span class="w-5 h-5 rounded-full bg-black/5 text-muted flex items-center justify-center shrink-0 mt-0.5 text-xs"><i class="fa-solid fa-xmark"></i></span>
+          <span class="text-xs sm:text-sm font-medium text-muted leading-snug">Travel to the pickup point</span>
+        </li>
+        <li class="flex gap-3.5 sm:gap-4 items-start">
+          <span class="w-5 h-5 rounded-full bg-black/5 text-muted flex items-center justify-center shrink-0 mt-0.5 text-xs"><i class="fa-solid fa-xmark"></i></span>
+          <span class="text-xs sm:text-sm font-medium text-muted leading-snug">Personal gear rental (available on request)</span>
+        </li>
       </ul>
     </section>
   </form>
 
   <aside class="lg:col-span-4">
-    <div class="sticky top-32 bg-brand text-accent rounded-panel p-10 shadow-brand">
-      <h2 class="font-display font-black text-2xl tracking-tighter mb-8 uppercase">Trip Log</h2>
+    <div class="sticky top-32 bg-brand text-accent rounded-[2rem] sm:rounded-panel p-5 sm:p-8 md:p-10 shadow-brand">
+      <h2 class="font-display font-black text-xl sm:text-2xl tracking-tighter mb-4 sm:mb-6 uppercase">Trip Log</h2>
       <div id="summary"></div>
       <button type="submit" form="rosterForm"
-        class="rm-btn rm-btn-accent w-full py-6 rounded-[2rem] font-black text-xl uppercase tracking-tighter">
+        class="rm-btn rm-btn-accent w-full py-4 sm:py-5 rounded-2xl sm:rounded-[2rem] font-black text-base sm:text-lg uppercase tracking-tight">
         Proceed to Step 02
       </button>
-      <a href="trip.html" data-keep="trip.html" class="block text-center mt-6 text-[10px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-accent transition-colors">
+      <a href="trip.html" data-keep="trip.html" class="block text-center mt-5 text-[10px] font-black uppercase tracking-[0.2em] text-white/50 hover:text-accent transition-colors">
         Back to trip
       </a>
     </div>

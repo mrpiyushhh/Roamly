@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roamly — Responsive Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{ --ink:#0e1410; --muted:#5f6b63; --line:#dbe4dd; --brand:#1a4332; --accent:#d4f27a; --ground:#e9eeea; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.5 'Inter',system-ui,sans-serif}
+header{
+  position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+  padding:12px 18px;background:#fff;border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:-.02em}
+.mark{width:26px;height:26px;border-radius:7px;background:var(--brand);color:var(--accent);display:grid;place-items:center;font-style:italic;font-size:12px}
+label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+select,button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 12px;cursor:pointer}
+button:hover,select:hover{background:#f4f7f4}
+.spacer{flex:1}
+.hint{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+
+.rail{display:flex;gap:18px;padding:18px;overflow-x:auto;align-items:flex-start;min-height:calc(100vh - 56px)}
+.frame{background:#fff;border-radius:12px;box-shadow:0 8px 28px -10px rgba(14,20,16,.25);overflow:hidden;flex:0 0 auto}
+.frame > .bar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:7px 12px;background:var(--brand);color:var(--accent);
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;
+}
+.frame .bar .w{opacity:.75}
+iframe{border:0;display:block;background:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span class="mark">R</span> Responsive Preview</div>
+  <label for="page">Page</label>
+  <select id="page">
+    <option value="/index.html">Home</option>
+    <option value="/trips.html">Browse trips</option>
+    <option value="/trip.html">Trip detail</option>
+    <option value="/book-1.html">Checkout 1 · Roster</option>
+    <option value="/book-2.html">Checkout 2 · Intel</option>
+    <option value="/book-3.html">Checkout 3 · Extraction</option>
+    <option value="/book-4.html">Checkout 4 · Secure</option>
+    <option value="/confirmation.html">Confirmation</option>
+    <option value="/my-trip.html">My Trip</option>
+    <option value="/admin">Admin</option>
+  </select>
+  <label for="h">Height</label>
+  <select id="h">
+    <option value="760">760</option>
+    <option value="900" selected>900</option>
+    <option value="1200">1200</option>
+  </select>
+  <button id="reload">Reload all</button>
+  <div class="spacer"></div>
+  <span class="hint">Each frame is a real viewport — scroll and navigate them independently.</span>
+</header>
+
+<div class="rail" id="rail"></div>
+
+<script>
+(function () {
+  'use strict';
+  var WIDTHS = [320, 375, 768, 1024, 1440];
+  var rail = document.getElementById('rail');
+  var pageSel = document.getElementById('page');
+  var hSel = document.getElementById('h');
+
+  function label(w) {
+    if (w <= 375) return 'PHONE';
+    if (w < 1024) return 'TABLET';
+    if (w < 1440) return 'LAPTOP';
+    return 'DESKTOP';
+  }
+
+  function build() {
+    var page = pageSel.value, h = hSel.value;
+    rail.innerHTML = WIDTHS.map(function (w) {
+      return '<div class="frame" style="width:' + w + 'px">' +
+        '<div class="bar"><span>' + label(w) + '</span><span class="w">' + w + '×' + h + '</span></div>' +
+        '<iframe src="' + page + '" width="' + w + '" height="' + h + '" ' +
+        'title="' + page + ' at ' + w + 'px" loading="eager"></iframe>' +
+      '</div>';
+    }).join('');
+  }
+
+  pageSel.addEventListener('change', build);
+  hSel.addEventListener('change', build);
+  document.getElementById('reload').addEventListener('click', build);
+
+  // deep-link a page: preview.html#/trips.html
+  var want = decodeURIComponent(location.hash.slice(1));
+  if (want) {
+    for (var i = 0; i < pageSel.options.length; i++) {
+      if (pageSel.options[i].value === want) { pageSel.selectedIndex = i; break; }
+    }
+  }
+  pageSel.addEventListener('change', function () {
+    try { history.replaceState(null, '', '#' + pageSel.value); } catch (e) {}
+  });
+
+  build();
+})();
+</script>
+</body>
+</html>

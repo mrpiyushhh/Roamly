@@ -1,879 +1,1044 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roamly — Modern Trekking Adventures</title>
-<meta name="description" content="Premium weekend trekking experiences for those who seek the silence of the summits.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="assets/theme.js"></script>
-<link href="assets/roamly.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roamly — Modern Trekking Adventures</title>
+  <meta name="description"
+    content="Premium weekend trekking experiences for those who seek the silence of the summits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/theme.js"></script>
+  <link href="assets/roamly.css" rel="stylesheet">
 </head>
+
 <body class="antialiased bg-canvas text-ink">
 
-<a href="#main" class="skip-link">Skip to content</a>
-<nav data-nav="marketing" data-active="home" aria-label="Main"></nav>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <nav data-nav="marketing" data-active="home" aria-label="Main"></nav>
 
-<main id="main">
+  <main id="main">
 
-  <!-- Hero -->
-  <header class="relative pt-32 pb-16 px-6 overflow-hidden" id="hero" aria-label="Hero">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-      <div class="lg:col-span-6 relative z-10">
-        <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-          2026 Winter Season Now Open
-        </p>
-        <h1 class="font-display text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-6 uppercase">
-          Hike beyond the <span class="text-brand">edge.</span>
-        </h1>
-        <p class="text-lg text-muted max-w-md mb-8 leading-relaxed font-medium">
-          Premium weekend trekking experiences for those who seek the silence of the summits.
-          No crowds, just the climb.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="trips.html" class="bg-brand text-accent px-10 py-5 rounded-2xl font-black text-lg hover:rotate-2 tx shadow-brand-lg uppercase tracking-tighter">Book Now</a>
-        </div>
-      </div>
-
-      <div class="lg:col-span-6 relative">
-        <a href="trip.html?trip=harishchandragad" id="heroTripLink" aria-label="Explore featured trip: Harishchandragad" class="group block relative aspect-[4/5] rounded-panel overflow-hidden shadow-2xl animate-float max-h-[600px] mx-auto cursor-pointer">
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b480f492a1_5d5662a06cc88467.png" alt="A lone hiker with a full pack standing on a sharp rocky ridge">
-          <div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-3xl group-hover:bg-white/90 group-hover:border-brand/30 transition-all duration-300">
-            <div class="flex justify-between items-center gap-4">
-              <div>
-                <p class="text-[10px] font-black uppercase tracking-widest text-brand mb-1">Featured Peak</p>
-                <p class="font-display font-extrabold text-xl uppercase group-hover:text-brand transition-colors" id="heroTripName">Harishchandragad & Kokankada</p>
-              </div>
-              <div class="text-right">
-                <p class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Difficulty</p>
-                <p class="font-bold text-brand uppercase" id="heroTripGrade">Moderate</p>
-              </div>
-            </div>
-          </div>
-        </a>
-        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accent rounded-full blur-3xl opacity-30 -z-10" aria-hidden="true"></div>
-        <div class="absolute -top-10 -right-10 w-60 h-60 bg-brand rounded-full blur-3xl opacity-10 -z-10" aria-hidden="true"></div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Search -->
-  <section class="px-6 -mt-6 mb-16 relative z-30" aria-label="Find a trip">
-    <div class="max-w-4xl mx-auto relative">
-      <form id="searchForm" class="bg-white border border-border-subtle p-2 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row gap-2 relative z-20">
-        <div class="flex-1 flex items-center gap-4 px-6 py-4 bg-surface rounded-[2rem]">
-          <i class="fa-solid fa-map-pin text-brand text-base shrink-0" aria-hidden="true"></i>
-          <div class="flex-1 min-w-0">
-            <input id="basecamp" name="basecamp" type="text" placeholder="Where do you start? e.g. Kalsubai, Sahyadri, Devkund" aria-label="Where do you start?" autocomplete="off" class="bg-transparent w-full text-sm font-bold outline-none border-none focus:outline-none focus-visible:outline-none focus:ring-0 placeholder:text-muted/50 uppercase text-ink tracking-wide">
-          </div>
-          <button type="button" id="clearHeroSearch" class="hidden text-muted hover:text-ink text-xs w-6 h-6 rounded-full hover:bg-black/5 flex items-center justify-center shrink-0 transition-colors">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <button type="submit" class="rm-btn rm-btn-primary px-8 py-4 rounded-[2rem] font-black uppercase tracking-widest text-xs shrink-0">
-          Search Trips
-        </button>
-      </form>
-
-      <!-- Live Search Suggestions Dropdown -->
-      <div id="searchSuggestions" class="hidden absolute left-0 right-0 top-full mt-3 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-[2rem] p-3 shadow-[0_24px_50px_-12px_rgba(0,0,0,0.25)] z-50 max-h-[380px] overflow-y-auto space-y-1.5 transition-all"></div>
-    </div>
-  </section>
-
-  <!-- Marquee -->
-  <section class="py-8 border-y border-border-subtle overflow-hidden bg-surface/30" aria-hidden="true">
-    <div class="marquee flex whitespace-nowrap overflow-hidden select-none">
-      <div class="marquee-track flex items-center gap-6 text-3xl md:text-4xl font-display font-black tracking-tighter italic uppercase pr-6 shrink-0 min-w-full">
-        <span class="text-brand">150+ Summits</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">8K Community</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Expert Guides</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Certified Safety</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Zero Hidden Fees</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Basecamp Pickups</span><span class="text-border-subtle font-normal">/</span>
-      </div>
-      <div class="marquee-track flex items-center gap-6 text-3xl md:text-4xl font-display font-black tracking-tighter italic uppercase pr-6 shrink-0 min-w-full" aria-hidden="true">
-        <span class="text-brand">150+ Summits</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">4.9 Rating</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">8K Community</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Expert Guides</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Eco-Trails</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Certified Safety</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Zero Hidden Fees</span><span class="text-border-subtle font-normal">/</span>
-        <span class="text-brand">Basecamp Pickups</span><span class="text-border-subtle font-normal">/</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Upcoming Trips -->
-  <section class="py-14 md:py-16 px-6" id="upcoming" aria-label="Upcoming trips">
-    <div class="max-w-7xl mx-auto">
-      <div class="max-w-3xl mb-10">
-        <h2 class="font-display text-5xl md:text-6xl font-extrabold tracking-tighter leading-none mb-4 uppercase">
-          Upcoming <span class="text-outline italic">Trips</span>
-        </h2>
-        <p class="text-muted font-medium">Curated weekend escapes for the modern hiker. From the Sahyadris to the Himalayas.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8" id="featured"></div>
-
-      <div class="flex justify-center mt-8">
-        <a href="trips.html"
-           class="rm-btn rm-btn-primary px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest inline-flex items-center gap-3">
-          <span>View All Trips</span>
-          <i class="fa-solid fa-arrow-right text-[11px]" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Story / About Us -->
-  <section class="py-14 md:py-16 px-6" id="about" aria-label="About Roamly">
-    <div class="max-w-7xl mx-auto">
-      <!-- Section Header -->
-      <div class="mb-10">
-        <p class="text-[11px] font-black uppercase tracking-[0.25em] text-brand mb-3">Our Story</p>
-        <h2 class="font-display text-5xl md:text-7xl font-extrabold tracking-tight leading-[0.95] mb-6 uppercase text-ink">
-          More than a<br>journey
-        </h2>
-        <p class="text-muted text-base md:text-lg max-w-2xl font-medium leading-relaxed">
-          Roamly was founded on a single belief: that true adventure happens when you strip away the noise. We curate immersive, expert-led mountaineering trips that connect you with the raw, untamed beauty of the world's highest peaks.
-        </p>
-      </div>
-
-      <!-- Photo Gallery Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        <!-- Left: Large Vertical Group Photo of Indian Explorers on Waterfall Trip -->
-        <div class="lg:col-span-6 rounded-3xl overflow-hidden shadow-lg bg-surface relative min-h-[480px] lg:min-h-full group">
-          <img src="assets/images/about-group-waterfall.jpg" 
-               alt="Group of friends happily taking a selfie in front of a majestic Sahyadri monsoon waterfall" 
-               loading="lazy"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-        </div>
-
-        <!-- Right: 2 Square Images + 1 Landscape Image -->
-        <div class="lg:col-span-6 flex flex-col gap-6">
-          <div class="grid grid-cols-2 gap-6">
-            <!-- Majestic Sahyadri Waterfall Cliffs -->
-            <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
-              <img src="assets/images/about-waterfall-cliffs.jpg" 
-                   alt="Twin waterfalls cascading down lush green Sahyadri mountain cliff faces in monsoon" 
-                   loading="lazy"
-                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-            <!-- Sahyadri Mountain Ridge Group Summit -->
-            <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
-              <img src="assets/images/about-group-sahyadri-summit.png" 
-                   alt="Group of trekkers standing together on a lush green Sahyadri mountain ridge overlooking the misty valley" 
-                   loading="lazy"
-                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
-          </div>
-          <!-- Kedarnath Dham Himalayan Temple -->
-          <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-[16/9] flex-1 group">
-            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80" 
-                 alt="Ancient Kedarnath Dham stone temple standing against towering snow-covered Himalayan peaks" 
-                 loading="lazy"
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Slider -->
-  <section class="py-14 md:py-16 px-6 bg-white border-y border-border-subtle overflow-hidden" id="testimonials" aria-label="Climber testimonials">
-    <div class="max-w-7xl mx-auto">
-      <!-- Section Header with Controls -->
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
-        <div>
-          <p class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
-            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-            Community Voices
+    <!-- Hero -->
+    <header class="relative pt-28 sm:pt-32 pb-12 sm:pb-16 px-6 overflow-hidden" id="hero" aria-label="Hero">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-6 relative z-10">
+          <h1
+            class="font-display text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-5 sm:mb-6 uppercase">
+            Hike beyond the <span class="text-brand">edge.</span>
+          </h1>
+          <p class="text-base sm:text-lg text-muted max-w-md mb-6 sm:mb-8 leading-relaxed font-medium">
+            Premium weekend trekking experiences for those who seek the silence of the summits.
+            No crowds, just the climb.
           </p>
-          <h2 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase leading-none text-ink">
-            Loved by <span class="text-brand italic">8,000+ Climbers</span>
+          <div class="flex flex-wrap gap-4">
+            <a href="trips.html"
+              class="bg-brand text-accent px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-black text-base sm:text-lg hover:rotate-2 tx shadow-brand-lg uppercase tracking-tighter">Book
+              Now</a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 relative">
+          <div class="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl animate-float max-h-[600px] mx-auto">
+            <img class="w-full h-full object-cover"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b480f492a1_5d5662a06cc88467.png"
+              alt="dramatic vertical shot of a lone hiker with a professional backpack standing on a sharp rocky ridge">
+            <a href="trip.html?trip=kalsubai" id="heroTripLink" class="absolute bottom-6 left-6 right-6 glass p-6 rounded-3xl block hover:bg-white/90 transition-all duration-300">
+              <div class="flex justify-between items-center">
+                <div>
+                  <p class="text-[10px] font-black uppercase tracking-widest text-brand mb-1">Featured Peak</p>
+                  <p class="font-display font-extrabold text-xl uppercase" id="heroTripName">Kalsubai Sunrise Summit</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Difficulty</p>
+                  <p class="font-bold text-brand uppercase" id="heroTripGrade">Easy to Moderate</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <!-- Decorative elements -->
+          <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accent rounded-full blur-3xl opacity-30 -z-10" aria-hidden="true"></div>
+          <div class="absolute -top-10 -right-10 w-60 h-60 bg-brand rounded-full blur-3xl opacity-10 -z-10" aria-hidden="true"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search -->
+    <section class="px-6 -mt-6 mb-12 sm:mb-16 relative z-30" aria-label="Find a trip">
+      <div class="max-w-4xl mx-auto relative">
+        <form id="searchForm"
+          class="bg-white border border-border-subtle p-2 md:p-2.5 rounded-[2.25rem] md:rounded-full shadow-2xl flex flex-col md:flex-row gap-2 relative z-20">
+          <div
+            class="flex-1 flex items-center gap-3.5 px-5 md:px-6 py-3.5 md:py-4 bg-surface rounded-full">
+            <i class="fa-solid fa-map-pin text-brand text-base shrink-0" aria-hidden="true"></i>
+            <div class="flex-1 min-w-0">
+              <input id="basecamp" name="basecamp" type="text"
+                placeholder="Search by trip name, peak, or region..." aria-label="Search by trip name"
+                autocomplete="off"
+                class="bg-transparent w-full text-xs sm:text-sm font-bold outline-none border-none focus:outline-none focus-visible:outline-none focus:ring-0 placeholder:text-muted/60 placeholder:normal-case text-ink tracking-wide">
+            </div>
+            <button type="button" id="clearHeroSearch"
+              class="hidden text-muted hover:text-ink text-xs w-6 h-6 rounded-full hover:bg-black/5 flex items-center justify-center shrink-0 transition-colors">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <button type="submit"
+            class="rm-btn rm-btn-primary w-full md:w-auto px-8 py-3.5 md:py-4 rounded-full font-black uppercase tracking-widest text-xs shrink-0 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-magnifying-glass text-xs md:hidden"></i>
+            Search Trips
+          </button>
+        </form>
+
+        <!-- Live Search Suggestions Dropdown -->
+        <div id="searchSuggestions"
+          class="hidden absolute left-0 right-0 top-full mt-3 bg-white/95 backdrop-blur-2xl border border-border-subtle rounded-[2rem] p-3 shadow-[0_24px_50px_-12px_rgba(0,0,0,0.25)] z-50 max-h-[380px] overflow-y-auto space-y-1.5 transition-all">
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <section class="py-5 sm:py-6 md:py-8 border-y border-border-subtle overflow-hidden bg-surface/30 my-4 sm:my-0"
+      aria-hidden="true">
+      <div class="marquee flex whitespace-nowrap overflow-hidden select-none">
+        <div
+          class="marquee-track flex items-center gap-5 sm:gap-6 text-xl sm:text-2xl md:text-4xl font-display font-black tracking-tighter italic uppercase pr-5 sm:pr-6 shrink-0 min-w-full">
+          <span class="text-brand">150+ Summits</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">4.9 Rating</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">8K Community</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Expert Guides</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Eco-Trails</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Certified Safety</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Zero Hidden Fees</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Basecamp Pickups</span><span class="text-border-subtle font-normal">/</span>
+        </div>
+        <div
+          class="marquee-track flex items-center gap-5 sm:gap-6 text-xl sm:text-2xl md:text-4xl font-display font-black tracking-tighter italic uppercase pr-5 sm:pr-6 shrink-0 min-w-full"
+          aria-hidden="true">
+          <span class="text-brand">150+ Summits</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">4.9 Rating</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">8K Community</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Expert Guides</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Eco-Trails</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Certified Safety</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Zero Hidden Fees</span><span class="text-border-subtle font-normal">/</span>
+          <span class="text-brand">Basecamp Pickups</span><span class="text-border-subtle font-normal">/</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Trips -->
+    <section class="py-14 sm:py-16 md:py-20 px-6" id="upcoming" aria-label="Upcoming trips">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-10">
+          <h2 class="font-display text-5xl md:text-6xl font-extrabold tracking-tighter leading-none mb-4 uppercase">
+            Upcoming <span class="text-brand">Trips</span>
           </h2>
+          <p class="text-muted font-medium">Curated weekend escapes for the modern hiker. From the Sahyadris to the
+            Himalayas.</p>
         </div>
-        
-        <div class="flex flex-wrap items-center gap-4">
-          <!-- Rating badge -->
-          <div class="flex items-center gap-4 bg-surface border border-border-subtle px-5 py-3.5 rounded-2xl">
-            <div class="flex text-amber-500 text-xs gap-1">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="h-5 w-px bg-border-subtle" aria-hidden="true"></div>
-            <div>
-              <p class="text-xs font-black tracking-tight leading-none text-ink">4.9 / 5.0</p>
-              <p class="text-[9px] font-bold uppercase tracking-widest text-muted">1,200+ Reviews</p>
-            </div>
-          </div>
 
-          <!-- Slider Navigation Arrows -->
-          <div class="flex items-center gap-2">
-            <button id="prevTestimonial" 
-                    aria-label="Previous testimonial"
-                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink tx shadow-sm active:scale-95">
-              <i class="fa-solid fa-arrow-left text-sm" aria-hidden="true"></i>
-            </button>
-            <button id="nextTestimonial" 
-                    aria-label="Next testimonial"
-                    class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink tx shadow-sm active:scale-95">
-              <i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8" id="featured"></div>
 
-      <!-- Testimonials Slider Track -->
-      <div id="testimonialTrack" 
-           class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-4 -mx-2 px-2">
-        <!-- Card 1 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
-          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
-          <div>
-            <div class="flex items-center justify-between gap-3 mb-6">
-              <div class="flex items-center gap-1 text-brand text-xs">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
-              </div>
-              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
-                Verified Climber
-              </span>
-            </div>
-            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
-              “Sandakphu with Roamly was pure magic. Waking up above the cloud inversion to see Kangchenjunga glowing pink at 5 AM is something I will never forget. The guides were exceptionally skilled and calm.”
-            </p>
-          </div>
-          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
-              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
-                     alt="Portrait of Priya Sharma" 
-                     loading="lazy" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-              </div>
-              <div>
-                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Priya Sharma</h3>
-                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Bangalore, IN</p>
-              </div>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
-              Sandakphu
-            </span>
-          </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
-          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
-          <div>
-            <div class="flex items-center justify-between gap-3 mb-6">
-              <div class="flex items-center gap-1 text-brand text-xs">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
-              </div>
-              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
-                Verified Climber
-              </span>
-            </div>
-            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
-              “I was hesitant about joining solo, but the 8-person cohort dynamic was incredible. Top-tier safety equipment, hot food at 4,000m, and leaders who know every nuance of the route.”
-            </p>
-          </div>
-          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
-              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" 
-                     alt="Portrait of Rohan Deshmukh" 
-                     loading="lazy" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-              </div>
-              <div>
-                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Rohan Deshmukh</h3>
-                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Mumbai, IN</p>
-              </div>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
-              Kashmir Lakes
-            </span>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
-          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
-          <div>
-            <div class="flex items-center justify-between gap-3 mb-6">
-              <div class="flex items-center gap-1 text-brand text-xs">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
-              </div>
-              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
-                Verified Climber
-              </span>
-            </div>
-            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
-              “Roamly’s zero-waste ethos and small group sizes set them miles apart from commercial trekking operators. The attention to detail from booking to extraction is world-class.”
-            </p>
-          </div>
-          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
-              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" 
-                     alt="Portrait of Ananya Iyer" 
-                     loading="lazy" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-              </div>
-              <div>
-                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Ananya Iyer</h3>
-                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Pune, IN</p>
-              </div>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
-              Kuari Pass
-            </span>
-          </div>
-        </article>
-
-        <!-- Card 4 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
-          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
-          <div>
-            <div class="flex items-center justify-between gap-3 mb-6">
-              <div class="flex items-center gap-1 text-brand text-xs">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
-              </div>
-              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
-                Verified Climber
-              </span>
-            </div>
-            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
-              “The dark sky stargazing night run at 3,200m was surreal. We saw the entire galactic core of the Milky Way with our guide's laser astronomy tour. An unforgettable weekend!”
-            </p>
-          </div>
-          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
-              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" 
-                     alt="Portrait of Kabir Sen" 
-                     loading="lazy" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-              </div>
-              <div>
-                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Kabir Sen</h3>
-                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Delhi, IN</p>
-              </div>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
-              Stargazer Run
-            </span>
-          </div>
-        </article>
-
-        <!-- Card 5 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
-          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
-          <div>
-            <div class="flex items-center justify-between gap-3 mb-6">
-              <div class="flex items-center gap-1 text-brand text-xs">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
-              </div>
-              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
-                Verified Climber
-              </span>
-            </div>
-            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
-              “Every campsite had clean eco-toilets, fresh warm organic meals, and mountain leaders who genuinely cared about nature. I've already booked my second trip for next spring.”
-            </p>
-          </div>
-          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
-              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" 
-                     alt="Portrait of Meera Nair" 
-                     loading="lazy" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-              </div>
-              <div>
-                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Meera Nair</h3>
-                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Kochi, IN</p>
-              </div>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
-              Alpine Valley
-            </span>
-          </div>
-        </article>
-
-        <!-- Card 6 -->
-        <article class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
-          <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none" aria-hidden="true"></i>
-          <div>
-            <div class="flex items-center justify-between gap-3 mb-6">
-              <div class="flex items-center gap-1 text-brand text-xs">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
-              </div>
-              <span class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
-                Verified Climber
-              </span>
-            </div>
-            <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
-              “From satellite check-ins to the perfectly paced altitude acclimation walks, safety was always front and center without ever dampening the raw thrill of the ridge.”
-            </p>
-          </div>
-          <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
-              <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" 
-                     alt="Portrait of Vikram Rathore" 
-                     loading="lazy" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-              </div>
-              <div>
-                <h3 class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">Vikram Rathore</h3>
-                <p class="text-[10px] font-black text-muted uppercase tracking-widest">Hyderabad, IN</p>
-              </div>
-            </div>
-            <span class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
-              Western Ghats
-            </span>
-          </div>
-        </article>
-      </div>
-
-      <!-- Slider Progress / Dots Indicator -->
-      <div class="flex items-center justify-center gap-2 mt-8" id="testimonialDots"></div>
-    </div>
-  </section>
-
-  <!-- FAQs -->
-  <section class="py-14 md:py-16 px-6 bg-surface/50 border-t border-border-subtle" id="faqs" aria-label="Frequently asked questions">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <p class="inline-flex items-center gap-2 bg-white border border-border-subtle px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
-          <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
-          Got Questions?
-        </p>
-        <h2 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase">
-          Frequently Asked <span class="text-brand italic">Questions</span>
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        <!-- FAQ 1 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
-          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
-            <div class="flex items-center gap-4 text-left">
-              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">01</span>
-              <span class="tracking-tight uppercase">What fitness level is required for trips?</span>
-            </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
-              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
-            </span>
-          </summary>
-          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
-            Each trail has a detailed grade from Easy to Extreme. Weekend Peaks suit beginner hikers with basic cardio, while Alpine Tours and Expert Ridges require prior endurance training and high-altitude experience.
-          </div>
-        </details>
-
-        <!-- FAQ 2 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
-          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
-            <div class="flex items-center gap-4 text-left">
-              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">02</span>
-              <span class="tracking-tight uppercase">What gear do I need to bring?</span>
-            </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
-              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
-            </span>
-          </summary>
-          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
-            We provide all core technical gear (tents, high-altitude sleeping bags, crampons, satellite comms, and medical kits). You only need personal clothing, trekking boots, a daypack, and a reusable water bottle.
-          </div>
-        </details>
-
-        <!-- FAQ 3 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
-          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
-            <div class="flex items-center gap-4 text-left">
-              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">03</span>
-              <span class="tracking-tight uppercase">Can I join as a solo traveler?</span>
-            </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
-              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
-            </span>
-          </summary>
-          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
-            Absolutely! Over 60% of Roamly climbers join solo. You'll be matched with a small cohort of up to 8 climbers led by professional certified mountain guides.
-          </div>
-        </details>
-
-        <!-- FAQ 4 -->
-        <details class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
-          <summary class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
-            <div class="flex items-center gap-4 text-left">
-              <span class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">04</span>
-              <span class="tracking-tight uppercase">What is the cancellation and refund policy?</span>
-            </div>
-            <span class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
-              <i class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
-            </span>
-          </summary>
-          <div class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
-            Full deposit refund up to 14 days before your trip start date. If weather forces a trail closure, we offer free rescheduling or 100% trip credit with no expiration.
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="px-6 py-14 md:py-16">
-    <div class="max-w-7xl mx-auto bg-brand rounded-block p-12 md:p-20 relative overflow-hidden text-center">
-      <i class="fa-solid fa-mountain text-[15rem] absolute top-0 right-0 p-12 opacity-10 text-accent" aria-hidden="true"></i>
-      <div class="relative z-10">
-        <h2 class="font-display text-5xl md:text-7xl font-black text-accent tracking-tighter mb-6 leading-none uppercase">
-          Stop scrolling. <br>Start <span class="italic">climbing.</span>
-        </h2>
-        <p class="text-white/70 text-lg max-w-xl mx-auto mb-10 font-medium">
-          Join our next weekend trip. Limited slots available for the Winter ’26 Sahyadri Ridge run.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="trips.html" class="bg-accent text-brand px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 tx uppercase tracking-tighter">Book Now</a>
-          <a href="https://wa.link/77nyt0" target="_blank" rel="noopener noreferrer" class="border-2 border-white/30 text-white px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 hover:bg-white/15 hover:border-accent tx uppercase tracking-tighter inline-flex items-center justify-center gap-3">
-            <i class="fa-brands fa-whatsapp text-2xl text-accent"></i> Contact Us
+        <div class="flex justify-center mt-8">
+          <a href="trips.html"
+            class="rm-btn rm-btn-primary px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest inline-flex items-center gap-3">
+            <span>View All Trips</span>
+            <i class="fa-solid fa-arrow-right text-[11px]" aria-hidden="true"></i>
           </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
 
-<footer data-footer="full"></footer>
+    <!-- Story / About Us -->
+    <section class="py-14 md:py-16 px-6" id="about" aria-label="About Roamly">
+      <div class="max-w-7xl mx-auto">
+        <!-- Section Header -->
+        <div class="mb-10">
+          <p class="text-[11px] font-black uppercase tracking-[0.25em] text-brand mb-3">Our Story</p>
+          <h2
+            class="font-display text-5xl md:text-7xl font-extrabold tracking-tight leading-[0.95] mb-6 uppercase text-ink">
+            More than a<br>journey
+          </h2>
+          <p class="text-muted text-base md:text-lg max-w-2xl font-medium leading-relaxed">
+            Roamly was founded on a single belief: that true adventure happens when you strip away the noise. We curate
+            immersive, expert-led mountaineering trips that connect you with the raw, untamed beauty of the world's
+            highest peaks.
+          </p>
+        </div>
 
-<script src="assets/data.js"></script>
-<script src="assets/roamly.js"></script>
-<script>
-(function () {
-  'use strict';
-  var D = window.RoamlyData, R = window.Roamly;
+        <!-- Photo Gallery Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <!-- Left: Large Vertical Group Photo of Indian Explorers on Waterfall Trip -->
+          <div
+            class="lg:col-span-6 rounded-3xl overflow-hidden shadow-lg bg-surface relative min-h-[480px] lg:min-h-full group">
+            <img src="assets/images/about-group-waterfall.jpg"
+              alt="Group of friends happily taking a selfie in front of a majestic Sahyadri monsoon waterfall"
+              loading="lazy"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+          </div>
 
-  /* hero caption reflects the flagship trip */
-  var flagship = D.byId('harishchandragad') || (D.trips && D.trips[0]);
-  if (flagship) {
-    var nameEl = document.getElementById('heroTripName');
-    var gradeEl = document.getElementById('heroTripGrade');
-    var linkEl = document.getElementById('heroTripLink');
-    if (nameEl) nameEl.textContent = flagship.name;
-    if (gradeEl) gradeEl.textContent = flagship.grade;
-    if (linkEl) linkEl.href = 'trip.html?trip=' + flagship.id;
-  }
+          <!-- Right: 2 Square Images + 1 Landscape Image -->
+          <div class="lg:col-span-6 flex flex-col gap-6">
+            <div class="grid grid-cols-2 gap-6">
+              <!-- Majestic Sahyadri Waterfall Cliffs -->
+              <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
+                <img src="assets/images/about-waterfall-cliffs.jpg"
+                  alt="Twin waterfalls cascading down lush green Sahyadri mountain cliff faces in monsoon"
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+              <!-- Sahyadri Mountain Ridge Group Summit -->
+              <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-square group">
+                <img src="assets/images/about-group-sahyadri-summit.png"
+                  alt="Group of trekkers standing together on a lush green Sahyadri mountain ridge overlooking the misty valley"
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              </div>
+            </div>
+            <!-- Kedarnath Dham Himalayan Temple -->
+            <div class="rounded-3xl overflow-hidden shadow-lg bg-surface aspect-[16/9] flex-1 group">
+              <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80"
+                alt="Ancient Kedarnath Dham stone temple standing against towering snow-covered Himalayan peaks"
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  /* featured bento — one large, one tall, three compact */
-  var big   = D.byId('harishchandragad');
-  var tall  = D.byId('kalsubai');
-  var small = ['devkund', 'rajgad', 'andharban'].map(D.byId);
+    <!-- Testimonials Slider -->
+    <section class="py-14 md:py-16 px-6 bg-white border-y border-border-subtle overflow-hidden" id="testimonials"
+      aria-label="Climber testimonials">
+      <div class="max-w-7xl mx-auto">
+        <!-- Section Header with Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+          <div>
+            <p
+              class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+              Community Voices
+            </p>
+            <h2
+              class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase leading-none text-ink">
+              Loved by <span class="text-brand italic">8,000+ Climbers</span>
+            </h2>
+          </div>
 
-  function bigCard(t) {
-    var badge = t.badges && t.badges[0]
-      ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
-      : '';
-    return '<article class="md:col-span-8 group trip-card flex flex-col h-full">' +
-      '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="block flex flex-col h-full">' +
-      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle shrink-0">' +
-        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
-        '<div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-[2.5rem] flex flex-wrap justify-between items-end gap-4">' +
+          <div class="flex flex-wrap items-center gap-4">
+            <!-- Rating badge -->
+            <div class="flex items-center gap-4 bg-surface border border-border-subtle px-5 py-3.5 rounded-2xl">
+              <div class="flex text-amber-500 text-xs gap-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="h-5 w-px bg-border-subtle" aria-hidden="true"></div>
+              <div>
+                <p class="text-xs font-black tracking-tight leading-none text-ink">4.9 / 5.0</p>
+                <p class="text-[9px] font-bold uppercase tracking-widest text-muted">1,200+ Reviews</p>
+              </div>
+            </div>
+
+            <!-- Slider Navigation Arrows -->
+            <div class="flex items-center gap-2">
+              <button id="prevTestimonial" aria-label="Previous testimonial"
+                class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink tx shadow-sm active:scale-95">
+                <i class="fa-solid fa-arrow-left text-sm" aria-hidden="true"></i>
+              </button>
+              <button id="nextTestimonial" aria-label="Next testimonial"
+                class="w-12 h-12 rounded-2xl border border-border-subtle bg-surface hover:bg-brand hover:text-accent hover:border-brand flex items-center justify-center text-ink tx shadow-sm active:scale-95">
+                <i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonials Slider Track -->
+        <div id="testimonialTrack"
+          class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-4 -mx-2 px-2">
+          <!-- Card 1: Kalsubai Peak -->
+          <article
+            class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
+            <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none"
+              aria-hidden="true"></i>
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <div class="flex items-center gap-1 text-brand text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+                </div>
+                <span
+                  class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                  Verified Climber
+                </span>
+              </div>
+              <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+                “Climbing Kalsubai at night with headlamps and summiting right as the sunrise turned the clouds pink over Bhandardara was pure magic. The steel ladder sections felt super safe with the Roamly leaders guiding every step, and the piping hot Pithla Bhakri at Bari village afterwards was unforgettable!”
+              </p>
+            </div>
+            <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                  <img
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+                    alt="Portrait of Priya Sharma" loading="lazy"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div>
+                  <h3
+                    class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">
+                    Priya Sharma</h3>
+                  <p class="text-[10px] font-black text-muted uppercase tracking-widest">Mumbai, IN</p>
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+                Kalsubai Peak
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 2: Devkund Waterfall -->
+          <article
+            class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
+            <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none"
+              aria-hidden="true"></i>
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <div class="flex items-center gap-1 text-brand text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+                </div>
+                <span
+                  class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                  Verified Climber
+                </span>
+              </div>
+              <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+                “The monsoon trail to Devkund was surreal. Roamly’s local scouts guided us through the dense Tamhini jungle away from the crowded paths. Swimming in the crystal-clear turquoise pool with lifejackets under the roaring falls was the highlight of our season!”
+              </p>
+            </div>
+            <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+                    alt="Portrait of Rohan Deshmukh" loading="lazy"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div>
+                  <h3
+                    class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">
+                    Rohan Deshmukh</h3>
+                  <p class="text-[10px] font-black text-muted uppercase tracking-widest">Pune, IN</p>
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+                Devkund Falls
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 3: Harishchandragad & Kokankada -->
+          <article
+            class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
+            <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none"
+              aria-hidden="true"></i>
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <div class="flex items-center gap-1 text-brand text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+                </div>
+                <span
+                  class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                  Verified Climber
+                </span>
+              </div>
+              <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+                “Standing at the edge of the 1,800-foot concave cliff at Kokankada during sunset was breathtaking. We saw the circular rainbow spectre, explored the ancient Kedareshwar cave, and enjoyed warm meals at basecamp. Roamly’s logistics were spot on!”
+              </p>
+            </div>
+            <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                  <img
+                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"
+                    alt="Portrait of Ananya Iyer" loading="lazy"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div>
+                  <h3
+                    class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">
+                    Ananya Iyer</h3>
+                  <p class="text-[10px] font-black text-muted uppercase tracking-widest">Bengaluru, IN</p>
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+                Harishchandragad
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 4: AMK Extreme -->
+          <article
+            class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
+            <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none"
+              aria-hidden="true"></i>
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <div class="flex items-center gap-1 text-brand text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+                </div>
+                <span
+                  class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                  Verified Climber
+                </span>
+              </div>
+              <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+                “AMK is Maharashtra’s toughest trek, and Roamly’s technical team handled it with absolute mastery. Certified harnesses, dynamic ropes, and steady belayers made the 80° rock climbs and 60ft rappelling thrills feel controlled and adrenaline-pumping.”
+              </p>
+            </div>
+            <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"
+                    alt="Portrait of Kabir Sen" loading="lazy"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div>
+                  <h3
+                    class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">
+                    Kabir Sen</h3>
+                  <p class="text-[10px] font-black text-muted uppercase tracking-widest">Delhi, IN</p>
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+                AMK Extreme
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 5: Kashmir Great Lakes -->
+          <article
+            class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
+            <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none"
+              aria-hidden="true"></i>
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <div class="flex items-center gap-1 text-brand text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+                </div>
+                <span
+                  class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                  Verified Climber
+                </span>
+              </div>
+              <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+                “Trekking across 7 high-altitude alpine lakes from Sonamarg to Naranag was a dream. The 8-person cohort size meant peaceful trails, clean eco-campsites, and experienced guides who treated the Himalayan ecosystem with deep respect.”
+              </p>
+            </div>
+            <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"
+                    alt="Portrait of Meera Nair" loading="lazy"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div>
+                  <h3
+                    class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">
+                    Meera Nair</h3>
+                  <p class="text-[10px] font-black text-muted uppercase tracking-widest">Kochi, IN</p>
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+                Kashmir Lakes
+              </span>
+            </div>
+          </article>
+
+          <!-- Card 6: Kedarkantha Winter Summit -->
+          <article
+            class="w-[88vw] sm:w-[380px] md:w-[420px] shrink-0 snap-start bg-surface border border-border-subtle hover:border-brand/40 rounded-[2.5rem] p-8 flex flex-col justify-between hover:shadow-2xl hover:-translate-y-2 tx duration-500 group relative">
+            <i class="fa-solid fa-quote-right absolute top-8 right-8 text-3xl text-brand/10 group-hover:text-brand/20 transition-colors pointer-events-none"
+              aria-hidden="true"></i>
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-6">
+                <div class="flex items-center gap-1 text-brand text-xs">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span class="font-display font-black text-ink text-xs ml-1.5 pt-0.5">5.0</span>
+                </div>
+                <span
+                  class="bg-brand text-accent text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-sm">
+                  Verified Climber
+                </span>
+              </div>
+              <p class="text-ink font-medium text-base leading-relaxed mb-8 group-hover:text-ink/90 transition-colors">
+                “Summitting Kedarkantha at 12,500 ft in knee-deep winter snow at sunrise was unforgettable. Micro-spikes, gaiters, hot ginger tea at 3 AM summit push, and flawless pacing. Roamly is hands down the best trekking crew in India.”
+              </p>
+            </div>
+            <div class="pt-6 border-t border-border-subtle flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-brand/20 group-hover:border-brand transition-colors shrink-0 shadow-sm">
+                  <img
+                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80"
+                    alt="Portrait of Vikram Rathore" loading="lazy"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div>
+                  <h3
+                    class="font-display font-extrabold text-sm uppercase tracking-tight text-ink group-hover:text-brand transition-colors">
+                    Vikram Rathore</h3>
+                  <p class="text-[10px] font-black text-muted uppercase tracking-widest">Hyderabad, IN</p>
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-black uppercase tracking-wider text-brand bg-brand/5 border border-brand/15 px-3 py-1.5 rounded-xl shrink-0">
+                Kedarkantha Peak
+              </span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Slider Progress / Dots Indicator -->
+        <div class="flex items-center justify-center gap-2 mt-8" id="testimonialDots"></div>
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="py-14 md:py-16 px-6 bg-surface/50 border-t border-border-subtle" id="faqs"
+      aria-label="Frequently asked questions">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <p
+            class="inline-flex items-center gap-2 bg-white border border-border-subtle px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
+            Got Questions?
+          </p>
+          <h2 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase">
+            Frequently Asked <span class="text-brand italic">Questions</span>
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- FAQ 1 -->
+          <details
+            class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+            <summary
+              class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+              <div class="flex items-center gap-4 text-left">
+                <span
+                  class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">01</span>
+                <span class="tracking-tight uppercase">What fitness level is required for trips?</span>
+              </div>
+              <span
+                class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
+                <i
+                  class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+              </span>
+            </summary>
+            <div
+              class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+              Each trail has a detailed grade from Easy to Extreme. Weekend Peaks suit beginner hikers with basic
+              cardio, while Alpine Tours and Expert Ridges require prior endurance training and high-altitude
+              experience.
+            </div>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details
+            class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+            <summary
+              class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+              <div class="flex items-center gap-4 text-left">
+                <span
+                  class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">02</span>
+                <span class="tracking-tight uppercase">What gear do I need to bring?</span>
+              </div>
+              <span
+                class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
+                <i
+                  class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+              </span>
+            </summary>
+            <div
+              class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+              We provide all core technical gear (tents, high-altitude sleeping bags, crampons, satellite comms, and
+              medical kits). You only need personal clothing, trekking boots, a daypack, and a reusable water bottle.
+            </div>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details
+            class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+            <summary
+              class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+              <div class="flex items-center gap-4 text-left">
+                <span
+                  class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">03</span>
+                <span class="tracking-tight uppercase">Can I join as a solo traveler?</span>
+              </div>
+              <span
+                class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
+                <i
+                  class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+              </span>
+            </summary>
+            <div
+              class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+              Absolutely! Over 60% of Roamly climbers join solo. You'll be matched with a small cohort of up to 8
+              climbers led by professional certified mountain guides.
+            </div>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details
+            class="group bg-white border border-border-subtle hover:border-brand/30 rounded-[2rem] p-6 md:p-8 tx duration-300 open:shadow-xl open:border-brand/40 cursor-pointer">
+            <summary
+              class="flex items-center justify-between gap-4 font-display font-extrabold text-base md:text-lg list-none select-none text-ink [&::-webkit-details-marker]:hidden">
+              <div class="flex items-center gap-4 text-left">
+                <span
+                  class="w-8 h-8 rounded-xl bg-surface border border-border-subtle flex items-center justify-center text-xs font-black text-brand shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand transition-colors">04</span>
+                <span class="tracking-tight uppercase">What is the cancellation and refund policy?</span>
+              </div>
+              <span
+                class="w-10 h-10 rounded-full bg-surface border border-border-subtle flex items-center justify-center shrink-0 group-open:bg-brand group-open:text-accent group-open:border-brand tx duration-300 shadow-sm">
+                <i
+                  class="fa-solid fa-chevron-down text-xs text-muted group-open:text-accent group-open:rotate-180 transition-transform duration-300"></i>
+              </span>
+            </summary>
+            <div
+              class="mt-6 pt-6 border-t border-border-subtle text-sm text-muted leading-relaxed font-medium pl-0 md:pl-12">
+              Full deposit refund up to 14 days before your trip start date. If weather forces a trail closure, we offer
+              free rescheduling or 100% trip credit with no expiration.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="px-6 py-14 md:py-16">
+      <div class="max-w-7xl mx-auto bg-brand rounded-block p-12 md:p-20 relative overflow-hidden text-center">
+        <i class="fa-solid fa-mountain text-[15rem] absolute top-0 right-0 p-12 opacity-10 text-accent"
+          aria-hidden="true"></i>
+        <div class="relative z-10">
+          <h2
+            class="font-display text-5xl md:text-7xl font-black text-accent tracking-tighter mb-6 leading-none uppercase">
+            Stop scrolling. <br>Start <span class="italic">climbing.</span>
+          </h2>
+          <p class="text-white/70 text-lg max-w-xl mx-auto mb-10 font-medium">
+            Join our next weekend trip. Limited slots available for the Winter ’26 Sahyadri Ridge run.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="trips.html"
+              class="bg-accent text-brand px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 tx uppercase tracking-tighter">Book
+              Now</a>
+            <a href="https://wa.link/77nyt0" target="_blank" rel="noopener noreferrer"
+              class="border-2 border-white/30 text-white px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 hover:bg-white/15 hover:border-accent tx uppercase tracking-tighter inline-flex items-center justify-center gap-3">
+              <i class="fa-brands fa-whatsapp text-2xl text-accent"></i> Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer data-footer="full"></footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/roamly.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      var D = window.RoamlyData, R = window.Roamly;
+
+      /* hero caption reflects the flagship trip */
+      var flagship = D.byId('kalsubai') || (D.trips && D.trips[0]);
+      if (flagship) {
+        var nameEl = document.getElementById('heroTripName');
+        var gradeEl = document.getElementById('heroTripGrade');
+        var linkEl = document.getElementById('heroTripLink');
+        if (nameEl) nameEl.textContent = flagship.name;
+        if (gradeEl) gradeEl.textContent = flagship.grade;
+        if (linkEl) linkEl.href = 'trip.html?trip=' + flagship.id;
+      }
+
+      /* featured bento — one large, one tall, three compact */
+      var big = D.byId('harishchandragad');
+      var tall = D.byId('kalsubai');
+      var small = ['devkund', 'rajgad', 'andharban'].map(D.byId);
+
+      function bigCard(t) {
+        var badgeDesktop = t.badges && t.badges[0]
+          ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
+          : '';
+        var badgeMobile = t.badges && t.badges[0]
+          ? '<div class="absolute top-3.5 left-3.5"><span class="bg-brand text-accent px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-wider shadow-md">' + R.esc(t.badges[0]) + '</span></div>'
+          : '';
+        var cleanTitle = t.name.length > 36 ? t.name.slice(0, 34) + '…' : t.name;
+
+        return '<article class="md:col-span-8 group trip-card flex flex-col h-full">' +
+          '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="block flex flex-col h-full">' +
+          // Desktop Bento Layout
+          '<div class="hidden md:block relative h-[500px] rounded-panel overflow-hidden border border-border-subtle shrink-0">' +
+          '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badgeDesktop +
+          '<div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-[2.5rem] flex flex-wrap justify-between items-end gap-4">' +
           '<div>' +
-            '<div class="flex items-center gap-1.5 mb-2 text-xs font-black text-brand">' +
-              '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
-            '</div>' +
-            '<h3 class="font-display font-extrabold text-2xl md:text-3xl mb-1 uppercase tracking-tight group-hover:text-brand transition-colors">' + R.esc(t.name) + '</h3>' +
-            '<p class="text-xs font-bold text-muted uppercase tracking-widest">' + R.pad(t.days) + ' Days • Grade: ' + R.esc(t.grade) + '</p>' +
+          '<div class="flex items-center gap-1.5 mb-2 text-xs font-black text-brand">' +
+          '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
+          '</div>' +
+          '<h3 class="font-display font-extrabold text-2xl md:text-3xl mb-1 uppercase tracking-tight group-hover:text-brand transition-colors">' + R.esc(t.name) + '</h3>' +
+          '<p class="text-xs font-bold text-muted uppercase tracking-widest">' + R.pad(t.days) + ' Days • Grade: ' + R.esc(t.grade) + '</p>' +
           '</div>' +
           '<div class="flex items-end gap-5">' +
-            '<div class="text-right">' +
-              '<p class="text-[9px] font-black uppercase tracking-[0.2em] text-muted mb-0.5">Starting from</p>' +
-              '<p class="text-3xl md:text-4xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
-            '</div>' +
-            '<span class="rm-btn-trail">View Trip</span>' +
+          '<div class="text-right">' +
+          '<p class="text-[9px] font-black uppercase tracking-[0.2em] text-muted mb-0.5">Starting from</p>' +
+          '<p class="text-3xl md:text-4xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
           '</div>' +
-        '</div>' +
-      '</div></a></article>';
-  }
+          '<span class="rm-btn-trail">View Trip</span>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          // Mobile Uniform Theme (same as Devkund)
+          '<div class="md:hidden flex flex-col h-full">' +
+          '<div class="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-5 border border-border-subtle shadow-sm shrink-0">' +
+          '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badgeMobile +
+          '</div>' +
+          '<div class="px-2 flex flex-col flex-1">' +
+          '<div class="flex justify-between items-start gap-3 mb-1.5">' +
+          '<h3 class="font-display font-extrabold text-xl tracking-tight uppercase min-h-[3.2rem] line-clamp-2 group-hover:text-brand transition-colors">' + R.esc(cleanTitle) + '</h3>' +
+          '<div class="flex items-center gap-1 text-xs font-black shrink-0 pt-0.5 text-brand">' +
+          '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
+          '</div>' +
+          '</div>' +
+          '<p class="text-muted text-[10px] font-bold uppercase tracking-widest mb-5">' +
+          (t.days > 1 ? R.pad(t.days) + ' Days' : 'Day Trip') + ' • Grade: ' + R.esc(t.grade) + '</p>' +
+          '<div class="flex justify-between items-end border-t border-border-subtle pt-5 mt-auto">' +
+          '<div>' +
+          '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
+          '<p class="text-2xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
+          '</div>' +
+          '<span class="rm-btn-trail">View Trip</span>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</a></article>';
+      }
 
-  function tallCard(t) {
-    var badge = t.badges && t.badges[0]
-      ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
-      : '';
-    return '<article class="md:col-span-4 group trip-card flex flex-col h-full">' +
-      '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="block flex flex-col h-full">' +
-      '<div class="relative h-[500px] rounded-panel overflow-hidden border border-border-subtle shrink-0">' +
-        '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
-        '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"></div>' +
-        '<div class="absolute bottom-8 left-8 right-8 text-white">' +
+      function tallCard(t) {
+        var badgeDesktop = t.badges && t.badges[0]
+          ? '<div class="absolute top-8 left-8"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl">' + R.esc(t.badges[0]) + '</span></div>'
+          : '';
+        var badgeMobile = t.badges && t.badges[0]
+          ? '<div class="absolute top-3.5 left-3.5"><span class="bg-brand text-accent px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-wider shadow-md">' + R.esc(t.badges[0]) + '</span></div>'
+          : '';
+        var cleanTitle = t.name.length > 36 ? t.name.slice(0, 34) + '…' : t.name;
+
+        return '<article class="md:col-span-4 group trip-card flex flex-col h-full">' +
+          '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="block flex flex-col h-full">' +
+          // Desktop Bento
+          '<div class="hidden md:block relative h-[500px] rounded-panel overflow-hidden border border-border-subtle shrink-0">' +
+          '<img class="w-full h-full object-cover trip-image" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badgeDesktop +
+          '<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"></div>' +
+          '<div class="absolute bottom-8 left-8 right-8 text-white">' +
           '<div class="flex items-center gap-1.5 mb-2 text-xs font-black text-accent">' +
-            '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
+          '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
           '</div>' +
           '<h3 class="font-display font-extrabold text-2xl mb-1 uppercase tracking-tight">' + R.esc(t.name) + '</h3>' +
           '<p class="text-xs font-bold text-white/70 uppercase tracking-widest mb-6">' + R.pad(t.days) + ' Days • Grade: ' + R.esc(t.grade) + '</p>' +
           '<div class="flex justify-between items-end border-t border-white/20 pt-5">' +
-            '<div>' +
-              '<p class="text-[9px] text-white/60 uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
-              '<span class="text-2xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</span>' +
-            '</div>' +
-            '<span class="rm-btn-accent px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest">View Trip</span>' +
+          '<div>' +
+          '<p class="text-[9px] text-white/60 uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
+          '<span class="text-2xl font-display font-black tracking-tighter">' + R.inr(t.price) + '</span>' +
           '</div>' +
-        '</div>' +
-      '</div></a></article>';
-  }
-
-  function smallCard(t) {
-    var badge = t.badges && t.badges[0]
-      ? '<div class="absolute top-5 left-5"><span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg">' + R.esc(t.badges[0]) + '</span></div>'
-      : '';
-    var cleanTitle = t.name.length > 36 ? t.name.slice(0, 34) + '…' : t.name;
-
-    return '<article class="md:col-span-4 group trip-card flex flex-col h-full">' +
-      '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="flex flex-col h-full block">' +
-      '<div class="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-5 border border-border-subtle shadow-sm shrink-0">' +
-        '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
-      '</div>' +
-      '<div class="px-2 flex flex-col flex-1">' +
-        '<div class="flex justify-between items-start gap-3 mb-1.5">' +
+          '<span class="rm-btn-accent px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest">View Trip</span>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          // Mobile Uniform Theme (same as Devkund)
+          '<div class="md:hidden flex flex-col h-full">' +
+          '<div class="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-5 border border-border-subtle shadow-sm shrink-0">' +
+          '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badgeMobile +
+          '</div>' +
+          '<div class="px-2 flex flex-col flex-1">' +
+          '<div class="flex justify-between items-start gap-3 mb-1.5">' +
           '<h3 class="font-display font-extrabold text-xl tracking-tight uppercase min-h-[3.2rem] line-clamp-2 group-hover:text-brand transition-colors">' + R.esc(cleanTitle) + '</h3>' +
           '<div class="flex items-center gap-1 text-xs font-black shrink-0 pt-0.5 text-brand">' +
-            '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
+          '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
           '</div>' +
-        '</div>' +
-        '<p class="text-muted text-[10px] font-bold uppercase tracking-widest mb-5">' +
+          '</div>' +
+          '<p class="text-muted text-[10px] font-bold uppercase tracking-widest mb-5">' +
           (t.days > 1 ? R.pad(t.days) + ' Days' : 'Day Trip') + ' • Grade: ' + R.esc(t.grade) + '</p>' +
-        '<div class="flex justify-between items-end border-t border-border-subtle pt-5 mt-auto">' +
+          '<div class="flex justify-between items-end border-t border-border-subtle pt-5 mt-auto">' +
           '<div>' +
-            '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
-            '<p class="text-2xl lg:text-3xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
+          '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
+          '<p class="text-2xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
           '</div>' +
           '<span class="rm-btn-trail">View Trip</span>' +
-        '</div>' +
-      '</div></a></article>';
-  }
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</a></article>';
+      }
 
-  document.getElementById('featured').innerHTML =
-    bigCard(big) + tallCard(tall) + small.map(smallCard).join('');
+      function smallCard(t) {
+        var badge = t.badges && t.badges[0]
+          ? '<div class="absolute top-3.5 left-3.5 sm:top-5 sm:left-5"><span class="bg-brand text-accent px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[8px] sm:text-[9px] font-black uppercase tracking-wider sm:tracking-widest shadow-md sm:shadow-lg">' + R.esc(t.badges[0]) + '</span></div>'
+          : '';
+        var cleanTitle = t.name.length > 36 ? t.name.slice(0, 34) + '…' : t.name;
 
-  /* Interactive Search & Live Suggestions */
-  var searchInput = document.getElementById('basecamp');
-  var searchForm = document.getElementById('searchForm');
-  var suggestionsBox = document.getElementById('searchSuggestions');
-  var clearBtn = document.getElementById('clearHeroSearch');
+        return '<article class="md:col-span-4 group trip-card flex flex-col h-full">' +
+          '<a href="trip.html?trip=' + t.id + '" data-trip="' + t.id + '" class="flex flex-col h-full block">' +
+          '<div class="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-5 border border-border-subtle shadow-sm shrink-0">' +
+          '<img class="w-full h-full object-cover trip-image" loading="lazy" src="' + t.hero + '" alt="' + R.esc(t.heroAlt) + '">' + badge +
+          '</div>' +
+          '<div class="px-2 flex flex-col flex-1">' +
+          '<div class="flex justify-between items-start gap-3 mb-1.5">' +
+          '<h3 class="font-display font-extrabold text-xl tracking-tight uppercase min-h-[3.2rem] line-clamp-2 group-hover:text-brand transition-colors">' + R.esc(cleanTitle) + '</h3>' +
+          '<div class="flex items-center gap-1 text-xs font-black shrink-0 pt-0.5 text-brand">' +
+          '<i class="fa-solid fa-star"></i> ' + t.rating.toFixed(1) +
+          '</div>' +
+          '</div>' +
+          '<p class="text-muted text-[10px] font-bold uppercase tracking-widest mb-5">' +
+          (t.days > 1 ? R.pad(t.days) + ' Days' : 'Day Trip') + ' • Grade: ' + R.esc(t.grade) + '</p>' +
+          '<div class="flex justify-between items-end border-t border-border-subtle pt-5 mt-auto">' +
+          '<div>' +
+          '<p class="text-[9px] text-muted uppercase tracking-[0.2em] font-black mb-0.5">Starting from</p>' +
+          '<p class="text-2xl lg:text-3xl font-display font-black tracking-tighter text-ink">' + R.inr(t.price) + '</p>' +
+          '</div>' +
+          '<span class="rm-btn-trail">View Trip</span>' +
+          '</div>' +
+          '</div></a></article>';
+      }
 
-  function renderSuggestions(q) {
-    if (!q || !suggestionsBox) {
-      if (suggestionsBox) suggestionsBox.classList.add('hidden');
-      return;
-    }
-    var query = q.toLowerCase().trim();
-    var matches = D.trips.filter(function (t) {
-      return t.name.toLowerCase().indexOf(query) !== -1 ||
-             t.region.toLowerCase().indexOf(query) !== -1 ||
-             t.grade.toLowerCase().indexOf(query) !== -1 ||
-             (t.summary || '').toLowerCase().indexOf(query) !== -1 ||
-             (t.badges || []).some(function (b) { return b.toLowerCase().indexOf(query) !== -1; });
-    }).slice(0, 5);
+      document.getElementById('featured').innerHTML =
+        bigCard(big) + tallCard(tall) + small.map(smallCard).join('');
 
-    if (matches.length === 0) {
-      suggestionsBox.innerHTML = '<div class="p-4 text-center text-xs font-bold uppercase tracking-wider text-muted">No trips matching "' + R.esc(q) + '"</div>';
-      suggestionsBox.classList.remove('hidden');
-      return;
-    }
+      /* Interactive Search & Live Suggestions */
+      var searchInput = document.getElementById('basecamp');
+      var searchForm = document.getElementById('searchForm');
+      var suggestionsBox = document.getElementById('searchSuggestions');
+      var clearBtn = document.getElementById('clearHeroSearch');
 
-    var html = matches.map(function (t) {
-      return '<a href="trip.html?trip=' + t.id + '" class="flex items-center justify-between p-3 rounded-2xl hover:bg-surface transition-all group">' +
-        '<div class="flex items-center gap-3.5 min-w-0">' +
-          '<img src="' + t.hero + '" alt="' + R.esc(t.heroAlt || t.name) + '" class="w-12 h-12 rounded-xl object-cover shrink-0 border border-border-subtle">' +
-          '<div class="min-w-0">' +
+      function renderSuggestions(q) {
+        if (!q || !suggestionsBox) {
+          if (suggestionsBox) suggestionsBox.classList.add('hidden');
+          return;
+        }
+        var query = q.toLowerCase().trim();
+        var matches = D.trips.filter(function (t) {
+          return t.name.toLowerCase().indexOf(query) !== -1 ||
+            t.region.toLowerCase().indexOf(query) !== -1 ||
+            t.grade.toLowerCase().indexOf(query) !== -1 ||
+            (t.summary || '').toLowerCase().indexOf(query) !== -1 ||
+            (t.badges || []).some(function (b) { return b.toLowerCase().indexOf(query) !== -1; });
+        }).slice(0, 5);
+
+        if (matches.length === 0) {
+          suggestionsBox.innerHTML = '<div class="p-4 text-center text-xs font-bold uppercase tracking-wider text-muted">No trips matching "' + R.esc(q) + '"</div>';
+          suggestionsBox.classList.remove('hidden');
+          return;
+        }
+
+        var html = matches.map(function (t) {
+          return '<a href="trip.html?trip=' + t.id + '" class="flex items-center justify-between p-3 rounded-2xl hover:bg-surface transition-all group">' +
+            '<div class="flex items-center gap-3.5 min-w-0">' +
+            '<img src="' + t.hero + '" alt="' + R.esc(t.heroAlt || t.name) + '" class="w-12 h-12 rounded-xl object-cover shrink-0 border border-border-subtle">' +
+            '<div class="min-w-0">' +
             '<p class="text-sm font-extrabold tracking-tight text-ink group-hover:text-brand transition-colors truncate">' + R.esc(t.name) + '</p>' +
             '<p class="text-[10px] font-bold text-muted uppercase tracking-wider">' + R.pad(t.days) + ' Days • ' + R.esc(t.region) + ' • ' + R.esc(t.grade) + '</p>' +
-          '</div>' +
-        '</div>' +
-        '<div class="text-right shrink-0 pl-3">' +
-          '<p class="text-sm font-display font-black text-ink">' + R.inr(t.price) + '</p>' +
-          '<span class="text-[9px] font-black uppercase tracking-widest text-brand group-hover:underline">View Trip →</span>' +
-        '</div>' +
-      '</a>';
-    }).join('');
+            '</div>' +
+            '</div>' +
+            '<div class="text-right shrink-0 pl-3">' +
+            '<p class="text-sm font-display font-black text-ink">' + R.inr(t.price) + '</p>' +
+            '<span class="text-[9px] font-black uppercase tracking-widest text-brand group-hover:underline">View Trip →</span>' +
+            '</div>' +
+            '</a>';
+        }).join('');
 
-    html += '<div class="border-t border-border-subtle pt-2 mt-1 px-3 pb-1 text-center">' +
-      '<button type="submit" form="searchForm" class="text-xs font-black uppercase tracking-widest text-brand hover:underline">' +
-        'See all results for "' + R.esc(q) + '" (' + matches.length + ' shown) →' +
-      '</button>' +
-    '</div>';
+        html += '<div class="border-t border-border-subtle pt-2 mt-1 px-3 pb-1 text-center">' +
+          '<button type="submit" form="searchForm" class="text-xs font-black uppercase tracking-widest text-brand hover:underline">' +
+          'See all results for "' + R.esc(q) + '" (' + matches.length + ' shown) →' +
+          '</button>' +
+          '</div>';
 
-    suggestionsBox.innerHTML = html;
-    suggestionsBox.classList.remove('hidden');
-  }
-
-  if (searchInput) {
-    searchInput.addEventListener('input', function (e) {
-      var val = e.target.value;
-      if (clearBtn) clearBtn.classList.toggle('hidden', !val);
-      renderSuggestions(val);
-    });
-
-    searchInput.addEventListener('focus', function () {
-      if (searchInput.value.trim()) renderSuggestions(searchInput.value);
-    });
-
-    if (clearBtn) {
-      clearBtn.addEventListener('click', function () {
-        searchInput.value = '';
-        clearBtn.classList.add('hidden');
-        if (suggestionsBox) suggestionsBox.classList.add('hidden');
-        searchInput.focus();
-      });
-    }
-
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('#searchForm') && !e.target.closest('#searchSuggestions')) {
-        if (suggestionsBox) suggestionsBox.classList.add('hidden');
+        suggestionsBox.innerHTML = html;
+        suggestionsBox.classList.remove('hidden');
       }
-    });
-  }
 
-  searchForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var val = (searchInput ? searchInput.value : '').trim();
-    if (val) {
-      window.location.href = 'trips.html?q=' + encodeURIComponent(val);
-    } else {
-      window.location.href = 'trips.html';
-    }
-  });
+      if (searchInput) {
+        searchInput.addEventListener('input', function (e) {
+          var val = e.target.value;
+          if (clearBtn) clearBtn.classList.toggle('hidden', !val);
+          renderSuggestions(val);
+        });
 
-  /* Testimonial slider controller */
-  var track = document.getElementById('testimonialTrack');
-  var prevBtn = document.getElementById('prevTestimonial');
-  var nextBtn = document.getElementById('nextTestimonial');
-  var dotsContainer = document.getElementById('testimonialDots');
+        searchInput.addEventListener('focus', function () {
+          if (searchInput.value.trim()) renderSuggestions(searchInput.value);
+        });
 
-  if (track && prevBtn && nextBtn && dotsContainer) {
-    var cards = track.querySelectorAll('article');
-    var totalCards = cards.length;
-    dotsContainer.innerHTML = '';
+        if (clearBtn) {
+          clearBtn.addEventListener('click', function () {
+            searchInput.value = '';
+            clearBtn.classList.add('hidden');
+            if (suggestionsBox) suggestionsBox.classList.add('hidden');
+            searchInput.focus();
+          });
+        }
 
-    for (var i = 0; i < totalCards; i++) {
-      var dot = document.createElement('button');
-      dot.type = 'button';
-      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
-      dot.className = 'h-2.5 rounded-full tx duration-300 ' + (i === 0 ? 'bg-brand w-8' : 'bg-black/15 hover:bg-black/30 w-2.5');
-      (function (idx) {
-        dot.addEventListener('click', function () {
-          var targetCard = cards[idx];
-          if (targetCard) {
-            var targetScroll;
-            var maxScroll = track.scrollWidth - track.clientWidth;
-            if (idx === totalCards - 1) {
-              targetScroll = maxScroll;
-            } else {
-              targetScroll = Math.min(maxScroll, Math.max(0, targetCard.offsetLeft - track.offsetLeft));
-            }
-            track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+        document.addEventListener('click', function (e) {
+          if (!e.target.closest('#searchForm') && !e.target.closest('#searchSuggestions')) {
+            if (suggestionsBox) suggestionsBox.classList.add('hidden');
           }
         });
-      })(i);
-      dotsContainer.appendChild(dot);
-    }
-
-    var ticking = false;
-    function updateSliderRealtime() {
-      var scrollLeft = track.scrollLeft;
-      var maxScroll = track.scrollWidth - track.clientWidth;
-
-      prevBtn.style.opacity = scrollLeft <= 8 ? '0.35' : '1';
-      prevBtn.style.pointerEvents = scrollLeft <= 8 ? 'none' : 'auto';
-
-      nextBtn.style.opacity = scrollLeft >= maxScroll - 8 ? '0.35' : '1';
-      nextBtn.style.pointerEvents = scrollLeft >= maxScroll - 8 ? 'none' : 'auto';
-
-      var activeIndex = 0;
-      if (maxScroll > 0) {
-        var progress = Math.min(1, Math.max(0, scrollLeft / maxScroll));
-        activeIndex = Math.min(totalCards - 1, Math.max(0, Math.round(progress * (totalCards - 1))));
       }
 
-      var dots = dotsContainer.querySelectorAll('button');
-      Array.prototype.forEach.call(dots, function (d, idx) {
-        if (idx === activeIndex) {
-          d.className = 'h-2.5 w-8 rounded-full bg-brand tx duration-300';
+      searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var val = (searchInput ? searchInput.value : '').trim();
+        if (val) {
+          window.location.href = 'trips.html?q=' + encodeURIComponent(val);
         } else {
-          d.className = 'h-2.5 w-2.5 rounded-full bg-black/15 hover:bg-black/30 tx duration-300';
+          window.location.href = 'trips.html';
         }
       });
-      ticking = false;
-    }
 
-    function onScrollTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateSliderRealtime);
-        ticking = true;
+      /* Testimonial slider controller */
+      var track = document.getElementById('testimonialTrack');
+      var prevBtn = document.getElementById('prevTestimonial');
+      var nextBtn = document.getElementById('nextTestimonial');
+      var dotsContainer = document.getElementById('testimonialDots');
+
+      if (track && prevBtn && nextBtn && dotsContainer) {
+        var cards = track.querySelectorAll('article');
+        var totalCards = cards.length;
+        dotsContainer.innerHTML = '';
+
+        for (var i = 0; i < totalCards; i++) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+          dot.className = 'h-2.5 rounded-full shrink-0 tx duration-300 ' + (i === 0 ? 'bg-brand w-8' : 'bg-black/15 hover:bg-black/30 w-2.5');
+          (function (idx) {
+            dot.addEventListener('click', function () {
+              var targetCard = cards[idx];
+              if (targetCard) {
+                var targetScroll;
+                var maxScroll = track.scrollWidth - track.clientWidth;
+                if (idx === totalCards - 1) {
+                  targetScroll = maxScroll;
+                } else {
+                  targetScroll = Math.min(maxScroll, Math.max(0, targetCard.offsetLeft - track.offsetLeft));
+                }
+                track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+              }
+            });
+          })(i);
+          dotsContainer.appendChild(dot);
+        }
+
+        var ticking = false;
+        function updateSliderRealtime() {
+          var scrollLeft = track.scrollLeft;
+          var maxScroll = track.scrollWidth - track.clientWidth;
+
+          prevBtn.style.opacity = scrollLeft <= 8 ? '0.35' : '1';
+          prevBtn.style.pointerEvents = scrollLeft <= 8 ? 'none' : 'auto';
+
+          nextBtn.style.opacity = scrollLeft >= maxScroll - 8 ? '0.35' : '1';
+          nextBtn.style.pointerEvents = scrollLeft >= maxScroll - 8 ? 'none' : 'auto';
+
+          var activeIndex = 0;
+          if (maxScroll > 0) {
+            var progress = Math.min(1, Math.max(0, scrollLeft / maxScroll));
+            activeIndex = Math.min(totalCards - 1, Math.max(0, Math.round(progress * (totalCards - 1))));
+          }
+
+          var dots = dotsContainer.querySelectorAll('button');
+          Array.prototype.forEach.call(dots, function (d, idx) {
+            if (idx === activeIndex) {
+              d.className = 'h-2.5 w-8 rounded-full shrink-0 bg-brand tx duration-300';
+            } else {
+              d.className = 'h-2.5 w-2.5 rounded-full shrink-0 bg-black/15 hover:bg-black/30 tx duration-300';
+            }
+          });
+          ticking = false;
+        }
+
+        function onScrollTick() {
+          if (!ticking) {
+            requestAnimationFrame(updateSliderRealtime);
+            ticking = true;
+          }
+        }
+
+        prevBtn.addEventListener('click', function () {
+          var step = cards[0] ? cards[0].offsetWidth + 24 : 420;
+          track.scrollBy({ left: -step, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', function () {
+          var step = cards[0] ? cards[0].offsetWidth + 24 : 420;
+          track.scrollBy({ left: step, behavior: 'smooth' });
+        });
+
+        track.addEventListener('scroll', onScrollTick, { passive: true });
+        window.addEventListener('resize', onScrollTick);
+        updateSliderRealtime();
       }
-    }
 
-    prevBtn.addEventListener('click', function () {
-      var step = cards[0] ? cards[0].offsetWidth + 24 : 420;
-      track.scrollBy({ left: -step, behavior: 'smooth' });
-    });
-
-    nextBtn.addEventListener('click', function () {
-      var step = cards[0] ? cards[0].offsetWidth + 24 : 420;
-      track.scrollBy({ left: step, behavior: 'smooth' });
-    });
-
-    track.addEventListener('scroll', onScrollTick, { passive: true });
-    window.addEventListener('resize', onScrollTick);
-    updateSliderRealtime();
-  }
-
-})();
-</script>
+    })();
+  </script>
 </body>
+
 </html>

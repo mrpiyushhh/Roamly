@@ -3,7 +3,7 @@
   "categories": [
     {
       "id": "all",
-      "label": "All Expeditions"
+      "label": "All Trips"
     },
     {
       "id": "weekend",
@@ -19,103 +19,6 @@
     }
   ],
   "trips": [
-    {
-      "id": "harishchandragad",
-      "code": "HCG",
-      "name": "Harishchandragad & Kokankada",
-      "short": "Harishchandragad",
-      "accent": "Kokankada.",
-      "region": "Sahyadri / Ahmednagar",
-      "category": "weekend",
-      "days": 2,
-      "grade": "Moderate",
-      "price": 1497,
-      "rating": 4.9,
-      "reviews": 312,
-      "slots": 6,
-      "badges": [
-        "Best Seller",
-        "Kokankada Cliff"
-      ],
-      "featured": "large",
-      "hero": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
-      "heroAlt": "Breathtaking panoramic view of Kokankada concave cliff bathed in golden sunset clouds",
-      "gallery": [
-        {
-          "src": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Mountain peak in golden sunset glow"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Starry night sky above the high mountain plateau"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Misty green valleys and cloud inversion"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Sunrise over rugged Sahyadri mountain ridges"
-        }
-      ],
-      "blurb": [
-        "The crown jewel of Sahyadri trekking. Harishchandragad is renowned for the mighty Kokankada — a massive, semi-circular concave cliff offering one of the most theatrical sunsets and cloud inversions in Asia.",
-        "Explore the 6th-century Harishchandreshwar temple, ancient Kedareshwar water cave, and pitch tents at Kokankada for a night under the stars with hot local Maharashtrian meals."
-      ],
-      "dates": "Every Sat – Sun Departure",
-      "itinerary": [
-        {
-          "t": "Overnight Departure from Pune / Mumbai",
-          "d": "Board overnight AC/Non-AC pushback transport. Multiple pickup hubs across Pune (Wakad, Swargate) and Mumbai (Dadar, Thane, Vashi)."
-        },
-        {
-          "t": "Basecamp Arrival & Pachnai Ascent",
-          "d": "Reach base village by 05:30 AM. Fresh breakfast, gear check, and commence the 3.5-hour climb through lush plateau trails."
-        },
-        {
-          "t": "Temple, Caves & Kokankada Sunset",
-          "d": "Visit Harishchandreshwar temple & Kedareshwar cave. Reach Kokankada by 16:30 for the legendary sunset and vertical cliff vista."
-        },
-        {
-          "t": "Taramati Peak Summit & Descent",
-          "d": "Early dawn hike to Taramati Peak (1,429m) for sunrise. Village-style Pithla Bhakri lunch at basecamp, return to city by 21:30."
-        }
-      ],
-      "guide": {
-        "name": "Omkar Shinde",
-        "role": "Sahyadri Lead Explorer",
-        "bio": "Certified mountaineer with 80+ Harishchandragad ascents. Specialist in Western Ghats trail geology and emergency response.",
-        "quote": "\"Kokankada at sunset is pure silence. You never forget your first view.\"",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
-      },
-      "pickups": [
-        {
-          "id": "pune-wakad",
-          "place": "Wakad Bridge, Pune",
-          "note": "Near Ginger Hotel service road",
-          "time": "11:00 PM",
-          "recommended": true
-        },
-        {
-          "id": "pune-swargate",
-          "place": "Swargate, Pune",
-          "note": "Opposite Bus Stand main gate",
-          "time": "10:30 PM"
-        },
-        {
-          "id": "mumbai-dadar",
-          "place": "Dadar TT Circle, Mumbai",
-          "note": "Near Swami Narayan Temple",
-          "time": "10:00 PM"
-        },
-        {
-          "id": "mumbai-thane",
-          "place": "Teen Hath Naka, Thane",
-          "note": "Eternity Mall flyover pillar 12",
-          "time": "11:15 PM"
-        }
-      ]
-    },
     {
       "id": "kalsubai",
       "code": "KLB",
@@ -211,7 +114,10 @@
           "note": "Flyover junction",
           "time": "10:15 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-05",
+      "endDate": "2026-09-06"
     },
     {
       "id": "devkund",
@@ -301,7 +207,10 @@
           "note": "Near Vashi Plaza flyover",
           "time": "05:00 AM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-12"
     },
     {
       "id": "andharban",
@@ -391,91 +300,10 @@
           "note": "Opposite Swami Narayan Gate",
           "time": "04:30 AM"
         }
-      ]
-    },
-    {
-      "id": "vasota",
-      "code": "VST",
-      "name": "Vasota Fort Jungle Trek & Koyna Boating",
-      "short": "Vasota Fort",
-      "accent": "Boating.",
-      "region": "Koyna Wildlife Sanctuary / Satara",
-      "category": "weekend",
-      "days": 2,
-      "grade": "Moderate",
-      "price": 1699,
-      "rating": 4.9,
-      "reviews": 198,
-      "slots": 6,
-      "badges": [
-        "Boat Safari + Trek",
-        "Wildlife Forest"
       ],
-      "hero": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      "heroAlt": "Scenic motorboat navigating the deep blue Koyna backwaters flanked by dense emerald jungle hills",
-      "gallery": [
-        {
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Dense jungle canopy in Koyna Wildlife Sanctuary"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Babu Kada sheer cliff view plunging into the valley"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Ancient fortress battlements overgrown with jungle vines"
-        },
-        {
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
-          "alt": "Campsite along the serene Koyna backwaters"
-        }
-      ],
-      "blurb": [
-        "Vasota Fort (Vyaghragad) is one of the most adventurous jungle treks in Maharashtra, located entirely inside the core zone of the Koyna Tiger Reserve.",
-        "The journey begins with an exhilarating 1.5-hour boat safari across the vast Koyna backwaters, followed by a guided deep forest ascent to the dizzying Babu Kada cliff."
-      ],
-      "dates": "Every Sat – Sun (Post-Monsoon to Summer)",
-      "itinerary": [
-        {
-          "t": "Pune Departure & Bamnoli Base",
-          "d": "Depart Pune at 04:30 AM via Satara. Arrive at Bamnoli lakeside jetty by 08:30 AM."
-        },
-        {
-          "t": "Koyna Backwaters Boat Safari",
-          "d": "Board speedboats for a scenic 1.5-hour water safari through the misty Koyna Tiger Reserve."
-        },
-        {
-          "t": "Deep Forest Climb & Babu Kada Cliff",
-          "d": "Enter core jungle trail with forest guards. Summit Vasota and witness the sheer 2,000ft Babu Kada vertical drop."
-        },
-        {
-          "t": "Return Boat Cruise & Satara Delicacies",
-          "d": "Cruise back to Bamnoli for local organic village lunch. Reach Pune by 21:00."
-        }
-      ],
-      "guide": {
-        "name": "Tanaji Patil",
-        "role": "Wildlife Sanctuary Guide",
-        "bio": "Satara native registered with Koyna Forest Department. 12+ years experience navigating remote Vasota jungle corridors.",
-        "quote": "\"The Koyna water cruise combined with the Babu Kada cliff makes Vasota unbeatable.\"",
-        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
-      },
-      "pickups": [
-        {
-          "id": "pune-swargate",
-          "place": "Swargate, Pune",
-          "note": "Opposite Natraj Hotel",
-          "time": "04:30 AM",
-          "recommended": true
-        },
-        {
-          "id": "pune-katraj",
-          "place": "Katraj Wonder City",
-          "note": "Main highway junction",
-          "time": "05:00 AM"
-        }
-      ]
+      "status": "active",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19"
     },
     {
       "id": "rajgad",
@@ -559,7 +387,10 @@
           "note": "Highway flyover",
           "time": "06:30 AM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-26",
+      "endDate": "2026-09-27"
     },
     {
       "id": "bhandardara",
@@ -643,7 +474,10 @@
           "note": "Service road pillar 12",
           "time": "11:00 AM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04"
     },
     {
       "id": "nanemachi",
@@ -727,7 +561,10 @@
           "note": "Near main bridge",
           "time": "11:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10"
     },
     {
       "id": "bhairavgad",
@@ -811,7 +648,10 @@
           "note": "Main junction pillar 8",
           "time": "10:30 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-18"
     },
     {
       "id": "gokarna",
@@ -901,7 +741,10 @@
           "note": "Near Police station",
           "time": "09:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-26"
     },
     {
       "id": "hampi",
@@ -985,7 +828,10 @@
           "note": "Pritam Hotel",
           "time": "05:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-11-06",
+      "endDate": "2026-11-09"
     },
     {
       "id": "kedarnath",
@@ -1077,7 +923,10 @@
           "note": "Main exit gate",
           "time": "05:00 AM"
         }
-      ]
+      ],
+      "status": "completed",
+      "startDate": "2026-07-10",
+      "endDate": "2026-07-16"
     },
     {
       "id": "kutch",
@@ -1161,7 +1010,10 @@
           "note": "Arrivals gate",
           "time": "09:30 AM"
         }
-      ]
+      ],
+      "status": "completed",
+      "startDate": "2026-01-15",
+      "endDate": "2026-01-19"
     },
     {
       "id": "himachal",
@@ -1253,7 +1105,10 @@
           "note": "Near ISBT Sector 43",
           "time": "10:30 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-02"
     },
     {
       "id": "ladakh",
@@ -1349,27 +1204,432 @@
           "note": "Upper Changspa Road",
           "time": "12:00 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-02"
     }
   ],
-  "updated": "2026-08-28T15:37:37.620Z",
+  "updated": "2026-08-29T17:00:00.461Z",
   "members": [
     {
-      "id": "mmtd47lhivpgpd",
-      "tripId": "harishchandragad",
-      "name": "Piyush",
-      "phone": "0987654321",
-      "email": "Piyush@gmail.com",
+      "id": "m_kal_01",
+      "tripId": "kalsubai",
+      "name": "Aarav Sharma",
+      "phone": "+91 98201 44521",
+      "email": "aarav.sharma@gmail.com",
+      "age": 26,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "KAL-8421",
+      "amount": 1299,
+      "paid": 1299,
+      "status": "paid",
+      "attended": true,
+      "note": "First time night trekker, needs trekking pole rental.",
+      "bookedAt": "2026-08-20T10:14:00.000Z",
+      "paidAt": "2026-08-20T10:15:30.000Z"
+    },
+    {
+      "id": "m_kal_02",
+      "tripId": "kalsubai",
+      "name": "Pooja Deshmukh",
+      "phone": "+91 97654 88120",
+      "email": "pooja.d@outlook.com",
+      "age": 24,
+      "gender": "Female",
+      "pickupId": "1",
+      "ref": "KAL-8422",
+      "amount": 1299,
+      "paid": 1299,
+      "status": "pending",
+      "attended": true,
+      "note": "Vegetarian breakfast requested.",
+      "bookedAt": "2026-08-21T14:30:00.000Z",
+      "paidAt": ""
+    },
+    {
+      "id": "m_kal_03",
+      "tripId": "kalsubai",
+      "name": "Rohan Varma",
+      "phone": "+91 99302 11450",
+      "email": "rohan.varma@gmail.com",
+      "age": 29,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "KAL-8423",
+      "amount": 1299,
+      "paid": 1299,
+      "status": "paid",
+      "attended": true,
+      "note": "Deposit paid. Balance ₹799 to be collected at reporting.",
+      "bookedAt": "2026-08-22T09:15:00.000Z",
+      "paidAt": "2026-08-29T15:59:30.436Z"
+    },
+    {
+      "id": "m_kal_04",
+      "tripId": "kalsubai",
+      "name": "Sneha Kulkarni",
+      "phone": "+91 98199 77234",
+      "email": "sneha.k@yahoo.com",
+      "age": 27,
+      "gender": "Female",
+      "pickupId": "2",
+      "ref": "KAL-8424",
+      "amount": 1299,
+      "paid": 1299,
+      "status": "paid",
+      "attended": true,
+      "note": "Joining with group from Thane.",
+      "bookedAt": "2026-08-23T16:45:00.000Z",
+      "paidAt": "2026-08-23T16:47:00.000Z"
+    },
+    {
+      "id": "m_kal_05",
+      "tripId": "kalsubai",
+      "name": "Vikram Mehta",
+      "phone": "+91 98210 33456",
+      "email": "vikram.mehta@corp.in",
+      "age": 32,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "KAL-8425",
+      "amount": 1299,
+      "paid": 1299,
+      "status": "paid",
+      "attended": true,
+      "note": "Carrying professional DSLR camera gear.",
+      "bookedAt": "2026-08-24T11:20:00.000Z",
+      "paidAt": "2026-08-24T11:22:00.000Z"
+    },
+    {
+      "id": "m_dev_01",
+      "tripId": "devkund",
+      "name": "Ananya Iyer",
+      "phone": "+91 99870 55432",
+      "email": "ananya.iyer@gmail.com",
+      "age": 23,
+      "gender": "Female",
+      "pickupId": "0",
+      "ref": "DEV-3310",
+      "amount": 1199,
+      "paid": 1199,
+      "status": "paid",
+      "note": "Non-swimmer, needs life-jacket assistance near pool.",
+      "bookedAt": "2026-08-22T11:00:00.000Z",
+      "paidAt": "2026-08-22T11:02:00.000Z"
+    },
+    {
+      "id": "m_dev_02",
+      "tripId": "devkund",
+      "name": "Karan Patel",
+      "phone": "+91 98701 22345",
+      "email": "karan.p@gmail.com",
+      "age": 28,
+      "gender": "Male",
+      "pickupId": "1",
+      "ref": "DEV-3311",
+      "amount": 1199,
+      "paid": 1199,
+      "status": "paid",
+      "note": "Experienced trekker.",
+      "bookedAt": "2026-08-23T15:10:00.000Z",
+      "paidAt": "2026-08-23T15:12:00.000Z"
+    },
+    {
+      "id": "m_dev_03",
+      "tripId": "devkund",
+      "name": "Tanvi Sawant",
+      "phone": "+91 98334 99012",
+      "email": "tanvi.sawant@rediffmail.com",
+      "age": 25,
+      "gender": "Female",
+      "pickupId": "0",
+      "ref": "DEV-3312",
+      "amount": 1199,
+      "paid": 1199,
+      "status": "paid",
+      "note": "Deposit paid. Balance ₹699 on arrival.",
+      "bookedAt": "2026-08-24T18:00:00.000Z",
+      "paidAt": "2026-08-29T15:50:22.768Z"
+    },
+    {
+      "id": "m_and_01",
+      "tripId": "andharban",
+      "name": "Aditya Roy",
+      "phone": "+91 98200 11998",
+      "email": "aditya.roy@gmail.com",
+      "age": 30,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "AND-9014",
+      "amount": 1399,
+      "paid": 1399,
+      "status": "paid",
+      "note": "Has poncho and waterproof bags.",
+      "bookedAt": "2026-08-21T09:00:00.000Z",
+      "paidAt": "2026-08-21T09:05:00.000Z"
+    },
+    {
+      "id": "m_and_02",
+      "tripId": "andharban",
+      "name": "Neha Joshi",
+      "phone": "+91 97690 44321",
+      "email": "neha.joshi@gmail.com",
+      "age": 26,
+      "gender": "Female",
+      "pickupId": "1",
+      "ref": "AND-9015",
+      "amount": 1399,
+      "paid": 1399,
+      "status": "paid",
+      "note": "Allergies: None.",
+      "bookedAt": "2026-08-22T13:40:00.000Z",
+      "paidAt": "2026-08-22T13:42:00.000Z"
+    },
+    {
+      "id": "m_and_03",
+      "tripId": "andharban",
+      "name": "Siddharth Nair",
+      "phone": "+91 98112 33445",
+      "email": "sid.nair@techcorp.com",
+      "age": 31,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "AND-9016",
+      "amount": 1399,
+      "paid": 1399,
+      "status": "paid",
+      "note": "Confirmed via UPI.",
+      "bookedAt": "2026-08-23T10:15:00.000Z",
+      "paidAt": "2026-08-23T10:16:00.000Z"
+    },
+    {
+      "id": "m_and_04",
+      "tripId": "andharban",
+      "name": "Meera Sen",
+      "phone": "+91 99201 88776",
+      "email": "meera.sen@gmail.com",
+      "age": 24,
+      "gender": "Female",
+      "pickupId": "2",
+      "ref": "AND-9017",
+      "amount": 1399,
+      "paid": 500,
+      "status": "pending",
+      "note": "Balance ₹899 due.",
+      "bookedAt": "2026-08-24T19:30:00.000Z",
+      "paidAt": ""
+    },
+    {
+      "id": "m_raj_01",
+      "tripId": "rajgad",
+      "name": "Pranav Patil",
+      "phone": "+91 98670 12345",
+      "email": "pranav.p@gmail.com",
+      "age": 27,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "RAJ-4512",
+      "amount": 1199,
+      "paid": 1199,
+      "status": "paid",
+      "note": "History buff, excited for Balekilla climb.",
+      "bookedAt": "2026-08-20T12:00:00.000Z",
+      "paidAt": "2026-08-20T12:03:00.000Z"
+    },
+    {
+      "id": "m_raj_02",
+      "tripId": "rajgad",
+      "name": "Deepika Rao",
+      "phone": "+91 98205 66778",
+      "email": "deepika.rao@yahoo.com",
+      "age": 25,
+      "gender": "Female",
+      "pickupId": "1",
+      "ref": "RAJ-4513",
+      "amount": 1199,
+      "paid": 1199,
+      "status": "paid",
+      "note": "Vegetarian.",
+      "bookedAt": "2026-08-21T17:20:00.000Z",
+      "paidAt": "2026-08-21T17:22:00.000Z"
+    },
+    {
+      "id": "m_bha_01",
+      "tripId": "bhandardara",
+      "name": "Kabir Sengupta",
+      "phone": "+91 98300 44556",
+      "email": "kabir.sen@gmail.com",
+      "age": 33,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "BHA-1092",
+      "amount": 1599,
+      "paid": 1599,
+      "status": "paid",
+      "note": "Couple tent booked with partner.",
+      "bookedAt": "2026-08-22T08:30:00.000Z",
+      "paidAt": "2026-08-22T08:32:00.000Z"
+    },
+    {
+      "id": "m_bha_02",
+      "tripId": "bhandardara",
+      "name": "Ritika Kapoor",
+      "phone": "+91 98300 44557",
+      "email": "ritika.kapoor@gmail.com",
+      "age": 31,
+      "gender": "Female",
+      "pickupId": "0",
+      "ref": "BHA-1093",
+      "amount": 1599,
+      "paid": 1599,
+      "status": "paid",
+      "attended": false,
+      "note": "Barbeque veg preference.",
+      "bookedAt": "2026-08-22T08:30:00.000Z",
+      "paidAt": "2026-08-29T15:54:44.668Z"
+    },
+    {
+      "id": "m_bha_03",
+      "tripId": "bhandardara",
+      "name": "Manish Chawla",
+      "phone": "+91 98101 77665",
+      "email": "manish.chawla@gmail.com",
+      "age": 35,
+      "gender": "Male",
+      "pickupId": "1",
+      "ref": "BHA-1094",
+      "amount": 1599,
+      "paid": 1599,
+      "status": "paid",
+      "note": "Stargazing telescope enthusiast.",
+      "bookedAt": "2026-08-23T12:10:00.000Z",
+      "paidAt": "2026-08-23T12:12:00.000Z"
+    },
+    {
+      "id": "m_gok_01",
+      "tripId": "gokarna",
+      "name": "Arjun Nambiar",
+      "phone": "+91 98450 12345",
+      "email": "arjun.n@gmail.com",
+      "age": 28,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "GOK-7710",
+      "amount": 5499,
+      "paid": 5499,
+      "status": "paid",
+      "note": "Confirmed flight tickets to Hubli.",
+      "bookedAt": "2026-08-19T14:00:00.000Z",
+      "paidAt": "2026-08-19T14:05:00.000Z"
+    },
+    {
+      "id": "m_gok_02",
+      "tripId": "gokarna",
+      "name": "Isha Sundaram",
+      "phone": "+91 98455 67890",
+      "email": "isha.s@gmail.com",
       "age": 27,
       "gender": "Female",
       "pickupId": "0",
-      "ref": "HCG-2023",
-      "amount": 1499,
-      "paid": 1499,
+      "ref": "GOK-7711",
+      "amount": 5499,
+      "paid": 5499,
       "status": "paid",
-      "note": "",
-      "bookedAt": "2026-08-28T15:37:11.046Z",
-      "paidAt": "2026-08-28T15:37:11.048Z"
+      "note": "Beach hostel accommodation preference.",
+      "bookedAt": "2026-08-20T18:20:00.000Z",
+      "paidAt": "2026-08-20T18:22:00.000Z"
+    },
+    {
+      "id": "m_ked_01",
+      "tripId": "kedarnath",
+      "name": "Suresh Hegde",
+      "phone": "+91 98800 22334",
+      "email": "suresh.hegde@infosys.com",
+      "age": 38,
+      "gender": "Male",
+      "pickupId": "0",
+      "ref": "KED-9001",
+      "amount": 11999,
+      "paid": 11999,
+      "status": "paid",
+      "note": "Medical fitness certificate verified.",
+      "bookedAt": "2026-08-15T11:00:00.000Z",
+      "paidAt": "2026-08-15T11:05:00.000Z"
+    },
+    {
+      "id": "m_ked_02",
+      "tripId": "kedarnath",
+      "name": "Sunita Hegde",
+      "phone": "+91 98800 22335",
+      "email": "sunita.h@gmail.com",
+      "age": 36,
+      "gender": "Female",
+      "pickupId": "0",
+      "ref": "KED-9002",
+      "amount": 11999,
+      "paid": 5000,
+      "status": "pending",
+      "note": "Advance ₹5,000 paid. Balance ₹6,999 due at Haridwar basecamp.",
+      "bookedAt": "2026-08-15T11:00:00.000Z",
+      "paidAt": ""
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp_1",
+      "tripId": "kalsubai",
+      "title": "Local Guide & Safety Marshals",
+      "category": "guide",
+      "amount": 1500,
+      "date": "2026-08-20",
+      "notes": "2 local certified guides from Bari village."
+    },
+    {
+      "id": "exp_2",
+      "tripId": "kalsubai",
+      "title": "Shared AC Tempo Traveller Transport",
+      "category": "transport",
+      "amount": 2200,
+      "date": "2026-08-21",
+      "notes": "Dadar to Bari village round trip toll & fuel."
+    },
+    {
+      "id": "exp_3",
+      "tripId": "kalsubai",
+      "title": "Village Basecamp Breakfast & Tea",
+      "category": "food",
+      "amount": 850,
+      "date": "2026-08-22",
+      "notes": "Poha, boiled eggs and hot chai for 10 pax."
+    },
+    {
+      "id": "exp_4",
+      "tripId": "devkund",
+      "title": "Forest Entry Permits & Guide",
+      "category": "permits",
+      "amount": 1200,
+      "date": "2026-08-22",
+      "notes": "Bhira Gram Panchayat forest permit."
+    },
+    {
+      "id": "exp_5",
+      "tripId": "andharban",
+      "title": "Forest Sanctuary Permits",
+      "category": "permits",
+      "amount": 1400,
+      "date": "2026-08-21",
+      "notes": "Tamhini wildlife sanctuary entry badge."
+    },
+    {
+      "id": "exp_6",
+      "tripId": "kedarnath",
+      "title": "Basecamp Helicopter & Porter Logistics",
+      "category": "transport",
+      "amount": 6500,
+      "date": "2026-07-11",
+      "notes": "Emergency mule and luggage transport."
     }
   ]
 }

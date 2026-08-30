@@ -15,87 +15,98 @@
 <body class="antialiased bg-canvas text-ink">
 
 <a href="#main" class="skip-link">Skip to content</a>
-<nav data-nav="account" aria-label="Main"></nav>
+<nav data-nav="marketing" data-active="account" aria-label="Main"></nav>
 
-<!-- No booking yet -->
-<main id="empty" class="hidden max-w-2xl mx-auto px-6 pt-40 pb-32 text-center">
-  <div class="w-24 h-24 rounded-[2rem] bg-surface border border-border-subtle flex items-center justify-center text-3xl text-muted mx-auto mb-10">
-    <i class="fa-solid fa-compass" aria-hidden="true"></i>
+<!-- Coming Soon View -->
+<main id="empty" class="hidden max-w-2xl mx-auto px-6 pt-36 sm:pt-44 pb-32 text-center">
+  <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-[2rem] bg-surface border border-border-subtle flex items-center justify-center text-3xl sm:text-4xl text-brand mx-auto mb-8 shadow-sm">
+    <i class="fa-solid fa-mountain-sun" aria-hidden="true"></i>
   </div>
-  <h1 class="font-display text-4xl md:text-6xl font-extrabold tracking-tighter uppercase mb-6">
-    No runs <span class="text-brand italic">logged.</span>
+
+  <div class="inline-flex items-center gap-2 bg-surface border border-border-subtle px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-sm">
+    <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
+    My Trip
+  </div>
+
+  <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter uppercase mb-10 leading-none">
+    Coming <span class="text-brand italic">Soon.</span>
   </h1>
-  <p class="text-muted font-medium text-lg mb-10">
-    Once you secure a slot, your trip log lives here — extraction point, gear list, guide contact and balance.
-  </p>
-  <a href="trips.html" class="inline-block bg-brand text-accent px-12 py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 tx shadow-brand">
-    Browse Trips
-  </a>
+
+  <!-- Action CTA -->
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-xs sm:max-w-md mx-auto">
+    <a href="trips.html" class="w-full sm:w-auto min-w-[170px] bg-brand text-accent hover:bg-brand/90 px-8 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] shadow-md flex items-center justify-center gap-2">
+      <span>Browse Trips</span>
+      <i class="fa-solid fa-arrow-right text-[11px]" aria-hidden="true"></i>
+    </a>
+    <a href="index.html" class="w-full sm:w-auto min-w-[170px] bg-surface hover:bg-white border border-border-subtle hover:border-brand/40 text-ink px-8 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] shadow-sm flex items-center justify-center">
+      <span>Return Home</span>
+    </a>
+  </div>
 </main>
 
 <!-- Booked -->
-<main id="main" class="hidden max-w-7xl mx-auto px-6 pt-32 pb-20">
+<main id="main" class="hidden max-w-7xl mx-auto px-6 pt-24 sm:pt-32 pb-20">
 
-  <div class="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-10 mb-12 sm:mb-16">
     <div class="max-w-2xl">
-      <div class="flex flex-wrap items-center gap-3 mb-6">
+      <div class="flex flex-wrap items-center gap-3 mb-4 sm:mb-6">
         <span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-brand">Confirmed</span>
         <span class="text-[10px] font-black uppercase tracking-[0.2em] text-muted" id="ref"></span>
       </div>
-      <h1 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-4 uppercase" id="title"></h1>
-      <p class="text-lg text-muted font-medium" id="meta"></p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-4 uppercase" id="title"></h1>
+      <p class="text-base sm:text-lg text-muted font-medium" id="meta"></p>
     </div>
     <div id="balanceCta"></div>
   </div>
 
   <!-- Journey -->
-  <section class="bg-surface border border-border-subtle rounded-panel p-10 mb-16" aria-label="Trip progress">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 relative" id="track">
+  <section class="bg-surface border border-border-subtle rounded-panel p-6 sm:p-10 mb-12 sm:mb-16" aria-label="Trip progress">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-8 relative" id="track">
       <div class="absolute top-6 left-[10%] right-[10%] h-0.5 bg-border-subtle hidden md:block" aria-hidden="true"></div>
     </div>
   </section>
 
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
 
-    <div class="lg:col-span-8 space-y-20">
+    <div class="lg:col-span-8 space-y-12 sm:space-y-20">
 
       <section>
-        <div class="flex items-center gap-4 mb-10">
+        <div class="flex items-center gap-4 mb-6 sm:mb-10">
           <span class="w-10 h-10 rounded-xl bg-brand text-accent flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-map-pin"></i></span>
-          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">Extraction Point</h2>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tighter uppercase">Extraction Point</h2>
         </div>
-        <div class="bg-ink text-white rounded-panel p-10 flex flex-col md:flex-row justify-between items-center gap-10" id="extraction"></div>
+        <div class="bg-ink text-white rounded-panel p-6 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-10" id="extraction"></div>
       </section>
 
       <section>
-        <div class="flex items-center gap-4 mb-10">
+        <div class="flex items-center gap-4 mb-6 sm:mb-10">
           <span class="w-10 h-10 rounded-xl bg-brand text-accent flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-user-group"></i></span>
-          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">The Roster</h2>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tighter uppercase">The Roster</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="roster"></div>
       </section>
 
       <section>
-        <div class="flex items-center gap-4 mb-10">
+        <div class="flex items-center gap-4 mb-6 sm:mb-10">
           <span class="w-10 h-10 rounded-xl bg-brand text-accent flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-file-shield"></i></span>
-          <h2 class="font-display text-3xl font-extrabold tracking-tighter uppercase">Trip Intel</h2>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tighter uppercase">Trip Intel</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent tx">
-            <span class="flex items-center gap-6">
-              <i class="fa-solid fa-file-pdf text-3xl" aria-hidden="true"></i>
+          <button type="button" class="doc group bg-surface border border-border-subtle p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] flex items-center justify-between gap-4 sm:gap-6 hover:bg-brand hover:text-accent tx">
+            <span class="flex items-center gap-4 sm:gap-6">
+              <i class="fa-solid fa-file-pdf text-2xl sm:text-3xl" aria-hidden="true"></i>
               <span class="text-left">
-                <span class="block font-bold uppercase tracking-tight">Gear Checklist</span>
+                <span class="block font-bold uppercase tracking-tight text-sm sm:text-base">Gear Checklist</span>
                 <span class="block text-[10px] opacity-60 uppercase tracking-widest">Alpine Standard</span>
               </span>
             </span>
             <i class="fa-solid fa-download" aria-hidden="true"></i>
           </button>
-          <button type="button" class="doc group bg-surface border border-border-subtle p-8 rounded-[2.5rem] flex items-center justify-between gap-6 hover:bg-brand hover:text-accent tx">
-            <span class="flex items-center gap-6">
-              <i class="fa-solid fa-file-pdf text-3xl" aria-hidden="true"></i>
+          <button type="button" class="doc group bg-surface border border-border-subtle p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] flex items-center justify-between gap-4 sm:gap-6 hover:bg-brand hover:text-accent tx">
+            <span class="flex items-center gap-4 sm:gap-6">
+              <i class="fa-solid fa-file-pdf text-2xl sm:text-3xl" aria-hidden="true"></i>
               <span class="text-left">
-                <span class="block font-bold uppercase tracking-tight">Full Itinerary</span>
+                <span class="block font-bold uppercase tracking-tight text-sm sm:text-base">Full Itinerary</span>
                 <span class="block text-[10px] opacity-60 uppercase tracking-widest" id="itinLabel"></span>
               </span>
             </span>
@@ -106,12 +117,12 @@
 
     </div>
 
-    <div class="lg:col-span-4 space-y-10">
-      <div class="bg-surface border border-border-subtle rounded-panel p-10 text-center" id="guide"></div>
-      <div class="bg-brand text-accent rounded-panel p-10">
-        <h2 class="font-display text-2xl font-extrabold tracking-tight mb-4 uppercase">Basecamp Help</h2>
-        <p class="text-white/70 font-medium mb-10">Stuck at basecamp? Need to reschedule your run?</p>
-        <button type="button" id="chat" class="w-full bg-accent text-brand py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] hover:scale-105 tx shadow-lg shadow-black/10">
+    <div class="lg:col-span-4 space-y-8 sm:space-y-10">
+      <div class="bg-surface border border-border-subtle rounded-panel p-6 sm:p-10 text-center" id="guide"></div>
+      <div class="bg-brand text-accent rounded-panel p-6 sm:p-10">
+        <h2 class="font-display text-xl sm:text-2xl font-extrabold tracking-tight mb-4 uppercase">Basecamp Help</h2>
+        <p class="text-white/70 font-medium mb-6 sm:mb-10 text-sm sm:text-base">Stuck at basecamp? Need to reschedule your run?</p>
+        <button type="button" id="chat" class="w-full bg-accent text-brand py-4 sm:py-5 rounded-2xl sm:rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] hover:scale-105 tx shadow-lg shadow-black/10">
           Chat with Command
         </button>
       </div>

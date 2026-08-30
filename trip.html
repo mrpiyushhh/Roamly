@@ -18,17 +18,17 @@
 <nav data-nav="marketing" data-active="upcoming" aria-label="Main"></nav>
 
 <!-- Gallery -->
-<section class="pt-28 px-6" aria-label="Trip gallery">
+<section class="pt-24 sm:pt-28 px-6" aria-label="Trip gallery">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-[420px] md:h-[650px]" id="gallery"></div>
+    <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 sm:gap-4 h-[280px] sm:h-[380px] md:h-[600px]" id="gallery"></div>
   </div>
 </section>
 
-<main id="main" class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+<main id="main" class="max-w-7xl mx-auto px-6 py-10 sm:py-16 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
 
   <!-- Detail -->
   <div class="lg:col-span-8">
-    <nav aria-label="Breadcrumb" class="mb-8">
+    <nav aria-label="Breadcrumb" class="mb-6 sm:mb-8">
       <ol class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted">
         <li><a href="index.html" class="hover:text-brand">Base</a></li>
         <li aria-hidden="true">/</li>
@@ -38,28 +38,28 @@
       </ol>
     </nav>
 
-    <div class="flex flex-wrap items-center gap-3 mb-6" id="badges"></div>
+    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6" id="badges"></div>
 
-    <h1 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-8 uppercase" id="title"></h1>
+    <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-6 sm:mb-8 uppercase" id="title"></h1>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 py-10 border-y border-border-subtle" id="stats"></div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 py-8 sm:py-10 border-y border-border-subtle" id="stats"></div>
 
-    <section class="mt-16 mb-20">
-      <h2 class="font-display text-3xl font-extrabold tracking-tighter mb-6 uppercase">Trip Brief</h2>
-      <div class="text-muted font-medium leading-relaxed space-y-6 text-lg max-w-3xl" id="blurb"></div>
+    <section class="mt-12 sm:mt-16 mb-14 sm:mb-20">
+      <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tighter mb-6 uppercase">Trip Brief</h2>
+      <div class="text-muted font-medium leading-relaxed space-y-6 text-base sm:text-lg max-w-3xl" id="blurb"></div>
     </section>
 
-    <section class="mb-20">
-      <h2 class="font-display text-3xl font-extrabold tracking-tighter mb-10 uppercase">The Ridge Run</h2>
-      <div class="space-y-4" id="itinerary"></div>
+    <section class="mb-14 sm:mb-20">
+      <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tighter mb-6 sm:mb-10 uppercase">The Ridge Run</h2>
+      <div class="space-y-3 sm:space-y-4" id="itinerary"></div>
     </section>
 
-    <section class="mb-20 bg-ink rounded-panel p-10 flex flex-col md:flex-row items-center gap-10" id="guide"></section>
+    <section class="mb-14 sm:mb-20 bg-ink rounded-panel p-6 sm:p-10 flex flex-col md:flex-row items-center gap-6 sm:gap-10" id="guide"></section>
   </div>
 
   <!-- Booking widget -->
   <aside class="lg:col-span-4" aria-label="Book this trip">
-    <form class="sticky top-32 bg-white border border-border-subtle rounded-panel p-10 shadow-soft" id="bookForm">
+    <form class="sticky top-32 bg-white border border-border-subtle rounded-panel p-6 sm:p-10 shadow-soft" id="bookForm">
       <div class="flex justify-between items-start gap-4 mb-8">
         <div>
           <p class="text-[10px] text-muted uppercase tracking-[0.2em] font-black mb-1">Starting from</p>
@@ -69,45 +69,13 @@
         <span class="bg-accent text-brand px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest animate-pulse shrink-0" id="slots"></span>
       </div>
 
-      <div class="space-y-4 mb-8">
-        <div class="p-6 bg-surface rounded-[2rem] border border-border-subtle">
-          <p class="text-[9px] font-black uppercase tracking-widest text-muted mb-2">Next Run</p>
-          <p class="font-bold text-sm uppercase" id="dates"></p>
-        </div>
-
-        <div class="p-6 bg-surface rounded-[2rem] border border-border-subtle">
-          <label class="block text-[9px] font-black uppercase tracking-widest text-muted mb-2" for="pickup">Basecamp Pickup</label>
-          <select id="pickup" class="w-full bg-transparent text-sm font-bold uppercase outline-none cursor-pointer"></select>
-        </div>
-
-        <div class="p-6 bg-surface rounded-[2rem] border border-border-subtle">
-          <p class="text-[9px] font-black uppercase tracking-widest text-muted mb-3">Roster Size</p>
-          <div class="flex items-center justify-between gap-4">
-            <button type="button" id="minus" aria-label="Remove a traveller"
-              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent tx disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-inherit">
-              <i class="fa-solid fa-minus"></i>
-            </button>
-            <span class="font-display text-3xl font-black tracking-tighter tabular-nums" id="paxOut" aria-live="polite">1</span>
-            <button type="button" id="plus" aria-label="Add a traveller"
-              class="w-11 h-11 rounded-full border border-border-subtle flex items-center justify-center hover:bg-brand hover:text-accent tx disabled:opacity-30">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex justify-between items-end pb-6 mb-6 border-b border-border-subtle">
-        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-muted">Total</span>
-        <span class="text-3xl font-display font-black tracking-tighter" id="total"></span>
-      </div>
-
-      <div class="space-y-4">
+      <div class="space-y-4 pt-4 border-t border-border-subtle/70">
         <button type="submit" class="rm-btn rm-btn-primary w-full py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter shadow-brand">
-          Secure My Slot
+          Enroll Now
         </button>
       </div>
 
-      <p class="text-[9px] text-center text-muted mt-8 uppercase tracking-widest font-black">
+      <p class="text-[9px] text-center text-muted mt-6 uppercase tracking-widest font-black">
         Zero Hidden Fees • Secure Encryption
       </p>
     </form>
@@ -147,8 +115,10 @@
         '<img class="w-full h-full object-cover" loading="lazy" src="' + g.src + '" alt="' + R.esc(g.alt) + '">' + btn + '</div>';
     }).join('');
 
-  document.getElementById('badges').innerHTML = (t.badges && t.badges[0])
-    ? '<span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-brand">' + R.esc(t.badges[0]) + '</span>'
+  document.getElementById('badges').innerHTML = (t.badges && t.badges.length)
+    ? t.badges.map(function (b) {
+        return '<span class="bg-brand text-accent px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider sm:tracking-widest shadow-sm">' + R.esc(b) + '</span>';
+      }).join('')
     : '';
 
   function stat(icon, big, small) {
@@ -171,16 +141,16 @@
     var id = 'stage-' + i;
     return '<div>' +
       '<button type="button" class="stage-row" aria-expanded="false" aria-controls="' + id + '">' +
-        '<span class="flex justify-between items-center gap-6">' +
+        '<span class="flex justify-between items-center gap-4 sm:gap-6">' +
           '<span class="text-left">' +
-            '<span class="text-[10px] font-black uppercase tracking-[0.2em] opacity-60 mb-2 block">Stage ' + R.pad(i + 1) + '</span>' +
-            '<span class="font-display text-2xl font-extrabold tracking-tight block">' + R.esc(st.t) + '</span>' +
+            '<span class="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] opacity-60 mb-1 sm:mb-2 block">Stage ' + R.pad(i + 1) + '</span>' +
+            '<span class="font-display text-base sm:text-lg md:text-2xl font-extrabold tracking-tight block">' + R.esc(st.t) + '</span>' +
           '</span>' +
-          '<i class="fa-solid fa-plus stage-plus shrink-0" aria-hidden="true"></i>' +
+          '<i class="fa-solid fa-plus stage-plus shrink-0 text-sm sm:text-base" aria-hidden="true"></i>' +
         '</span>' +
       '</button>' +
       '<div class="stage-body" id="' + id + '"><div>' +
-        '<p class="px-10 py-6 text-muted font-medium leading-relaxed">' + R.esc(st.d) + '</p>' +
+        '<p class="px-5 sm:px-10 py-4 sm:py-6 text-muted font-medium text-xs sm:text-sm md:text-base leading-relaxed">' + R.esc(st.d) + '</p>' +
       '</div></div></div>';
   }).join('');
 
@@ -209,43 +179,20 @@
         '<i class="fa-brands fa-whatsapp text-lg"></i> Contact Coordinator</a></div>';
 
   /* ---- booking widget ---- */
-  var pax = s.pax || 1;
   var priceEl = document.getElementById('price');
-  var totalEl = document.getElementById('total');
-  var paxOut  = document.getElementById('paxOut');
-  var minus   = document.getElementById('minus');
-  var plus    = document.getElementById('plus');
-
-  priceEl.textContent = R.inr(t.price);
-  document.getElementById('dates').textContent = t.dates;
-  document.getElementById('slots').textContent = t.slots + ' Slots Left';
-
-  document.getElementById('pickup').innerHTML = t.pickups.map(function (p) {
-    return '<option value="' + p.id + '"' + (p.id === s.pickup ? ' selected' : '') + '>' +
-      R.esc(p.place) + ' (' + p.time + ')</option>';
-  }).join('');
-
-  function paint() {
-    paxOut.textContent = pax;
-    totalEl.textContent = R.inr(t.price * pax);
-    minus.disabled = pax <= 1;
-    plus.disabled = pax >= t.slots;
-  }
-  minus.addEventListener('click', function () { if (pax > 1) { pax--; paint(); } });
-  plus.addEventListener('click', function () {
-    if (pax < t.slots) { pax++; paint(); }
-    else R.toast('Only ' + t.slots + ' slots left on this run');
-  });
-  paint();
+  if (priceEl) priceEl.textContent = R.inr(t.price);
+  var slotsEl = document.getElementById('slots');
+  if (slotsEl) slotsEl.textContent = t.slots + ' Slots Left';
 
   document.getElementById('bookForm').addEventListener('submit', function (e) {
     e.preventDefault();
+    var defaultPickup = (t.pickups && t.pickups[0]) ? t.pickups[0].id : '';
     R.state.set({
       trip: t.id,
-      pax: pax,
-      date: t.dates,
-      pickup: document.getElementById('pickup').value,
-      travellers: []
+      pax: s.pax || 1,
+      date: s.date || t.dates,
+      pickup: s.pickup || defaultPickup,
+      travellers: s.travellers || []
     });
     R.go('book-1.html');
   });

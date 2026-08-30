@@ -23,50 +23,44 @@
     <div class="absolute -bottom-2 -right-2 w-32 h-32 bg-accent rounded-[2.5rem] -z-10 rotate-12 opacity-50" aria-hidden="true"></div>
   </div>
 
-  <h1 class="font-display text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-6 uppercase">
+  <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tighter leading-none mb-4 sm:mb-6 uppercase">
     Peak <span class="text-brand italic">attained.</span>
   </h1>
-  <p class="text-muted text-lg font-medium mb-12 max-w-lg mx-auto" id="lede"></p>
+  <p class="text-muted text-base sm:text-lg font-medium mb-8 sm:mb-12 max-w-lg mx-auto" id="lede"></p>
 
   <!-- Ticket -->
-  <section class="bg-surface border border-border-subtle rounded-panel p-10 mb-12 text-left relative overflow-hidden shadow-xl" aria-label="Booking summary">
-    <p class="absolute top-0 right-0 px-8 py-3 bg-brand text-accent text-[10px] font-black uppercase tracking-widest rounded-bl-[2rem]">
-      Confirmed Extraction
+  <section class="bg-surface border border-border-subtle rounded-panel p-6 sm:p-10 mb-8 sm:mb-12 text-left relative overflow-hidden shadow-xl" aria-label="Booking summary">
+    <p class="absolute top-0 right-0 px-6 sm:px-8 py-2.5 sm:py-3 bg-brand text-accent text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded-bl-2xl sm:rounded-bl-[2rem]">
+      Confirmed Booking
     </p>
 
-    <div class="flex flex-wrap justify-between items-center gap-6 mb-10 pb-10 border-b border-border-subtle">
-      <div>
-        <p class="text-[9px] font-black uppercase tracking-[0.2em] text-muted mb-2">Booking Reference</p>
-        <p class="font-display text-3xl font-black tracking-tighter uppercase" id="ref"></p>
-      </div>
-      <div class="text-right">
-        <p class="text-[9px] font-black uppercase tracking-[0.2em] text-muted mb-2">Status</p>
-        <span class="bg-brand text-accent px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-brand">In Queue</span>
-      </div>
+    <div class="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-border-subtle">
+      <p class="text-[9px] font-black uppercase tracking-[0.2em] text-muted mb-1.5 sm:mb-2">Booking Reference</p>
+      <p class="font-display text-2xl sm:text-3xl font-black tracking-tighter uppercase text-ink" id="ref"></p>
     </div>
 
-    <div class="grid grid-cols-2 gap-8 mb-10" id="facts"></div>
+    <div class="grid grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-10" id="facts"></div>
 
-    <div class="p-8 bg-ink text-white rounded-[2rem] shadow-xl" id="money"></div>
+    <div class="p-5 sm:p-8 bg-ink text-white rounded-2xl sm:rounded-[2rem] shadow-xl" id="money"></div>
   </section>
 
   <div class="flex flex-col sm:flex-row gap-4 items-stretch">
     <a href="my-trip.html" data-keep="my-trip.html"
-       class="flex-1 bg-brand text-accent py-5 rounded-[2rem] font-black text-xl uppercase tracking-tighter hover:scale-105 tx shadow-brand flex items-center justify-center">
+       class="flex-1 bg-brand text-accent py-4 sm:py-5 rounded-2xl sm:rounded-[2rem] font-black text-lg sm:text-xl uppercase tracking-tighter hover:scale-105 tx shadow-brand flex items-center justify-center">
       Access My Log
     </a>
-    <div class="flex gap-4 justify-center">
-      <button type="button" id="share" class="w-16 h-16 rounded-full border border-border-subtle flex items-center justify-center text-xl hover:bg-brand hover:text-accent tx" aria-label="Share on WhatsApp">
+    <div class="flex gap-3 sm:gap-4 justify-center">
+      <button type="button" id="share" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-border-subtle flex items-center justify-center text-lg sm:text-xl hover:bg-brand hover:text-accent tx" aria-label="Share on WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
       </button>
-      <button type="button" id="print" class="w-16 h-16 rounded-full border border-border-subtle flex items-center justify-center text-xl hover:bg-brand hover:text-accent tx" aria-label="Print this confirmation">
+      <button type="button" id="print" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-border-subtle flex items-center justify-center text-lg sm:text-xl hover:bg-brand hover:text-accent tx" aria-label="Print this confirmation">
         <i class="fa-solid fa-download"></i>
       </button>
     </div>
   </div>
 
-  <a href="index.html" class="inline-block mt-12 text-[10px] font-black uppercase tracking-[0.2em] text-muted hover:text-brand transition-colors">
-    Return to Base
+  <a href="index.html" class="inline-block mt-8 sm:mt-12 text-[10px] font-black uppercase tracking-[0.2em] text-muted hover:text-brand transition-colors">
+    Return Home
   </a>
 
 </main>
@@ -83,9 +77,25 @@
   var p = R.pickup();
   var ref = R.makeRef();
 
+  function formatTripDate(dStr) {
+    if (dStr && /\d{1,2}\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)|\d{4}-\d{2}-\d{2}/i.test(dStr)) {
+      return dStr;
+    }
+    var now = new Date();
+    var day = now.getDay();
+    var daysUntilSat = (6 - day + 7) % 7;
+    if (daysUntilSat === 0) daysUntilSat = 7;
+    var tripD = new Date(now.getTime() + daysUntilSat * 24 * 60 * 60 * 1000);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    return days[tripD.getDay()] + ', ' + tripD.getDate() + ' ' + months[tripD.getMonth()] + ' ' + tripD.getFullYear();
+  }
+
+  var formattedDate = formatTripDate(s.date);
+
   document.getElementById('ref').textContent = ref;
   document.getElementById('lede').innerHTML =
-    'Your slot on the ' + R.esc(t.name) + ' is secured. Extraction protocols are on the way to ' +
+    'Your slot on the ' + R.esc(t.name) + ' is secured. Booking details and pickup instructions are on the way to ' +
     '<span class="text-brand font-bold">' + R.esc(lead.email || 'your inbox') + '</span>';
 
   function fact(label, value) {
@@ -93,26 +103,29 @@
       '<p class="font-bold text-sm uppercase">' + value + '</p></div>';
   }
   document.getElementById('facts').innerHTML =
-    fact('Target Date', R.esc(s.date || t.dates)) +
-    fact('Unit Strength', R.pad(s.pax) + (s.pax === 1 ? ' Person' : ' People')) +
-    fact('Extraction', R.esc(p.place)) +
-    fact('Reporting', R.esc(p.time));
+    fact('Date of Trip', R.esc(formattedDate)) +
+    fact('Team Size', R.pad(s.pax) + (s.pax === 1 ? ' Person' : ' People')) +
+    fact('Pickup Point', R.esc(p.place)) +
+    fact('Reporting Time', R.esc(p.time));
 
-  var dep = R.deposit(), bal = R.balance();
-  document.getElementById('money').innerHTML = dep > 0
+  var isDep = (s.payMode || 'deposit') === 'deposit' && (R.deposit() < R.total());
+  var paid = isDep ? R.deposit() : R.total();
+  var bal = isDep ? Math.max(0, R.total() - R.deposit()) : 0;
+
+  document.getElementById('money').innerHTML = paid > 0
     ? '<div class="flex justify-between items-center mb-2">' +
-        '<span class="text-[10px] font-black uppercase tracking-[0.2em] text-white/50">Authorized Deposit</span>' +
-        '<span class="text-2xl font-display font-black tracking-tighter text-accent tabular-nums">' + R.inr(dep) + '</span></div>' +
+        '<span class="text-[10px] font-black uppercase tracking-[0.2em] text-white/50">' + (isDep ? 'Authorized Token Deposit' : 'Amount Paid in Full') + '</span>' +
+        '<span class="text-2xl font-display font-black tracking-tighter text-accent tabular-nums">' + R.inr(paid) + '</span></div>' +
       '<div class="flex justify-between items-center text-white/70">' +
-        '<span class="text-[9px] font-black uppercase tracking-[0.2em]">Pending Balance</span>' +
-        '<span class="text-sm font-bold tabular-nums">' + R.inr(bal) + '</span></div>'
+        '<span class="text-[9px] font-black uppercase tracking-[0.2em]">' + (isDep ? 'Pending Balance' : 'Remaining Balance') + '</span>' +
+        '<span class="text-sm font-bold tabular-nums">' + (isDep ? R.inr(bal) : '₹0 (Settled)') + '</span></div>'
     : '<div class="flex justify-between items-center">' +
         '<span class="text-[10px] font-black uppercase tracking-[0.2em] text-white/50">Amount Due</span>' +
         '<span class="text-2xl font-display font-black tracking-tighter text-accent">Free</span></div>';
 
   document.getElementById('print').addEventListener('click', function () { window.print(); });
   document.getElementById('share').addEventListener('click', function () {
-    var msg = 'Booked the ' + t.name + ' with Roamly — ref ' + ref + ', ' + (s.date || t.dates);
+    var msg = 'Booked the ' + t.name + ' with Roamly — ref ' + ref + ', ' + formattedDate;
     if (navigator.share) {
       navigator.share({ title: 'Roamly booking', text: msg }).catch(function () {});
     } else {

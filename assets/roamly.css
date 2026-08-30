@@ -26,7 +26,6 @@ body { font-family: 'Inter', system-ui, sans-serif; background: #ffffff; color: 
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, .3);
 }
-.text-outline { -webkit-text-stroke: 1px #0a0a0a; color: transparent; }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -113,69 +112,93 @@ input.outline-none:focus-visible, select.outline-none:focus-visible, .outline-no
               transform var(--dur-reveal) var(--ease-out);
 }
 
-/* ---------- floating chrome ----------
-   The nav is a material, not a bar: it thickens as content passes
-   under it rather than sitting on a permanent hard divider. */
+/* ---------- modern glassmorphic navbar ----------
+   The nav is a translucent frosted glass capsule with subtle gradient,
+   crisp inner specular edge, and multi-layered depth shadow. */
 nav[data-nav] > div {
-  transition: background-color var(--dur-2) var(--ease-out),
-              box-shadow     var(--dur-2) var(--ease-out),
+  background: rgba(255, 255, 255, 0.72);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.62) 100%);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+              0 8px 32px -8px rgba(14, 20, 16, 0.12),
+              0 2px 8px -2px rgba(14, 20, 16, 0.05);
+  transition: background var(--dur-2) var(--ease-out),
+              border-color var(--dur-2) var(--ease-out),
+              box-shadow var(--dur-2) var(--ease-out),
               backdrop-filter var(--dur-2) var(--ease-out);
 }
 nav[data-nav].is-scrolled > div {
-  background: rgba(255, 255, 255, .82);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 8px 30px -12px rgba(14, 20, 16, .28);
+  background: rgba(255, 255, 255, 0.84);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.76) 100%);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 1),
+              0 14px 40px -12px rgba(14, 20, 16, 0.20),
+              0 4px 12px -2px rgba(14, 20, 16, 0.08);
 }
 
-/* ---------- navbar enlarge & shadow effect ---------- */
+/* ---------- navbar links & pills ---------- */
 .nav-pill-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* A nav item is seen dozens of times a day: no overshoot, and short
-     enough to read as instant. */
-  transition: transform var(--dur-1) var(--ease-out),
-              background-color var(--dur-1) var(--ease-out),
-              color var(--dur-1) var(--ease-out),
-              box-shadow var(--dur-1) var(--ease-out) !important;
-}
-.nav-pill-btn[aria-current="page"],
-.nav-pill-btn.bg-brand {
-  box-shadow: 0 12px 24px -2px rgba(26, 67, 50, 0.42), 0 6px 12px -2px rgba(26, 67, 50, 0.28) !important;
+  font-weight: 700;
+  color: #3d4a41;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  transition: all var(--dur-1) var(--ease-out) !important;
 }
 .nav-pill-btn:hover {
-  transform: scale(1.06) !important;
-  box-shadow: 0 8px 22px -2px rgba(0, 0, 0, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.06);
+  color: #0e1410;
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
   position: relative;
   z-index: 20;
 }
+.nav-pill-btn[aria-current="page"],
+.nav-pill-btn.is-active,
+.nav-pill-btn.bg-brand {
+  background: #1a4332 !important;
+  color: #d4f27a !important;
+  font-weight: 800;
+  border-color: transparent !important;
+  box-shadow: 0 8px 20px -3px rgba(26, 67, 50, 0.42), 0 4px 8px -2px rgba(26, 67, 50, 0.25) !important;
+}
 .nav-pill-btn[aria-current="page"]:hover,
+.nav-pill-btn.is-active:hover,
 .nav-pill-btn.bg-brand:hover {
-  transform: scale(1.06) !important;
-  box-shadow: 0 18px 32px -2px rgba(26, 67, 50, 0.50), 0 8px 16px -2px rgba(26, 67, 50, 0.35) !important;
+  transform: translateY(-1px) scale(1.02) !important;
+  box-shadow: 0 12px 26px -3px rgba(26, 67, 50, 0.50), 0 6px 12px -2px rgba(26, 67, 50, 0.30) !important;
 }
 .nav-pill-btn:active {
-  transform: scale(0.96) !important;
+  transform: scale(0.97) !important;
 }
 
 .nav-cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 24px -2px rgba(26, 67, 50, 0.42), 0 6px 12px -2px rgba(26, 67, 50, 0.28) !important;
-  transition: transform var(--dur-1) var(--ease-out),
-              background-color var(--dur-1) var(--ease-out),
-              box-shadow var(--dur-1) var(--ease-out) !important;
+  background: #1a4332;
+  color: #d4f27a;
+  box-shadow: 0 10px 22px -3px rgba(26, 67, 50, 0.45), 0 4px 8px -2px rgba(26, 67, 50, 0.25) !important;
+  transition: all var(--dur-1) var(--ease-out) !important;
 }
 .nav-cta-btn:hover {
-  transform: scale(1.06) !important;
-  box-shadow: 0 18px 32px -2px rgba(26, 67, 50, 0.50), 0 8px 16px -2px rgba(26, 67, 50, 0.35) !important;
+  transform: translateY(-1px) scale(1.03) !important;
+  box-shadow: 0 14px 28px -3px rgba(26, 67, 50, 0.55), 0 6px 14px -2px rgba(26, 67, 50, 0.35) !important;
   position: relative;
   z-index: 20;
 }
 .nav-cta-btn:active {
-  transform: scale(0.96) !important;
+  transform: scale(0.97) !important;
 }
 
 /* ---------- accordion details reset ---------- */
@@ -272,44 +295,59 @@ details summary::marker {
    announced correctly, selected state carried on the border. */
 .option-card {
   display: block; position: relative; cursor: pointer;
-  background: #ffffff; border: 1px solid #e5e7eb;
-  border-radius: 2.5rem; padding: 2rem 2.25rem;
-  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  background: #ffffff; border: 2px solid #e5e7eb;
+  border-radius: 2rem; padding: 1.5rem 1.75rem;
+  transition: all .2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
-.option-card:hover { border-color: #1a4332; }
+.option-card:hover {
+  border-color: rgba(26, 67, 50, 0.35);
+  background: rgba(248, 249, 250, 0.7);
+}
 .option-card input { position: absolute; opacity: 0; width: 0; height: 0; }
 .option-card input:focus-visible ~ .option-body {
-  outline: 3px solid #1a4332; outline-offset: 10px; border-radius: 1.5rem;
+  outline: 3px solid #1a4332; outline-offset: 6px; border-radius: 1.5rem;
 }
-.option-card:has(input:checked) {
-  border: 2px solid #1a4332;
-  padding: calc(2rem - 1px) calc(2.25rem - 1px);
-  box-shadow: 0 25px 50px -12px rgba(26, 67, 50, .12);
-}
-.option-card .option-check {
-  position: absolute; top: 2rem; right: 2.25rem;
-  width: 28px; height: 28px; border-radius: 999px;
-  border: 1px solid #e5e7eb; background: #f8f9fa;
-  display: grid; place-items: center; color: transparent;
-  transition: all .18s ease;
-}
-.option-card:has(input:checked) .option-check {
-  background: #1a4332; border-color: #1a4332; color: #d4f27a;
-}
-.option-card .option-tag {
-  position: absolute; top: -12px; left: 2.25rem;
-  background: #1a4332; color: #d4f27a;
-  padding: 5px 16px; border-radius: 999px;
-  font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase;
-}
-/* Fallback for browsers without :has() — JS mirrors the state onto the label. */
+.option-card:has(input:checked),
 .option-card.is-selected {
   border: 2px solid #1a4332;
-  padding: calc(2rem - 1px) calc(2.25rem - 1px);
-  box-shadow: 0 25px 50px -12px rgba(26, 67, 50, .12);
+  background: rgba(26, 67, 50, 0.04);
+  box-shadow: 0 12px 30px -10px rgba(26, 67, 50, .14);
 }
+.option-card .option-check {
+  position: absolute; top: 1.5rem; right: 1.75rem;
+  width: 24px; height: 24px; border-radius: 999px;
+  border: 2px solid #e5e7eb; background: #ffffff;
+  display: grid; place-items: center; color: transparent;
+  transition: all .2s ease;
+}
+.option-card:has(input:checked) .option-check,
 .option-card.is-selected .option-check {
   background: #1a4332; border-color: #1a4332; color: #d4f27a;
+  box-shadow: 0 2px 8px rgba(26, 67, 50, 0.25);
+}
+.option-card .option-tag {
+  position: absolute; top: -10px; left: 1.75rem;
+  background: #1a4332; color: #d4f27a;
+  padding: 4px 14px; border-radius: 999px;
+  font-size: 9px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase;
+  z-index: 10;
+}
+
+@media (max-width: 640px) {
+  .option-card {
+    padding: 1.25rem 1.25rem;
+    border-radius: 1.75rem;
+  }
+  .option-card .option-check {
+    top: 1.25rem; right: 1.25rem;
+    width: 22px; height: 22px;
+  }
+  .option-card .option-tag {
+    top: -10px; left: 1.25rem;
+    padding: 3px 12px;
+    font-size: 8.5px;
+  }
 }
 
 /* ---------- typography helpers ---------- */
@@ -323,18 +361,28 @@ details summary::marker {
 }
 .field-input {
   width: 100%; background: #ffffff;
-  border: 1px solid #e5e7eb; border-radius: 1rem;
-  padding: 1rem 1.5rem;
+  border: 1.5px solid #e5e7eb; border-radius: 1rem;
+  padding: 0.85rem 1.25rem; min-height: 48px;
   font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700;
-  color: #0a0a0a; transition: border-color .15s ease;
+  color: #0a0a0a; transition: border-color .15s ease, box-shadow .15s ease;
+  display: flex; align-items: center;
 }
 .field-input::placeholder { color: #666666; opacity: .5; font-weight: 500; }
-.field-input:focus { border-color: #1a4332; }
+.field-input:focus { border-color: #1a4332; outline: none; box-shadow: 0 0 0 3px rgba(26, 67, 50, 0.1); }
 .field-input:user-invalid { border-color: #a3341f; }
 select.field-input { appearance: none; cursor: pointer; text-transform: uppercase;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23666'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 1.25rem center; background-size: 16px;
   padding-right: 3rem;
+}
+
+@media (max-width: 640px) {
+  .field-input {
+    padding: 0.65rem 0.85rem;
+    font-size: 12.5px;
+    min-height: 44px;
+    border-radius: 0.85rem;
+  }
 }
 .field-error {
   display: none; margin: .5rem 0 0 .5rem;
@@ -345,8 +393,21 @@ select.field-input { appearance: none; cursor: pointer; text-transform: uppercas
 /* ---------- itinerary accordion ---------- */
 .stage-row {
   width: 100%; text-align: left;
-  background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 2.5rem;
-  padding: 2rem 2.5rem; transition: background .2s ease, color .2s ease;
+  background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 1.25rem;
+  padding: 1.15rem 1.35rem; transition: background .2s ease, color .2s ease, border-radius .2s ease, padding .2s ease;
+  cursor: pointer;
+}
+@media (min-width: 640px) {
+  .stage-row {
+    border-radius: 1.75rem;
+    padding: 1.5rem 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .stage-row {
+    border-radius: 2.25rem;
+    padding: 1.75rem 2.25rem;
+  }
 }
 .stage-row:hover { background: #1a4332; color: #d4f27a; }
 .stage-row .stage-plus { transition: transform .2s ease; }
@@ -397,14 +458,15 @@ select.field-input { appearance: none; cursor: pointer; text-transform: uppercas
 
 /* ---------- toast ---------- */
 #toast {
-  position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 140%);
+  position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 20px) scale(0.95);
+  opacity: 0; visibility: hidden; pointer-events: none;
   z-index: 250; background: #0a0a0a; color: #d4f27a;
-  padding: 16px 28px; border-radius: 999px;
+  padding: 14px 24px; border-radius: 999px;
   font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .5);
-  transition: transform .32s cubic-bezier(.2, .9, .3, 1);
+  transition: opacity .25s ease, transform .32s cubic-bezier(.2, .9, .3, 1), visibility .25s;
 }
-#toast.show { transform: translate(-50%, 0); }
+#toast.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
 
 /* ---------- unified design system components ---------- */
 .rm-btn {
@@ -526,6 +588,450 @@ select.field-input { appearance: none; cursor: pointer; text-transform: uppercas
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+
+
+/* ============================================================
+   MOBILE NAVIGATION  (responsive fix — Fork A1)
+
+   Below 768px the primary links used to be `hidden md:flex` with
+   no replacement, leaving 1 of 5 nav items reachable on a phone.
+   They now live in a drawer that opens from under the nav pill,
+   so it reads as the pill expanding rather than a separate panel
+   arriving from nowhere.
+   ============================================================ */
+
+/* ---------- desktop vs mobile nav visibility (independent of Tailwind JIT) ---------- */
+.nav-links-desktop {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+}
+.nav-desktop-only {
+  display: none !important;
+}
+.nav-mobile-only {
+  display: inline-flex !important;
+}
+
+@media (min-width: 768px) {
+  .nav-links-desktop {
+    display: flex !important;
+  }
+  .nav-desktop-only {
+    display: inline-flex !important;
+  }
+  .nav-mobile-only {
+    display: none !important;
+  }
+  .nav-drawer,
+  .nav-scrim {
+    display: none !important;
+  }
+}
+
+.nav-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #0e1410;
+  cursor: pointer; flex-shrink: 0;
+  box-shadow: 0 4px 12px -2px rgba(14, 20, 16, 0.08);
+  transition: all var(--dur-1) var(--ease-out);
+}
+.nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #ffffff;
+  box-shadow: 0 6px 16px -2px rgba(14, 20, 16, 0.12);
+}
+.nav-toggle[aria-expanded="true"] {
+  background: #1a4332;
+  color: #d4f27a;
+  border-color: #1a4332;
+  box-shadow: 0 8px 20px -3px rgba(26, 67, 50, 0.4);
+}
+
+/* scrim */
+.nav-scrim {
+  position: fixed; inset: 0; z-index: 110;
+  background: rgba(10, 16, 12, .35);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.nav-scrim.open { opacity: 1; pointer-events: auto; }
+
+/* panel — anchored under the nav pill, matching its inset and radius */
+.nav-drawer {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: calc(100% + 8px);
+  max-width: 36rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+              0 24px 48px -12px rgba(14, 20, 16, 0.25),
+              0 6px 16px -4px rgba(14, 20, 16, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(-8px) scale(.98);
+  transform-origin: top center;
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 120;
+  transition: opacity var(--dur-2) var(--ease-out),
+              transform var(--dur-2) var(--ease-out),
+              visibility 0s linear var(--dur-2);
+}
+.nav-drawer.open {
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  transition: opacity var(--dur-2) var(--ease-out),
+              transform var(--dur-2) var(--ease-out),
+              visibility 0s !important;
+}
+@media (min-width: 640px) {
+  .nav-drawer {
+    left: 1.5rem;
+    right: 1.5rem;
+    padding: 12px;
+    gap: 6px;
+  }
+}
+
+.drawer-link,
+.drawer-link[href="index.html"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 44px !important;
+  padding: 10px 16px !important;
+  border-radius: 999px !important;
+  font-family: 'Space Grotesk', 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .05em !important;
+  text-transform: uppercase !important;
+  color: #3d4a41 !important;
+  text-decoration: none !important;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid transparent;
+  transition: all var(--dur-1) var(--ease-out);
+}
+.drawer-link:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.95);
+  color: #0e1410 !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+}
+.drawer-link.is-active,
+.drawer-link.is-active[href="index.html"] {
+  background: #1a4332 !important;
+  color: #d4f27a !important;
+  font-family: 'Space Grotesk', 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 20px -3px rgba(26, 67, 50, 0.35);
+}
+.drawer-link .chev { opacity: .35; font-size: 11px; }
+.drawer-link.is-active .chev { opacity: .7; }
+
+.drawer-cta-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 44px !important;
+  padding: 10px 16px !important;
+  border-radius: 999px !important;
+  font-family: 'Space Grotesk', 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .05em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  background: rgba(255, 255, 255, 0.7);
+  color: #1a4332 !important;
+  border: 1px solid rgba(26, 67, 50, 0.22);
+  box-shadow: 0 4px 12px -2px rgba(14, 20, 16, 0.05);
+  transition: all var(--dur-1) var(--ease-out);
+  margin-top: 4px;
+}
+.drawer-cta-btn:hover {
+  background: #1a4332 !important;
+  color: #d4f27a !important;
+  border-color: #1a4332;
+  box-shadow: 0 8px 20px -3px rgba(26, 67, 50, 0.4);
+}
+
+body.nav-open { overflow: hidden; }
+
+/* ---------- compact checkout progress (responsive fix — issue 2) ----------
+   The 4-step indicator was `hidden md:flex`, so a phone showed 0 of 4
+   steps through the whole booking funnel. */
+.step-mini { display: flex; align-items: center; gap: 10px; }
+@media (min-width: 1024px) { .step-mini { display: none; } }
+.step-mini-dots { display: flex; gap: 5px; }
+.step-mini-dots i {
+  width: 7px; height: 7px; border-radius: 999px;
+  background: #e5e7eb; display: block;
+}
+.step-mini-dots i.done { background: #1a4332; }
+.step-mini-dots i.now  { background: #d4f27a; box-shadow: 0 0 0 2px #1a4332; }
+.step-mini-cap {
+  font-size: 10px; font-weight: 900; letter-spacing: .12em;
+  text-transform: uppercase; color: #1a4332; white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-drawer { transition: opacity var(--dur-2) var(--ease-out), visibility 0s linear var(--dur-2); transform: none; }
+  .nav-drawer.open { transform: none; }
+}
+
+/* Pill states as classes, so the active toggle never has to rewrite
+   className and clobber the responsive utilities alongside it. */
+.nav-pill-btn { color: #666666; font-weight: 700; }
+.nav-pill-btn:hover { background: rgba(0, 0, 0, .05); color: #0a0a0a; }
+.nav-pill-btn.is-active {
+  background: #1a4332; color: #d4f27a; font-weight: 900;
+}
+.nav-pill-btn.is-active:hover { background: #1a4332; color: #d4f27a; }
+
+/* The drawer takes focus as a dialog; it should not paint a ring for that. */
+.nav-drawer:focus { outline: none; }
+.nav-drawer:focus-visible { outline: 3px solid #1a4332; outline-offset: 2px; }
+
+/* ============================================================
+   MOBILE REFINEMENTS
+   Everything below is gated to small viewports. Desktop layout,
+   type scale and spacing are deliberately untouched.
+   ============================================================ */
+
+/* Tailwind's `tracking-tighter` (-.05em) eats the word gap on SMALL
+   uppercase strings — "1 Days Run" rendered as "1DAYSRUN". Scoped to the
+   small sizes where it actually bites; large display headings have plenty
+   of room and are left exactly as designed. */
+.tracking-tighter.uppercase.text-xs,
+.tracking-tighter.uppercase.text-sm,
+.tracking-tighter.uppercase.text-base { word-spacing: .16em; }
+
+@media (max-width: 480px) {
+
+  /* ---- hero headline ----
+     text-6xl is 60px, which at 375px leaves "BEYOND THE" touching the
+     edge. Scale with the viewport instead, landing back on 60px by 480. */
+  header h1.font-display {
+    font-size: clamp(2.35rem, 11.4vw, 3.75rem);
+    line-height: .95;
+  }
+
+  /* ---- hero caption ----
+     Compact, sleek single-row layout with generous rounded pill corners */
+  header .glass {
+    border-radius: 1.5rem !important;
+    padding: .75rem 1rem !important;
+  }
+  header .glass > .flex {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: .75rem !important;
+  }
+  header .glass .text-right { text-align: right !important; }
+
+  /* ---- section headings ----
+     Keep the outline/italic treatment, just stop it overshooting. */
+  section h2.font-display { font-size: clamp(2rem, 9.5vw, 3rem); }
+
+  /* ---- bento overlay cards ----
+     The large card's `.glass` panel IS the flex row (title on one side,
+     price + button on the other) and it was sized for a 500px-wide card.
+     At 327px the price and button collided. Stack every level of it. */
+  .trip-card .glass,
+  .trip-card .absolute > .flex.justify-between {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: .8rem;
+  }
+  /* the inner price + CTA pair */
+  .trip-card .glass .flex.items-end,
+  .trip-card .absolute .flex.items-end {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: .7rem;
+  }
+  .trip-card .glass .text-right,
+  .trip-card .absolute .text-right { text-align: left !important; }
+
+  /* CTA spans the panel instead of fighting the price for room */
+  .trip-card .glass a,
+  .trip-card .glass button,
+  .trip-card .glass span[class*="bg-"],
+  .trip-card .absolute span[class*="bg-"] {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Badges must not stretch — they are chips, not buttons.
+     This block used to sit inside the rule above (its closing brace was
+     missing), so CSS nesting resolved it to a selector matching nothing
+     and badges were stretching full-width. The offsets below are the ones
+     the markup actually uses: top-0/3/6/8. */
+  .trip-card .absolute.top-0 span,
+  .trip-card .absolute.top-3 span,
+  .trip-card .absolute.top-6 span,
+  .trip-card .absolute.top-8 span {
+    width: auto;
+    font-size: 8px !important;
+    padding: 3.5px 9px !important;
+    letter-spacing: 0.08em !important;
+  }
+}
+
+/* ---- touch targets ---- */
+#testimonialDots button {
+  min-height: 10px !important;
+  max-height: 10px !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Footer, breadcrumb and other inline link rows: give thumbs something
+   to land on without changing how they look. */
+@media (hover: none), (pointer: coarse) {
+  footer a, nav[aria-label="Breadcrumb"] a {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+}
+
+/* ============================================================
+   MOBILE SCALE
+   The layout fits at 375px, but it inherits desktop proportions:
+   500px card images, 48px radii, 68px-tall buttons, 96px section
+   padding. Everything below rescales those for small screens.
+   Desktop is untouched — the whole block is gated.
+
+   Floor: interactive elements stay at or above 44px.
+   ============================================================ */
+@media (max-width: 480px) {
+
+  /* ---- radii ----
+     A 48px corner on a 285px-wide card reads as a bubble. */
+  .trip-card .rounded-panel,
+  .trip-card [class*="rounded-[3rem]"],
+  .trip-card [class*="rounded-[2.5rem]"],
+  .trip-card [class*="rounded-[2rem]"] { border-radius: 1.5rem; }
+  .trip-card .glass { border-radius: 1.15rem; padding: .95rem 1.05rem; }
+
+  /* ---- bento imagery ----
+     500px of image is three-quarters of a phone viewport. 370px is the
+     floor: the overlay caption stacks to ~270px, so going lower pushes it
+     up into the badge sitting at the top of the frame. */
+  .trip-card [class*="h-[500px]"] { height: 370px; }
+
+  /* ---- card rhythm ---- */
+  #featured { gap: 1.15rem; }
+  .trip-card [class*="rounded-panel"] > .absolute.bottom-6 { left: .85rem; right: .85rem; bottom: .85rem; }
+  .trip-card .glass { gap: .55rem; }
+  /* the caption's own heading doesn't need desktop's step-up here */
+  .trip-card .glass h3, .trip-card .absolute h3 { font-size: 1.25rem; line-height: 1.2; }
+
+  /* ---- buttons ----
+     px-10/py-5/text-lg gives a 68px-tall control. Bring it to ~52px,
+     comfortably above the 44px touch floor. */
+  a[class*="py-5"], button[class*="py-5"],
+  a[class*="py-6"], button[class*="py-6"] { padding-top: .85rem; padding-bottom: .85rem; }
+  a[class*="px-10"], button[class*="px-10"],
+  a[class*="px-12"], button[class*="px-12"] { padding-left: 1.6rem; padding-right: 1.6rem; }
+  a[class*="text-lg"].font-black,  button[class*="text-lg"].font-black,
+  a[class*="text-xl"].font-black,  button[class*="text-xl"].font-black,
+  a[class*="text-xl"].font-extrabold, button[class*="text-xl"].font-extrabold { font-size: 1rem; }
+
+  /* ---- body copy ----
+     18px ledes are a desktop measure; 16px reads better in a 327px column. */
+  p[class*="text-lg"] { font-size: 1rem; line-height: 1.6; }
+
+  /* ---- section rhythm ----
+     96px of vertical padding on a phone is a lot of empty scrolling. */
+  section[class*="py-24"], section[class*="py-20"] {
+    padding-top: 2.6rem; padding-bottom: 2.6rem;
+  }
+  section[class*="py-16"] { padding-top: 2.2rem; padding-bottom: 2.2rem; }
+  header[class*="pt-32"] { padding-top: 6.5rem; }
+
+  /* ---- panels ----
+     Detail/checkout cards carry desktop padding into a 327px column. */
+  [class*="rounded-panel"][class*="p-10"],
+  [class*="rounded-[3rem]"][class*="p-10"],
+  [class*="rounded-[2.5rem]"][class*="p-10"] { padding: 1.25rem !important; border-radius: 1.5rem !important; }
+  [class*="rounded-[2.5rem]"][class*="p-8"] { padding: 1rem !important; border-radius: 1.25rem !important; }
+}
+
+/* Touch floor: scaling components down must not push real controls under 44px */
+@media (pointer: coarse) {
+  a[data-keep],
+  nav[data-nav] a,
+  nav[aria-label="Breadcrumb"] a,
+  footer a,
+  .rm-btn,
+  .rm-btn-primary,
+  .rm-btn-accent,
+  .rm-btn-trail {
+    min-height: 44px;
+  }
+}
+
+/* ---------- mobile nav bar fit ---------- */
+@media (max-width: 767px) {
+  nav[data-nav] > div {
+    padding: 7px 14px !important;
+  }
+  nav[data-nav] .nav-cta-btn {
+    display: none !important;
+  }
+  nav[data-nav] .nav-toggle {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 14px !important;
+    flex-shrink: 0 !important;
+  }
+  nav[data-nav] a.font-display[href="index.html"] {
+    font-size: 1.25rem !important;
+    gap: 8px !important;
+  }
+}
+
+/* Responsive utilities for bento cards on tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .trip-card .glass {
+    padding: 1rem !important;
+    border-radius: 1.5rem !important;
+  }
+  .trip-card h3 {
+    font-size: 1.25rem !important;
   }
 }
 
