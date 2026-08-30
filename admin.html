@@ -1526,7 +1526,10 @@
   <!-- Toast Alert -->
   <div id="toast"><i class="fa-solid fa-circle-check"></i> <span></span></div>
 
-  <script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/admin-config.js"></script>
+<script src="assets/admin-supabase.js"></script>
+<script>
     (function () {
       'use strict';
 
@@ -1556,14 +1559,17 @@
       }
 
       function api(method, path, body) {
-        var opts = { method: method, headers: { 'Content-Type': 'application/json' } };
-        if (body) opts.body = JSON.stringify(body);
-        return fetch(path, opts).then(function (res) {
-          return res.json().then(function (data) {
-            if (!res.ok) throw data;
-            return data;
+          // Supabase in production; the local server.js API when the shim
+          // is absent (offline dev). Same contract either way.
+          if (window.RoamlyBackend) return window.RoamlyBackend.api(method, path, body);
+          var opts = { method: method, headers: { 'Content-Type': 'application/json' } };
+          if (body) opts.body = JSON.stringify(body);
+          return fetch(path, opts).then(function (res) {
+            return res.json().then(function (data) {
+              if (!res.ok) throw data;
+              return data;
+            });
           });
-        });
       }
 
       /* ================= Navigation & Drill-Down Routing ================= */
@@ -1956,7 +1962,7 @@
 
       window.RoamlyDownloadPDF = function () {
         if (!activeTripId) return;
-        window.open('/api/trips/' + encodeURIComponent(activeTripId) + '/roster.pdf', '_blank');
+        (window.RoamlyBackend ? window.RoamlyBackend.openRosterPdf(activeTripId) : window.open('/api/trips/' + encodeURIComponent(activeTripId) + '/roster.pdf', '_blank'));
       };
 
       window.RoamlyNewTrip = function () {

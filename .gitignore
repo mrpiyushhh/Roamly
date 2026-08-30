@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.local
+.vercel/
+.DS_Store
+
+# Generated at build time from Supabase
+assets/data.js
+
+# Local-only server state
+assets/backups/

@@ -1,0 +1,16 @@
+{
+  "name": "roamly",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Roamly — trekking site. Static front end on Vercel, data in Supabase.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "build": "node --env-file-if-exists=.env.local scripts/build-data.mjs",
+    "seed": "node --env-file-if-exists=.env.local scripts/seed-supabase.mjs",
+    "seed:dry": "node --env-file-if-exists=.env.local scripts/seed-supabase.mjs --dry-run"
+  }
+}
