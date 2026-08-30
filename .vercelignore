@@ -1,0 +1,19 @@
+# Vercel must NOT see server.js. It is the local dev server, and its presence
+# at the repo root makes Vercel run this as a Node app — the function then
+# handles every request and answers 404 for any file its tracer could not
+# statically detect (CSS, JS, images). The site is static; Vercel serves the
+# files directly.
+server.js
+
+# Local-only state and docs — no reason to ship them.
+assets/backups/
+assets/data.original.js
+*.md
+!DEPLOY.md
+
+# Internal tooling, not part of the site
+design-system.html
+supabase/
+
+# scripts/ is deliberately NOT ignored: vercel.json's buildCommand runs
+# scripts/build-data.mjs to generate assets/data.js from Supabase.
