@@ -449,10 +449,34 @@ function body(req) {
 const authed = req => !TOKEN || (req.headers['x-admin-token'] || '') === TOKEN;
 
 function serveStatic(req, res, urlPath) {
-  let rel = decodeURIComponent(urlPath.split('?')[0]);
-  if (rel === '/')      rel = '/index.html';
-  if (rel === '/admin') rel = '/admin.html';
-  if (rel === '/login' || rel === '/admin-login') rel = '/admin-login.html';
+  let [rawPath, qs] = urlPath.split('?');
+  let rel = decodeURIComponent(rawPath);
+  let query = qs ? '?' + qs : '';
+
+  // Redirect /index.html to /
+  if (rel === '/index.html') {
+    res.writeHead(308, { 'Location': '/' + query, 'Cache-Control': 'no-store' });
+    return res.end();
+  }
+
+  // Redirect direct .html requests to clean URLs (e.g. /trips.html -> /trips)
+  if (rel.endsWith('.html') && rel !== '/login.html' && rel !== '/admin-login.html') {
+    let clean = rel.replace(/\.html$/, '');
+    res.writeHead(308, { 'Location': clean + query, 'Cache-Control': 'no-store' });
+    return res.end();
+  }
+
+  if (rel === '/')                                rel = '/index.html';
+  else if (rel === '/admin')                      rel = '/admin.html';
+  else if (rel === '/login' || rel === '/admin-login') rel = '/admin-login.html';
+  else if (!path.extname(rel)) {
+    // Check if a matching .html file exists for this clean URL
+    const possibleHtml = path.join(ROOT, rel + '.html');
+    if (fs.existsSync(possibleHtml) && fs.statSync(possibleHtml).isFile()) {
+      rel = rel + '.html';
+    }
+  }
+
   const file = path.join(ROOT, rel);
   if (!file.startsWith(ROOT + path.sep)) return json(res, 403, { error:'forbidden' });
   fs.stat(file, (err, st) => {

@@ -88,8 +88,17 @@
     return s;
   }
 
+  function cleanPath(p) {
+    if (!p) return '/';
+    p = p.replace(/\.html$/, '');
+    if (p === 'index' || p === '/index') return '/';
+    return p;
+  }
+
   function url(page) {
-    return page + '?s=' + encode();
+    var p = cleanPath(page);
+    var sep = p.indexOf('?') > -1 ? '&' : '?';
+    return p + sep + 's=' + encode();
   }
 
   function go(page) { w.location.href = url(page); }
@@ -140,25 +149,23 @@
 
   /* ---------- nav ---------- */
   var NAV_LINKS = [
-    { id: 'home',     label: 'Home',           href: 'index.html' },
-    { id: 'upcoming', label: 'Upcoming Trips', href: 'index.html#upcoming' },
-    { id: 'about',    label: 'About Us',       href: 'index.html#about' },
-    { id: 'faqs',     label: 'FAQs',           href: 'index.html#faqs' }
+    { id: 'home',     label: 'Home',           href: '/' },
+    { id: 'upcoming', label: 'Upcoming Trips', href: '/#upcoming' },
+    { id: 'about',    label: 'About Us',       href: '/#about' },
+    { id: 'faqs',     label: 'FAQs',           href: '/#faqs' }
   ];
 
   var STEPS = [
-    { n: '01', cap: 'Roster',     page: 'book-1.html' },
-    { n: '02', cap: 'Intel',      page: 'book-2.html' },
-    { n: '03', cap: 'Extraction', page: 'book-3.html' },
-    { n: '04', cap: 'Secure',     page: 'book-4.html' }
+    { n: '01', cap: 'Roster',     page: 'book-1' },
+    { n: '02', cap: 'Intel',      page: 'book-2' },
+    { n: '03', cap: 'Extraction', page: 'book-3' },
+    { n: '04', cap: 'Secure',     page: 'book-4' }
   ];
 
   function logoMark(small) {
     var box = small ? 'w-6 h-6 rounded text-[10px]' : 'w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs sm:text-sm';
     var size = small ? 'text-lg sm:text-xl' : 'text-lg sm:text-2xl';
-    // Wordmark is its own element so narrow viewports can drop it and keep
-    // the R mark — otherwise the logo, CTA and menu button don't fit at 320.
-    return '<a href="index.html" class="font-display font-extrabold ' + size +
+    return '<a href="/" class="font-display font-extrabold ' + size +
            ' tracking-tighter flex items-center gap-1.5 sm:gap-2 shrink-0">' +
            '<span class="bg-brand text-accent ' + box +
            ' flex items-center justify-center italic font-black shrink-0">R</span>' +
@@ -166,9 +173,6 @@
   }
 
   function navMarketing(active) {
-    // Active state is a single toggled class, never a className rewrite —
-    // rewriting it dropped the responsive utilities (`hidden md:inline-flex`)
-    // and un-hid desktop-only pills on phones.
     var PILL = 'nav-pill-btn px-4.5 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider';
     var links = NAV_LINKS.map(function (l) {
       var on = l.id === active;
@@ -177,17 +181,15 @@
              l.label + '</a>';
     }).join('');
 
-    // Same links again for the mobile drawer. Kept as separate nodes rather
-    // than moved, so the desktop row never has to be re-parented on resize.
     var drawerLinks = NAV_LINKS.concat([
-      { id: 'account', label: 'My Trip', href: 'my-trip.html', tag: 'Soon' }
+      { id: 'account', label: 'My Trip', href: 'my-trip', tag: 'Soon' }
     ]).map(function (l) {
       var tag = l.tag ? '<span class="ml-2 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-accent text-brand inline-block">' + l.tag + '</span>' : '';
       return '<a href="' + l.href + '" data-nav-id="' + l.id + '" class="drawer-link' +
         (l.id === active ? ' is-active' : '') + '"><span>' + l.label + tag + '</span>' +
         '<i class="fa-solid fa-chevron-right chev" aria-hidden="true"></i></a>';
     }).join('') +
-    '<a href="trips.html" class="drawer-cta-btn">' +
+    '<a href="trips" class="drawer-cta-btn">' +
       '<span>Book Now</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>';
 
     return '<div class="max-w-7xl mx-auto glass rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center ' +
@@ -198,8 +200,8 @@
           '</div>' +
         '</div>' +
         '<div class="flex items-center gap-3">' +
-          '<a href="my-trip.html" data-nav-id="account" class="nav-pill-btn nav-desktop-only px-4 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider text-muted hover:text-ink hover:bg-black/5 font-bold inline-flex items-center gap-1.5"><span>My Trip</span><span class="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-accent text-brand">Soon</span></a>' +
-          '<a href="trips.html" class="nav-cta-btn nav-desktop-only bg-brand text-accent px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs font-black uppercase tracking-widest shadow-brand whitespace-nowrap">Book Now</a>' +
+          '<a href="my-trip" data-nav-id="account" class="nav-pill-btn nav-desktop-only px-4 sm:px-5 py-2 rounded-full text-[12px] uppercase tracking-wider text-muted hover:text-ink hover:bg-black/5 font-bold inline-flex items-center gap-1.5"><span>My Trip</span><span class="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-accent text-brand">Soon</span></a>' +
+          '<a href="trips" class="nav-cta-btn nav-desktop-only bg-brand text-accent px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs font-black uppercase tracking-widest shadow-brand whitespace-nowrap">Book Now</a>' +
           '<button type="button" class="nav-toggle nav-mobile-only" id="navToggle" aria-expanded="false" ' +
             'aria-controls="navDrawer" aria-label="Open menu">' +
             '<i class="fa-solid fa-bars" aria-hidden="true"></i></button>' +
@@ -405,7 +407,7 @@
       '<p class="text-[10px] font-bold uppercase tracking-widest text-muted">' +
         '© 2026 Piyush Yadav. All rights reserved.</p>' +
       '<div class="flex flex-wrap justify-center gap-6 sm:gap-8 text-[10px] font-bold uppercase tracking-widest text-muted">' +
-        '<a href="index.html" class="hover:text-brand">Back to Base</a>' +
+        '<a href="/" class="hover:text-brand">Back to Base</a>' +
         '<a href="#" class="hover:text-brand">Privacy</a>' +
         '<a href="#" class="hover:text-brand">Terms</a>' +
         '<a href="#" class="hover:text-brand">Cancellations</a>' +
@@ -673,16 +675,16 @@
       var link = el.closest('a');
       if (link) {
         var href = link.getAttribute('href') || '';
-        var currentPath = (w.location.pathname || '').split('/').pop() || 'index.html';
-        var isHome = currentPath === '' || currentPath === 'index.html' || currentPath === '/';
+        var rawPath = (w.location.pathname || '').replace(/\/$/, '').split('/').pop() || '';
+        var isHome = rawPath === '' || rawPath === 'index' || rawPath === 'index.html';
 
-        var isHomeTarget = href === 'index.html' || href === 'index.html#hero' || href === '#hero' || href === '#top' || href === '#' || href === './' || href === '/' || link.getAttribute('data-nav-id') === 'home';
+        var isHomeTarget = href === '/' || href === '/#hero' || href === 'index.html' || href === 'index.html#hero' || href === '#hero' || href === '#top' || href === '#' || href === './' || link.getAttribute('data-nav-id') === 'home';
 
         // When on Home page and clicking Home link or Logo: smooth scroll to top
         if (isHome && isHomeTarget) {
           e.preventDefault();
           if (w.history && w.history.replaceState) {
-            w.history.replaceState(null, '', 'index.html');
+            w.history.replaceState(null, '', '/');
           }
           setTimeout(function () {
             w.scrollTo({
@@ -697,9 +699,10 @@
         var hashIndex = href.indexOf('#');
         if (hashIndex !== -1) {
           var targetHash = href.slice(hashIndex);
-          var targetPath = href.slice(0, hashIndex) || 'index.html';
+          var targetPath = href.slice(0, hashIndex);
+          var isTargetHome = targetPath === '' || targetPath === '/' || targetPath === 'index.html' || targetPath === 'index' || targetPath === './';
 
-          if (isHome && (targetPath === 'index.html' || targetPath === '' || targetPath === './')) {
+          if (isHome && isTargetHome) {
             var targetEl = d.querySelector(targetHash);
             if (targetEl) {
               e.preventDefault();
@@ -720,7 +723,7 @@
       if (trip) {
         e.preventDefault();
         set({ trip: trip.getAttribute('data-trip') });
-        go('trip.html');
+        go('trip');
         return;
       }
       var keep = el.closest('[data-keep]');
@@ -746,13 +749,13 @@
     function updateNavActiveState() {
       var marketingNav = d.querySelector('[data-nav="marketing"]');
       if (!marketingNav) return;
-      var currentPath = (w.location.pathname || '').split('/').pop() || 'index.html';
+      var rawPath = (w.location.pathname || '').replace(/\/$/, '').split('/').pop() || '';
       var currentHash = (w.location.hash || '').replace('#', '');
 
       var activeId = 'home';
-      if (currentPath.indexOf('trips.html') !== -1 || currentPath.indexOf('trip.html') !== -1) {
+      if (rawPath === 'trips' || rawPath === 'trips.html' || rawPath === 'trip' || rawPath === 'trip.html') {
         activeId = 'upcoming';
-      } else if (currentPath.indexOf('my-trip.html') !== -1) {
+      } else if (rawPath === 'my-trip' || rawPath === 'my-trip.html') {
         activeId = 'account';
       } else {
         var scrollY = w.scrollY || d.documentElement.scrollTop || 0;
@@ -764,7 +767,7 @@
         if (scrollY < 180) {
           activeId = 'home';
           if (w.history && w.history.replaceState && currentHash) {
-            w.history.replaceState(null, '', currentPath || 'index.html');
+            w.history.replaceState(null, '', '/');
           }
         } else if (faqsSec && scrollPos >= getElementTop(faqsSec)) {
           activeId = 'faqs';

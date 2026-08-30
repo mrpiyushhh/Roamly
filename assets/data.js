@@ -1,9 +1,9 @@
 /* ============================================================
    Roamly — content
    GENERATED FILE — do not edit by hand.
-   Built from Supabase by scripts/build-data.mjs.
+   Built from assets/data.json (local fallback) by scripts/build-data.mjs.
    Member and expense records are intentionally NOT included here.
-   Generated: 2026-08-30T07:38:48.337Z
+   Generated: 2026-08-30T08:35:00.485Z
    ============================================================ */
 (function (w) {
   'use strict';
@@ -43,31 +43,29 @@
       "rating": 4.9,
       "reviews": 428,
       "slots": 10,
-      "status": "active",
-      "startDate": "2026-09-05",
-      "endDate": "2026-09-06",
       "badges": [
         "Highest Peak (1,646m)",
         "Sunrise Batch"
       ],
+      "featured": "tall",
       "hero": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
       "heroAlt": "Golden sunrise bursting over Kalsubai mountain range and sea of clouds",
       "gallery": [
         {
-          "alt": "Mountain ridge illuminated at dawn",
-          "src": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Mountain ridge illuminated at dawn"
         },
         {
-          "alt": "Night camp under stars before summit push",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Night camp under stars before summit push"
         },
         {
-          "alt": "Lush green valleys seen from summit",
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Lush green valleys seen from summit"
         },
         {
-          "alt": "Trekkers climbing mountain trail",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Trekkers climbing mountain trail"
         }
       ],
       "blurb": [
@@ -77,57 +75,59 @@
       "dates": "Every Friday & Saturday Night",
       "itinerary": [
         {
-          "d": "Pickup from Pune/Mumbai late evening. Headlamp distribution and safety briefing during the scenic night drive.",
-          "t": "Night Journey from City"
+          "t": "Night Journey from City",
+          "d": "Pickup from Pune/Mumbai late evening. Headlamp distribution and safety briefing during the scenic night drive."
         },
         {
-          "d": "Arrive at Bari village by 03:00 AM. Begin guided headlamp ascent up the 4 steel ladder sections.",
-          "t": "Bari Village Base & Midnight Climb"
+          "t": "Bari Village Base & Midnight Climb",
+          "d": "Arrive at Bari village by 03:00 AM. Begin guided headlamp ascent up the 4 steel ladder sections."
         },
         {
-          "d": "Reach summit temple by 06:15 AM. Witness sunrise above the Sahyadri cloud inversions.",
-          "t": "360° Sunrise from Maharashtra’s Highest Peak"
+          "t": "360° Sunrise from Maharashtra’s Highest Peak",
+          "d": "Reach summit temple by 06:15 AM. Witness sunrise above the Sahyadri cloud inversions."
         },
         {
-          "d": "Descend to Bari by 11:00 AM for steaming hot village lunch (Pithla Bhakri & Thecha). Return to city by 17:00.",
-          "t": "Descent & Authentic Village Feast"
+          "t": "Descent & Authentic Village Feast",
+          "d": "Descend to Bari by 11:00 AM for steaming hot village lunch (Pithla Bhakri & Thecha). Return to city by 17:00."
         }
       ],
       "guide": {
-        "bio": "Over 120 guided Kalsubai night treks. Wilderness First Aid certified with deep knowledge of Sahyadri flora and weather patterns.",
         "name": "Sagar More",
         "role": "Senior Alpine Lead",
-        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Standing above the clouds at 5,400 feet changes how you see the world.\""
+        "bio": "Over 120 guided Kalsubai night treks. Wilderness First Aid certified with deep knowledge of Sahyadri flora and weather patterns.",
+        "quote": "\"Standing above the clouds at 5,400 feet changes how you see the world.\"",
+        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-wakad",
+          "place": "Wakad Bridge, Pune",
           "note": "Near Ginger Hotel",
           "time": "09:30 PM",
-          "place": "Wakad Bridge, Pune",
           "recommended": true
         },
         {
           "id": "pune-shivaji",
+          "place": "Shivajinagar, Pune",
           "note": "Opposite Bank of Maharashtra",
-          "time": "10:00 PM",
-          "place": "Shivajinagar, Pune"
+          "time": "10:00 PM"
         },
         {
           "id": "mumbai-dadar",
+          "place": "Dadar TT, Mumbai",
           "note": "Pritam Hotel Circle",
-          "time": "09:00 PM",
-          "place": "Dadar TT, Mumbai"
+          "time": "09:00 PM"
         },
         {
           "id": "mumbai-thane",
+          "place": "Teen Hath Naka, Thane",
           "note": "Flyover junction",
-          "time": "10:15 PM",
-          "place": "Teen Hath Naka, Thane"
+          "time": "10:15 PM"
         }
       ],
-      "featured": "tall"
+      "status": "active",
+      "startDate": "2026-09-05",
+      "endDate": "2026-09-06"
     },
     {
       "id": "devkund",
@@ -143,9 +143,6 @@
       "rating": 4.8,
       "reviews": 389,
       "slots": 12,
-      "status": "active",
-      "startDate": "2026-09-12",
-      "endDate": "2026-09-12",
       "badges": [
         "Top Monsoon Trek",
         "Crystal Pool"
@@ -154,20 +151,20 @@
       "heroAlt": "Turquoise natural plunge pool fed by a majestic 300ft waterfall surrounded by dark mossy cliffs",
       "gallery": [
         {
-          "alt": "Dense river trail along Bhira backwaters",
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Dense river trail along Bhira backwaters"
         },
         {
-          "alt": "Rushing stream crossing in deep woods",
-          "src": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Rushing stream crossing in deep woods"
         },
         {
-          "alt": "Hikers navigating jungle path in Tamhini Ghat",
-          "src": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Hikers navigating jungle path in Tamhini Ghat"
         },
         {
-          "alt": "Sunlight filtering through dense jungle canopy",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sunlight filtering through dense jungle canopy"
         }
       ],
       "blurb": [
@@ -177,50 +174,53 @@
       "dates": "Every Saturday & Sunday",
       "itinerary": [
         {
-          "d": "Depart from Pune/Mumbai at 05:30 AM. Breakfast and chai en route near Mulshi lake.",
-          "t": "Early Morning City Departure"
+          "t": "Early Morning City Departure",
+          "d": "Depart from Pune/Mumbai at 05:30 AM. Breakfast and chai en route near Mulshi lake."
         },
         {
-          "d": "Reach Bhira village basecamp by 08:30 AM. Local forest permits and trail briefing.",
-          "t": "Bhira Dam Basecamp to Jungle Trail"
+          "t": "Bhira Dam Basecamp to Jungle Trail",
+          "d": "Reach Bhira village basecamp by 08:30 AM. Local forest permits and trail briefing."
         },
         {
-          "d": "Trek through streams and boulders. Spend 2 hours by the turquoise pool enjoying the spray.",
-          "t": "Devkund Waterfall Plunge Pool"
+          "t": "Devkund Waterfall Plunge Pool",
+          "d": "Trek through streams and boulders. Spend 2 hours by the turquoise pool enjoying the spray."
         },
         {
-          "d": "Hike back to basecamp for freshly cooked village lunch. Return to city by 19:30.",
-          "t": "Return Trail & Local Maharashtrian Lunch"
+          "t": "Return Trail & Local Maharashtrian Lunch",
+          "d": "Hike back to basecamp for freshly cooked village lunch. Return to city by 19:30."
         }
       ],
       "guide": {
-        "bio": "Tamhini Ghat native with 7 years leading jungle stream navigations and aquatic safety protocols.",
         "name": "Pratik Deshmukh",
         "role": "Forest Trail Specialist",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"The color of the water when sunlight hits Devkund is like nothing else in India.\""
+        "bio": "Tamhini Ghat native with 7 years leading jungle stream navigations and aquatic safety protocols.",
+        "quote": "\"The color of the water when sunlight hits Devkund is like nothing else in India.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-chandani",
+          "place": "Chandani Chowk, Pune",
           "note": "Opposite Paud Road bus stop",
           "time": "05:30 AM",
-          "place": "Chandani Chowk, Pune",
           "recommended": true
         },
         {
           "id": "pune-wakad",
+          "place": "Wakad Bridge, Pune",
           "note": "Ginger Hotel highway exit",
-          "time": "05:45 AM",
-          "place": "Wakad Bridge, Pune"
+          "time": "05:45 AM"
         },
         {
           "id": "mumbai-vashi",
+          "place": "Vashi Old Toll Plaza",
           "note": "Near Vashi Plaza flyover",
-          "time": "05:00 AM",
-          "place": "Vashi Old Toll Plaza"
+          "time": "05:00 AM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-12"
     },
     {
       "id": "andharban",
@@ -236,9 +236,6 @@
       "rating": 4.9,
       "reviews": 341,
       "slots": 8,
-      "status": "active",
-      "startDate": "2026-09-19",
-      "endDate": "2026-09-19",
       "badges": [
         "Dense Mist Jungle",
         "13km Descent"
@@ -247,20 +244,20 @@
       "heroAlt": "Ethereal dense fog winding through moss-covered ancient forest trees in Andharban",
       "gallery": [
         {
-          "alt": "Rushing stream crossing in deep woods",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Rushing stream crossing in deep woods"
         },
         {
-          "alt": "Misty mountain ridge overlooking valley",
-          "src": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Misty mountain ridge overlooking valley"
         },
         {
-          "alt": "Lush green moss covering ancient stone steps",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Lush green moss covering ancient stone steps"
         },
         {
-          "alt": "Campfire and forest clearing",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Campfire and forest clearing"
         }
       ],
       "blurb": [
@@ -270,50 +267,53 @@
       "dates": "Every Weekend (Monsoon & Winter)",
       "itinerary": [
         {
-          "d": "Start from Pimpri village trailhead at 08:30 AM after breakfast. Enter the misty high-canopy forest.",
-          "t": "Pimpri Trailhead Start"
+          "t": "Pimpri Trailhead Start",
+          "d": "Start from Pimpri village trailhead at 08:30 AM after breakfast. Enter the misty high-canopy forest."
         },
         {
-          "d": "Traverse cascading waterfalls and the intermediate tribal village of Hirdi on the plateau.",
-          "t": "Hirdi Plateau & Waterfalls"
+          "t": "Hirdi Plateau & Waterfalls",
+          "d": "Traverse cascading waterfalls and the intermediate tribal village of Hirdi on the plateau."
         },
         {
-          "d": "Stunning viewpoint overlooking the roaring Kundalika river and Bhira hydro power station.",
-          "t": "Kundalika Valley Viewpoint"
+          "t": "Kundalika Valley Viewpoint",
+          "d": "Stunning viewpoint overlooking the roaring Kundalika river and Bhira hydro power station."
         },
         {
-          "d": "Reach Bhira dam by 15:30. Enjoy a hot Konkani-style lunch before heading back to the city.",
-          "t": "Bhira Dam & Hot Lunch"
+          "t": "Bhira Dam & Hot Lunch",
+          "d": "Reach Bhira dam by 15:30. Enjoy a hot Konkani-style lunch before heading back to the city."
         }
       ],
       "guide": {
-        "bio": "Environmental educator with 5+ years navigating Western Ghats biodiversity trails. Expert in local orchid and bird identification.",
         "name": "Kavita Jadhav",
         "role": "Botanist & Forest Guide",
-        "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Walking through Andharban in the mist feels like stepping back 10,000 years.\""
+        "bio": "Environmental educator with 5+ years navigating Western Ghats biodiversity trails. Expert in local orchid and bird identification.",
+        "quote": "\"Walking through Andharban in the mist feels like stepping back 10,000 years.\"",
+        "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-chandani",
+          "place": "Chandani Chowk, Pune",
           "note": "Near Auto Stand",
           "time": "05:30 AM",
-          "place": "Chandani Chowk, Pune",
           "recommended": true
         },
         {
           "id": "pune-wakad",
+          "place": "Wakad Bridge, Pune",
           "note": "Near Ginger Hotel",
-          "time": "06:00 AM",
-          "place": "Wakad Bridge, Pune"
+          "time": "06:00 AM"
         },
         {
           "id": "mumbai-dadar",
+          "place": "Dadar TT Circle",
           "note": "Opposite Swami Narayan Gate",
-          "time": "04:30 AM",
-          "place": "Dadar TT Circle"
+          "time": "04:30 AM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19"
     },
     {
       "id": "rajgad",
@@ -329,9 +329,6 @@
       "rating": 4.9,
       "reviews": 265,
       "slots": 8,
-      "status": "active",
-      "startDate": "2026-09-26",
-      "endDate": "2026-09-27",
       "badges": [
         "King of Forts",
         "Historical Trail"
@@ -340,20 +337,20 @@
       "heroAlt": "Majestic ancient stone ramparts and watchtowers of Rajgad Fort winding across the mountain ridge",
       "gallery": [
         {
-          "alt": "Ancient stone fortress architecture",
-          "src": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Ancient stone fortress architecture"
         },
         {
-          "alt": "Historic citadel walls and bastions",
-          "src": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Historic citadel walls and bastions"
         },
         {
-          "alt": "Palace ruins and scenic viewpoint",
-          "src": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Palace ruins and scenic viewpoint"
         },
         {
-          "alt": "Panoramic views across the Sahyadri mountains",
-          "src": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Panoramic views across the Sahyadri mountains"
         }
       ],
       "blurb": [
@@ -363,44 +360,47 @@
       "dates": "Every Saturday & Sunday",
       "itinerary": [
         {
-          "d": "Depart Pune at 06:00 AM. Reach Gunjavane village and begin the steady 3-hour climb via Chor Darwaza.",
-          "t": "Gunjavane Basecamp Ascent"
+          "t": "Gunjavane Basecamp Ascent",
+          "d": "Depart Pune at 06:00 AM. Reach Gunjavane village and begin the steady 3-hour climb via Chor Darwaza."
         },
         {
-          "d": "Explore Padmavati temple, lake, and granary structures on the expansive plateau.",
-          "t": "Padmavati Machi & Royal Lake"
+          "t": "Padmavati Machi & Royal Lake",
+          "d": "Explore Padmavati temple, lake, and granary structures on the expansive plateau."
         },
         {
-          "d": "Climb the steep rock-cut stairs with steel safety railings to the supreme throne viewpoint.",
-          "t": "Balekilla Citadel Vertical Push"
+          "t": "Balekilla Citadel Vertical Push",
+          "d": "Climb the steep rock-cut stairs with steel safety railings to the supreme throne viewpoint."
         },
         {
-          "d": "Walk along the massive fortifications of Suvela Machi before descending to basecamp for lunch.",
-          "t": "Suvela Machi & Return"
+          "t": "Suvela Machi & Return",
+          "d": "Walk along the massive fortifications of Suvela Machi before descending to basecamp for lunch."
         }
       ],
       "guide": {
-        "bio": "Heritage trek leader with 60+ Rajgad and Torna expeditions. Passionate military historian and mountaineer.",
         "name": "Rohan Gaikwad",
         "role": "Maratha History & Trail Guide",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Rajgad is an architectural masterpiece. Every bastion tells a story of unmatched courage.\""
+        "bio": "Heritage trek leader with 60+ Rajgad and Torna expeditions. Passionate military historian and mountaineer.",
+        "quote": "\"Rajgad is an architectural masterpiece. Every bastion tells a story of unmatched courage.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-swargate",
+          "place": "Swargate, Pune",
           "note": "Opposite Bus Depot",
           "time": "06:00 AM",
-          "place": "Swargate, Pune",
           "recommended": true
         },
         {
           "id": "pune-katraj",
+          "place": "Katraj Wonder City",
           "note": "Highway flyover",
-          "time": "06:30 AM",
-          "place": "Katraj Wonder City"
+          "time": "06:30 AM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-26",
+      "endDate": "2026-09-27"
     },
     {
       "id": "bhandardara",
@@ -416,9 +416,6 @@
       "rating": 4.8,
       "reviews": 289,
       "slots": 14,
-      "status": "upcoming",
-      "startDate": "2026-10-03",
-      "endDate": "2026-10-04",
       "badges": [
         "Lakeside Tents",
         "BBQ & Bonfire"
@@ -427,20 +424,20 @@
       "heroAlt": "Illuminated cozy camping tents on the pristine grassy banks of Bhandardara Lake under thousands of stars",
       "gallery": [
         {
-          "alt": "Tents pitched on lakeside meadow",
-          "src": "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Tents pitched on lakeside meadow"
         },
         {
-          "alt": "Campfire gathering with live acoustic music",
-          "src": "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Campfire gathering with live acoustic music"
         },
         {
-          "alt": "Stargazing by the lake edge",
-          "src": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Stargazing by the lake edge"
         },
         {
-          "alt": "Early morning calm reflections on water",
-          "src": "https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Early morning calm reflections on water"
         }
       ],
       "blurb": [
@@ -450,44 +447,47 @@
       "dates": "Every Friday & Saturday Evening",
       "itinerary": [
         {
-          "d": "Arrive at Bhandardara lakeside by 16:00. Welcome tea, snacks, and tent allotment right on the water edge.",
-          "t": "Campsite Check-in & Sunset Tea"
+          "t": "Campsite Check-in & Sunset Tea",
+          "d": "Arrive at Bhandardara lakeside by 16:00. Welcome tea, snacks, and tent allotment right on the water edge."
         },
         {
-          "d": "Enjoy peaceful boat ride across Arthur Lake. Evening BBQ starters and acoustic campfire music.",
-          "t": "Lake Boating & Golden Hour BBQ"
+          "t": "Lake Boating & Golden Hour BBQ",
+          "d": "Enjoy peaceful boat ride across Arthur Lake. Evening BBQ starters and acoustic campfire music."
         },
         {
-          "d": "Telescope-guided constellations session under low-light Bortle 3 night skies. Authentic buffet dinner.",
-          "t": "Stargazing & Midnight Campfire"
+          "t": "Stargazing & Midnight Campfire",
+          "d": "Telescope-guided constellations session under low-light Bortle 3 night skies. Authentic buffet dinner."
         },
         {
-          "d": "Wake up to cool lake breeze. Breakfast, optional visit to 1,000-year-old Amruteshwar temple, check-out by 11:00.",
-          "t": "Sunrise Boating & Amruteshwar Temple Visit"
+          "t": "Sunrise Boating & Amruteshwar Temple Visit",
+          "d": "Wake up to cool lake breeze. Breakfast, optional visit to 1,000-year-old Amruteshwar temple, check-out by 11:00."
         }
       ],
       "guide": {
-        "bio": "Dark-sky enthusiast and camping lead with over 8 years managing sustainable eco-campsites across Maharashtra.",
         "name": "Aditya Kulkarni",
         "role": "Camp Master & Astronomer",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Turn off your screens, sit by the water, and let the stars do the talking.\""
+        "bio": "Dark-sky enthusiast and camping lead with over 8 years managing sustainable eco-campsites across Maharashtra.",
+        "quote": "\"Turn off your screens, sit by the water, and let the stars do the talking.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-wakad",
+          "place": "Wakad Bridge, Pune",
           "note": "Near Ginger Hotel",
           "time": "10:00 AM",
-          "place": "Wakad Bridge, Pune",
           "recommended": true
         },
         {
           "id": "mumbai-thane",
+          "place": "Thane Teen Hath Naka",
           "note": "Service road pillar 12",
-          "time": "11:00 AM",
-          "place": "Thane Teen Hath Naka"
+          "time": "11:00 AM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04"
     },
     {
       "id": "nanemachi",
@@ -503,9 +503,6 @@
       "rating": 4.8,
       "reviews": 172,
       "slots": 8,
-      "status": "upcoming",
-      "startDate": "2026-10-10",
-      "endDate": "2026-10-10",
       "badges": [
         "Hidden Gorge",
         "Milky Cascade"
@@ -514,20 +511,20 @@
       "heroAlt": "Majestic milky waterfall plunging deep into a mystical secluded jungle rock gorge",
       "gallery": [
         {
-          "alt": "Turquoise natural lagoon at the bottom of the gorge",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Turquoise natural lagoon at the bottom of the gorge"
         },
         {
-          "alt": "Moss-covered canyon walls in deep shadow",
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Moss-covered canyon walls in deep shadow"
         },
         {
-          "alt": "Trekkers traversing the rocky stream bed",
-          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Trekkers traversing the rocky stream bed"
         },
         {
-          "alt": "Jungle canopy overlooking the Raigad hills",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Jungle canopy overlooking the Raigad hills"
         }
       ],
       "blurb": [
@@ -537,44 +534,47 @@
       "dates": "Every Weekend (Monsoon to Winter)",
       "itinerary": [
         {
-          "d": "Depart from Pune/Mumbai late night. Scenic journey through the Sahyadri ghat passes.",
-          "t": "Midnight Departure"
+          "t": "Midnight Departure",
+          "d": "Depart from Pune/Mumbai late night. Scenic journey through the Sahyadri ghat passes."
         },
         {
-          "d": "Arrive at base village by 06:30 AM. Fuel up with hot Poha & tea, begin the 3-hour gorge descent.",
-          "t": "Base Village & Canyon Descent"
+          "t": "Base Village & Canyon Descent",
+          "d": "Arrive at base village by 06:30 AM. Fuel up with hot Poha & tea, begin the 3-hour gorge descent."
         },
         {
-          "d": "Spend 2.5 hours swimming in the turquoise lagoon and relaxing beneath the thunderous waterfall.",
-          "t": "Nanemachi Lagoon & Cavern Exploration"
+          "t": "Nanemachi Lagoon & Cavern Exploration",
+          "d": "Spend 2.5 hours swimming in the turquoise lagoon and relaxing beneath the thunderous waterfall."
         },
         {
-          "d": "Ascend back to village for an authentic Konkani feast. Arrive in city by 20:30.",
-          "t": "Konkani Lunch & Evening Return"
+          "t": "Konkani Lunch & Evening Return",
+          "d": "Ascend back to village for an authentic Konkani feast. Arrive in city by 20:30."
         }
       ],
       "guide": {
-        "bio": "Raigad mountaineering veteran with 9 years of canyon navigation and safety rope rigging experience.",
         "name": "Sachin Salvi",
         "role": "Konkan Trail Lead",
-        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"The canyon amphitheatre of Nanemachi gives you absolute seclusion.\""
+        "bio": "Raigad mountaineering veteran with 9 years of canyon navigation and safety rope rigging experience.",
+        "quote": "\"The canyon amphitheatre of Nanemachi gives you absolute seclusion.\"",
+        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-chandani",
+          "place": "Chandani Chowk, Pune",
           "note": "Opposite bus bay",
           "time": "11:30 PM",
-          "place": "Chandani Chowk, Pune",
           "recommended": true
         },
         {
           "id": "mumbai-vashi",
+          "place": "Vashi Plaza, Mumbai",
           "note": "Near main bridge",
-          "time": "11:00 PM",
-          "place": "Vashi Plaza, Mumbai"
+          "time": "11:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10"
     },
     {
       "id": "bhairavgad",
@@ -590,9 +590,6 @@
       "rating": 5,
       "reviews": 142,
       "slots": 4,
-      "status": "upcoming",
-      "startDate": "2026-10-17",
-      "endDate": "2026-10-18",
       "badges": [
         "High Angle Climb",
         "100ft Rappel"
@@ -601,20 +598,20 @@
       "heroAlt": "Climber on vertical needle pinnacle overlooking dramatic Malshej Ghat valleys",
       "gallery": [
         {
-          "alt": "80-degree steep rock-cut steps carved on needle cliff",
-          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "80-degree steep rock-cut steps carved on needle cliff"
         },
         {
-          "alt": "Technical rope anchoring and harness safety gear check",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Technical rope anchoring and harness safety gear check"
         },
         {
-          "alt": "Climber rappelling down a vertical rock wall",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Climber rappelling down a vertical rock wall"
         },
         {
-          "alt": "Summit panorama over Malshej Ghat and Naneghat",
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Summit panorama over Malshej Ghat and Naneghat"
         }
       ],
       "blurb": [
@@ -624,44 +621,47 @@
       "dates": "Alternate Weekends (Winter & Summer)",
       "itinerary": [
         {
-          "d": "Arrive at Moroshi village basecamp. Gear fitting (harness, carabiners, helmets) and safety orientation.",
-          "t": "Basecamp Arrival & Technical Briefing"
+          "t": "Basecamp Arrival & Technical Briefing",
+          "d": "Arrive at Moroshi village basecamp. Gear fitting (harness, carabiners, helmets) and safety orientation."
         },
         {
-          "d": "2-hour hike to the plateau ridge base before dawn.",
-          "t": "Moroshi Ridge Approach Climb"
+          "t": "Moroshi Ridge Approach Climb",
+          "d": "2-hour hike to the plateau ridge base before dawn."
         },
         {
-          "d": "Roped climbing with fixed anchor support across the steep rock-cut needle staircase to the pinnacle.",
-          "t": "Technical Roped Climbing on Rock Steps"
+          "t": "Technical Roped Climbing on Rock Steps",
+          "d": "Roped climbing with fixed anchor support across the steep rock-cut needle staircase to the pinnacle."
         },
         {
-          "d": "Summit celebration at 3,250ft, followed by a guided 100ft sheer cliff rappelling descent. Lunch at basecamp.",
-          "t": "Summit & 100ft Thrilling Rappel"
+          "t": "Summit & 100ft Thrilling Rappel",
+          "d": "Summit celebration at 3,250ft, followed by a guided 100ft sheer cliff rappelling descent. Lunch at basecamp."
         }
       ],
       "guide": {
-        "bio": "HMI Darjeeling certified mountaineer (Advance Method of Mountaineering). 11 years technical wall rigging across Western Ghats.",
         "name": "Akshay Gaonkar",
         "role": "Lead Rock & Rope Instructor",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Safety is absolute. Once you step off the rappel edge, fear turns into pure euphoria.\""
+        "bio": "HMI Darjeeling certified mountaineer (Advance Method of Mountaineering). 11 years technical wall rigging across Western Ghats.",
+        "quote": "\"Safety is absolute. Once you step off the rappel edge, fear turns into pure euphoria.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-wakad",
+          "place": "Wakad Bridge, Pune",
           "note": "Ginger Hotel highway exit",
           "time": "10:00 PM",
-          "place": "Wakad Bridge, Pune",
           "recommended": true
         },
         {
           "id": "mumbai-thane",
+          "place": "Thane Teen Hath Naka",
           "note": "Main junction pillar 8",
-          "time": "10:30 PM",
-          "place": "Thane Teen Hath Naka"
+          "time": "10:30 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-18"
     },
     {
       "id": "gokarna",
@@ -677,9 +677,6 @@
       "rating": 4.9,
       "reviews": 218,
       "slots": 8,
-      "status": "upcoming",
-      "startDate": "2026-10-23",
-      "endDate": "2026-10-26",
       "badges": [
         "5 Beaches Trail",
         "Group Solo"
@@ -688,20 +685,20 @@
       "heroAlt": "Hikers walking along golden sands of Om Beach in Gokarna with turquoise waves and coastal cliff trail",
       "gallery": [
         {
-          "alt": "Sunset over cliffside cafe at Kudle Beach",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Sunset over cliffside cafe at Kudle Beach"
         },
         {
-          "alt": "Beachside campfire under coconut palms",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Beachside campfire under coconut palms"
         },
         {
-          "alt": "Coastal headland trail connecting Half Moon and Paradise beach",
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Coastal headland trail connecting Half Moon and Paradise beach"
         },
         {
-          "alt": "Calm ocean waters along the coast",
-          "src": "https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Calm ocean waters along the coast"
         }
       ],
       "blurb": [
@@ -711,50 +708,53 @@
       "dates": "Every Thursday Evening – Monday Morning",
       "itinerary": [
         {
-          "d": "Board comfortable AC sleeper bus from Pune / Mumbai / Bengaluru to Gokarna.",
-          "t": "Overnight AC Sleeper Journey"
+          "t": "Overnight AC Sleeper Journey",
+          "d": "Board comfortable AC sleeper bus from Pune / Mumbai / Bengaluru to Gokarna."
         },
         {
-          "d": "Check into beach resort. Trek the headland trail from Kudle to iconic Om Beach for sunset cafe vibes.",
-          "t": "Kudle to Om Beach Cliff Trail"
+          "t": "Kudle to Om Beach Cliff Trail",
+          "d": "Check into beach resort. Trek the headland trail from Kudle to iconic Om Beach for sunset cafe vibes."
         },
         {
-          "d": "Full day coastal hike across boulder trails to pristine Paradise beach. Sunset dolphin spotting.",
-          "t": "Half Moon, Paradise & Secluded Coves"
+          "t": "Half Moon, Paradise & Secluded Coves",
+          "d": "Full day coastal hike across boulder trails to pristine Paradise beach. Sunset dolphin spotting."
         },
         {
-          "d": "Morning swim, explore historic Mirjan Fort, board return sleeper bus by 16:00.",
-          "t": "Mirjan Fort & Journey Home"
+          "t": "Mirjan Fort & Journey Home",
+          "d": "Morning swim, explore historic Mirjan Fort, board return sleeper bus by 16:00."
         }
       ],
       "guide": {
-        "bio": "Coastal backpacker with 6+ years organizing beach hikes and marine conservation trails in Karnataka and Goa.",
         "name": "Rhea D’Souza",
         "role": "Coastal Trail Coordinator",
-        "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"The sound of breaking waves on a secluded cliff camp heals everything.\""
+        "bio": "Coastal backpacker with 6+ years organizing beach hikes and marine conservation trails in Karnataka and Goa.",
+        "quote": "\"The sound of breaking waves on a secluded cliff camp heals everything.\"",
+        "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-swargate",
+          "place": "Swargate, Pune",
           "note": "Opposite bus stand",
           "time": "06:00 PM",
-          "place": "Swargate, Pune",
           "recommended": true
         },
         {
           "id": "mumbai-vashi",
+          "place": "Vashi Highway Gate",
           "note": "Near Toll plaza",
-          "time": "04:30 PM",
-          "place": "Vashi Highway Gate"
+          "time": "04:30 PM"
         },
         {
           "id": "bengaluru-madiwala",
+          "place": "Madiwala, Bengaluru",
           "note": "Near Police station",
-          "time": "09:00 PM",
-          "place": "Madiwala, Bengaluru"
+          "time": "09:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-26"
     },
     {
       "id": "hampi",
@@ -770,9 +770,6 @@
       "rating": 4.9,
       "reviews": 184,
       "slots": 6,
-      "status": "upcoming",
-      "startDate": "2026-11-06",
-      "endDate": "2026-11-09",
       "badges": [
         "UNESCO Ruins",
         "Coracle Ride"
@@ -781,20 +778,20 @@
       "heroAlt": "Majestic ancient stone chariot temple at Vijayanagara empire ruins in Hampi during sunrise",
       "gallery": [
         {
-          "alt": "Matanga Hill 360-degree sunrise panorama over stone boulder hills",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Matanga Hill 360-degree sunrise panorama over stone boulder hills"
         },
         {
-          "alt": "Round coracle boat gliding on Tungabhadra River",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Round coracle boat gliding on Tungabhadra River"
         },
         {
-          "alt": "Virupaksha temple gopuram illuminated at dusk",
-          "src": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Virupaksha temple gopuram illuminated at dusk"
         },
         {
-          "alt": "Bouldering on Hippie Island granite formations",
-          "src": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Bouldering on Hippie Island granite formations"
         }
       ],
       "blurb": [
@@ -804,44 +801,47 @@
       "dates": "Every Thursday Night – Monday Morning",
       "itinerary": [
         {
-          "d": "Board AC sleeper coach. Arrive in Hampi base by 07:30 AM.",
-          "t": "Overnight Departure to Hospet / Hampi"
+          "t": "Overnight Departure to Hospet / Hampi",
+          "d": "Board AC sleeper coach. Arrive in Hampi base by 07:30 AM."
         },
         {
-          "d": "Virupaksha temple, Monolithic Bull, and circular coracle boat ride on Tungabhadra.",
-          "t": "Sacred Centre & Tungabhadra Coracle Ride"
+          "t": "Sacred Centre & Tungabhadra Coracle Ride",
+          "d": "Virupaksha temple, Monolithic Bull, and circular coracle boat ride on Tungabhadra."
         },
         {
-          "d": "Pre-dawn hike to Matanga Hill for sunrise. Explore Vijaya Vittala stone chariot and Lotus Mahal.",
-          "t": "Matanga Hill Sunrise & Royal Enclosure"
+          "t": "Matanga Hill Sunrise & Royal Enclosure",
+          "d": "Pre-dawn hike to Matanga Hill for sunrise. Explore Vijaya Vittala stone chariot and Lotus Mahal."
         },
         {
-          "d": "Scooter ride through paddy fields, Sanapur lake cliff jumps, return sleeper bus.",
-          "t": "Sanapur Lake Cliff Jumps & Departure"
+          "t": "Sanapur Lake Cliff Jumps & Departure",
+          "d": "Scooter ride through paddy fields, Sanapur lake cliff jumps, return sleeper bus."
         }
       ],
       "guide": {
-        "bio": "Historian with 8 years guiding UNESCO heritage walks across Southern India.",
         "name": "Kiran Rao",
         "role": "Archaeology & Cultural Lead",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Every single stone in Hampi carries the memory of an empire.\""
+        "bio": "Historian with 8 years guiding UNESCO heritage walks across Southern India.",
+        "quote": "\"Every single stone in Hampi carries the memory of an empire.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "pune-swargate",
+          "place": "Swargate, Pune",
           "note": "Opposite bus depot",
           "time": "07:00 PM",
-          "place": "Swargate, Pune",
           "recommended": true
         },
         {
           "id": "mumbai-dadar",
+          "place": "Dadar TT, Mumbai",
           "note": "Pritam Hotel",
-          "time": "05:00 PM",
-          "place": "Dadar TT, Mumbai"
+          "time": "05:00 PM"
         }
-      ]
+      ],
+      "status": "upcoming",
+      "startDate": "2026-11-06",
+      "endDate": "2026-11-09"
     },
     {
       "id": "kedarnath",
@@ -857,9 +857,6 @@
       "rating": 5,
       "reviews": 247,
       "slots": 6,
-      "status": "completed",
-      "startDate": "2026-07-10",
-      "endDate": "2026-07-16",
       "badges": [
         "Highest Shiva Temple",
         "Chandrashila Peak"
@@ -868,20 +865,20 @@
       "heroAlt": "Majestic Kedarnath Temple illuminated at dusk with snow-capped Kedar Dome peaks towering in the background",
       "gallery": [
         {
-          "alt": "Tungnath temple at 3,680m shrouded in high altitude snow",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Tungnath temple at 3,680m shrouded in high altitude snow"
         },
         {
-          "alt": "Chandrashila summit 360-degree panorama of Nanda Devi and Trishul",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Chandrashila summit 360-degree panorama of Nanda Devi and Trishul"
         },
         {
-          "alt": "Camp on alpine meadows of Chopta mini-Switzerland",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Camp on alpine meadows of Chopta mini-Switzerland"
         },
         {
-          "alt": "Crystal clear reflections on Deoriatal alpine lake",
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Crystal clear reflections on Deoriatal alpine lake"
         }
       ],
       "blurb": [
@@ -891,52 +888,55 @@
       "dates": "Fixed Departure Batches (May to Nov)",
       "itinerary": [
         {
-          "d": "Pickup from Rishikesh. Drive along the holy confluence of Devprayag and Rudraprayag.",
-          "t": "Rishikesh to Guptkashi / Sonprayag"
+          "t": "Rishikesh to Guptkashi / Sonprayag",
+          "d": "Pickup from Rishikesh. Drive along the holy confluence of Devprayag and Rudraprayag."
         },
         {
-          "d": "Early start for the 16km holy trail along Mandakini river. Reach Kedarnath shrine for evening aarti.",
-          "t": "Gaurikund to Kedarnath Shrine Trek"
+          "t": "Gaurikund to Kedarnath Shrine Trek",
+          "d": "Early start for the 16km holy trail along Mandakini river. Reach Kedarnath shrine for evening aarti."
         },
         {
-          "d": "Morning darshan with Kedar Dome backdrop. Descend to basecamp for overnight rest.",
-          "t": "Temple Darshan & Descent to Guptkashi"
+          "t": "Temple Darshan & Descent to Guptkashi",
+          "d": "Morning darshan with Kedar Dome backdrop. Descend to basecamp for overnight rest."
         },
         {
-          "d": "Drive to Chopta \"Mini Switzerland\". Short acclimatisation trek to emerald Deoriatal lake.",
-          "t": "Chopta & Deoriatal Alpine Lake"
+          "t": "Chopta & Deoriatal Alpine Lake",
+          "d": "Drive to Chopta \"Mini Switzerland\". Short acclimatisation trek to emerald Deoriatal lake."
         },
         {
-          "d": "Dawn summit push to Tungnath and Chandrashila for breathtaking 360° Himalayan views.",
-          "t": "Tungnath Temple & Chandrashila Summit (4,000m)"
+          "t": "Tungnath Temple & Chandrashila Summit (4,000m)",
+          "d": "Dawn summit push to Tungnath and Chandrashila for breathtaking 360° Himalayan views."
         },
         {
-          "d": "Scenic return drive along the Ganga valley, drop at Rishikesh by 18:00.",
-          "t": "Return Drive to Rishikesh"
+          "t": "Return Drive to Rishikesh",
+          "d": "Scenic return drive along the Ganga valley, drop at Rishikesh by 18:00."
         }
       ],
       "guide": {
-        "bio": "Uttarakhand native with 12 years guiding Himalayan pilgrim and alpine trails. Mountaineering certified from NIM Uttarkashi.",
         "name": "Vikram Negi",
         "role": "Garhwal Mountain Lead",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"When you stand at Chandrashila and see Chaukhamba turning gold, words fall silent.\""
+        "bio": "Uttarakhand native with 12 years guiding Himalayan pilgrim and alpine trails. Mountaineering certified from NIM Uttarkashi.",
+        "quote": "\"When you stand at Chandrashila and see Chaukhamba turning gold, words fall silent.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "rishikesh-bus",
+          "place": "Rishikesh ISBT / Tapovan",
           "note": "Near Laxman Jhula bypass",
           "time": "06:00 AM",
-          "place": "Rishikesh ISBT / Tapovan",
           "recommended": true
         },
         {
           "id": "haridwar-rly",
+          "place": "Haridwar Railway Station",
           "note": "Main exit gate",
-          "time": "05:00 AM",
-          "place": "Haridwar Railway Station"
+          "time": "05:00 AM"
         }
-      ]
+      ],
+      "status": "completed",
+      "startDate": "2026-07-10",
+      "endDate": "2026-07-16"
     },
     {
       "id": "kutch",
@@ -952,9 +952,6 @@
       "rating": 4.9,
       "reviews": 156,
       "slots": 10,
-      "status": "completed",
-      "startDate": "2026-01-15",
-      "endDate": "2026-01-19",
       "badges": [
         "White Salt Desert",
         "Full Moon Special"
@@ -963,20 +960,20 @@
       "heroAlt": "Endless glowing white salt crust desert of Rann of Kutch under a brilliant full moon sky",
       "gallery": [
         {
-          "alt": "Kalo Dungar Black Hill panoramic view overlooking the Great Rann",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Kalo Dungar Black Hill panoramic view overlooking the Great Rann"
         },
         {
-          "alt": "Traditional Gujarati Bhunga huts with mirror work",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Traditional Gujarati Bhunga huts with mirror work"
         },
         {
-          "alt": "Camel safari on the white desert during sunset",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Camel safari on the white desert during sunset"
         },
         {
-          "alt": "Vijay Vilas Palace and Mandvi private beach",
-          "src": "https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Vijay Vilas Palace and Mandvi private beach"
         }
       ],
       "blurb": [
@@ -986,44 +983,47 @@
       "dates": "Full Moon & Weekend Batches (Nov – Feb)",
       "itinerary": [
         {
-          "d": "Pickup from Bhuj Station/Airport. Check into authentic Kutchi Bhunga huts at Hodka.",
-          "t": "Bhuj Arrival & Hodka Village Camp"
+          "t": "Bhuj Arrival & Hodka Village Camp",
+          "d": "Pickup from Bhuj Station/Airport. Check into authentic Kutchi Bhunga huts at Hodka."
         },
         {
-          "d": "Explore artisan handicraft villages. Head to the White Desert for a magical sunset and folk dance night.",
-          "t": "White Rann Sunset & Cultural Night"
+          "t": "White Rann Sunset & Cultural Night",
+          "d": "Explore artisan handicraft villages. Head to the White Desert for a magical sunset and folk dance night."
         },
         {
-          "d": "Drive to the highest point in Kutch at Kalo Dungar. Visit the Dattatreya temple and India Bridge.",
-          "t": "Kalo Dungar & Magnetic Hill"
+          "t": "Kalo Dungar & Magnetic Hill",
+          "d": "Drive to the highest point in Kutch at Kalo Dungar. Visit the Dattatreya temple and India Bridge."
         },
         {
-          "d": "Visit Vijay Vilas Palace and Mandvi beach. Drop at Bhuj by 18:00 for return train/flight.",
-          "t": "Mandvi Palace, Beach & Bhuj Drop"
+          "t": "Mandvi Palace, Beach & Bhuj Drop",
+          "d": "Visit Vijay Vilas Palace and Mandvi beach. Drop at Bhuj by 18:00 for return train/flight."
         }
       ],
       "guide": {
-        "bio": "Bhuj native and road trip specialist with 7 years curating cultural desert safaris and artisan heritage tours.",
         "name": "Devang Jadeja",
         "role": "Kutch Roadtrip Lead",
-        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Standing in the middle of the White Rann at full moon is pure magic.\""
+        "bio": "Bhuj native and road trip specialist with 7 years curating cultural desert safaris and artisan heritage tours.",
+        "quote": "\"Standing in the middle of the White Rann at full moon is pure magic.\"",
+        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "bhuj-rly",
+          "place": "Bhuj Railway Station",
           "note": "Main exit porch",
           "time": "08:00 AM",
-          "place": "Bhuj Railway Station",
           "recommended": true
         },
         {
           "id": "bhuj-air",
+          "place": "Bhuj Airport",
           "note": "Arrivals gate",
-          "time": "09:30 AM",
-          "place": "Bhuj Airport"
+          "time": "09:30 AM"
         }
-      ]
+      ],
+      "status": "completed",
+      "startDate": "2026-01-15",
+      "endDate": "2026-01-19"
     },
     {
       "id": "himachal",
@@ -1039,9 +1039,6 @@
       "rating": 4.9,
       "reviews": 194,
       "slots": 6,
-      "status": "active",
-      "startDate": "2026-09-01",
-      "endDate": "2026-09-02",
       "badges": [
         "Dharamshala & Kasol",
         "Triund Ridge"
@@ -1050,20 +1047,20 @@
       "heroAlt": "Towering Dhauladhar snow peaks rising steeply above Triund mountain ridge and alpine pine forests",
       "gallery": [
         {
-          "alt": "Camp on Triund ridge with Dhauladhar mountain wall behind",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Camp on Triund ridge with Dhauladhar mountain wall behind"
         },
         {
-          "alt": "Gushing Parvati river in Kasol under tall deodar trees",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Gushing Parvati river in Kasol under tall deodar trees"
         },
         {
-          "alt": "Traditional wooden Himachali mountain village of Tosh",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Traditional wooden Himachali mountain village of Tosh"
         },
         {
-          "alt": "Natural hot water spring dip at Manikaran Sahib",
-          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Natural hot water spring dip at Manikaran Sahib"
         }
       ],
       "blurb": [
@@ -1073,52 +1070,55 @@
       "dates": "Fixed Weekly Batches (All Year Round)",
       "itinerary": [
         {
-          "d": "Overnight AC Volvo bus transfer to McLeodGanj, Dharamshala.",
-          "t": "Delhi / Chandigarh Departure"
+          "t": "Delhi / Chandigarh Departure",
+          "d": "Overnight AC Volvo bus transfer to McLeodGanj, Dharamshala."
         },
         {
-          "d": "Visit Dalai Lama Temple, start scenic 9km hike to Triund ridge for overnight alpine camping.",
-          "t": "McLeodGanj & Triund Ridge Push"
+          "t": "McLeodGanj & Triund Ridge Push",
+          "d": "Visit Dalai Lama Temple, start scenic 9km hike to Triund ridge for overnight alpine camping."
         },
         {
-          "d": "Descend to Bhagsu waterfall, board transfers across Kullu valley into the heart of Parvati Valley.",
-          "t": "Descent & Transfer to Kasol"
+          "t": "Descent & Transfer to Kasol",
+          "d": "Descend to Bhagsu waterfall, board transfers across Kullu valley into the heart of Parvati Valley."
         },
         {
-          "d": "Hike to the traditional village of Tosh. Visit Manikaran hot springs and riverside cafes.",
-          "t": "Kasol, Manikaran & Tosh Village Hike"
+          "t": "Kasol, Manikaran & Tosh Village Hike",
+          "d": "Hike to the traditional village of Tosh. Visit Manikaran hot springs and riverside cafes."
         },
         {
-          "d": "Morning riverside walk in Chalal, cafe hopping, board return Volvo to Delhi/Chandigarh.",
-          "t": "Chalal Riverside Walk & Return Volvo"
+          "t": "Chalal Riverside Walk & Return Volvo",
+          "d": "Morning riverside walk in Chalal, cafe hopping, board return Volvo to Delhi/Chandigarh."
         },
         {
-          "d": "Reach Delhi ISBT early morning by 07:00 AM.",
-          "t": "Arrival in Delhi / Chandigarh"
+          "t": "Arrival in Delhi / Chandigarh",
+          "d": "Reach Delhi ISBT early morning by 07:00 AM."
         }
       ],
       "guide": {
-        "bio": "Manali local with 10+ years guiding high alpine passes and backpacking cohorts across Kangra and Parvati valleys.",
         "name": "Rajat Sharma",
         "role": "Himachal Circuit Lead",
-        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Parvati Valley teaches you to slow down, breathe deep, and look up at the peaks.\""
+        "bio": "Manali local with 10+ years guiding high alpine passes and backpacking cohorts across Kangra and Parvati valleys.",
+        "quote": "\"Parvati Valley teaches you to slow down, breathe deep, and look up at the peaks.\"",
+        "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "delhi-majnu",
+          "place": "Majnu Ka Tilla, Delhi",
           "note": "Near Tibetan Monastery gate",
           "time": "06:00 PM",
-          "place": "Majnu Ka Tilla, Delhi",
           "recommended": true
         },
         {
           "id": "chd-tribune",
+          "place": "Tribune Chowk, Chandigarh",
           "note": "Near ISBT Sector 43",
-          "time": "10:30 PM",
-          "place": "Tribune Chowk, Chandigarh"
+          "time": "10:30 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-02"
     },
     {
       "id": "ladakh",
@@ -1134,9 +1134,6 @@
       "rating": 5,
       "reviews": 118,
       "slots": 4,
-      "status": "active",
-      "startDate": "2026-09-01",
-      "endDate": "2026-09-02",
       "badges": [
         "Royal Enfield Himalayan",
         "Khardung La (17,982ft)"
@@ -1145,20 +1142,20 @@
       "heroAlt": "Adventure motorcycle riding along dramatic winding mountain pass with stark barren Himalayan peaks",
       "gallery": [
         {
-          "alt": "Pangong Tso Lake sparkling in deep blue against desert mountains",
-          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Pangong Tso Lake sparkling in deep blue against desert mountains"
         },
         {
-          "alt": "Nubra Valley sand dunes with double-humped Bactrian camels",
-          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Nubra Valley sand dunes with double-humped Bactrian camels"
         },
         {
-          "alt": "Motorcycles lined up at high altitude pass",
-          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Motorcycles lined up at high altitude pass"
         },
         {
-          "alt": "Ancient Thiksey Monastery perched dramatically on a hill",
-          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80"
+          "src": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Ancient Thiksey Monastery perched dramatically on a hill"
         }
       ],
       "blurb": [
@@ -1168,56 +1165,59 @@
       "dates": "Fixed Summer Departures (June to September)",
       "itinerary": [
         {
-          "d": "Land at Leh Airport (3,500m). Full day rest, hydration, and evening orientation walk around Leh market.",
-          "t": "Arrival in Leh & Mandatory Acclimatisation"
+          "t": "Arrival in Leh & Mandatory Acclimatisation",
+          "d": "Land at Leh Airport (3,500m). Full day rest, hydration, and evening orientation walk around Leh market."
         },
         {
-          "d": "Test ride along Magnetic Hill, Indus-Zanskar Sangam, and Hall of Fame.",
-          "t": "Sham Valley Ride & Bike Handover"
+          "t": "Sham Valley Ride & Bike Handover",
+          "d": "Test ride along Magnetic Hill, Indus-Zanskar Sangam, and Hall of Fame."
         },
         {
-          "d": "Scale the legendary Khardung La pass. Descend into Nubra Valley and ride Hunder sand dunes.",
-          "t": "Leh to Nubra Valley via Khardung La (17,982 ft)"
+          "t": "Leh to Nubra Valley via Khardung La (17,982 ft)",
+          "d": "Scale the legendary Khardung La pass. Descend into Nubra Valley and ride Hunder sand dunes."
         },
         {
-          "d": "Ride to the northernmost village of Turtuk along the Shyok river. Experience unique Balti culture.",
-          "t": "Turtuk India-Pakistan Border Village"
+          "t": "Turtuk India-Pakistan Border Village",
+          "d": "Ride to the northernmost village of Turtuk along the Shyok river. Experience unique Balti culture."
         },
         {
-          "d": "Off-road riverbed route to world-famous Pangong Tso lake. Stay at luxury lakeside dome tents.",
-          "t": "Nubra to Pangong Tso via Shyok River"
+          "t": "Nubra to Pangong Tso via Shyok River",
+          "d": "Off-road riverbed route to world-famous Pangong Tso lake. Stay at luxury lakeside dome tents."
         },
         {
-          "d": "Witness sunrise on Pangong lake. Ride across Chang La pass back to Leh.",
-          "t": "Pangong to Leh via Chang La (17,590 ft)"
+          "t": "Pangong to Leh via Chang La (17,590 ft)",
+          "d": "Witness sunrise on Pangong lake. Ride across Chang La pass back to Leh."
         },
         {
-          "d": "Transfer to Leh Airport with unforgettable memories of the Trans-Himalayas.",
-          "t": "Departure from Leh Airport"
+          "t": "Departure from Leh Airport",
+          "d": "Transfer to Leh Airport with unforgettable memories of the Trans-Himalayas."
         }
       ],
       "guide": {
-        "bio": "Leh native with 14 years leading motorcycle expeditions across Ladakh, Spiti, and Zanskar. Trained in high-altitude emergency trauma.",
         "name": "Stanzin Dorje",
         "role": "Chief Road Marshal & Himalayan Medic",
-        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-        "quote": "\"Riding in Ladakh is not just about the destination — the road itself is the temple.\""
+        "bio": "Leh native with 14 years leading motorcycle expeditions across Ladakh, Spiti, and Zanskar. Trained in high-altitude emergency trauma.",
+        "quote": "\"Riding in Ladakh is not just about the destination — the road itself is the temple.\"",
+        "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
       },
       "pickups": [
         {
           "id": "leh-air",
+          "place": "Kushok Bakula Rimpochee Airport, Leh",
           "note": "Arrivals kerb, Roamly marshal",
           "time": "09:00 AM",
-          "place": "Kushok Bakula Rimpochee Airport, Leh",
           "recommended": true
         },
         {
           "id": "leh-hotel",
+          "place": "Roamly Basecamp Hotel, Leh",
           "note": "Upper Changspa Road",
-          "time": "12:00 PM",
-          "place": "Roamly Basecamp Hotel, Leh"
+          "time": "12:00 PM"
         }
-      ]
+      ],
+      "status": "active",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-02"
     }
   ]
 };

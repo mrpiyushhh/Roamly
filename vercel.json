@@ -3,12 +3,12 @@
   "buildCommand": "node scripts/build-data.mjs",
   "outputDirectory": ".",
   "framework": null,
-  "cleanUrls": false,
+  "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
     { "source": "/login", "destination": "/admin-login.html" },
-    { "source": "/admin-login", "destination": "/admin-login.html" }
+    { "source": "/admin-login", "destination": "/admin-login.html" },
+    { "source": "/admin", "destination": "/admin.html" }
   ],
   "headers": [
     {
@@ -32,13 +32,7 @@
       ]
     },
     {
-      "source": "/admin.html",
-      "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
-      ]
-    },
-    {
-      "source": "/admin-login.html",
+      "source": "/(admin|admin.html|admin-login|admin-login.html|login|login.html)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
       ]
